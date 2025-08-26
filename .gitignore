@@ -1,5 +1,5 @@
 # Configuration file with sensitive data
 config.php
-
+.vs/
 # Vendor folders for dependencies (if you use Composer later)
 /vendor/
