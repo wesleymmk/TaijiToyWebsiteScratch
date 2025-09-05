@@ -23,17 +23,22 @@ if (empty($email) || empty($password)) {
     exit();
 }
 
-if (strlen($password) < 6) {
-    echo json_encode(['success' => false, 'message' => 'Password must be at least 6 characters long.']);
+if (strlen($password) < 8) {
+    echo json_encode(['success' => false, 'message' => 'Password must be at least 8 characters long.']);
     exit();
 }
 
 // Connect to the database
-$conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-if ($conn->connect_error) {
+try{
+    $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+    if ($conn->connect_error) {
+        throw new Exception("Connection failed. " . $conn->connect_error);
+    }
+} catch (Exception $e) {
     echo json_encode(['success' => false, 'message' => 'Database connection failed.']);
     exit();
 }
+
 
 // --- Check if the email already exists ---
 $sql_check = "SELECT customer_id FROM users WHERE email = ?";

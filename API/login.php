@@ -24,11 +24,12 @@ $email = $request_data['email'];
 $password_attempt = $request_data['password'];
 
 // 6. Connect to the database using MySQLi
-$conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-
-// Check for connection errors
-if ($conn->connect_error) {
-    // Send a JSON error response and stop the script
+try{
+    $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+    if ($conn->connect_error) {
+        throw new Exception("Connection failed: " . $conn->connect_error);
+    }
+} catch (Exception $e) {
     echo json_encode(['success' => false, 'message' => 'Database connection failed.']);
     exit();
 }
