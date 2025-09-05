@@ -7,6 +7,9 @@ function clearAppContainer() {
     appContainer.innerHTML = '';
 }
 
+/* Paul-Anthony Sutton
+added renderWelcomeView() to add basic functionailty
+*/
 function renderWelcomeView() {
     clearAppContainer(); // Clear the screen first
 
