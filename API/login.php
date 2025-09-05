@@ -1,3 +1,4 @@
+//Done by Nathan Duarte
 <?php
 // 1. Start a session
 // This allows us to store information about the logged-in user
