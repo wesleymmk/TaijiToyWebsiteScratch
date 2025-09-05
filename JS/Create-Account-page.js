@@ -38,4 +38,5 @@ document.addEventListener('DOMContentLoaded', () => {
         // In a real application, you would send this data to a server
         // for processing (e.g., using fetch() to make an API call).
     });
+
 });
