@@ -1,3 +1,4 @@
+// Anthony Guzman 9/2/25  This code sets up the backend
 require('dotenv').config();             //recommemded 
 const express = require('express');
 const axios = require('axios');
@@ -65,4 +66,5 @@ const PORT = 3000;
 app.listen(PORT, '0.0.0.0', () => {
   console.log(` Server ready at: http://localhost:${PORT}`);
 });
+
 
