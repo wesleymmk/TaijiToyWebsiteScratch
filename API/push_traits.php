@@ -1,3 +1,4 @@
+// This file was made by Anthony Guzman
 <?php
 header('Content-Type: application/json');
 
@@ -25,3 +26,4 @@ if (curl_errno($ch)) {
 curl_close($ch);
 http_response_code($httpCode);
 echo $response;
+
