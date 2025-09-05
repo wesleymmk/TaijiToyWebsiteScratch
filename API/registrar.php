@@ -1,3 +1,4 @@
+//Done by Nathan duarte
 <?php
 // Include the database configuration
 require_once 'config.php';
