@@ -3,38 +3,7 @@
 const appContainer = document.getElementById('app');
 
 // --- Function to clear the current view ---
-function clearAppContainer() {
-    appContainer.innerHTML = '';
-}
 
-/* Paul-Anthony Sutton
-added renderWelcomeView() to add basic functionailty
-*/
-function renderWelcomeView() {
-    clearAppContainer(); // Clear the screen first
-
-    let heading = document.createElement('h1');
-    heading.classList.add('header');
-    heading.textContent = 'Welcome to Taiji Toys';
-    
-
-    let LoginButton = document.createElement("button");
-    LoginButton.textContent = 'Login';
-    LoginButton.classList.add('LoginButton');
-
-    let CreateAccountButton = document.createElement("button");
-    CreateAccountButton.textContent = 'Create Account';
-
-    appContainer.appendChild(heading);
-    appContainer.appendChild(LoginButton);
-    appContainer.appendChild(CreateAccountButton);
-}
-
-function renderLoginView() {
-    clearAppContainer();
-
-
-}
 
 /* the following code was a mock main.js to test implemtation of backend this was made by Anthony Guzman 
 this code wont be used but here to show what was worked on this week
