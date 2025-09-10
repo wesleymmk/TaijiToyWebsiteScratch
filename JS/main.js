@@ -1,8 +1,20 @@
 
+
 // Find the main container element in the HTML
-const appContainer = document.getElementById('app');
+
 
 // --- Function to clear the current view ---
+
+
+//import { renderWelcomeView, clearAppContainer, appContainer } from "./Authenticaiton_Page.js";
+import * as Utils from './Authentication_Page.js';
+function LoadContainer() {
+    appContainer();
+}
+
+function LoadClear() {
+    clearAppContainer();
+}
 
 
 /* the following code was a mock main.js to test implemtation of backend this was made by Anthony Guzman 
@@ -131,7 +143,6 @@ renderLoginView();
 // When the website first loads, show the login view.
 
 
+Utils.renderWelcomeView();
 
-
-renderWelcomeView();
 // THIS HAS TO BE THE VERY BOTTOM

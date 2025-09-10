@@ -1,12 +1,14 @@
+import * as Utils from './Authentication_Page.js';
 
-function clearAppContainer() {
+export const appContainer = document.getElementById('app');
+export function clearAppContainer() {
     appContainer.innerHTML = '';
 }
 
 /* Paul-Anthony Sutton
-added renderWelcomeView() to add basic functionailty
-*/
-function renderWelcomeView() {
+added renderWelcomeView() to add basic functionailty*/
+
+export function renderWelcomeView() {
     clearAppContainer(); // Clear the screen first
 
     let heading = document.createElement('h1');
@@ -31,3 +33,4 @@ function renderLoginView() {
 
 
 }
+
