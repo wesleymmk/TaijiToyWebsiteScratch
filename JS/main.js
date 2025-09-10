@@ -7,14 +7,15 @@
 
 
 //import { renderWelcomeView, clearAppContainer, appContainer } from "./Authenticaiton_Page.js";
+import * as ComUtils from './Common_Function.js';
 import * as Utils from './Authentication_Page.js';
-function LoadContainer() {
+/*function LoadContainer() {
     appContainer();
 }
 
 function LoadClear() {
     clearAppContainer();
-}
+}*/
 
 
 /* the following code was a mock main.js to test implemtation of backend this was made by Anthony Guzman 
