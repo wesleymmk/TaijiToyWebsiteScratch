@@ -53,7 +53,7 @@ export function renderCreateAccountView() {
 
     let emailCheckbox = document.createElement('input');
     emailCheckbox.type = 'checkbox';
-    emailCheckbox.name = 'Hi';
+    emailCheckbox.name = 'emailCheckbox';
 
     let CheckboxLabel = document.createElement('label');
     CheckboxLabel.htmlFor = 'emailCheckbox';
