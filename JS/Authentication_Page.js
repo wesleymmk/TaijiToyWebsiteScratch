@@ -41,6 +41,9 @@ export function renderCreateAccountView() {
     let heading = document.createElement('h1');
     heading.textContent = 'Create Your Account!';
 
+    const registerForm = document.createElement('form');
+    registerForm.id = 'register-form';
+
     let emailAccount = document.createElement('input');
     emailAccount.type = 'email';
     emailAccount.placeholder = 'Enter your email';
@@ -62,11 +65,33 @@ export function renderCreateAccountView() {
     let CreateAccountButton = document.createElement("button");
     CreateAccountButton.textContent = 'Create Account';
     CreateAccountButton.classList.add('LoginButton');
+    CreateAccountButton.type="submit";
 
     let LoginButton = document.createElement("button");
     LoginButton.textContent = 'Already have an account? Login';
     LoginButton.classList.add('LoginButton');
     LoginButton.addEventListener('click', renderWelcomeView);
+
+    registerForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        const email = emailInput.value;
+        const password = passwordInput.value;
+
+        // Send the data to our register.php script
+        fetch('api/register.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: email, password: password })
+        })
+            .then(response => response.json())
+            .then(data => {
+                // *** THIS IS THE CHANGED PART ***
+                // Instead of an alert, we call our new function to render a status page
+                renderStatusView(data.success, data.message, email);
+            });
+    });
+
 
     appContainer.appendChild(heading);
     appContainer.appendChild(emailAccount);
