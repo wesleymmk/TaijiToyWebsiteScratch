@@ -20,7 +20,7 @@ export function renderGenerationView() {
 
     let ImageGen = document.createElement('img');
     ImageGen.classList.add('ImageBox');
-    ImageGen.src = 'Need/To/Create/Folder/Structure';
+    ImageGen.src = 'Generated_Images/Trait1.jpg';
     ImageGen.alt = 'Image_Generation';
 
     appContainer.appendChild(heading);
