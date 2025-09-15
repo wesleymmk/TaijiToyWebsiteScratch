@@ -22,6 +22,7 @@ export function renderWelcomeView() {
     passwordInput.placeholder = 'Enter your password';
     passwordInput.required = true;
     */
+   
     let LoginButton = document.createElement("button");
     LoginButton.textContent = 'Login';
     LoginButton.classList.add('LoginButton');
