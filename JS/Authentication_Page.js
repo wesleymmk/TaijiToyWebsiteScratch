@@ -2,6 +2,7 @@
 added renderWelcomeView() to add basic functionailty*/
 import * as ComUtils from './Common_Function.js';
 export const appContainer = document.getElementById('app');
+import * as GenUtils from './Order_Generation.js';
 export function renderWelcomeView() {
     ComUtils.clearAppContainer(); // Clear the screen first
 
@@ -28,11 +29,17 @@ export function renderWelcomeView() {
     CreateAccountButton.classList.add('LoginButton');
     CreateAccountButton.addEventListener('click', renderCreateAccountView);
 
+    let GenerationButton = document.createElement("button");
+    GenerationButton.textContent = 'Generation (Temp)';
+    GenerationButton.classList.add('LoginButton');
+    GenerationButton.addEventListener('click', GenUtils.renderGenerationView);
+
     appContainer.appendChild(heading);
     appContainer.appendChild(emailAccount);
     appContainer.appendChild(passwordInput);
     appContainer.appendChild(LoginButton);
     appContainer.appendChild(CreateAccountButton);
+    appContainer.appendChild(GenerationButton);
 }
 
 export function renderCreateAccountView() {
@@ -112,3 +119,4 @@ function renderLoginView() {
     appContainer.appendChild(heading);
 }
 
+export const Trait_1 = 'This code is within Authentication_Page.js and testing linking dynamic text';
