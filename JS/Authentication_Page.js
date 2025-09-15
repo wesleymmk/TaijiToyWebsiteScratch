@@ -40,26 +40,34 @@ export function renderWelcomeView() {
 
 
     /* Test for the pop up button*/
-    const modal = document.getElementById("myModal");
-    const openBtn = document.getElementById("openModalBtn");
-    const closeBtn = document.querySelector(".close-btn");
+   // 1. Create the button element
+const openButton = document.createElement('button');
 
-    // When the user clicks the button, open the modal
-    openBtn.onclick = function() {
-    modal.style.display = "block";
-    }
+// 2. Set the button's text
+openButton.textContent = 'Open Popup';
 
-    // When the user clicks on <span> (x), close the modal
-    closeBtn.onclick = function() {
-    modal.style.display = "none";
-    }
+// 3. Add a click event listener to the button
+openButton.addEventListener('click', function() {
+  const url = "https://www.google.com"; // Replace with your desired URL
+  const width = 600;
+  const height = 400;
+  const left = (window.screen.width / 2) - (width / 2);
+  const top = (window.screen.height / 2) - (height / 2);
 
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-  }
-}
+  const features = `
+    width=${width},
+    height=${height},
+    left=${left},
+    top=${top},
+    resizable=yes,
+    scrollbars=yes
+  `;
+
+  window.open(url, "_blank", features);
+});
+
+// 4. Append the button to the document body (or any other container)
+document.body.appendChild(openButton);
 }
 
 export function renderCreateAccountView() {
