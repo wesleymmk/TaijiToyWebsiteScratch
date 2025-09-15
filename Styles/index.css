@@ -1,11 +1,15 @@
 /*PS Created first css to test implementation 
 & creating file structure*/
+/*created by Paul, edited and modified by Ernesto */
+
+@import url('https://fonts.cdnfonts.com/css/chinese-rocks');
 .header {
   height: 55px;
   align-items: center;
   text-align: center;
   display: flex;
   background-color: lightblue;
+  font-family: 'Chinese Rocks';
 }
             
 .LoginButton{
