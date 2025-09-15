@@ -37,37 +37,6 @@ export function renderWelcomeView() {
     appContainer.appendChild(passwordInput);
     appContainer.appendChild(LoginButton);
     appContainer.appendChild(CreateAccountButton);
-
-
-    /* Test for the pop up button*/
-   // 1. Create the button element
-const openButton = document.createElement('button');
-
-// 2. Set the button's text
-openButton.textContent = 'Open Popup';
-
-// 3. Add a click event listener to the button
-openButton.addEventListener('click', function() {
-  const url = "https://www.google.com"; // Replace with your desired URL
-  const width = 600;
-  const height = 400;
-  const left = (window.screen.width / 2) - (width / 2);
-  const top = (window.screen.height / 2) - (height / 2);
-
-  const features = `
-    width=${width},
-    height=${height},
-    left=${left},
-    top=${top},
-    resizable=yes,
-    scrollbars=yes
-  `;
-
-  window.open(url, "_blank", features);
-});
-
-// 4. Append the button to the document body (or any other container)
-document.body.appendChild(openButton);
 }
 
 export function renderCreateAccountView() {
