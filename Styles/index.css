@@ -8,9 +8,10 @@
   align-items: center;
   text-align: center;
   display: flex;
-  background-color: lightblue;
+  background-color: black;
   font-family: 'Chinese Rocks Rg', sana-serif;
   justify-content: center;
+  color: white;
 }
             
 .LoginButton{
