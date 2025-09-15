@@ -10,7 +10,7 @@ export function renderWelcomeView() {
     heading.classList.add('header');
     heading.textContent = 'Welcome to Taiji Toys';
 
-    /*
+    
     let emailAccount = document.createElement('input');
     emailAccount.type = 'email';
     emailAccount.placeholder = 'Enter your email';
@@ -21,17 +21,7 @@ export function renderWelcomeView() {
     passwordInput.type = 'password';
     passwordInput.placeholder = 'Enter your password';
     passwordInput.required = true;
-    */
-
-
-    function openNewPopup() {
-    const url = "new_popup_page.html"; // The URL of the page you want to open
-    const windowName = "myPopup"; // A name for the new window
-    const windowFeatures = "width=600,height=400,resizable=yes,scrollbars=yes"; // Window size and features
-
-    window.open(url, windowName, windowFeatures);
-    }
-
+   
 
     let LoginButton = document.createElement("button");
     LoginButton.textContent = 'Login';
@@ -47,6 +37,29 @@ export function renderWelcomeView() {
     appContainer.appendChild(passwordInput);
     appContainer.appendChild(LoginButton);
     appContainer.appendChild(CreateAccountButton);
+
+
+    /* Test for the pop up button*/
+    const modal = document.getElementById("myModal");
+    const openBtn = document.getElementById("openModalBtn");
+    const closeBtn = document.querySelector(".close-btn");
+
+    // When the user clicks the button, open the modal
+    openBtn.onclick = function() {
+    modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    closeBtn.onclick = function() {
+    modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+  }
+}
 }
 
 export function renderCreateAccountView() {
