@@ -1,5 +1,6 @@
 /* Paul-Anthony Sutton
 added renderWelcomeView() to add basic functionailty*/
+/* Eddited by Ernesto*/
 import * as ComUtils from './Common_Function.js';
 export const appContainer = document.getElementById('app');
 export function renderWelcomeView() {
@@ -9,16 +10,18 @@ export function renderWelcomeView() {
     heading.classList.add('header');
     heading.textContent = 'Welcome to Taiji Toys';
 
+    /*
     let emailAccount = document.createElement('input');
     emailAccount.type = 'email';
     emailAccount.placeholder = 'Enter your email';
     emailAccount.required = true;
 
+    
     let passwordInput = document.createElement('input');
     passwordInput.type = 'password';
     passwordInput.placeholder = 'Enter your password';
     passwordInput.required = true;
-
+    */
     let LoginButton = document.createElement("button");
     LoginButton.textContent = 'Login';
     LoginButton.classList.add('LoginButton');
