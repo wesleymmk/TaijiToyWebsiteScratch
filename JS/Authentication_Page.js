@@ -22,7 +22,17 @@ export function renderWelcomeView() {
     passwordInput.placeholder = 'Enter your password';
     passwordInput.required = true;
     */
-   
+
+
+    function openNewPopup() {
+    const url = "new_popup_page.html"; // The URL of the page you want to open
+    const windowName = "myPopup"; // A name for the new window
+    const windowFeatures = "width=600,height=400,resizable=yes,scrollbars=yes"; // Window size and features
+
+    window.open(url, windowName, windowFeatures);
+    }
+
+
     let LoginButton = document.createElement("button");
     LoginButton.textContent = 'Login';
     LoginButton.classList.add('LoginButton');
