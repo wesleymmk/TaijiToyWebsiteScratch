@@ -10,6 +10,7 @@
   display: flex;
   background-color: lightblue;
   font-family: 'Chinese Rocks Rg', sana-serif;
+  justify-content: center;
 }
             
 .LoginButton{
