@@ -12,14 +12,15 @@ export function clearAppContainer()  // WM code // from online modified it so th
 export function apiCall(php_file, js_object) // WM code // 
 {
     return fetch(php_file, // Returns the result of fetch
-        { 
-        method: 'POST',      
-        headers: {
-            // tells the PHP script that the incoming data is JS
-            'Content-Type': 'application/json'
-        },
+        {
+            method: 'POST',
+            headers: {
+                // tells the PHP script that the incoming data is JS
+                'Content-Type': 'application/json'
+            },
             body: JSON.stringify(js_object) // this parses the data from a JS Object to a JSON string that can be read by php
-    })
+        })
+    /*
         .then(response =>
         {
             if (!response.ok) // Checks response
@@ -33,5 +34,6 @@ export function apiCall(php_file, js_object) // WM code //
             console.error(`Fetch Error at ${php_file}:`, error);
             return { success: false, message: 'Could not connect to the server.' };
         });
+        */
 }
 
