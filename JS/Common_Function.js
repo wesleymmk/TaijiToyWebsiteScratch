@@ -2,10 +2,38 @@
 // Its primary purpose is to reduce the code base's size and increase organization.
 // It does this through having 'common functions' such as the clear HTML code function.
 export const appContainer = document.getElementById('app');
+import * as AuthUtils from './Authentication_Page.js';
+import * as GenUtils from './Order_Generation.js';
 //This is the HTML Page Clear function. 
 export function clearAppContainer()  // WM code // from online modified it so that it can be exported and used accross the server
 {
     appContainer.innerHTML = '';
+}
+
+export function header() {
+    let HomeLogo = document.createElement('img');
+    HomeLogo.classList.add('LogoBox');
+    HomeLogo.src = 'Brand_Logos/Taijitoylogolight.png';
+    HomeLogo.alt = 'Color of Toy';
+    HomeLogo.addEventListener('click', AuthUtils.renderWelcomeView);
+
+    let AccountOption = document.createElement('p');
+    AccountOption.textContent = 'Account';
+    AccountOption.classList.add('headerOptions');
+    //AccountOption.addEventListener('click', GenUtils.renderGenerationView);
+
+    let GenerateOption = document.createElement('p');
+    GenerateOption.textContent = 'Generate';
+    GenerateOption.classList.add('headerOptions');
+    GenerateOption.addEventListener('click', GenUtils.renderGenerationView);
+
+    let topBar = document.createElement('h1');
+    topBar.classList.add('topBar');
+    topBar.appendChild(HomeLogo);
+    topBar.appendChild(AccountOption);
+    topBar.appendChild(GenerateOption);
+
+    appContainer.appendChild(topBar);
 }
 
 // This function acts as an API call taking a JS object and a PHP endpoint

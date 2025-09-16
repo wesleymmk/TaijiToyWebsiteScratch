@@ -4,7 +4,8 @@ import * as Utils from './Authentication_Page.js';
 export const appContainer = document.getElementById('app');
 
 export function renderGenerationView() {
-    ComUtils.clearAppContainer(); // Clear the screen first
+    ComUtils.clearAppContainer(); 
+    ComUtils.header();
 
     let heading = document.createElement('h1');
     heading.classList.add('header');

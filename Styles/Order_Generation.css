@@ -3,3 +3,9 @@
   height: 200px;
 }
 
+.LogoBox {
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+}
+
