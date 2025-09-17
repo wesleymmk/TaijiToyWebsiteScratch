@@ -77,17 +77,19 @@
   position:fixed;
   width:50%;
   height:50%;
+  
 }
 
 .modal-content{
-  background-color: white;
+  background-color: black;
   padding: 20px;
   width:80%;
-  font-family: 'Chinese Rocks Rg', sana-serif;;
+  font-family: 'Chinese Rocks Rg', sana-serif;
+  color: white;
 }
 
 .close-button{
-  color: black;
+  color: white;
   font-size: 30px;
   font-weight: bold;
 }
