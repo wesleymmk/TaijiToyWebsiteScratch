@@ -4,6 +4,28 @@
 
 /* EQ added in the font and made the text larger.*/
 @import url('https://fonts.cdnfonts.com/css/chinese-rocks');
+                
+.topBar {
+  margin: 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex: 1;
+  background-color: black;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.headerOptions {
+  align-items: center;
+  display: flex;
+  margin: 0px;
+  font-family: opensans, Arial;
+  color: white;
+  font-weight: 100;
+  cursor: pointer;
+}
+
 .header {
   height: 250px;
   align-items: center;
@@ -13,7 +35,8 @@
   font-family: 'Chinese Rocks Rg', sana-serif;
   justify-content: center;
   color: white;
-  font-size: 150px;
+  font-size: 100px;
+  margin-top: 0px;
 }
             
 .LoginButton{

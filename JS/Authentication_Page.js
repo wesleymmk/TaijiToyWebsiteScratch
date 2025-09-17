@@ -3,9 +3,12 @@ added renderWelcomeView() to add basic functionailty*/
 /* Eddited by Ernesto*/
 import * as ComUtils from './Common_Function.js';
 export const appContainer = document.getElementById('app');
+import * as GenUtils from './Order_Generation.js';
+
 export function renderWelcomeView() {
     ComUtils.clearAppContainer(); // Clear the screen first
-
+    ComUtils.header();
+    
     let heading = document.createElement('h1');
     heading.classList.add('header');
     heading.textContent = 'Welcome to Taiji Toys';
@@ -32,15 +35,22 @@ export function renderWelcomeView() {
     CreateAccountButton.classList.add('LoginButton');
     CreateAccountButton.addEventListener('click', renderCreateAccountView);
 
+    let GenerationButton = document.createElement("button");
+    GenerationButton.textContent = 'Generation (Temp)';
+    GenerationButton.classList.add('LoginButton');
+    GenerationButton.addEventListener('click', GenUtils.renderGenerationView);
+
     appContainer.appendChild(heading);
     appContainer.appendChild(emailAccount);
     appContainer.appendChild(passwordInput);
     appContainer.appendChild(LoginButton);
     appContainer.appendChild(CreateAccountButton);
+    appContainer.appendChild(GenerationButton);
 }
 
 export function renderCreateAccountView() {
     ComUtils.clearAppContainer();
+    ComUtils.header();
 
     let heading = document.createElement('h1');
     heading.textContent = 'Create Your Account!';
@@ -116,3 +126,4 @@ function renderLoginView() {
     appContainer.appendChild(heading);
 }
 
+export const Trait_1 = 'This text is within Authentication_Page.js and testing linking dynamic text';
