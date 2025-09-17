@@ -13,13 +13,11 @@ export function renderWelcomeView() {
     heading.classList.add('header');
     heading.textContent = 'Welcome to Taiji Toys';
 
-    
     let emailAccount = document.createElement('input');
     emailAccount.type = 'email';
     emailAccount.placeholder = 'Enter your email';
     emailAccount.required = true;
 
-    
     let passwordInput = document.createElement('input');
     passwordInput.type = 'password';
     passwordInput.placeholder = 'Enter your password';
@@ -29,6 +27,11 @@ export function renderWelcomeView() {
     let LoginButton = document.createElement("button");
     LoginButton.textContent = 'Login';
     LoginButton.classList.add('LoginButton');
+
+    let PopupButton = document.createElement("button");
+    PopupButton.textContent = 'popup';
+    PopupButton.classList.add('PopupButton');
+    PopupButton.addEventListener('click', showPopupModal);
 
     let CreateAccountButton = document.createElement("button");
     CreateAccountButton.textContent = 'Create Account';
@@ -44,9 +47,51 @@ export function renderWelcomeView() {
     appContainer.appendChild(emailAccount);
     appContainer.appendChild(passwordInput);
     appContainer.appendChild(LoginButton);
+    appContainer.appendChild(PopupButton);
     appContainer.appendChild(CreateAccountButton);
     appContainer.appendChild(GenerationButton);
 }
+export function showPopupModal(){
+    let modal=document.getElementById('myPopupModal');
+    if (!modal) {
+        modal=document.createElement('div');
+        modal.id='myPopupModal';
+        modal.classList.add('modal');
+
+        let modalContent=document.createElement('div');
+        modalContent.classList.add('modal-content');
+
+        let closeButton = document.createElement('span');
+        closeButton.classList.add('close-button');
+        closeButton.innerHTML = '&times;'; // The 'x' character
+        closeButton.onclick = () => {
+            modal.style.display = "none";
+    };
+    let popupHeading = document.createElement('h2');
+        popupHeading.textContent = 'This is a Pop-up Window!';
+        
+        let popupText = document.createElement('p');
+        popupText.textContent = 'You can add any content here, like a form, an image, or important information.';
+
+        // Append everything together
+        modalContent.appendChild(closeButton);
+        modalContent.appendChild(popupHeading);
+        modalContent.appendChild(popupText);
+        modal.appendChild(modalContent);
+
+        // Add the new modal to the main app container
+        appContainer.appendChild(modal);
+}
+         modal.style.display = "block";
+
+    // Add an event listener to close the modal if the user clicks outside of it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+        }
+    }
+
 
 export function renderCreateAccountView() {
     ComUtils.clearAppContainer();
