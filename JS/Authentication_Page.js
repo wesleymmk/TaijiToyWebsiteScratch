@@ -28,6 +28,7 @@ export function renderWelcomeView() {
     LoginButton.textContent = 'Login';
     LoginButton.classList.add('LoginButton');
 
+    /*Pop up button temporary*/
     let PopupButton = document.createElement("button");
     PopupButton.textContent = 'popup';
     PopupButton.classList.add('PopupButton');
@@ -51,6 +52,7 @@ export function renderWelcomeView() {
     appContainer.appendChild(CreateAccountButton);
     appContainer.appendChild(GenerationButton);
 }
+/*Popup function done by Ernesto Q.*/ 
 export function showPopupModal(){
     let modal=document.getElementById('myPopupModal');
     if (!modal) {
