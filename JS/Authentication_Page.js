@@ -39,10 +39,15 @@ export function renderWelcomeView() {
     CreateAccountButton.classList.add('LoginButton');
     CreateAccountButton.addEventListener('click', renderCreateAccountView);
 
-    let GenerationButton = document.createElement("button");
-    GenerationButton.textContent = 'Generation (Temp)';
-    GenerationButton.classList.add('LoginButton');
-    GenerationButton.addEventListener('click', GenUtils.renderGenerationView);
+    let GenerationButtonOutput = document.createElement("button");
+    GenerationButtonOutput.textContent = 'Generation Output (Temp)';
+    GenerationButtonOutput.classList.add('LoginButton');
+    GenerationButtonOutput.addEventListener('click', GenUtils.renderGenerationOutputView);
+
+    let GenerationButtonInput = document.createElement("button");
+    GenerationButtonInput.textContent = 'Generation Input (Temp)';
+    GenerationButtonInput.classList.add('LoginButton');
+    GenerationButtonInput.addEventListener('click', GenUtils.renderGenerationInputView);
 
     appContainer.appendChild(heading);
     appContainer.appendChild(emailAccount);
@@ -50,7 +55,8 @@ export function renderWelcomeView() {
     appContainer.appendChild(LoginButton);
     appContainer.appendChild(PopupButton);
     appContainer.appendChild(CreateAccountButton);
-    appContainer.appendChild(GenerationButton);
+    appContainer.appendChild(GenerationButtonOutput);
+    appContainer.appendChild(GenerationButtonInput);
 }
 /*Popup function done by Ernesto Q.*/ 
 export function showPopupModal(){
