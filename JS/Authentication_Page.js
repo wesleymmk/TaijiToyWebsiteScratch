@@ -30,7 +30,7 @@ export function renderWelcomeView() {
 
     /*Pop up button temporary*/
     let PopupButton = document.createElement("button");
-    PopupButton.textContent = 'popup';
+    PopupButton.textContent = 'popup Login';
     PopupButton.classList.add('PopupButton');
     PopupButton.addEventListener('click', showPopupModal);
 
@@ -70,15 +70,35 @@ export function showPopupModal(){
             modal.style.display = "none";
     };
     let popupHeading = document.createElement('h2');
-        popupHeading.textContent = 'This is a Pop-up Window!';
+        popupHeading.textContent = 'Login page';
         
-        let popupText = document.createElement('p');
-        popupText.textContent = 'You can add any content here, like a form, an image, or important information.';
+        
+
+        let emailAccount = document.createElement('input');
+        emailAccount.type = 'email';
+        emailAccount.placeholder = 'Enter your email';
+        emailAccount.required = true;
+
+        let passwordInput = document.createElement('input');
+        passwordInput.type = 'password';
+        passwordInput.placeholder = 'Enter your password';
+        passwordInput.required = true;
+
+        let Signinbutton = document.createElement("button");
+        Signinbutton.textContent = 'Sign in';
+        Signinbutton.classList.add('Signinbutton');
+
+        let CreateAccountButton = document.createElement("button");
+        CreateAccountButton.textContent = 'Create Account';
+        CreateAccountButton.classList.add('CreateAccountButton');
 
         // Append everything together
         modalContent.appendChild(closeButton);
         modalContent.appendChild(popupHeading);
-        modalContent.appendChild(popupText);
+        modalContent.appendChild(emailAccount);
+        modalContent.appendChild(passwordInput)
+        modalContent.appendChild(Signinbutton);
+        modalContent.appendChild(CreateAccountButton);
         modal.appendChild(modalContent);
 
         // Add the new modal to the main app container

@@ -72,25 +72,31 @@
   vertical-align: top;
 }
 
+/*Content within the popup window*/
+/*Modal and modal-content done by Ernesto Q.*/
 .modal{
   display: none;
-  align-items: center;
   position:fixed;
+  top:50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width:50%;
   height:50%;
   
 }
 
 .modal-content{
-  background-color: black;
+  background-color: white;
+  border-style: solid;
+  border-color: black;
   padding: 20px;
   width:80%;
   font-family: 'Chinese Rocks Rg', sana-serif;
-  color: white;
+  color: black;
 }
 
 .close-button{
-  color: white;
+  color: black;
   font-size: 30px;
   font-weight: bold;
 }
