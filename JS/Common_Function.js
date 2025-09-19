@@ -4,6 +4,7 @@
 export const appContainer = document.getElementById('app');
 import * as AuthUtils from './Authentication_Page.js';
 import * as GenUtils from './Order_Generation.js';
+import * as AccUtils from './User_Account.js';
 //This is the HTML Page Clear function. 
 export function clearAppContainer()  // WM code // from online modified it so that it can be exported and used accross the server
 {
@@ -20,7 +21,7 @@ export function header() {
     let AccountOption = document.createElement('p');
     AccountOption.textContent = 'Account';
     AccountOption.classList.add('headerOptions');
-    //AccountOption.addEventListener('click', GenUtils.renderGenerationView);
+    AccountOption.addEventListener('click', AccUtils.renderUserAccount);
 
     let GenerateOuputOption = document.createElement('p');
     GenerateOuputOption.textContent = 'Generate (Output)';

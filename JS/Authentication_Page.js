@@ -4,6 +4,7 @@ added renderWelcomeView() to add basic functionailty*/
 import * as ComUtils from './Common_Function.js';
 export const appContainer = document.getElementById('app');
 import * as GenUtils from './Order_Generation.js';
+import * as AccUtils from './User_Account.js';
 
 export function renderWelcomeView() {
     ComUtils.clearAppContainer(); // Clear the screen first
