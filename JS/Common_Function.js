@@ -22,16 +22,22 @@ export function header() {
     AccountOption.classList.add('headerOptions');
     //AccountOption.addEventListener('click', GenUtils.renderGenerationView);
 
-    let GenerateOption = document.createElement('p');
-    GenerateOption.textContent = 'Generate';
-    GenerateOption.classList.add('headerOptions');
-    GenerateOption.addEventListener('click', GenUtils.renderGenerationView);
+    let GenerateOuputOption = document.createElement('p');
+    GenerateOuputOption.textContent = 'Generate (Output)';
+    GenerateOuputOption.classList.add('headerOptions');
+    GenerateOuputOption.addEventListener('click', GenUtils.renderGenerationOutputView);
+
+    let GenerateInputOption = document.createElement('p');
+    GenerateInputOption.textContent = 'Generate (Input)';
+    GenerateInputOption.classList.add('headerOptions');
+    GenerateInputOption.addEventListener('click', GenUtils.renderGenerationInputView);
 
     let topBar = document.createElement('h1');
     topBar.classList.add('topBar');
     topBar.appendChild(HomeLogo);
     topBar.appendChild(AccountOption);
-    topBar.appendChild(GenerateOption);
+    topBar.appendChild(GenerateOuputOption);
+    topBar.appendChild(GenerateInputOption);
 
     appContainer.appendChild(topBar);
 }
