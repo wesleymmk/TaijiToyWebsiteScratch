@@ -21,8 +21,7 @@ export function renderWelcomeView() {
     let passwordInput = document.createElement('input');
     passwordInput.type = 'password';
     passwordInput.placeholder = 'Enter your password';
-    passwordInput.required = true;
-   
+    passwordInput.required = true;  
 
     let LoginButton = document.createElement("button");
     LoginButton.textContent = 'Login';
@@ -77,8 +76,6 @@ export function showPopupModal(){
     };
     let popupHeading = document.createElement('h2');
         popupHeading.textContent = 'Login page';
-        
-        
 
         let emailAccount = document.createElement('input');
         emailAccount.type = 'email';
