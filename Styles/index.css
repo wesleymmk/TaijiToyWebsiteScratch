@@ -86,17 +86,17 @@
 }
 
 .modal-content{
-  background-color: white;
+  background-color: black;
   border-style: solid;
-  border-color: black;
+  border-color: white;
   padding: 20px;
   width:80%;
   font-family: 'Chinese Rocks Rg', sana-serif;
-  color: black;
+  color: white;
 }
 
 .close-button{
-  color: black;
+  color: white;
   font-size: 30px;
   font-weight: bold;
 }
