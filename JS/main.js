@@ -1,12 +1,4 @@
-
-
-// Find the main container element in the HTML
-
-
-// --- Function to clear the current view ---
-
-
-//import { renderWelcomeView, clearAppContainer, appContainer } from "./Authenticaiton_Page.js";
+// Import functions from 
 import * as ComUtils from './Common_Function.js';
 import * as Utils from './Authentication_Page.js';
 import * as GenUtils from './Order_Generation.js';
