@@ -2,9 +2,10 @@
 import * as ComUtils from './Common_Function.js';
 import * as Utils from './Authentication_Page.js';
 export const appContainer = document.getElementById('app');
+import * as AccUtils from './User_Account.js';
 
 export function renderGenerationOutputView() {
-    ComUtils.clearAppContainer(); 
+    ComUtils.clearAppContainer();
     ComUtils.header();
 
     let heading = document.createElement('h1');
