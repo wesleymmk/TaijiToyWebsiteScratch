@@ -11,7 +11,7 @@ import * as ComUtils from './Common_Function.js';
 const contentContainer = document.getElementById('content');
 
 function loadPage() {
-    const hash = window.location.hash.substring(1); // Get the hash, e.g., 'home', 'about', 'contact'
+    const hash = window.location.hash.substring(1); // Get the hash
 
     let content = '';
     switch (hash) {
