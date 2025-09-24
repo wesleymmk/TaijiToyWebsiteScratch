@@ -1,7 +1,9 @@
 <?php
 session_start();
 require_once 'config.php';
+// ^ initial declarations
 
+// created by WM
 // test function for saving entire orders to 
 
 
@@ -37,7 +39,9 @@ header('Content-Type: application/json');
 	// define area for toy 6
 	INSERT INTO output_details (id, order_id, color_1, color_2, attribute_1, attribute_2, desc_short, desc_long, image_path) VALUES (/*assign order ID */? , /*color ID 1*/? , /*color ID 2*/? , /*attribute 1*/? , /*attribute 2 */? , /*short description */? , /*long description */?);
 
-	// check function for checking that output saved porperly
+
+
+	// Function for checking that output was generated properly created by WAM
 	if (!is_array($generated_products) || count($generated_products) !== 6) 
 	{
     throw new Exception("error in num of arrays retrieved");
@@ -55,5 +59,6 @@ header('Content-Type: application/json');
 			!isset($generated_products[i]['desc_long'])
 		) {
 			throw new Exception("Error in product data line ' . $i . '.");
+			// this should throw an exception that lists the line where the error occured 
 		}
 	}
