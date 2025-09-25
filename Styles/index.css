@@ -53,6 +53,7 @@
   margin-left: 8px;
   transition: opacity 0.15s;
   vertical-align: top;
+  display: inline-block;
 }
 
 .LoginButton-2{
@@ -69,6 +70,7 @@
   margin-left: 8px;
   transition: opacity 0.15s;
   vertical-align: top;
+  display: inline-block;
 }
 
 /*Popup button temporary*/
