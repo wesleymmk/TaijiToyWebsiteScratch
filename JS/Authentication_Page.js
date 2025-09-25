@@ -205,7 +205,7 @@ export function showCreateAccountPopup(){
         registerForm.appendChild(emailCheckbox);
         registerForm.appendChild(CheckboxLabel);
         registerForm.appendChild(CreateAccountButton);
-        registerForm.appendChild(Back2Login);
+        modalContent.appendChild(Back2Login);
         modalContent.appendChild(registerForm); 
         modal.appendChild(modalContent);
 
