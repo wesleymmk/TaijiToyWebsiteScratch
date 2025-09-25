@@ -92,11 +92,16 @@ export function showPopupModal(){
 
         let Signinbutton = document.createElement("button");
         Signinbutton.textContent = 'Sign in';
-        Signinbutton.classList.add('Signinbutton');
+        Signinbutton.classList.add('LoginButton-2');
 
         let CreateAccountButton = document.createElement("button");
         CreateAccountButton.textContent = 'Create Account';
-        CreateAccountButton.classList.add('CreateAccountButton');
+        CreateAccountButton.classList.add('LoginButton-2');
+
+        CreateAccountButton.addEventListener('click', () => {
+            modal.style.display = "none"; // Close the login popup first
+            showCreateAccountPopup();      // Then open the create account popup
+        });     
 
         // Append everything together
         modalContent.appendChild(closeButton);
@@ -116,9 +121,106 @@ export function showPopupModal(){
     window.onclick = function(event) {
         if (event.target == modal) {
             modal.style.display = "none";
-        }
+        };
+}
+}
+/* New popup window for the create account popup*/
+/*Done by Ernesto Q.*/
+export function showCreateAccountPopup(){
+    let modal=document.getElementById('myCreateAccountModal');
+    if (!modal) {
+        modal=document.createElement('div');
+        modal.id='myCreateAccountModal';
+        modal.classList.add('modal');
+
+        let modalContent=document.createElement('div');
+        modalContent.classList.add('modal-content');
+
+        let closeButton = document.createElement('span');
+        closeButton.classList.add('close-button');
+        closeButton.innerHTML = '&times;'; // The 'x' character
+        closeButton.onclick = () => {
+            modal.style.display = "none";
+    };
+    let popupHeading = document.createElement('h2');
+        popupHeading.textContent = 'Create Your Account!';
+
+        const registerForm = document.createElement('form');
+        registerForm.id = 'register-form-popup';
+
+        let emailAccount = document.createElement('input');
+        emailAccount.type = 'email';
+        emailAccount.placeholder = 'Enter your email';
+        emailAccount.required = true;
+
+        let passwordInput = document.createElement('input');
+        passwordInput.type = 'password';
+        passwordInput.placeholder = 'Enter your password';
+        passwordInput.required = true;
+
+        let emailCheckbox = document.createElement('input');
+        emailCheckbox.type = 'checkbox';
+        emailCheckbox.id = 'emailCheckboxPopup';
+
+        let CheckboxLabel = document.createElement('label');
+        CheckboxLabel.htmlFor = 'emailCheckboxPopup';
+        CheckboxLabel.textContent = ' Send me emails?';
+
+        let CreateAccountButton = document.createElement("button");
+        CreateAccountButton.textContent = 'Create Account';
+        CreateAccountButton.classList.add('LoginButton-2');
+        CreateAccountButton.type = "submit";
+
+        let Back2Login = document.createElement("button");
+        Back2Login.textContent = 'Already have an account? Log in!';
+        Back2Login.classList.add('LoginButton-2');
+
+        Back2Login.addEventListener('click', () => {
+            modal.style.display = "none"; // Close the account creation popup first
+            showPopupModal();      // Then open the login popup
+        });
+            
+        registerForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const email = emailAccount.value;
+            const password = passwordInput.value;
+
+            fetch('api/register.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: email, password: password })
+            })
+            .then(response => response.json())
+            .then(data => {
+                modal.style.display = "none"; 
+                renderStatusView(data.success, data.message, email);
+            });
+        });
+
+        // Append everything together
+        modalContent.appendChild(closeButton);
+        modalContent.appendChild(popupHeading);
+        registerForm.appendChild(emailAccount);
+        registerForm.appendChild(passwordInput);
+        registerForm.appendChild(emailCheckbox);
+        registerForm.appendChild(CheckboxLabel);
+        registerForm.appendChild(CreateAccountButton);
+        modalContent.appendChild(Back2Login);
+        modalContent.appendChild(registerForm); 
+        modal.appendChild(modalContent);
+
+        appContainer.appendChild(modal);
+    }
+
+    modal.style.display = "block";
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
         }
     }
+}
+
 
 // PS creation, EQ Modifying 
 export function renderCreateAccountView() {
