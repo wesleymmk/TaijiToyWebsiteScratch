@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once 'config.php';
+require_once 'common_functions.php';
 header('Content-Type: application/json');
 // ^ initial declarations
 
@@ -14,11 +15,8 @@ header('Content-Type: application/json');
 // $customer_id this is a variable that will be gathered from the user being logged in allowing us to attach the customers ID to the order they just created
 try 
 {
-	//checks if logged in and retrieves customer ID if they are logged in
-	if (!isset($_SESSION['customer_id'])) {
-        throw new Exception("Not logged in");
-    }
-    $customer_id = $_SESSION['customer_id'];
+	// retrieves customer ID if they are logged in
+	$customer_id = getAuthenticatedUserId();
 
     // Get the text prompt from the frontend
 	// this first statement decodes the JSON into php
@@ -37,28 +35,9 @@ try
 	$generated_products = json_decode($ai_response_json, true);
 
 	/* This function is commented out until we move to a 6 outputs stystem
-
-	// Function for checking that output was generated properly created by WAM
-	if (!is_array($generated_products) || count($generated_products) !== 6) // checks number of strings
-	{
-	   throw new Exception("error in num of arrays retrieved");
-	}
-		
-	for($i = 0, $i < 6, $i++) // checks each array in generated products 
-	{
-		if (
-			!isset($generated_products[i]['color_1']) || 
-			!isset($generated_products[i]['color_2']) || 
-			!isset($generated_products[i]['attribute_1']) || 
-			!isset($generated_products[i]['attribute_2']) || 
-			!isset($generated_products[i]['desc_short']) || 
-			!isset($generated_products[i]['desc_long'])
-		) {
-			throw new Exception("Error in product data line ' . $i . '.");
-			// this should throw an exception that lists the line where the error occured 
-		}
-	}
+	check_deliverables($generated_products);
 	*/
+	
 
 	// connects to server
     $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
