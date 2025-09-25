@@ -15,8 +15,8 @@ header('Content-Type: application/json');
 // $customer_id this is a variable that will be gathered from the user being logged in allowing us to attach the customers ID to the order they just created
 try 
 {
-	// retrieves customer ID if they are logged in
-	$customer_id = getAuthenticatedUserId();
+	// retrieves customer ID if they are logged in throws exception if user is not logged in
+	$customer_id = get_user_ID();
 
     // Get the text prompt from the frontend
 	// this first statement decodes the JSON into php
@@ -29,7 +29,6 @@ try
     }
 	// if it checks out the text prompt string is assigned directly into the customer_prompt_response variable
     $customer_prompt_response = $request_data['text_prompt'];
-
 
 	// creates the $generated_products variable and stores the json response in it
 	$generated_products = json_decode($ai_response_json, true);
@@ -46,37 +45,19 @@ try
 	// and does not put corrupt/incorrect data into the server
     $conn->begin_transaction();
 
-	// save to outputs database first
-	// This line creates a new line in Outputs and other values are auto generated
-	$sql_output = INSERT INTO outputs (customer_id, customer_prompt_response) VALUES (? , ?);
-	// this statement sends the above line to the SQL server 
-	// this ensures that the values we are trying to assign are actually in that line
-	$stmt_output = $conn->prepare($sql_output);
-	// this assigns values to the insert line but puts them in as strings at this point to prevent direct SQL injection
-	// NOTE TO TEAM "is" means that the first input is an Integer and the second is a string
-	$stmt_output->bind_param("is", $customer_id, $prompt_response);
-	// executes the INSERT INTO command with the blind parameters assigned
-	$stmt_output->execute();
-
-	// This creates a new variable called new order ID that stores the order ID for the entire order
-	$new_order_id = $conn->insert_id;
-	// now that the above code has been executed and we have grabbed the order ID we can free up the server resources
-	$stmt_output->close();
+	$new_order_id = save_to_outputs($conn, $customer_id, $prompt_response);
 
 
-	// defining the toy this set of code effectively works the same as the one above
-	$sql_details_1 = INSERT INTO output_details (order_id, color_1, color_2, attribute_1, attribute_2, desc_short, desc_long) VALUES (?, ?, ?, ?, ?, ?, ?);
-
-	$stmt_details_1 = $conn->prepare($sql_details_1);
-
-	$stmt_details_1->bind_param("issssss", $new_order_id, $color_1_1, $color_2_1, $attribute_1_1, $attribute_2_1, $desc_s_1, $desc_l_1);
-
-	$stmt_details_1->execute();
-	// creates a variable to store the newly generated ID for this portion of the order
-	$new_detail_id_1 = $conn->insert_id;
-
-	$stmt_details_1->close();
-
+	$detail_id_1 = save_to_output_details($conn, $new_order_id, $color_1, $color_2, $attribute_1, $attribute_2, $desc_s, $desc_l);
+	
+	// other 5 instantiations of the save_to_output_details
+	/*
+	$detail_id_2 = save_to_output_details($conn, $new_order_id, $color_1, $color_2, $attribute_1, $attribute_2, $desc_s, $desc_l);
+	$detail_id_3 = save_to_output_details($conn, $new_order_id, $color_1, $color_2, $attribute_1, $attribute_2, $desc_s, $desc_l);
+	$detail_id_4 = save_to_output_details($conn, $new_order_id, $color_1, $color_2, $attribute_1, $attribute_2, $desc_s, $desc_l);
+	$detail_id_5 = save_to_output_details($conn, $new_order_id, $color_1, $color_2, $attribute_1, $attribute_2, $desc_s, $desc_l);
+	$detail_id_6 = save_to_output_details($conn, $new_order_id, $color_1, $color_2, $attribute_1, $attribute_2, $desc_s, $desc_l);
+	*/
 
 
 	// BELOW THIS is AI generated temporaraily will be replaced by WAM with better code when has time
