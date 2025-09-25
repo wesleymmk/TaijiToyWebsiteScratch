@@ -14,4 +14,4 @@ export function renderUserAccount() {
     heading.textContent = 'User Account';
 
     appContainer.appendChild(heading);
-}
+} 

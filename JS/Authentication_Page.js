@@ -1,11 +1,13 @@
 /* Paul-Anthony Sutton
 added renderWelcomeView() to add basic functionailty*/
 /* Eddited by Ernesto*/
-import * as ComUtils from './Common_Function.js';
 export const appContainer = document.getElementById('app');
+import * as ComUtils from './Common_Function.js';
 import * as GenUtils from './Order_Generation.js';
 import * as AccUtils from './User_Account.js';
+import * as Gen2Utils from './Order_Gen_Output.js';
 
+//PS Creation & EQ collaboration
 export function renderWelcomeView() {
     ComUtils.clearAppContainer(); // Clear the screen first
     ComUtils.header();
@@ -42,7 +44,7 @@ export function renderWelcomeView() {
     let GenerationButtonOutput = document.createElement("button");
     GenerationButtonOutput.textContent = 'Generation Output (Temp)';
     GenerationButtonOutput.classList.add('LoginButton');
-    GenerationButtonOutput.addEventListener('click', GenUtils.renderGenerationOutputView);
+    GenerationButtonOutput.addEventListener('click', Gen2Utils.renderGenerationOutputView);
 
     let GenerationButtonInput = document.createElement("button");
     GenerationButtonInput.textContent = 'Generation Input (Temp)';
@@ -210,7 +212,7 @@ export function showCreateAccountPopup(){
 }
 
 
-
+// PS creation, EQ Modifying 
 export function renderCreateAccountView() {
     ComUtils.clearAppContainer();
     ComUtils.header();
