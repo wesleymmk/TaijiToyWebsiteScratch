@@ -171,6 +171,15 @@ export function showCreateAccountPopup(){
         CreateAccountButton.classList.add('LoginButton');
         CreateAccountButton.type = "submit";
 
+        let Back2Login = document.createElement("button");
+        Back2Login.textContent = 'Already have an account? Log in!';
+        Back2Login.classList.add('Back2Login');
+
+        Back2Login.addEventListener('click', () => {
+            modal.style.display = "none"; // Close the login popup first
+            showPopupModal();      // Then open the create account popup
+        });
+            
         registerForm.addEventListener('submit', (event) => {
             event.preventDefault();
             const email = emailAccount.value;
@@ -196,6 +205,7 @@ export function showCreateAccountPopup(){
         registerForm.appendChild(emailCheckbox);
         registerForm.appendChild(CheckboxLabel);
         registerForm.appendChild(CreateAccountButton);
+        registerForm.appendChild(Back2Login);
         modalContent.appendChild(registerForm); 
         modal.appendChild(modalContent);
 
