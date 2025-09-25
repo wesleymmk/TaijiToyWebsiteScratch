@@ -17,7 +17,12 @@ export function renderGenerationOutputView() {
     paragraph1.textContent = Utils.Trait_1;
 
     let traits=document.createElement("P");
+    traits.classList.add('.traits')
     traits.textContent="Trait 1 \n Trait2 \n Trait3 \n Trait4 \n Trait5 \n Trait6 \n"
+
+    let RegenText=document.createElement("button");
+    RegenText.textContent='Regenerate Text';
+    RegenText.classList.add(RegenText);
 
     let TaijiToyColor = document.createElement('img');
     TaijiToyColor.classList.add('ImageBox');
