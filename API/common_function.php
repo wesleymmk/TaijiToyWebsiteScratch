@@ -73,8 +73,8 @@ function check_deliverables($generated_products)
 //--------------------  END OF FUNCTION  --------------------
 
 //-------------------- Saving to outputs table in mySQL --------------------
-// Created by: 
-// Date created: 
+// Created by: WAM 
+// Date created: 9/25/25
 
 
 function save_to_outputs($conn, $customer_id, $prompt_response)
@@ -157,10 +157,10 @@ function save_to_output_details($conn, $new_order_id, $color_1, $color_2, $attri
 //--------------------  END OF FUNCTION  --------------------
 
 
-
-// Template created by WAM
 //---------------------------------------------------------------------------------------------------------------
-//                  DO NOT TOUCH COPY THIS FORMATING
+//                                    Template created by WAM
+//---------------------------------------------------------------------------------------------------------------
+//                                 DO NOT TOUCH COPY THIS FORMATING
 //---------------------------------------------------------------------------------------------------------------
 
 
