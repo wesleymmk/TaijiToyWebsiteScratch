@@ -93,33 +93,3 @@ echo json_encode($response);
 
 	// end of AI gen
 ?> 
-
-
-
-
-header('Content-Type: application/json');
-
-
-
-	// This intial definition of areas that are blank and then later assigned values using blind params this is to prevent direct SQL injection. 
-	// order_id	output_creation_time	output_ordered	customer_id	customer_prompt_response	
-	INSERT INTO outputs (order_id, output_creation_time, output_ordered, customer_id, customer_prompt_response) VALUES (/*assign order ID */? , /*def is Null not sure if we will use this*/? , /*customer ID varaibale */? , /*customer prompt response*/?);
-	
-	// id	order_id	color_1	color_2	attribute_1	attribute_2	desc_short	desc_long	image_path	
-	// define area for toy 1
-	INSERT INTO output_details (id, order_id, color_1, color_2, attribute_1, attribute_2, desc_short, desc_long, image_path) VALUES (/*assign order ID */? , /*color ID 1*/? , /*color ID 2*/? , /*attribute 1*/? , /*attribute 2 */? , /*short description */? , /*long description */?);
-	
-	// define area for toy 2
-	INSERT INTO output_details (id, order_id, color_1, color_2, attribute_1, attribute_2, desc_short, desc_long, image_path) VALUES (/*assign order ID */? , /*color ID 1*/? , /*color ID 2*/? , /*attribute 1*/? , /*attribute 2 */? , /*short description */? , /*long description */?);
-	
-	// define area for toy 3
-	INSERT INTO output_details (id, order_id, color_1, color_2, attribute_1, attribute_2, desc_short, desc_long, image_path) VALUES (/*assign order ID */? , /*color ID 1*/? , /*color ID 2*/? , /*attribute 1*/? , /*attribute 2 */? , /*short description */? , /*long description */?);
-	
-	// define area for toy 4
-	INSERT INTO output_details (id, order_id, color_1, color_2, attribute_1, attribute_2, desc_short, desc_long, image_path) VALUES (/*assign order ID */? , /*color ID 1*/? , /*color ID 2*/? , /*attribute 1*/? , /*attribute 2 */? , /*short description */? , /*long description */?);
-	
-	// define area for toy 5
-	INSERT INTO output_details (id, order_id, color_1, color_2, attribute_1, attribute_2, desc_short, desc_long, image_path) VALUES (/*assign order ID */? , /*color ID 1*/? , /*color ID 2*/? , /*attribute 1*/? , /*attribute 2 */? , /*short description */? , /*long description */?);
-	
-	// define area for toy 6
-	INSERT INTO output_details (id, order_id, color_1, color_2, attribute_1, attribute_2, desc_short, desc_long, image_path) VALUES (/*assign order ID */? , /*color ID 1*/? , /*color ID 2*/? , /*attribute 1*/? , /*attribute 2 */? , /*short description */? , /*long description */?);

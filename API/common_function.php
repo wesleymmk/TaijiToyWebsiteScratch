@@ -45,19 +45,19 @@ function check_deliverables($generated_products)
 	   throw new Exception("error in number of arrays retrieved");
 	}
 		
-	for($i = 0; $i < 6; $i++) // checks each array in generated products 
+	for ($i = 0; $i < 6; $i++) // checks each array in generated products 
 	{
 		//redefine variable to prevent errors
 		$product = $generated_products[$i];
 		if (
-			!isset(product[$i]['color_1']) || 
-			!isset(product[$i]['color_2']) || 
-			!isset(product[$i]['attribute_1']) || 
-			!isset(product[$i]['attribute_2']) || 
-			!isset(product[$i]['desc_short']) || 
-			!isset(product[$i]['desc_long'])
+			!isset(product['color_1']) || 
+			!isset(product['color_2']) || 
+			!isset(product['attribute_1']) || 
+			!isset(product['attribute_2']) || 
+			!isset(product['desc_short']) || 
+			!isset(product['desc_long'])
 		) {
-			throw new Exception("Error in product data line ' . $i . '.");
+			throw new Exception('Error in product data at index ' . $i . '.');
 			// this should throw an exception that lists the line where the error occured 
 		}
 	}
@@ -75,13 +75,14 @@ function check_deliverables($generated_products)
 //-------------------- Saving to outputs table in mySQL --------------------
 // Created by: WAM 
 // Date created: 9/25/25
+// Note these loops were origionally created by me on 9/24/25 but was moved here and turned to a function on 9/25/25
 
 
 function save_to_outputs($conn, $customer_id, $prompt_response)
 {
 	// save to outputs database first
 	// This line creates a new line in Outputs and other values are auto generated
-	$sql_output = INSERT INTO outputs (customer_id, customer_prompt_response) VALUES (? , ?);
+	$sql_output = "INSERT INTO outputs (customer_id, customer_prompt_response) VALUES (? , ?)";
 	// this statement sends the above line to the SQL server 
 	// this ensures that the values we are trying to assign are actually in that line
 	$stmt_output = $conn->prepare($sql_output);
