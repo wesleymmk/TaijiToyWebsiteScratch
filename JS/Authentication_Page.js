@@ -92,11 +92,11 @@ export function showPopupModal(){
 
         let Signinbutton = document.createElement("button");
         Signinbutton.textContent = 'Sign in';
-        Signinbutton.classList.add('Signinbutton');
+        Signinbutton.classList.add('LoginButton-2');
 
         let CreateAccountButton = document.createElement("button");
         CreateAccountButton.textContent = 'Create Account';
-        CreateAccountButton.classList.add('CreateAccountButton');
+        CreateAccountButton.classList.add('LoginButton-2');
 
         CreateAccountButton.addEventListener('click', () => {
             modal.style.display = "none"; // Close the login popup first
@@ -168,16 +168,16 @@ export function showCreateAccountPopup(){
 
         let CreateAccountButton = document.createElement("button");
         CreateAccountButton.textContent = 'Create Account';
-        CreateAccountButton.classList.add('LoginButton');
+        CreateAccountButton.classList.add('LoginButton-2');
         CreateAccountButton.type = "submit";
 
         let Back2Login = document.createElement("button");
         Back2Login.textContent = 'Already have an account? Log in!';
-        Back2Login.classList.add('Back2Login');
+        Back2Login.classList.add('LoginButton-2');
 
         Back2Login.addEventListener('click', () => {
-            modal.style.display = "none"; // Close the login popup first
-            showPopupModal();      // Then open the create account popup
+            modal.style.display = "none"; // Close the account creation popup first
+            showPopupModal();      // Then open the login popup
         });
             
         registerForm.addEventListener('submit', (event) => {
