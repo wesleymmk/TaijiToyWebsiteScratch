@@ -16,13 +16,38 @@ export function renderGenerationOutputView() {
     let paragraph1 = document.createElement("p");
     paragraph1.textContent = Utils.Trait_1;
 
-    let traits=document.createElement("P");
-    traits.classList.add('.traits')
-    traits.textContent="Trait 1 \n Trait2 \n Trait3 \n Trait4 \n Trait5 \n Trait6 \n"
+    let trait1=document.createElement("P");
+    trait1.classList.add('traits');
+    trait1.textContent="-Trait 1";
+
+    let trait2=document.createElement("P");
+    trait2.classList.add('traits');
+    trait2.textContent="-Trait 2";
+
+    let trait3=document.createElement("P");
+    trait3.classList.add('traits');
+    trait3.textContent="-Trait 3";
+
+    let trait4=document.createElement("P");
+    trait4.classList.add('traits');
+    trait4.textContent="-Trait 4";
+
+    let trait5=document.createElement("P");
+    trait5.classList.add('traits');
+    trait5.textContent="-Trait 5";
+
+    let trait6=document.createElement("P");
+    trait6.classList.add('traits');
+    trait6.textContent="-Trait 6";
 
     let RegenText=document.createElement("button");
     RegenText.textContent='Regenerate Text';
-    RegenText.classList.add(RegenText);
+    RegenText.classList.add('RegenText');
+
+    let RegenAll=document.createElement("button");
+    RegenAll.textContent='Regenerate All';
+    RegenAll.classList.add('RegenText');
+
 
     let TaijiToyColor = document.createElement('img');
     TaijiToyColor.classList.add('ImageBox');
@@ -34,9 +59,22 @@ export function renderGenerationOutputView() {
     ImageGen.src = 'Generated_Images/Trait1.jpg';
     ImageGen.alt = 'Image_Generation';
 
+    let Regenbutton1=document.createElement('button');
+    Regenbutton1.textContent='Regenerate the image and the color';
+    Regenbutton1.classList.add('Regen-img-color');
+
     appContainer.appendChild(heading);
     appContainer.appendChild(paragraph1);
     appContainer.appendChild(TaijiToyColor);
+    appContainer.appendChild(Regenbutton1);
     appContainer.appendChild(ImageGen);
+    appContainer.appendChild(trait1);
+    appContainer.appendChild(trait2);
+    appContainer.appendChild(trait3);
+    appContainer.appendChild(trait4);
+    appContainer.appendChild(trait5);
+    appContainer.appendChild(trait6);
+    appContainer.appendChild(RegenText);
+    appContainer.appendChild(RegenAll);
 }
 
