@@ -29,6 +29,14 @@ try
     }
 	// if it checks out the text prompt string is assigned directly into the customer_prompt_response variable
     $customer_prompt_response = $request_data['text_prompt'];
+	
+	// defines the $conn variable which is directions on where the script should look for a place to save the order information
+	// This is defined in config.php a hidden file only placeholders are used here to identify it for security
+	$conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+    $conn->set_charset("utf8mb4");
+
+    // we use transaction here so that it only saves if all data is points are storred
+    $conn->begin_transaction();
 
 	// creates the $generated_products variable and stores the json response in it
 	$generated_products = json_decode($ai_response_json, true);
