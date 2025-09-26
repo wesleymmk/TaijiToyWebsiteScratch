@@ -60,7 +60,8 @@ export function renderWelcomeView() {
     appContainer.appendChild(GenerationButtonOutput);
     appContainer.appendChild(GenerationButtonInput);
 }
-/*Popup function done by Ernesto Q.*/ 
+/*Popup function done by Ernesto Q.*/
+//Main purpose is to open up a popup window for the login page. 
 export function showPopupModal(){
     let modal=document.getElementById('myPopupModal');
     if (!modal) {
@@ -98,10 +99,20 @@ export function showPopupModal(){
         CreateAccountButton.textContent = 'Create Account';
         CreateAccountButton.classList.add('LoginButton-2');
 
+        let ForgotPass=document.createElement("button");
+        ForgotPass.textContent='Forgot Password?';
+        ForgotPass.classList.add('LoginButton-2');
+
         CreateAccountButton.addEventListener('click', () => {
             modal.style.display = "none"; // Close the login popup first
             showCreateAccountPopup();      // Then open the create account popup
+        
         });     
+
+        ForgotPass.addEventListener('click', ()=> {
+            modal.style.display="none"; //Close the login popup
+            ForgotPassPopup(); //Open "Forgot password popup"
+        });
 
         // Append everything together
         modalContent.appendChild(closeButton);
@@ -110,6 +121,7 @@ export function showPopupModal(){
         modalContent.appendChild(passwordInput)
         modalContent.appendChild(Signinbutton);
         modalContent.appendChild(CreateAccountButton);
+        modalContent.appendChild(ForgotPass);
         modal.appendChild(modalContent);
 
         // Add the new modal to the main app container
@@ -205,10 +217,89 @@ export function showCreateAccountPopup(){
         registerForm.appendChild(emailCheckbox);
         registerForm.appendChild(CheckboxLabel);
         registerForm.appendChild(CreateAccountButton);
-        modalContent.appendChild(Back2Login);
         modalContent.appendChild(registerForm); 
         modal.appendChild(modalContent);
+        modalContent.appendChild(Back2Login);
 
+        appContainer.appendChild(modal);
+    }
+
+    modal.style.display = "block";
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+}
+
+//Popup for the "forgot password" popup
+export function ForgotPassPopup(){
+    let modal=document.getElementById('ForgotPassModal');
+    if (!modal) {
+        modal=document.createElement('div');
+        modal.id='ForgotPassModal';
+        modal.classList.add('modal');
+
+        let modalContent=document.createElement('div');
+        modalContent.classList.add('modal-content');
+
+        let closeButton = document.createElement('span');
+        closeButton.classList.add('close-button');
+        closeButton.innerHTML = '&times;'; // The 'x' character
+        closeButton.onclick = () => {
+            modal.style.display = "none";
+    };
+    let popupHeading = document.createElement('h2');
+        popupHeading.textContent = 'Reset Password';
+
+        const registerForm = document.createElement('form');
+        registerForm.id = 'register-form-popup';
+
+        let emailAccount = document.createElement('input');
+        emailAccount.type = 'email';
+        emailAccount.placeholder = 'Enter your email';
+        emailAccount.required = true;
+
+        let LinkRequest = document.createElement("button");
+        LinkRequest.textContent = 'Send Reset Link';
+        LinkRequest.classList.add=('LoginButton-2');
+        LinkRequest.type = "submit";
+
+        let Back2Login = document.createElement("button");
+        Back2Login.textContent = 'Back to Login';
+        Back2Login.classList.add('LoginButton-2');
+
+        Back2Login.addEventListener('click', () => {
+            modal.style.display = "none"; // Close the account creation popup first
+            showPopupModal();      // Then open the login popup
+        });
+            
+       /* registerForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const email = emailAccount.value;
+            const password = passwordInput.value;
+
+            fetch('api/register.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: email, password: password })
+            })
+            .then(response => response.json())
+            .then(data => {
+                modal.style.display = "none"; 
+                renderStatusView(data.success, data.message, email);
+            });
+        });*/ //Function is commented out as this was copied and pasted from other exisitng code.
+
+        // Append everything together
+        modalContent.appendChild(closeButton);
+        modalContent.appendChild(popupHeading);
+        registerForm.appendChild(emailAccount);
+        registerForm.appendChild(LinkRequest);
+        modalContent.appendChild(registerForm); 
+        modal.appendChild(modalContent);
+        modalContent.appendChild(Back2Login);
         appContainer.appendChild(modal);
     }
 
