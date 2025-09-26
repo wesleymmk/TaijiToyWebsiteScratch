@@ -6,6 +6,7 @@ session_start();
 
 // 2. Include the database configuration file
 require_once 'config.php';
+require_once 'common_functions.php';
 
 // 3. Set the response header to JSON
 // This tells the browser that our response will be in JSON format

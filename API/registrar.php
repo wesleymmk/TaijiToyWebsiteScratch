@@ -2,7 +2,7 @@
 <?php
 // Include the database configuration
 require_once 'config.php';
-
+require_once 'common_functions.php';
 // Set the response header to JSON
 header('Content-Type: application/json');
 

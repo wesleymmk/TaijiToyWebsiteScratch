@@ -357,13 +357,21 @@ export function renderCreateAccountView() {
 
         const email = emailInput.value;
         const password = passwordInput.value;
+        const receives_emails = emailCheckbox.checked; // this returns a true or false value if the checkbox is checked
+
+        //Package all data together in a way like this
+
+        const registrar_Data = {
+            email: email,
+            password: password,
+            receives_emails: checkbox.checked //passes either true or false
+        };
 
         // Send the data to our register.php script
-        fetch('api/register.php', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email: email, password: password })
-        })
+        /
+
+        // call this function when sending data package as apposed to doing the whole fetch method manually
+        ComUtils.apiCall('api/register.php', registrar_Data)
             .then(response => response.json())
             .then(data => {
                 // *** THIS IS THE CHANGED PART ***
