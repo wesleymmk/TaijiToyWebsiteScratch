@@ -6,7 +6,6 @@ header('Content-Type: application/json');
 // =================================================================
 // This file is a log in check function callable by the front end to ensure the user accessing the page is logged in
 // Created by WAM on 9/29/25
-//
 // =================================================================
 
 
