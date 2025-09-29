@@ -27,3 +27,4 @@ curl_close($ch);
 http_response_code($httpCode);
 echo $response;
 
+?>

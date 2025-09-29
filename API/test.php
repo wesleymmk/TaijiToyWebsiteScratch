@@ -48,11 +48,12 @@ try
 
 	// connects to server
     $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+	$conn->set_charset("utf8mb4");
 
     // does this process as a transaction so that if the whole process doesnt work it cancels
 	// and does not put corrupt/incorrect data into the server
     $conn->begin_transaction();
-
+	
 	$new_order_id = save_to_outputs($conn, $customer_id, $prompt_response);
 
 
@@ -74,7 +75,8 @@ try
     $response['message'] = "Successfully generated and saved 6 product ideas.";
 
 	// this needs to be changed to send different data
-    $response['data'] = $generated_products; // Send the data back to the frontend to be displayed.
+    $response['data'] = $generated_products; 
+	// Send the data back to the frontend to be displayed.
 
 
 	// handle these errors better
