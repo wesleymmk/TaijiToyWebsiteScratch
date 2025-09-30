@@ -30,7 +30,7 @@ function loadPage() {
             break;
     }
 
-    contentContainer.innerHTML = content;
+    //contentContainer.innerHTML = content;
 }
 
 window.addEventListener('hashchange', loadPage);

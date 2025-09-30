@@ -4,26 +4,86 @@
 
 /* EQ added in the font and made the text larger.*/
 @import url('https://fonts.cdnfonts.com/css/chinese-rocks');
-                
-.topBar {
-  margin: 0px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  flex: 1;
-  background-color: black;
-  padding-left: 50px;
-  padding-right: 50px;
+/* PS Added a, .account-menu, nav-menu, nav-wrapper, topBar, headerOptions, header, & LoginButton*/
+
+.Homepage{
+  height: 500px;
+  width: 500px;
+  background-color: lightcoral;
 }
 
-.headerOptions {
-  align-items: center;
+#home .home{
+  text-decoration: underline;
+}
+
+#account .account{
+  text-decoration: underline;
+}
+
+#order-input .inputorder{
+  text-decoration: underline;
+}
+
+#order-output .outputorder{
+  text-decoration: underline;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+a {
+  text-decoration: none;
+}
+
+.account-menu{
   display: flex;
+  flex: 1;
+  flex-direction: row;
+  justify-content: flex-end;
+  background-color: black;
+}
+
+.nav-menu{
+  display: flex;
+  flex-direction: row;
+  flex: 5;
+  justify-content: flex-end;
+  background-color: black;
+  padding-left: 40px;
+}
+
+.nav-wrapper {
+  display: flex;
+  flex-direction: row;
+  padding-inline: 50px;
+  align-items: center;
+  height: 60px;
+  background-color: black;
+}
+
+.topBar {
   margin: 0px;
+}
+
+.textnavmenu {
+  margin: 0;
+  margin-right: 25px;
   font-family: opensans, Arial;
   color: white;
-  font-weight: 100;
+  font-weight: 80;
   cursor: pointer;
+  font-size: 20px;
+}
+
+.textaccountmenu {
+  margin: 0;
+  margin-left: 25px;
+  font-family: opensans, Arial;
+  color: white;
+  font-weight: 80;
+  cursor: pointer;
+  font-size: 20px;
 }
 
 .header {

@@ -7,7 +7,22 @@ import * as AccUtils from './User_Account.js';
 
 export function renderGenerationOutputView() {
     ComUtils.clearAppContainer();
-    ComUtils.header();
+    //ComUtils.header();
+
+    const navwrapper = document.createElement('div');
+    navwrapper.id = 'order-output';
+    navwrapper.classList.add('nav-wrapper');
+    navwrapper.appendChild(ComUtils.HomeLogo);
+    navwrapper.appendChild(ComUtils.navmenu);
+    navwrapper.appendChild(ComUtils.accountmenu);
+    ComUtils.Home.classList.remove('home');
+    ComUtils.GenerateInputOption.classList.remove('inputorder');
+    ComUtils.GenerateOutputOption.classList.add('outputorder');
+    ComUtils.AccountOption.classList.remove('account');
+    ComUtils.navmenu.appendChild(ComUtils.Home);
+    ComUtils.navmenu.appendChild(ComUtils.GenerateInputOption);
+    ComUtils.navmenu.appendChild(ComUtils.GenerateOutputOption);
+    ComUtils.accountmenu.appendChild(ComUtils.AccountOption);
 
     let heading = document.createElement('h1');
     heading.classList.add('header');
@@ -63,6 +78,7 @@ export function renderGenerationOutputView() {
     Regenbutton1.textContent='Regenerate the image and the color';
     Regenbutton1.classList.add('Regen-img-color');
 
+    appContainer.appendChild(navwrapper);
     appContainer.appendChild(heading);
     appContainer.appendChild(paragraph1);
     appContainer.appendChild(TaijiToyColor);

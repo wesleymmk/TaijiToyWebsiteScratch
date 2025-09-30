@@ -10,7 +10,27 @@ import * as Gen2Utils from './Order_Gen_Output.js';
 //PS Creation & EQ collaboration
 export function renderWelcomeView() {
     ComUtils.clearAppContainer(); // Clear the screen first
-    ComUtils.header();
+    //ComUtils.header();
+
+    const navwrapper = document.createElement('div');
+    navwrapper.id = 'home';
+    navwrapper.classList.add('nav-wrapper');
+    navwrapper.appendChild(ComUtils.HomeLogo);
+    navwrapper.appendChild(ComUtils.navmenu);
+    navwrapper.appendChild(ComUtils.accountmenu);
+    ComUtils.Home.classList.add('home');
+    ComUtils.GenerateInputOption.classList.remove('inputorder');
+    ComUtils.GenerateOutputOption.classList.remove('outputorder');
+    ComUtils.AccountOption.classList.remove('account');
+    ComUtils.navmenu.appendChild(ComUtils.Home);
+    ComUtils.navmenu.appendChild(ComUtils.GenerateInputOption);
+    ComUtils.navmenu.appendChild(ComUtils.GenerateOutputOption);
+    ComUtils.accountmenu.appendChild(ComUtils.AccountOption);
+    
+
+    const Body = document.createElement("div");
+    Body.classList.add('Homepage')
+    Body.id = "account";
     
     let heading = document.createElement('h1');
     heading.classList.add('header');
@@ -49,9 +69,11 @@ export function renderWelcomeView() {
     let GenerationButtonInput = document.createElement("button");
     GenerationButtonInput.textContent = 'Generation Input (Temp)';
     GenerationButtonInput.classList.add('LoginButton');
-    GenerationButtonInput.addEventListener('click', GenUtils.renderGenerationInputView);
+    GenerationButtonInput.addEventListener('click', function () { window.location.href = '#order-input'; });
 
+    appContainer.appendChild(navwrapper);
     appContainer.appendChild(heading);
+    appContainer.appendChild(Body);
     appContainer.appendChild(emailAccount);
     appContainer.appendChild(passwordInput);
     appContainer.appendChild(LoginButton);
@@ -368,7 +390,7 @@ export function renderCreateAccountView() {
         };
 
         // Send the data to our register.php script
-        /
+        //
 
         // call this function when sending data package as apposed to doing the whole fetch method manually
         ComUtils.apiCall('api/register.php', registrar_Data)

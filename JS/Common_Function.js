@@ -12,12 +12,52 @@ export function clearAppContainer()  // WM code // from online modified it so th
     appContainer.innerHTML = '';
 }
 
-export function header() {
+export const navmenu = document.createElement('div');
+navmenu.classList.add('nav-menu');
+
+export const accountmenu = document.createElement('div');
+accountmenu.classList.add('account-menu');
+
+export const Home = document.createElement('p');
+Home.textContent = 'Home';
+Home.classList.add('textnavmenu');
+Home.addEventListener('click', function () { window.location.href = '#welcome-page'; });
+
+export const GenerateInputOption = document.createElement('p');
+GenerateInputOption.textContent = 'Input-Order';
+GenerateInputOption.classList.add('textnavmenu');
+GenerateInputOption.addEventListener('click', function () { window.location.href = '#order-input'; });
+
+export const GenerateOutputOption = document.createElement('p');
+GenerateOutputOption.textContent = 'Output-Order';
+GenerateOutputOption.classList.add('textnavmenu');
+GenerateOutputOption.addEventListener('click', function () { window.location.href = '#order-output'; });
+
+export const AccountOption = document.createElement('p');
+AccountOption.textContent = 'Account';
+AccountOption.classList.add('textaccountmenu');
+AccountOption.addEventListener('click', function () { window.location.href = '#account' });
+
+export const HomeLogo = document.createElement('img');
+HomeLogo.classList.add('LogoBox');
+HomeLogo.src = 'Brand_Logos/Taijitoylogolight.png';
+HomeLogo.alt = 'HOME';
+HomeLogo.addEventListener('click', function () { window.location.href = '#welcome-page' });
+
+//Temporary removal of header
+/*export function header() {
+
+    const navwrapper = document.createElement('div');
+    navwrapper.classList.add('nav-wrapper');
+
+    const navmenu = document.createElement('div');
+    navmenu.classList.add('nav-menu');
+
     let HomeLogo = document.createElement('img');
     HomeLogo.classList.add('LogoBox');
     HomeLogo.src = 'Brand_Logos/Taijitoylogolight.png';
     HomeLogo.alt = 'Color of Toy';
-    HomeLogo.addEventListener('click', AuthUtils.renderWelcomeView);
+    HomeLogo.addEventListener('click', function() { window.location.href = '#welcome-page'});
 
     let AccountOption = document.createElement('p');
     AccountOption.textContent = 'Account';
@@ -32,17 +72,24 @@ export function header() {
     let GenerateInputOption = document.createElement('p');
     GenerateInputOption.textContent = 'Generate (Input)';
     GenerateInputOption.classList.add('headerOptions');
-    GenerateInputOption.addEventListener('click', GenUtils.renderGenerationInputView);
+    GenerateInputOption.addEventListener('click', function() { window.location.href = '#order-input'; });
 
-    let topBar = document.createElement('h1');
+    const topBar = document.createElement('h1');
     topBar.classList.add('topBar');
-    topBar.appendChild(HomeLogo);
-    topBar.appendChild(AccountOption);
-    topBar.appendChild(GenerateOuputOption);
-    topBar.appendChild(GenerateInputOption);
+
+    topBar.appendChild(navwrapper);
+    navwrapper.appendChild(HomeLogo);
+    navwrapper.appendChild(navmenu);
+    navmenu.appendChild(GenerateInputOption);
+    //topBar.appendChild(HomeLogo);
+    //topBar.appendChild(AccountOption);
+    //topBar.appendChild(GenerateOuputOption);
+    //topBar.appendChild(GenerateInputOption);
 
     appContainer.appendChild(topBar);
-}
+
+
+}*/
 
 // This function acts as an API call taking a JS object and a PHP endpoint
 export function apiCall(php_file, js_object) // WM code // 

@@ -1,6 +1,6 @@
 export function renderGenerationInputView() {
     ComUtils.clearAppContainer();
-    ComUtils.header();
+    //ComUtils.header();
 
     let heading = document.createElement('h1');
     heading.classList.add('header');
