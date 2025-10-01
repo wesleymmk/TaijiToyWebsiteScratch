@@ -6,12 +6,6 @@
 @import url('https://fonts.cdnfonts.com/css/chinese-rocks');
 /* PS Added a, .account-menu, nav-menu, nav-wrapper, topBar, headerOptions, header, & LoginButton*/
 
-.Homepage{
-  height: 500px;
-  width: 500px;
-  background-color: lightcoral;
-}
-
 #home .home{
   text-decoration: underline;
 }
@@ -32,8 +26,63 @@
   text-decoration: underline;
 }
 
-a {
-  text-decoration: none;
+.title {
+  font-family: 'Chinese Rocks Rg', sana-serif;
+  margin: 0;
+  font-size: 150px;
+  font-weight: 900;
+  cursor: default;
+  color: white;
+}
+
+.pagetexttitle {
+  font-family: 'Chinese Rocks Rg', sana-serif;
+  font-size: 27px;
+  font-weight: 900;
+  cursor: default;
+  margin-top: 45px;
+  margin-bottom: 20px;
+  color: white;
+}
+
+.trademarktitle {
+  margin-top: 77px;
+  margin-bottom: 0px;
+}
+
+.titlesection {
+  background-color: black;
+  display: grid;
+  grid-template-columns: auto 105px auto 105px auto;
+  grid-template-rows: auto auto;
+}
+
+.titlesection-a {
+  grid-column: 3;
+  grid-row: 1;
+  background-color: black;
+  text-align: center;
+}
+
+.titlesection-b {
+  grid-column: 3;
+  grid-row: 2;
+  background-color: black;
+}
+
+.titlesection-c {
+  grid-column: 4;
+  grid-row: 1 / span 2;
+  background-color: black;
+  text-align: right;
+}
+
+.Homepage{
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .account-menu{
@@ -62,13 +111,9 @@ a {
   background-color: black;
 }
 
-.topBar {
-  margin: 0px;
-}
-
 .textnavmenu {
   margin: 0;
-  margin-right: 25px;
+  margin-left: 25px;
   font-family: opensans, Arial;
   color: white;
   font-weight: 80;
@@ -96,7 +141,7 @@ a {
   justify-content: center;
   color: white;
   font-size: 100px;
-  margin-top: 0px;
+  margin: 0px;
 }
             
 .LoginButton{

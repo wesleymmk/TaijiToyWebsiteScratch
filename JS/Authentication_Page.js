@@ -29,9 +29,33 @@ export function renderWelcomeView() {
     
 
     const Body = document.createElement("div");
-    Body.classList.add('Homepage')
-    Body.id = "account";
-    
+    Body.classList.add('Homepage');
+
+    const TradeMarkdiv = document.createElement('div');
+    TradeMarkdiv.classList.add('titlesection-c');
+
+    const Titlediv = document.createElement('div');
+    Titlediv.classList.add('titlesection');
+
+    const Descriptiondiv = document.createElement('div');
+    Descriptiondiv.classList.add('titlesection-a');
+
+    const Logodiv = document.createElement('div');
+    Logodiv.classList.add('titlesection-b');
+
+    const Title = document.createElement("p");
+    Title.classList.add('title');
+    Title.textContent = 'TaijiToy';
+
+    const Description = document.createElement('p');
+    Description.classList.add('pagetexttitle');
+    Description.textContent = '3D yin-yang';
+
+    const TradeMark = document.createElement('p');
+    TradeMark.classList.add('pagetexttitle');
+    TradeMark.classList.add('trademarktitle');
+    TradeMark.textContent = 'TM';
+
     let heading = document.createElement('h1');
     heading.classList.add('header');
     heading.textContent = 'Welcome to Taiji Toys';
@@ -55,12 +79,12 @@ export function renderWelcomeView() {
     PopupButton.textContent = 'popup Login';
     PopupButton.classList.add('PopupButton');
     PopupButton.addEventListener('click', showPopupModal);
-
+    /* No longer functions (not needed anyways  -PS)
     let CreateAccountButton = document.createElement("button");
     CreateAccountButton.textContent = 'Create Account';
     CreateAccountButton.classList.add('LoginButton');
     CreateAccountButton.addEventListener('click', renderCreateAccountView);
-
+    */
     let GenerationButtonOutput = document.createElement("button");
     GenerationButtonOutput.textContent = 'Generation Output (Temp)';
     GenerationButtonOutput.classList.add('LoginButton');
@@ -72,13 +96,21 @@ export function renderWelcomeView() {
     GenerationButtonInput.addEventListener('click', function () { window.location.href = '#order-input'; });
 
     appContainer.appendChild(navwrapper);
-    appContainer.appendChild(heading);
+    appContainer.appendChild(Body);
+    Body.appendChild(Titlediv);
+    Titlediv.appendChild(Descriptiondiv);
+    Titlediv.appendChild(TradeMarkdiv);
+    Titlediv.appendChild(Logodiv);
+    Descriptiondiv.appendChild(Description);
+    TradeMarkdiv.appendChild(TradeMark);
+    Logodiv.appendChild(Title);
+    //appContainer.appendChild(heading);
     appContainer.appendChild(Body);
     appContainer.appendChild(emailAccount);
     appContainer.appendChild(passwordInput);
     appContainer.appendChild(LoginButton);
     appContainer.appendChild(PopupButton);
-    appContainer.appendChild(CreateAccountButton);
+    //appContainer.appendChild(CreateAccountButton);
     appContainer.appendChild(GenerationButtonOutput);
     appContainer.appendChild(GenerationButtonInput);
 }
