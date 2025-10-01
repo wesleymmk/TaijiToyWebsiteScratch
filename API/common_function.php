@@ -142,6 +142,52 @@ function save_to_output_details($conn, $new_order_id, $color_1, $color_2, $attri
 */
 //--------------------  END OF FUNCTION  --------------------
 
+//-------------------- Fetch Output Details --------------------
+// Created by: WAM
+// Date created: 10/1/25
+
+
+function getOutputDetailsByOrderId($conn, $order_id)
+{
+    // preparing statement to pull a line from outputs details database based on the unique identifier
+    $sql = "SELECT * FROM outputs_details WHERE order_id = ?";
+    
+    $stmt = $conn->prepare($sql);
+    // checks if the statement will work and throws error if it doesnt work
+    if ($stmt === false) {
+        throw new Exception("Failed to prepare statement for fetching details: ");
+    }
+    
+    $stmt->bind_param("i", $order_id);
+    
+    if (!$stmt->execute()) {
+        throw new Exception("Failed to execute statement for fetching details: ");
+    }
+    
+    // Get the full result set from the database.
+    $result = $stmt->get_result();
+    
+    // define an array to place values into
+    $details_array = [];
+    
+    //place value into the array with a while loop
+    while ($val = $result->fetch_assoc()) {
+        $details_array[] = $val;
+    }
+    
+    $stmt->close();
+    // returns the array of values
+    return $details_array;
+}
+/* Use case & Syntax:
+// explanation
+
+ show use case
+
+*/
+//--------------------  END OF FUNCTION  --------------------
+
+
 //-------------------- SQL Checking function --------------------
 // Created by: WAM
 // Date created: 9/30/25
@@ -153,16 +199,16 @@ function SQL_checker($conn, $order_id, $order_details_id)
     $sql = "SELECT COUNT(*) FROM outputs WHERE order_id = ? AND id = ?";
     
     $stmt = $conn->prepare($sql);
-    
+    // checks if the statement will work and throws error if it doesnt work
     if ($stmt === false) {
-        throw new Exception("Failed to prepare statement: " . $conn->error);
+        throw new Exception("Failed to prepare statement: ";
     }
 
     // Bind the two integer IDs we are checking.
     $stmt->bind_param("ii", $output_id, $order_details_id);
     
     if (!$stmt->execute()) {
-        throw new Exception("Failed to execute statement: " . $stmt->error);
+        throw new Exception("Failed to execute statement: ");
     }
     
     // Get the result and bind it to a variable called $count.
@@ -201,17 +247,13 @@ function gather_output($conn, $customer_id, $order_id, $order_details_id_1, $ord
     if ($stmt === false) {
         throw new Exception("Failed to prepare statement: ");
     }
-
     // Turn the inputs to strings to prevent direct SQL injection
     $stmt->bind_param("ii", $output_id, $customer_id);
-    
     if (!$stmt->execute()) {
         throw new Exception("Failed to execute statement: ");
     }
-    
     // Get the result and bind it to a variable called $count.
     $stmt->bind_result($count);
-    
     // Fetch the single result row.
     $stmt->fetch();
     
