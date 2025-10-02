@@ -10,8 +10,7 @@ import * as Gen2Utils from './Order_Gen_Output.js';
 //PS Creation & EQ collaboration
 export function renderWelcomeView() {
     ComUtils.clearAppContainer(); // Clear the screen first
-    //ComUtils.header();
-
+    //PS added navwrapper
     const navwrapper = document.createElement('div');
     navwrapper.id = 'home';
     navwrapper.classList.add('nav-wrapper');
@@ -26,74 +25,40 @@ export function renderWelcomeView() {
     ComUtils.navmenu.appendChild(ComUtils.GenerateInputOption);
     ComUtils.navmenu.appendChild(ComUtils.GenerateOutputOption);
     ComUtils.accountmenu.appendChild(ComUtils.AccountOption);
-    
-
+    // PS added Body
     const Body = document.createElement("div");
     Body.classList.add('Homepage');
-
+    // PS added TradeMarkdiv
     const TradeMarkdiv = document.createElement('div');
     TradeMarkdiv.classList.add('titlesection-c');
-
+    // PS added Titlediv
     const Titlediv = document.createElement('div');
     Titlediv.classList.add('titlesection');
-
+    // PS added Descriptiondiv
     const Descriptiondiv = document.createElement('div');
     Descriptiondiv.classList.add('titlesection-a');
-
+    // PS added Logodiv
     const Logodiv = document.createElement('div');
     Logodiv.classList.add('titlesection-b');
-
+    // PS added Title
     const Title = document.createElement("p");
     Title.classList.add('title');
     Title.textContent = 'TaijiToy';
-
+    // PS added Description
     const Description = document.createElement('p');
     Description.classList.add('pagetexttitle');
     Description.textContent = '3D yin-yang';
-
+    // PS added TradeMark
     const TradeMark = document.createElement('p');
     TradeMark.classList.add('pagetexttitle');
     TradeMark.classList.add('trademarktitle');
     TradeMark.textContent = 'TM';
-
-    let heading = document.createElement('h1');
-    heading.classList.add('header');
-    heading.textContent = 'Welcome to Taiji Toys';
-
-    let emailAccount = document.createElement('input');
-    emailAccount.type = 'email';
-    emailAccount.placeholder = 'Enter your email';
-    emailAccount.required = true;
-
-    let passwordInput = document.createElement('input');
-    passwordInput.type = 'password';
-    passwordInput.placeholder = 'Enter your password';
-    passwordInput.required = true;  
-
-    let LoginButton = document.createElement("button");
-    LoginButton.textContent = 'Login';
-    LoginButton.classList.add('LoginButton');
 
     /*Pop up button temporary*/
     let PopupButton = document.createElement("button");
     PopupButton.textContent = 'popup Login';
     PopupButton.classList.add('PopupButton');
     PopupButton.addEventListener('click', showPopupModal);
-    /* No longer functions (not needed anyways  -PS)
-    let CreateAccountButton = document.createElement("button");
-    CreateAccountButton.textContent = 'Create Account';
-    CreateAccountButton.classList.add('LoginButton');
-    CreateAccountButton.addEventListener('click', renderCreateAccountView);
-    */
-    let GenerationButtonOutput = document.createElement("button");
-    GenerationButtonOutput.textContent = 'Generation Output (Temp)';
-    GenerationButtonOutput.classList.add('LoginButton');
-    GenerationButtonOutput.addEventListener('click', Gen2Utils.renderGenerationOutputView);
-
-    let GenerationButtonInput = document.createElement("button");
-    GenerationButtonInput.textContent = 'Generation Input (Temp)';
-    GenerationButtonInput.classList.add('LoginButton');
-    GenerationButtonInput.addEventListener('click', function () { window.location.href = '#order-input'; });
 
     appContainer.appendChild(navwrapper);
     appContainer.appendChild(Body);
@@ -104,15 +69,7 @@ export function renderWelcomeView() {
     Descriptiondiv.appendChild(Description);
     TradeMarkdiv.appendChild(TradeMark);
     Logodiv.appendChild(Title);
-    //appContainer.appendChild(heading);
-    appContainer.appendChild(Body);
-    appContainer.appendChild(emailAccount);
-    appContainer.appendChild(passwordInput);
-    appContainer.appendChild(LoginButton);
     appContainer.appendChild(PopupButton);
-    //appContainer.appendChild(CreateAccountButton);
-    appContainer.appendChild(GenerationButtonOutput);
-    appContainer.appendChild(GenerationButtonInput);
 }
 /*Popup function done by Ernesto Q.*/
 //Main purpose is to open up a popup window for the login page. 

@@ -7,8 +7,7 @@ import * as AccUtils from './User_Account.js';
 
 export function renderGenerationOutputView() {
     ComUtils.clearAppContainer();
-    //ComUtils.header();
-
+    //PS added navwrapper
     const navwrapper = document.createElement('div');
     navwrapper.id = 'order-output';
     navwrapper.classList.add('nav-wrapper');

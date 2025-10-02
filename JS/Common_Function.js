@@ -11,7 +11,7 @@ export function clearAppContainer()  // WM code // from online modified it so th
 {
     appContainer.innerHTML = '';
 }
-
+// PS Added navmenu, accountmenu, Home, GenerateInputOption, GenerateOutputOption, AccountOption, HomeLogo.
 export const navmenu = document.createElement('div');
 navmenu.classList.add('nav-menu');
 
@@ -44,52 +44,6 @@ HomeLogo.src = 'Brand_Logos/Taijitoylogolight.png';
 HomeLogo.alt = 'HOME';
 HomeLogo.addEventListener('click', function () { window.location.href = '#welcome-page' });
 
-//Temporary removal of header
-/*export function header() {
-
-    const navwrapper = document.createElement('div');
-    navwrapper.classList.add('nav-wrapper');
-
-    const navmenu = document.createElement('div');
-    navmenu.classList.add('nav-menu');
-
-    let HomeLogo = document.createElement('img');
-    HomeLogo.classList.add('LogoBox');
-    HomeLogo.src = 'Brand_Logos/Taijitoylogolight.png';
-    HomeLogo.alt = 'Color of Toy';
-    HomeLogo.addEventListener('click', function() { window.location.href = '#welcome-page'});
-
-    let AccountOption = document.createElement('p');
-    AccountOption.textContent = 'Account';
-    AccountOption.classList.add('headerOptions');
-    AccountOption.addEventListener('click', AccUtils.renderUserAccount);
-
-    let GenerateOuputOption = document.createElement('p');
-    GenerateOuputOption.textContent = 'Generate (Output)';
-    GenerateOuputOption.classList.add('headerOptions');
-    GenerateOuputOption.addEventListener('click', Gen2Utils.renderGenerationOutputView);
-
-    let GenerateInputOption = document.createElement('p');
-    GenerateInputOption.textContent = 'Generate (Input)';
-    GenerateInputOption.classList.add('headerOptions');
-    GenerateInputOption.addEventListener('click', function() { window.location.href = '#order-input'; });
-
-    const topBar = document.createElement('h1');
-    topBar.classList.add('topBar');
-
-    topBar.appendChild(navwrapper);
-    navwrapper.appendChild(HomeLogo);
-    navwrapper.appendChild(navmenu);
-    navmenu.appendChild(GenerateInputOption);
-    //topBar.appendChild(HomeLogo);
-    //topBar.appendChild(AccountOption);
-    //topBar.appendChild(GenerateOuputOption);
-    //topBar.appendChild(GenerateInputOption);
-
-    appContainer.appendChild(topBar);
-
-
-}*/
 
 // This function acts as an API call taking a JS object and a PHP endpoint
 export function apiCall(php_file, js_object) // WM code // 

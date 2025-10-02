@@ -7,8 +7,7 @@ import * as ComUtils from './Common_Function.js';
 
 export function renderUserAccount() {
     ComUtils.clearAppContainer();
-    //ComUtils.header();
-
+    //PS added navwrapper
     const navwrapper = document.createElement('div');
     navwrapper.id = 'account';
     navwrapper.classList.add('nav-wrapper');
