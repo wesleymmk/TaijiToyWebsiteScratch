@@ -366,7 +366,7 @@ export function renderCreateAccountView() {
         //
 
         // call this function when sending data package as apposed to doing the whole fetch method manually
-        ComUtils.apiCall('api/register.php', registrar_Data)
+        ComUtils.apiCall('api/registrar.php', registrar_Data)
             .then(response => response.json())
             .then(data => {
                 // *** THIS IS THE CHANGED PART ***
