@@ -72,7 +72,7 @@ function check_deliverables($generated_products)
 */
 //--------------------  END OF FUNCTION  --------------------
 
-//-------------------- Saving to outputs table in mySQL --------------------
+///-------------------- Saving to outputs table in mySQL --------------------
 // Created by: WAM 
 // Date created: 9/25/25
 // Note these loops were origionally created by me on 9/24/25 but was moved here and turned to a function on 9/25/25
@@ -142,12 +142,86 @@ function save_to_output_details($conn, $new_order_id, $color_1, $color_2, $attri
 */
 //--------------------  END OF FUNCTION  --------------------
 
-//-------------------- New general function --------------------
-// Created by: 
-// Date created: 
+//-------------------- Fetch Output Details --------------------
+// Created by: WAM
+// Date created: 10/1/25
 
 
-//code here
+function getOutputDetailsByOrderId($conn, $order_id)
+{
+    // preparing statement to pull a line from outputs details database based on the unique identifier
+    $sql = "SELECT * FROM outputs_details WHERE order_id = ?";
+    
+    $stmt = $conn->prepare($sql);
+    // checks if the statement will work and throws error if it doesnt work
+    if ($stmt === false) {
+        throw new Exception("Failed to prepare statement for fetching details: ");
+    }
+    
+    $stmt->bind_param("i", $order_id);
+    
+    if (!$stmt->execute()) {
+        throw new Exception("Failed to execute statement for fetching details: ");
+    }
+    
+    // Get the full result set from the database.
+    $result = $stmt->get_result();
+    
+    // define an array to place values into
+    $details_array = [];
+    
+    //place value into the array with a while loop
+    while ($val = $result->fetch_assoc()) {
+        $details_array[] = $val;
+    }
+    
+    $stmt->close();
+    // returns the array of values
+    return $details_array;
+}
+/* Use case & Syntax:
+// explanation
+
+ show use case
+
+*/
+//--------------------  END OF FUNCTION  --------------------
+
+
+//-------------------- SQL Checking function --------------------
+// Created by: WAM
+// Date created: 9/30/25
+
+
+function SQL_checker($conn, $order_id, $order_details_id)
+{
+    // The SQL command asks the database to COUNT how many rows match our criteria.
+    $sql = "SELECT COUNT(*) FROM outputs WHERE order_id = ? AND id = ?";
+    
+    $stmt = $conn->prepare($sql);
+    // checks if the statement will work and throws error if it doesnt work
+    if ($stmt === false) {
+        throw new Exception("Failed to prepare statement: ";
+    }
+
+    // Bind the two integer IDs we are checking.
+    $stmt->bind_param("ii", $output_id, $order_details_id);
+    
+    if (!$stmt->execute()) {
+        throw new Exception("Failed to execute statement: ");
+    }
+    
+    // Get the result and bind it to a variable called $count.
+    $stmt->bind_result($count);
+    
+    // Fetch the single result row.
+    $stmt->fetch();
+    
+    $stmt->close();
+    
+    // returns true if val = 1 and false if val is 0
+    return $count > 0;
+}
 
 /* Use case & Syntax:
 // explanation
@@ -156,6 +230,74 @@ function save_to_output_details($conn, $new_order_id, $color_1, $color_2, $attri
 
 */
 //--------------------  END OF FUNCTION  --------------------
+
+//-------------------- Output function --------------------
+// Created by: WAM
+// Date created: 9/30/25
+
+
+function gather_output($conn, $customer_id, $order_id, $order_details_id_1, $order_details_id_2, $order_details_id_3, $order_details_id_4, $order_details_id_5, $order_details_id_6)
+{
+	//first create a loop to check and make sure that all the outputs exist inside of the SQL server
+	// set up SQL statement to count number of rows where the order and customer ID's match the inputs
+    $sql = "SELECT COUNT(*) FROM outputs WHERE order_id = ? AND customer_id = ?";
+    
+    $stmt = $conn->prepare($sql);
+    // checks if the statement will work and throws error if it doesnt work
+    if ($stmt === false) {
+        throw new Exception("Failed to prepare statement: ");
+    }
+    // Turn the inputs to strings to prevent direct SQL injection
+    $stmt->bind_param("ii", $output_id, $customer_id);
+    if (!$stmt->execute()) {
+        throw new Exception("Failed to execute statement: ");
+    }
+    // Get the result and bind it to a variable called $count.
+    $stmt->bind_result($count);
+    // Fetch the single result row.
+    $stmt->fetch();
+    
+    $stmt->close();
+    // check if the main order ID exists
+    if($count == 0)
+	{
+		throw new Exception("Failed to find order with specified customer and order IDs: ");
+	}
+	// check1-check6 are all True/False values assigned based on if an order ID is found for 
+	$check1 = SQL_checker($conn, $order_id, $order_details_id_1);
+	$check2 = SQL_checker($conn, $order_id, $order_details_id_2);
+	$check3 = SQL_checker($conn, $order_id, $order_details_id_3);
+	$check4 = SQL_checker($conn, $order_id, $order_details_id_4);
+	$check5 = SQL_checker($conn, $order_id, $order_details_id_5);
+	$check6 = SQL_checker($conn, $order_id, $order_details_id_6);
+
+	// Next we need to check for the output detail IDs
+	if(!$check1 && !$check2 && !$check3 && !$check4 && !$check5 && !$check6)
+	{
+		throw new Exception("Failed to find order with specified detail and order IDs: ");
+	}
+
+	// At this point we have confirmed the entire order exists in the SQL database and that we have the correct order number values
+	// now we can get all of the order information out of the SQL server for this specific order 
+	// $order_id, $order_details_id_1, $order_details_id_2, $order_details_id_3, $order_details_id_4, $order_details_id_5, $order_details_id_6
+	// above are variables used here for easy copy paste access while coding/editing to prevent syntax errors
+
+
+
+
+
+	// finally package everything together as a JSON
+}
+
+/* Use case & Syntax:
+// goal take 7 inputs order # then 6 order details # then outputs all information as a single JSON package set of arrays
+
+ show use case
+
+*/
+//--------------------  END OF FUNCTION  --------------------
+
+
 
 
 //---------------------------------------------------------------------------------------------------------------
