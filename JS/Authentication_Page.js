@@ -202,24 +202,8 @@ export function showCreateAccountPopup(){
             modal.style.display = "none"; // Close the account creation popup first
             showPopupModal();      // Then open the login popup
         });
-            
-        registerForm.addEventListener('submit', (event) => {
-            event.preventDefault();
-            const email = emailAccount.value;
-            const password = passwordInput.value;
 
-            fetch('api/register.php', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email: email, password: password })
-            })
-            .then(response => response.json())
-            .then(data => {
-                modal.style.display = "none"; 
-                renderStatusView(data.success, data.message, email);
-            });
-        });
-
+        
         // Append everything together
         modalContent.appendChild(closeButton);
         modalContent.appendChild(popupHeading);
