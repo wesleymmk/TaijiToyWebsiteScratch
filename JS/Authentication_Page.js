@@ -203,6 +203,28 @@ export function showCreateAccountPopup(){
             showPopupModal();      // Then open the login popup
         });
 
+        registerForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+    
+            const email = emailInput.value;
+            const password = passwordInput.value;
+            const receives_emails = emailCheckbox.checked; // this returns a true or false value if the checkbox is checked
+            //Package all data together in a way like this
+            const registrar_Data = {
+                email: email,
+                password: password,
+                receives_emails: checkbox.checked //passes either true or false
+            };
+            // Send the data to our register.php script
+            // call this function when sending data package as apposed to doing the whole fetch method manually
+            ComUtils.apiCall('api/registrar.php', registrar_Data)
+                .then(response => response.json())
+                .then(data => {
+                    // *** THIS IS THE CHANGED PART ***
+                    // Instead of an alert, we call our new function to render a status page
+                    renderStatusView(data.success, data.message, email);
+                });
+        });
         
         // Append everything together
         modalContent.appendChild(closeButton);
