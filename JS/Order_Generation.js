@@ -63,7 +63,8 @@ SubmitGeneration.addEventListener('click', async () => {
     SubmitGeneration.disabled = true;
     SubmitGeneration.textContent = 'Loading...';
 
-    try {
+    try
+    {
         //  Send input to Node.js backend which will call Gemini
         const response = await fetch('http://localhost:3000/generate', {
             method: 'POST',
@@ -75,43 +76,29 @@ SubmitGeneration.addEventListener('click', async () => {
         const data = await response.json();
         console.log("Backend returned:", data);
 
-        // If success, save traits  and redirect
-        if (data.success && data.traits) {
-            // Save to temporary variables
-            Utils.Trait_1 = data.traits[0].short_description || 'First trait';
-            Utils.GeneratedTraits = data.traits;
+        ComUtils.apiCall('api/save_traits.php', data)
+            .then(response => response.json())
+            .then(output_data => {
+                if (output_data.success)
+                {
+                    //logic if save_traits.php succeeds
 
-            // save to SQL via PHP
-            const saveToPHP = await fetch('http://localhost/TaijiToyWebsiteScratch/API/save_traits.php', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    prompt: coreValues,
-                    traits: data.traits
-                })
-            });
 
-            const phpResponse = await saveToPHP.json();
-            console.log("PHP save result:", phpResponse);
 
-            if (phpResponse.success) {
-                
-                // Saved to SQL, now go to output
-                window.location.hash = "#order-output";
-            } else {
-                throw new Error("Failed to save traits to PHP: " + (phpResponse.message || 'No message'));
-            }
-        } else {
-            alert("Error: " + (data.message || 'Unexpected response from backend.'));
-        }
-    } catch (error) {
-        console.error("Error reaching backend or PHP:", error);
-        alert('Something went wrong on the server.');
-    } finally {
-        SubmitGeneration.disabled = false;
-        SubmitGeneration.textContent = 'Submit';
+
+                }
+                else
+                {
+                    //logic if save_traits.php fails
+
+
+
+                }
+            })
+
     }
-});
+}
+);
 
 // ================= BACKEND INTEGRATION END =================
 
