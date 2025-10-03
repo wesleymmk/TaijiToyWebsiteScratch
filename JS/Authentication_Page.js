@@ -10,7 +10,7 @@ import * as Gen2Utils from './Order_Gen_Output.js';
 //PS Creation & EQ collaboration
 export function renderWelcomeView() {
     ComUtils.clearAppContainer(); // Clear the screen first
-    //PS added navwrapper
+    //PS added navwrapper, This is the new implementation of the navbar. Removed html version.
     const navwrapper = document.createElement('div');
     navwrapper.id = 'home';
     navwrapper.classList.add('nav-wrapper');
@@ -25,19 +25,19 @@ export function renderWelcomeView() {
     ComUtils.navmenu.appendChild(ComUtils.GenerateInputOption);
     ComUtils.navmenu.appendChild(ComUtils.GenerateOutputOption);
     ComUtils.accountmenu.appendChild(ComUtils.AccountOption);
-    // PS added Body
+    // PS added Body This div will hold the title & other div elements
     const Body = document.createElement("div");
     Body.classList.add('Homepage');
-    // PS added TradeMarkdiv
+    // PS added TradeMarkdiv this div will hold the trademark text
     const TradeMarkdiv = document.createElement('div');
     TradeMarkdiv.classList.add('titlesection-c');
-    // PS added Titlediv
+    // PS added Titlediv this div will hold all the div elements for the marketing
     const Titlediv = document.createElement('div');
     Titlediv.classList.add('titlesection');
-    // PS added Descriptiondiv
+    // PS added Descriptiondiv This div will hold the marketing text above the Logo
     const Descriptiondiv = document.createElement('div');
     Descriptiondiv.classList.add('titlesection-a');
-    // PS added Logodiv
+    // PS added Logodiv this div will hold the TaijiToy text
     const Logodiv = document.createElement('div');
     Logodiv.classList.add('titlesection-b');
     // PS added Title
@@ -54,12 +54,12 @@ export function renderWelcomeView() {
     TradeMark.classList.add('trademarktitle');
     TradeMark.textContent = 'TM';
 
-    /*Pop up button temporary*/
+    /*Pop up button for the login*/
     let PopupButton = document.createElement("button");
-    PopupButton.textContent = 'popup Login';
+    PopupButton.textContent = 'Login';
     PopupButton.classList.add('PopupButton');
     PopupButton.addEventListener('click', showPopupModal);
-
+    // These commands just call all the elements to the screen
     appContainer.appendChild(navwrapper);
     appContainer.appendChild(Body);
     Body.appendChild(Titlediv);
