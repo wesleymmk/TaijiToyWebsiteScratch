@@ -211,7 +211,7 @@ function SQL_checker($conn, $order_id, $order_details_id)
     $stmt = $conn->prepare($sql);
     // checks if the statement will work and throws error if it doesnt work
     if ($stmt === false) {
-        throw new Exception("Failed to prepare statement: ";
+        throw new Exception("Failed to prepare statement: ");
     }
 
     // Bind the two integer IDs we are checking.
