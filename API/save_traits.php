@@ -2,41 +2,45 @@
 // Made by Anthony Guzman 10/1/25 
 // save_traits.php — Receives Gemini traits from Node/JS frontend and saves to SQL
 // 
+session_start();
+
 header('Content-Type: application/json');
-require_once('config.php');              
-require_once('common_function.php');     
+
+// === Load dependencies ===
+require_once 'config.php';               // Contains DB credentials + connection
+require_once 'common_function.php';      // Your provided shared functions
 
 try {
-    session_start();
-    $customer_id = get_user_ID(); 
-    // Get incoming JSON from Node.js
-    $json = file_get_contents('php://input');
-    $data = json_decode($json, true);
-
-    // DEBUG LOG — see what is being sent to PHP
-    file_put_contents(__DIR__ . "/debug_log.txt", print_r($data, true));
-
-    if (!isset($data['prompt']) || !isset($data['traits']) || count($data['traits']) !== 6) {
-        throw new Exception("Invalid or incomplete data received from frontend.");
-    }
-
-    $prompt = $data['prompt'];
-    $traits = $data['traits'];
-
-    // Open database connection
+    // === Connect to MySQL ===
     $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-    $conn->set_charset("utf8mb4");
-
     if ($conn->connect_error) {
         throw new Exception("Database connection failed: " . $conn->connect_error);
     }
 
-    // Save main prompt to outputs table
+    // === Grab raw POST body and decode JSON ===
+    $input = json_decode(file_get_contents('php://input'), true);
+
+    if (!isset($input['prompt']) || !isset($input['traits'])) {
+        throw new Exception("Missing prompt or traits in request");
+    }
+
+    $prompt = $input['prompt'];
+    $traits = $input['traits'];
+
+    // === Check if user is logged in ===
+    $customer_id = get_user_ID(); // from common_function.php
+
+    // === Validate trait data ===
+    check_deliverables($traits); // Throws exception if bad data
+
+    // === Save prompt to outputs table ===
     $order_id = save_to_outputs($conn, $customer_id, $prompt);
 
-    //  Loop through traits and save each row into outputs_details
+    // === Save each trait to outputs_details table ===
+    $detail_ids = [];
+
     foreach ($traits as $trait) {
-        save_to_output_details(
+        $detail_id = save_to_output_details(
             $conn,
             $order_id,
             $trait['color_1'],
@@ -46,27 +50,23 @@ try {
             $trait['short_description'],
             $trait['long_description']
         );
+        $detail_ids[] = $detail_id;
     }
 
-    //  Prepare success response
-    $response = [
+    // === Done, send success response ===
+    echo json_encode([
         'success' => true,
-        'message' => 'Successfully saved traits to SQL',
+        'message' => 'Saved to SQL successfully',
         'data' => [
             'order_id' => $order_id,
-            'details' => $traits
+            'detail_ids' => $detail_ids
         ]
-    ];
+    ]);
 
 } catch (Exception $e) {
-    // Catch and report errors
-    $response = [
+    echo json_encode([
         'success' => false,
         'message' => $e->getMessage()
-    ];
-} finally {
-    if (isset($conn) && $conn instanceof mysqli) {
-        $conn->close();
-    }
-    echo json_encode($response);
+    ]);
 }
+?>
