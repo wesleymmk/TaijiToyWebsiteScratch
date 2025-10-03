@@ -7,7 +7,7 @@ import * as AccUtils from './User_Account.js';
 
 export function renderGenerationOutputView() {
     ComUtils.clearAppContainer();
-    //PS added navwrapper
+    //PS added navwrapper, This is the new implementation of the navbar. Removed html version.
     const navwrapper = document.createElement('div');
     navwrapper.id = 'order-output';
     navwrapper.classList.add('nav-wrapper');

@@ -12,6 +12,8 @@ export function clearAppContainer()  // WM code // from online modified it so th
     appContainer.innerHTML = '';
 }
 // PS Added navmenu, accountmenu, Home, GenerateInputOption, GenerateOutputOption, AccountOption, HomeLogo.
+/* These are just the buttons for the header that each webapge will call to simplify each file and reduce
+repeating code*/
 export const navmenu = document.createElement('div');
 navmenu.classList.add('nav-menu');
 

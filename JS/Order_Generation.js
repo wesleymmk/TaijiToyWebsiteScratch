@@ -7,7 +7,7 @@ import * as AccUtils from './User_Account.js';
 // PS creation
 export function renderGenerationInputView() {
     ComUtils.clearAppContainer();
-    //PS added navwrapper
+    //PS added navwrapper, This is the new implementation of the navbar. Removed html version.
     const navwrapper = document.createElement('div');
     navwrapper.id = 'order-input';
     navwrapper.classList.add('nav-wrapper');
@@ -45,14 +45,75 @@ export function renderGenerationInputView() {
     SubmitGeneration.classList.add('LoginButton');
     SubmitGeneration.type = "submit";
 
-    /*registerForm.addEventListener('submit', (event) => {
-        event.preventDefault();
+      // ================= BACKEND INTEGRATION START =================
+// AG 
+// This section handles the connection between the frontend and the backend Node server.
 
-        const text = CustomerInput.value;
+// Handle "Submit" button
+SubmitGeneration.addEventListener('click', async () => {
+    
+    // Get user input
+    const coreValues = CustomerInput.value.trim();
+    if (!coreValues) {
+        alert('Please enter your values.');
+        return;
+    }
 
-        // Backend code needed.
-        
-    });*/
+   //Disable button and show loading
+    SubmitGeneration.disabled = true;
+    SubmitGeneration.textContent = 'Loading...';
+
+    try {
+        //  Send input to Node.js backend which will call Gemini
+        const response = await fetch('http://localhost:3000/generate', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ coreValues })
+        });
+
+        // Parse the response from backend
+        const data = await response.json();
+        console.log("Backend returned:", data);
+
+        // If success, save traits  and redirect
+        if (data.success && data.traits) {
+            // Save to temporary variables
+            Utils.Trait_1 = data.traits[0].short_description || 'First trait';
+            Utils.GeneratedTraits = data.traits;
+
+            // save to SQL via PHP
+            const saveToPHP = await fetch('http://localhost/TaijiToyWebsiteScratch/API/save_traits.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    prompt: coreValues,
+                    traits: data.traits
+                })
+            });
+
+            const phpResponse = await saveToPHP.json();
+            console.log("PHP save result:", phpResponse);
+
+            if (phpResponse.success) {
+                
+                // Saved to SQL, now go to output
+                window.location.hash = "#order-output";
+            } else {
+                throw new Error("Failed to save traits to PHP: " + (phpResponse.message || 'No message'));
+            }
+        } else {
+            alert("Error: " + (data.message || 'Unexpected response from backend.'));
+        }
+    } catch (error) {
+        console.error("Error reaching backend or PHP:", error);
+        alert('Something went wrong on the server.');
+    } finally {
+        SubmitGeneration.disabled = false;
+        SubmitGeneration.textContent = 'Submit';
+    }
+});
+
+// ================= BACKEND INTEGRATION END =================
 
     appContainer.appendChild(navwrapper);
     appContainer.appendChild(heading);

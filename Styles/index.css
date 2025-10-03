@@ -5,27 +5,23 @@
 /* EQ added in the font and made the text larger, as well as all the popup visuals*/
 @import url('https://fonts.cdnfonts.com/css/chinese-rocks');
 /* PS Added a, .account-menu, nav-menu, nav-wrapper, topBar, headerOptions, header, & LoginButton*/
-
+/*PS Added*/
 #home .home{
   text-decoration: underline;
 }
-
+/*PS Added*/
 #account .account{
   text-decoration: underline;
 }
-
+/*PS Added*/
 #order-input .inputorder{
   text-decoration: underline;
 }
-
+/*PS Added*/
 #order-output .outputorder{
   text-decoration: underline;
 }
-
-.underline {
-  text-decoration: underline;
-}
-
+/*PS Added*/
 .title {
   font-family: 'Chinese Rocks Rg', sana-serif;
   margin: 0;
@@ -34,7 +30,7 @@
   cursor: default;
   color: white;
 }
-
+/*PS Added*/
 .pagetexttitle {
   font-family: 'Chinese Rocks Rg', sana-serif;
   font-size: 27px;
@@ -44,39 +40,39 @@
   margin-bottom: 20px;
   color: white;
 }
-
+/*PS Added*/
 .trademarktitle {
   margin-top: 77px;
   margin-bottom: 0px;
 }
-
+/*PS Added*/
 .titlesection {
   background-color: black;
   display: grid;
   grid-template-columns: auto 105px auto 105px auto;
   grid-template-rows: auto auto;
 }
-
+/*PS Added*/
 .titlesection-a {
   grid-column: 3;
   grid-row: 1;
   background-color: black;
   text-align: center;
 }
-
+/*PS Added*/
 .titlesection-b {
   grid-column: 3;
   grid-row: 2;
   background-color: black;
 }
-
+/*PS Added*/
 .titlesection-c {
   grid-column: 4;
   grid-row: 1 / span 2;
   background-color: black;
   text-align: right;
 }
-
+/*PS Added*/
 .Homepage{
   background-color: black;
   display: flex;
@@ -84,7 +80,7 @@
   justify-content: center;
   align-items: center;
 }
-
+/*PS Added*/
 .account-menu{
   display: flex;
   flex: 1;
@@ -92,7 +88,7 @@
   justify-content: flex-end;
   background-color: black;
 }
-
+/*PS Added*/
 .nav-menu{
   display: flex;
   flex-direction: row;
@@ -101,7 +97,7 @@
   background-color: black;
   padding-left: 40px;
 }
-
+/*PS Added*/
 .nav-wrapper {
   display: flex;
   flex-direction: row;
@@ -110,7 +106,7 @@
   height: 60px;
   background-color: black;
 }
-
+/*PS Added*/
 .textnavmenu {
   margin: 0;
   margin-left: 25px;
@@ -120,7 +116,7 @@
   cursor: pointer;
   font-size: 20px;
 }
-
+/*PS Added*/
 .textaccountmenu {
   margin: 0;
   margin-left: 25px;
@@ -130,7 +126,7 @@
   cursor: pointer;
   font-size: 20px;
 }
-
+/*PS Added*/
 .header {
   height: 250px;
   align-items: center;
@@ -143,7 +139,7 @@
   font-size: 100px;
   margin: 0px;
 }
-            
+/*PS Added*/
 .LoginButton{
   background-color: rgb(0, 0, 0);
   color: white;
@@ -227,15 +223,15 @@
 .PopupButton:hover{
   opacity: 0.8;
 }
-
+/*PS Added*/
 .LoginButton:hover{
   opacity: 0.8;
 }
-
+/*PS Added*/
 .LoginButton:active{
   opacity: 0.5;
 }
-
+/*PS Added*/
 body{
   margin: 0;
 }

@@ -1,5 +1,5 @@
-//Done by Nathan duarte
 <?php
+//Done by Nathan duarte
 // Include the database configuration
 require_once 'config.php';
 require_once 'common_functions.php';
