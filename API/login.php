@@ -1,5 +1,5 @@
-//Done by Nathan Duarte
 <?php
+//Done by Nathan Duarte
 // 1. Start a session
 // This allows us to store information about the logged-in user
 session_start();
@@ -37,7 +37,7 @@ try{
 }
 
 // 7. Prepare a secure SQL statement to prevent SQL injection
-$sql = "SELECT id, email, password_hash FROM users WHERE email = ?";
+$sql = "SELECT customer_id, email, password_hash FROM users WHERE email = ?";
 $stmt = $conn->prepare($sql);
 
 if ($stmt === false) {
@@ -65,7 +65,7 @@ if ($result->num_rows === 1) {
         // Passwords match! Login is successful.
 
         // Store user info in the session
-        $_SESSION['user_id'] = $user['id'];
+        $_SESSION['user_id'] = $user['customer_id'];
         $_SESSION['user_email'] = $user['email'];
 
         // Send a success response back to the frontend

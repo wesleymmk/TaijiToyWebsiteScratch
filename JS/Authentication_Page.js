@@ -125,6 +125,44 @@ export function showPopupModal(){
             ForgotPassPopup(); //Open "Forgot password popup"
         });
 
+        //Login Button Functions
+        /*Nathan D*/
+        Signinbutton.addEventListener('click', (event) => {
+            event.preventDefault(); // Prevent default button behavior, though it might not be a form submission
+
+            const email = emailAccount.value;
+            const password = passwordInput.value;
+
+            if (!email || !password) {
+                alert('Please enter both email and password.');
+                return;
+            }
+
+            const login_Data = {
+                email: email,
+                password: password
+            };
+
+            // Send data to the new login.php script
+            ComUtils.apiCall('api/login.php', login_Data)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // 1. Close the modal
+                        document.getElementById('myPopupModal').style.display = "none";
+
+                        // 2. Redirect to the logged-in view
+                        // Since you import User_Account.js as AccUtils, you should call it here:
+                        AccUtils.renderUserAccount();
+
+                    } else {
+                        // Login failed (e.g., Invalid email or password)
+                        alert(`Login Failed: ${data.message}`);
+                    }
+                })
+                
+        });
+
         // Append everything together
         modalContent.appendChild(closeButton);
         modalContent.appendChild(popupHeading);
