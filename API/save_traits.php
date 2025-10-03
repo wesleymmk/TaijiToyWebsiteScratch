@@ -8,8 +8,7 @@ require_once('common_function.php');
 
 try {
     session_start();
-    $customer_id = get_user_ID(); // Will throw exception if not logged in
-
+    $customer_id = get_user_ID(); 
     // Get incoming JSON from Node.js
     $json = file_get_contents('php://input');
     $data = json_decode($json, true);
