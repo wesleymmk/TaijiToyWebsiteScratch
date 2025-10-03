@@ -262,7 +262,7 @@ export function showCreateAccountPopup(){
                         AccUtils.renderUserAccount();
                         modal.style.display = "none";
                     } else {
-                        alert('Registration Failed: ${data.message}');
+                        alert(`Registration Failed: ${data.message}`);
                     }
                 });
         });
@@ -435,7 +435,7 @@ export function renderCreateAccountView() {
                 if (data.success) {
                     AccUtils.renderUserAccount();
                 } else {
-                    alert('Registraion Failed: ${data.message}');
+                    alert(`Registraion Failed: ${data.message}`);
                 }
             });
     });
