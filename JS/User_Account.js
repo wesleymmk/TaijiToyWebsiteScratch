@@ -7,7 +7,7 @@ import * as ComUtils from './Common_Function.js';
 
 export function renderUserAccount() {
     ComUtils.clearAppContainer();
-    //PS added navwrapper
+    //PS added navwrapper, This is the new implementation of the navbar. Removed html version.
     const navwrapper = document.createElement('div');
     navwrapper.id = 'account';
     navwrapper.classList.add('nav-wrapper');
