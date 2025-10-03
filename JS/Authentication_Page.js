@@ -54,9 +54,9 @@ export function renderWelcomeView() {
     TradeMark.classList.add('trademarktitle');
     TradeMark.textContent = 'TM';
 
-    /*Pop up button temporary*/
+    /*Pop up button for the login*/
     let PopupButton = document.createElement("button");
-    PopupButton.textContent = 'popup Login';
+    PopupButton.textContent = 'Login';
     PopupButton.classList.add('PopupButton');
     PopupButton.addEventListener('click', showPopupModal);
 
