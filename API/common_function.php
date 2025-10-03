@@ -149,40 +149,50 @@ function save_to_output_details($conn, $new_order_id, $color_1, $color_2, $attri
 
 function getOutputDetailsByOrderId($conn, $order_id)
 {
-    // preparing statement to pull a line from outputs details database based on the unique identifier
+    // Creates SQL order structure
     $sql = "SELECT * FROM outputs_details WHERE order_id = ?";
     
+    // Prepares statement and throws exception if fails
     $stmt = $conn->prepare($sql);
-    // checks if the statement will work and throws error if it doesnt work
     if ($stmt === false) {
         throw new Exception("Failed to prepare statement for fetching details: ");
     }
     
+    // bind param to prevent direct SQL injection
     $stmt->bind_param("i", $order_id);
     
+    // trys to execute the statement if this fails throws exception
     if (!$stmt->execute()) {
         throw new Exception("Failed to execute statement for fetching details: ");
     }
     
-    // Get the full result set from the database.
+    // gets entire result of all rows with that order id
     $result = $stmt->get_result();
     
-    // define an array to place values into
+    if ($result->num_rows !== 6) {
+        throw new Exception("Incorrect number of rows found for order_id " . $order_id . ", but still found " . $result->num_rows . ".");
+    }
+
+    // Packaging logic
+    // Creates an array to package the entire order
     $details_array = [];
     
-    //place value into the array with a while loop
-    while ($val = $result->fetch_assoc()) {
-        $details_array[] = $val;
+    // Uses a loop to put each row into the data
+    while ($row = $result->fetch_assoc()) {
+        // add the current row to the array
+        $details_array[] = $row;
     }
-    
+
+    // close the statement to prevent Memory leak
     $stmt->close();
-    // returns the array of values
+    
+    // return the array
     return $details_array;
 }
-/* Use case & Syntax:
+/* Use case & Syntax: takes an order id and fetches all 6 rows associated with it in outputs_details
 // explanation
 
- show use case
+ output_details = getOutputDetailsByOrderId($conn, $order_id);
 
 */
 //--------------------  END OF FUNCTION  --------------------
@@ -282,17 +292,17 @@ function gather_output($conn, $customer_id, $order_id, $order_details_id_1, $ord
 	// $order_id, $order_details_id_1, $order_details_id_2, $order_details_id_3, $order_details_id_4, $order_details_id_5, $order_details_id_6
 	// above are variables used here for easy copy paste access while coding/editing to prevent syntax errors
 
+    // calling function to put all of the order details into a single array
+    $order_output = getOutputDetailsByOrderId($conn, $order_id);
 
 
-
-
-	// finally package everything together as a JSON
+	return $order_output;
 }
 
 /* Use case & Syntax:
-// goal take 7 inputs order # then 6 order details # then outputs all information as a single JSON package set of arrays
+// goal take 7 inputs order # then 6 order details # then outputs all information as a single array containing 6 rows each with a set of order details
 
- show use case
+$order_output = gather_output($conn, $customer_id, $order_id, $order_details_id_1, $order_details_id_2, $order_details_id_3, $order_details_id_4, $order_details_id_5, $order_details_id_6);
 
 */
 //--------------------  END OF FUNCTION  --------------------
