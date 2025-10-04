@@ -41,6 +41,59 @@
   color: white;
 }
 /*PS Added*/
+.pagetextlargew {
+  font-family: 'Chinese Rocks Rg', sana-serif;
+  font-size: 47px;
+  font-weight: 900;
+  cursor: default;
+  margin: 0;
+  color: white;
+}
+/*PS Added*/
+.pagetextmediumw {
+  font-family: 'Chinese Rocks Rg', sana-serif;
+  font-size: 37px;
+  font-weight: 900;
+  cursor: default;
+  margin: 0;
+  color: white;
+}
+/*PS Added*/
+.pagetextsmallw {
+  font-family: 'Chinese Rocks Rg', sana-serif;
+  font-size: 20px;
+  font-weight: 900;
+  cursor: default;
+  margin: 0;
+  color: white;
+}
+.pagetextlargeb {
+  font-family: 'Chinese Rocks Rg', sana-serif;
+  font-size: 47px;
+  font-weight: 900;
+  cursor: default;
+  margin: 0;
+  color: black;
+}
+/*PS Added*/
+.pagetextmediumb {
+  font-family: 'Chinese Rocks Rg', sana-serif;
+  font-size: 37px;
+  font-weight: 900;
+  cursor: default;
+  margin: 0;
+  color: black;
+}
+/*PS Added*/
+.pagetextsmallb {
+  font-family: 'Chinese Rocks Rg', sana-serif;
+  font-size: 20px;
+  font-weight: 900;
+  cursor: default;
+  margin: 0;
+  color: black;
+}
+/*PS Added*/
 .trademarktitle {
   margin-top: 77px;
   margin-bottom: 0px;
@@ -73,12 +126,95 @@
   text-align: right;
 }
 /*PS Added*/
-.Homepage{
+.marketing {
+  background-color: black;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr 2fr;
+  grid-template-rows: auto;
+  text-align: center;
+  margin-top: 50px;
+  width: 100%;
+}
+/*PS Added*/
+.marketing-a {
+  grid-column: 1;
+  margin-top: 50px;
+  margin-left: 25px;
+  background-color: black;
+}
+/*PS Added*/
+.marketing-b {
+  grid-column: 2;
+  background-color: black;
+}
+/*PS Added*/
+.marketing-c {
+  grid-column: 3;
+  background-color: black;
+}
+/*PS Added*/
+.marketing-d {
+  grid-column: 4;
+  background-color: black;
+}
+/*PS Added*/
+.marketing-e {
+  grid-column: 5;
+  background-color: black;
+}
+/*PS Added*/
+.marketing-f {
+  grid-column: 6;
+  margin-top: 50px;
+  margin-right: 25px;
+  background-color: black;
+}
+/*PS Added*/
+.marketingdiv3,
+.marketingdiv {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  height: 325px;
+  width: 675px;
+  margin-top: 50px;
+  justify-content: space-between;
+}
+/*PS Added*/
+.marketingdiv2 {
+  display: flex;
+  flex-direction: column;
+  height: 325px;
+  width: 350px;
+  margin-top: 50px;
+  justify-content: center;
+}
+/*PS Added*/
+.marketinner {
+  display: flex;
+  height: 277px;
+  width: 675px;
+  justify-content: space-between;
+}
+/*PS Added*/
+.body{
   background-color: black;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: 0;
+}
+/*PS Added*/
+.body2 {
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 45px;
+  padding-right: 45px;
+  margin: 0;
 }
 /*PS Added*/
 .account-menu{
@@ -139,6 +275,27 @@
   font-size: 100px;
   margin: 0px;
 }
+/*PS Added*/
+.button1 {
+  background-color: white;
+  border-radius: 15px;
+  border-width: 5px;
+  border-color: black;
+  border: solid;
+  height: 71px;
+  width: 100%;
+}
+.button1:hover {
+  background-color: black;
+  color: white;
+  border-color: white;
+  transition: 0.35s;
+}
+.button1:active {
+  transition: 0.10s;
+  opacity: 0.65;
+}
+
 /*PS Added*/
 .LoginButton{
   background-color: rgb(0, 0, 0);

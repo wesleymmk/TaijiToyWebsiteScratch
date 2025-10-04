@@ -12,34 +12,83 @@ export function renderWelcomeView() {
     ComUtils.clearAppContainer(); // Clear the screen first
     //PS added navwrapper, This is the new implementation of the navbar. Removed html version.
     const navwrapper = document.createElement('div');
-    navwrapper.id = 'home';
-    navwrapper.classList.add('nav-wrapper');
-    navwrapper.appendChild(ComUtils.HomeLogo);
-    navwrapper.appendChild(ComUtils.navmenu);
-    navwrapper.appendChild(ComUtils.accountmenu);
-    ComUtils.Home.classList.add('home');
-    ComUtils.GenerateInputOption.classList.remove('inputorder');
-    ComUtils.GenerateOutputOption.classList.remove('outputorder');
-    ComUtils.AccountOption.classList.remove('account');
-    ComUtils.navmenu.appendChild(ComUtils.Home);
-    ComUtils.navmenu.appendChild(ComUtils.GenerateInputOption);
-    ComUtils.navmenu.appendChild(ComUtils.GenerateOutputOption);
-    ComUtils.accountmenu.appendChild(ComUtils.AccountOption);
+    navwrapper.id = 'home'; // This is adding an id for the css clas sto specifically target this attribute
+    navwrapper.classList.add('nav-wrapper'); // Class added
+    navwrapper.appendChild(ComUtils.HomeLogo); // Grab button from Common_Function.js
+    navwrapper.appendChild(ComUtils.navmenu); // Grab button from Common_Function.js
+    navwrapper.appendChild(ComUtils.accountmenu); // Grab button from Common_Function.js
+    ComUtils.Home.classList.add('home'); // Class added
+    ComUtils.GenerateInputOption.classList.remove('inputorder'); // Class removed
+    ComUtils.GenerateOutputOption.classList.remove('outputorder'); // Class removed
+    ComUtils.AccountOption.classList.remove('account'); // Class removed
+    ComUtils.navmenu.appendChild(ComUtils.Home); // Grab button from Common_Function.js
+    ComUtils.navmenu.appendChild(ComUtils.GenerateInputOption); // Grab button from Common_Function.js
+    ComUtils.navmenu.appendChild(ComUtils.GenerateOutputOption); // Grab button from Common_Function.js
+    ComUtils.accountmenu.appendChild(ComUtils.AccountOption); // Grab button from Common_Function.js
+    /***************Parent Div Containers***************/
     // PS added Body This div will hold the title & other div elements
-    const Body = document.createElement("div");
-    Body.classList.add('Homepage');
-    // PS added TradeMarkdiv this div will hold the trademark text
-    const TradeMarkdiv = document.createElement('div');
-    TradeMarkdiv.classList.add('titlesection-c');
+    const Body = document.createElement('div');
+    Body.classList.add('body');
+    // PS added Body2 this will hold a transitional background
+    const Body2 = document.createElement('div');
+    Body2.classList.add('body');
+    // PS added Body3 this will hold some marketing pictures & button
+    const Body3 = document.createElement('div');
+    Body3.classList.add('body2');
+    // PS added Body4 This will hold a transitional background
+    const Body4 = document.createElement('div');
+    Body4.classList.add('body');
+    // PS added YinYang div to hold the marketing photo
+    const YinYang = document.createElement('div');
+    /***************Inner Structure Div Containers***************/
     // PS added Titlediv this div will hold all the div elements for the marketing
     const Titlediv = document.createElement('div');
     Titlediv.classList.add('titlesection');
+    // PS added Marketingdiv This will hold the div containers promoting TaijiToy
+    const Marketingdiv = document.createElement('div');
+    Marketingdiv.classList.add('marketing');
+    // PS added MarketingRowdiv for a row structured marketing and button option
+    const MarketingRowdiv1 = document.createElement('div');
+    MarketingRowdiv1.classList.add('marketingdiv');
+    const MarketingRowdiv2 = document.createElement('div');
+    MarketingRowdiv2.classList.add('marketingdiv2');
+    const MarketingRowdiv3 = document.createElement('div');
+    MarketingRowdiv3.classList.add('marketingdiv3');
+    /***************Innermost Div containers holding text or images***************/
     // PS added Descriptiondiv This div will hold the marketing text above the Logo
     const Descriptiondiv = document.createElement('div');
     Descriptiondiv.classList.add('titlesection-a');
     // PS added Logodiv this div will hold the TaijiToy text
     const Logodiv = document.createElement('div');
     Logodiv.classList.add('titlesection-b');
+    // PS added TradeMarkdiv this div will hold the trademark text
+    const TradeMarkdiv = document.createElement('div');
+    TradeMarkdiv.classList.add('titlesection-c');
+    // PS added Locationdiv This will hold text promoting TaijiToy
+    const Locationdiv = document.createElement('div');
+    Locationdiv.classList.add('marketing-a');
+    // PS added Connectdiv This will hold text promoting TaijiToy
+    const Connectdiv = document.createElement('div');
+    Connectdiv.classList.add('marketing-b');
+    // PS added Combinediv This will hold text promoting TaijiToy
+    const Combinediv = document.createElement('div');
+    Combinediv.classList.add('marketing-c');
+    // PS added Collectdiv This will hold text promoting TaijiToy
+    const Collectdiv = document.createElement('div');
+    Collectdiv.classList.add('marketing-d');
+    // PS added Sharediv This will hold text promoting TaijiToy
+    const Sharediv = document.createElement('div');
+    Sharediv.classList.add('marketing-e');
+    // PS added Agesdiv This will hold text promoting TaijiToy
+    const Agesdiv = document.createElement('div');
+    Agesdiv.classList.add('marketing-f');
+    // PS added MerjetingInnerdiv for pictures & text to be structured
+    const MarketingInnerdiv = document.createElement('div');
+    MarketingInnerdiv.classList.add('marketinner');
+    // PS added MerjetingInnerdiv for pictures & text to be structured
+    const MarketingInnerdiv2 = document.createElement('div');
+    MarketingInnerdiv2.classList.add('marketinner');
+    /***************Content to be Inserted into Div containers***************/
     // PS added Title
     const Title = document.createElement("p");
     Title.classList.add('title');
@@ -53,22 +102,114 @@ export function renderWelcomeView() {
     TradeMark.classList.add('pagetexttitle');
     TradeMark.classList.add('trademarktitle');
     TradeMark.textContent = 'TM';
-
+    // PS added Location of manufacturing
+    const Location = document.createElement('p');
+    Location.classList.add('pagetextsmallw');
+    Location.textContent = 'Made In Boerne, Texas, USA';
+    // PS added Connect marketing text
+    const Connect = document.createElement('p');
+    Connect.classList.add('pagetextlargew');
+    Connect.textContent = 'Connect';
+    // PS added Combine marketing text
+    const Combine = document.createElement('p');
+    Combine.classList.add('pagetextlargew');
+    Combine.textContent = 'Combine';
+    // PS added Combine marketing text
+    const Collect = document.createElement('p');
+    Collect.classList.add('pagetextlargew');
+    Collect.textContent = 'Collect';
+    // PS added Share marketing text
+    const Share = document.createElement('p');
+    Share.classList.add('pagetextlargew');
+    Share.textContent = 'Share';
+    // PS added Ages marketing text
+    const Ages = document.createElement('p');
+    Ages.classList.add('pagetextsmallw');
+    Ages.textContent = 'Made For Ages 3 + UP';
+    // PS added Explore to market Toy
+    const Explore = document.createElement('p');
+    Explore.classList.add('pagetextmediumb');
+    Explore.textContent = 'Explore The Yin-Yang';
+    // PS added Explore2 to market Toy
+    const Explore2 = document.createElement('p');
+    Explore2.classList.add('pagetextmediumb');
+    Explore2.textContent = 'Explore Collections';
+    // PS added background image
+    const Background = document.createElement('img');
+    Background.classList.add('Background');
+    Background.src = 'Background/Background1.png';
+    // PS added background image
+    const Background2 = document.createElement('img');
+    Background2.classList.add('Background');
+    Background2.src = 'Background/Background2.png';
+    // PS added marketing photo for homepage
+    const ToyPicture1 = document.createElement('img');
+    ToyPicture1.classList.add('marketimage');
+    ToyPicture1.src = 'Marketing_Images/TT+product+Image+001.jpg'
+    // PS added marketing photo for homepage
+    const ToyPicture2 = document.createElement('img');
+    ToyPicture2.classList.add('marketimage');
+    ToyPicture2.src = 'Marketing_Images/TT+product+Image+002.jpg'
+    // PS added marketing photo for homepage
+    const ToyPicture3 = document.createElement('img');
+    ToyPicture3.classList.add('marketimage');
+    ToyPicture3.src = 'Marketing_Images/TT+product+Image+003.jpg'
+    // PS added marketing photo for homepage
+    const ToyPicture4 = document.createElement('img');
+    ToyPicture4.classList.add('marketimage');
+    ToyPicture4.src = 'Marketing_Images/TT+product+Image+004.jpg'
     /*Pop up button for the login*/
     let PopupButton = document.createElement("button");
     PopupButton.textContent = 'Login';
     PopupButton.classList.add('PopupButton');
     PopupButton.addEventListener('click', showPopupModal);
     // These commands just call all the elements to the screen
+    /***************Navigation Bar***************/
     appContainer.appendChild(navwrapper);
+    /***************Parent Div containers***************/
     appContainer.appendChild(Body);
-    Body.appendChild(Titlediv);
+    appContainer.appendChild(Body2);
+    appContainer.appendChild(Body3);
+    appContainer.appendChild(Body4);
+    /***************Inner structured Div Containers***************/
+    Body.appendChild(Titlediv);+
+    Body.appendChild(Marketingdiv);
+    Body3.appendChild(MarketingRowdiv1);
+    Body3.appendChild(MarketingRowdiv2);
+    Body3.appendChild(MarketingRowdiv3);
+    /***************Inner Div containers to hold content***************/
     Titlediv.appendChild(Descriptiondiv);
     Titlediv.appendChild(TradeMarkdiv);
     Titlediv.appendChild(Logodiv);
+    Marketingdiv.appendChild(Locationdiv);
+    Marketingdiv.appendChild(Connectdiv);
+    Marketingdiv.appendChild(Combinediv);
+    Marketingdiv.appendChild(Collectdiv);
+    Marketingdiv.appendChild(Sharediv);
+    Marketingdiv.appendChild(Agesdiv);
+    MarketingRowdiv1.appendChild(MarketingInnerdiv);
+    MarketingRowdiv2.appendChild(ComUtils.ShopNowButton);
+    MarketingRowdiv3.appendChild(MarketingInnerdiv2);
+    /***************Text to be inserted in inner div containers structure***************/
     Descriptiondiv.appendChild(Description);
     TradeMarkdiv.appendChild(TradeMark);
     Logodiv.appendChild(Title);
+    Locationdiv.appendChild(Location);
+    Connectdiv.appendChild(Connect);
+    Combinediv.appendChild(Combine);
+    Collectdiv.appendChild(Collect);
+    Sharediv.appendChild(Share);
+    Agesdiv.appendChild(Ages);
+    MarketingRowdiv1.appendChild(Explore);
+    MarketingRowdiv3.appendChild(Explore2);
+    /***************Images to be used by page***************/
+    Body2.appendChild(Background);
+    MarketingInnerdiv.appendChild(ToyPicture1);
+    MarketingInnerdiv.appendChild(ToyPicture2);
+    MarketingInnerdiv2.appendChild(ToyPicture3);
+    MarketingInnerdiv2.appendChild(ToyPicture4);
+    Body4.appendChild(Background2);
+
     appContainer.appendChild(PopupButton);
 }
 /*Popup function done by Ernesto Q.*/

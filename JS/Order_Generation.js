@@ -50,7 +50,7 @@ export function renderGenerationInputView() {
 // This section handles the connection between the frontend and the backend Node server.
 
 // Handle "Submit" button
-SubmitGeneration.addEventListener('click', async () => {
+/*SubmitGeneration.addEventListener('click', async () => {
     
     // Get user input
     const coreValues = CustomerInput.value.trim();
@@ -98,7 +98,7 @@ SubmitGeneration.addEventListener('click', async () => {
 
     }
 }
-);
+);*/
 
 // ================= BACKEND INTEGRATION END =================
 

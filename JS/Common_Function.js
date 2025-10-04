@@ -46,6 +46,11 @@ HomeLogo.src = 'Brand_Logos/Taijitoylogolight.png';
 HomeLogo.alt = 'HOME';
 HomeLogo.addEventListener('click', function () { window.location.href = '#welcome-page' });
 
+export const ShopNowButton = document.createElement('button');
+ShopNowButton.classList.add('button1');
+ShopNowButton.classList.add('pagetextmediumb');
+ShopNowButton.textContent = 'Shop Now';
+
 
 // This function acts as an API call taking a JS object and a PHP endpoint
 export function apiCall(php_file, js_object) // WM code // 
