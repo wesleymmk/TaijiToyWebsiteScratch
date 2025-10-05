@@ -25,6 +25,12 @@
   height: 277px;
 }
 
+.marketimage1 {
+  width: 871px;
+  object-fit: contain;
+  object-position: center;
+}
+
 .traits{
   font-size:20px;
   color:black;

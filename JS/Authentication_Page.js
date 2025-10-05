@@ -38,8 +38,18 @@ export function renderWelcomeView() {
     // PS added Body4 This will hold a transitional background
     const Body4 = document.createElement('div');
     Body4.classList.add('body');
-    // PS added YinYang div to hold the marketing photo
-    const YinYang = document.createElement('div');
+    // PS added Body5 This will hold marketing text
+    const Body5 = document.createElement('div');
+    Body5.classList.add('body3');
+    // PS added Body6 This will hold marketing Title text
+    const Body6 = document.createElement('div');
+    Body6.classList.add('body2');
+    // PS added Body7 This will hold marketing text & photo
+    const Body7 = document.createElement('div');
+    Body7.classList.add('body2');
+    // PS added Body8 This will hold marketing text & photo
+    const Body8 = document.createElement('div');
+    Body8.classList.add('body3');
     /***************Inner Structure Div Containers***************/
     // PS added Titlediv this div will hold all the div elements for the marketing
     const Titlediv = document.createElement('div');
@@ -54,6 +64,22 @@ export function renderWelcomeView() {
     MarketingRowdiv2.classList.add('marketingdiv2');
     const MarketingRowdiv3 = document.createElement('div');
     MarketingRowdiv3.classList.add('marketingdiv3');
+    // PS added MarketingRevealdiv for a row structure holding text
+    const MarketingRevealdiv1 = document.createElement('div');
+    MarketingRevealdiv1.classList.add('marketingrevealdiv1')
+    const MarketingRevealdiv2 = document.createElement('div');
+    MarketingRevealdiv2.classList.add('marketingrevealdiv2')
+    const MarketingRevealdiv3 = document.createElement('div');
+    MarketingRevealdiv3.classList.add('marketingrevealdiv3');
+    // PS added Offersdiv for a large title transition to more marketing
+    const Offersdiv = document.createElement('div');
+    Offersdiv.classList.add('offersdiv');
+    // PS added SOLOSdiv for an image and text marketing segment
+    const SOLOSdiv = document.createElement('div');
+    SOLOSdiv.classList.add('solosdiv');
+    // PS added Curateddiv for curated marketing
+    const Curateddiv = document.createElement('div');
+    Curateddiv.classList.add('curateddiv');
     /***************Innermost Div containers holding text or images***************/
     // PS added Descriptiondiv This div will hold the marketing text above the Logo
     const Descriptiondiv = document.createElement('div');
@@ -82,13 +108,31 @@ export function renderWelcomeView() {
     // PS added Agesdiv This will hold text promoting TaijiToy
     const Agesdiv = document.createElement('div');
     Agesdiv.classList.add('marketing-f');
-    // PS added MerjetingInnerdiv for pictures & text to be structured
+    // PS added MarketingInnerdiv for pictures & text to be structured
     const MarketingInnerdiv = document.createElement('div');
     MarketingInnerdiv.classList.add('marketinner');
-    // PS added MerjetingInnerdiv for pictures & text to be structured
+    // PS added MarketingInnerdiv for pictures & text to be structured
     const MarketingInnerdiv2 = document.createElement('div');
     MarketingInnerdiv2.classList.add('marketinner');
-    /***************Content to be Inserted into Div containers***************/
+    // PS added MarketingRevealInnerdiv for text spacing
+    const MarketingRevealInnerdiv = document.createElement('div');
+    MarketingRevealInnerdiv.classList.add('marketrevealinner');
+    // PS added SOLOSinnerdiv for adding text alingside image
+    const SOLOSinnerdiv = document.createElement('div');
+    SOLOSinnerdiv.classList.add('solosinnerdiv');
+    // PS added SOLOSinnerdiv1 for adding subtext
+    const SOLOSinnerdiv1 = document.createElement('div');
+    SOLOSinnerdiv1.classList.add('solosinnerdiv1');
+    // PS added SOLOSinnerdiv2 for adding subtext
+    const SOLOSinnerdiv2 = document.createElement('div');
+    SOLOSinnerdiv2.classList.add('solosinnerdiv2');
+    // PS added Curatedinnerdiv for curated marketing
+    const Curatedinnerdiv = document.createElement('div');
+    Curatedinnerdiv.classList.add('curatedinnerdiv');
+    // PS added Curatedinnerdiv2 for curated marketing
+    const Curatedinnerdiv2 = document.createElement('div');
+    Curatedinnerdiv2.classList.add('curatedinnerdiv2');
+    /***************Text to be Inserted into Div containers***************/
     // PS added Title
     const Title = document.createElement("p");
     Title.classList.add('title');
@@ -134,6 +178,51 @@ export function renderWelcomeView() {
     const Explore2 = document.createElement('p');
     Explore2.classList.add('pagetextmediumb');
     Explore2.textContent = 'Explore Collections';
+    // PS added represent1 text for markting
+    const Represent1 = document.createElement('p');
+    Represent1.classList.add('pagetextsmallw1');
+    Represent1.textContent = 'Yin and Yang represent the inherent duality in all things. A Continuous dance of opposing yet interconnected and complementary forces striving for balance and harmony.';
+    // PS added represent2 text for markting
+    const Represent2 = document.createElement('p');
+    Represent2.classList.add('pagetextsmallw1');
+    Represent2.textContent = "Taiji (the Supreme Ultimate) represents the universe's initial state of undifferentiated unity, where the opposing forces of yin and yang exist in perfect balance and mutual interaction.";
+    // PS added Reveals text for TaijiToy Marketing
+    const Reveals = document.createElement('p');
+    Reveals.classList.add('pagetextlargew');
+    Reveals.textContent = 'TaijiToy Reveals';
+    // PS added Halves text for TaijiToy Marketing
+    const Halves = document.createElement('p');
+    Halves.classList.add('pagetextlargew');
+    Halves.textContent = 'How two halves make a whole.';
+    // PS added First text for TaijiToy Marketing
+    const First = document.createElement('p');
+    First.classList.add('pagetextsmallw1');
+    First.textContent = 'For the first time. You see the inner-workings of yin-yang';
+    // PS added Offer text for TaijiToy Marketing
+    const Offer = document.createElement('p');
+    Offer.classList.add('pagetexttitleb');
+    Offer.textContent = 'What TaijiToy Offers...';
+    // PS added SOLOS text for TaijiToy Marketing
+    const SOLOS = document.createElement('p');
+    SOLOS.classList.add('pagetextlargeb');
+    SOLOS.textContent = 'TaijiToy (solos)';
+    // PS added SOLOS1 text for TaijiToy Marketing
+    const SOLOS1 = document.createElement('p');
+    SOLOS1.classList.add('pagetextsmallb');
+    SOLOS1.textContent = '- Assorted colors';
+    // PS added SOLOS2 text for TaijiToy Marketing
+    const SOLOS2 = document.createElement('p');
+    SOLOS2.classList.add('pagetextsmallb');
+    SOLOS2.textContent = '- Buy in bulk and save';
+    //PS added Curated text for TaijiToy Marketing
+    const Curated = document.createElement('p');
+    Curated.classList.add('pagetextlargew');
+    Curated.textContent = 'Curated\nCollections'
+    //PS added Curated2 text for TaijiToy Marketing list
+    const Curated2 = document.createElement('p');
+    Curated2.classList.add('pagetextsmallw');
+    Curated2.textContent = '- Spirits of tha compass\n- Duality and change management\n- Trigrams of the I ching\n- Chinese Dragons\n- Chinese zondiac signs\n- Western zodiac signs';
+    /***************Images to be Inserted into Div containers***************/
     // PS added background image
     const Background = document.createElement('img');
     Background.classList.add('Background');
@@ -158,6 +247,15 @@ export function renderWelcomeView() {
     const ToyPicture4 = document.createElement('img');
     ToyPicture4.classList.add('marketimage');
     ToyPicture4.src = 'Marketing_Images/TT+product+Image+004.jpg'
+    // PS added marketing photo for homepage
+    const Marketingphoto1 = document.createElement('img');
+    Marketingphoto1.classList.add('marketimage1');
+    Marketingphoto1.src = 'Marketing_Images/Taji-Color206.png'
+    // PS added marketing2 photo for homepage
+    const Marketingphoto2 = document.createElement('img');
+    Marketingphoto2.classList.add('marketimage1');
+    Marketingphoto2.src = 'Marketing_Images/collections+banner.jpg';
+
     /*Pop up button for the login*/
     let PopupButton = document.createElement("button");
     PopupButton.textContent = 'Login';
@@ -171,12 +269,22 @@ export function renderWelcomeView() {
     appContainer.appendChild(Body2);
     appContainer.appendChild(Body3);
     appContainer.appendChild(Body4);
+    appContainer.appendChild(Body5);
+    appContainer.appendChild(Body6);
+    appContainer.appendChild(Body7);
+    appContainer.appendChild(Body8);
     /***************Inner structured Div Containers***************/
     Body.appendChild(Titlediv);+
     Body.appendChild(Marketingdiv);
     Body3.appendChild(MarketingRowdiv1);
     Body3.appendChild(MarketingRowdiv2);
     Body3.appendChild(MarketingRowdiv3);
+    Body5.appendChild(MarketingRevealdiv1);
+    Body5.appendChild(MarketingRevealdiv2);
+    Body5.appendChild(MarketingRevealdiv3);
+    Body6.appendChild(Offersdiv);
+    Body7.appendChild(SOLOSdiv);
+    Body8.appendChild(Curateddiv);
     /***************Inner Div containers to hold content***************/
     Titlediv.appendChild(Descriptiondiv);
     Titlediv.appendChild(TradeMarkdiv);
@@ -190,6 +298,9 @@ export function renderWelcomeView() {
     MarketingRowdiv1.appendChild(MarketingInnerdiv);
     MarketingRowdiv2.appendChild(ComUtils.ShopNowButton);
     MarketingRowdiv3.appendChild(MarketingInnerdiv2);
+    SOLOSdiv.appendChild(SOLOSinnerdiv);
+    SOLOSinnerdiv.appendChild(SOLOSinnerdiv1);
+    SOLOSinnerdiv.appendChild(SOLOSinnerdiv2);
     /***************Text to be inserted in inner div containers structure***************/
     Descriptiondiv.appendChild(Description);
     TradeMarkdiv.appendChild(TradeMark);
@@ -202,6 +313,16 @@ export function renderWelcomeView() {
     Agesdiv.appendChild(Ages);
     MarketingRowdiv1.appendChild(Explore);
     MarketingRowdiv3.appendChild(Explore2);
+    MarketingRevealdiv1.appendChild(Represent1);
+    MarketingRevealdiv2.appendChild(Reveals);
+    MarketingRevealdiv2.appendChild(Halves);
+    MarketingRevealdiv2.appendChild(MarketingRevealInnerdiv);
+    MarketingRevealdiv3.appendChild(Represent2);
+    MarketingRevealInnerdiv.appendChild(First);
+    Offersdiv.appendChild(Offer);
+    SOLOSinnerdiv2.appendChild(SOLOS1);
+    SOLOSinnerdiv2.appendChild(SOLOS2);
+    SOLOSinnerdiv1.appendChild(SOLOS);
     /***************Images to be used by page***************/
     Body2.appendChild(Background);
     MarketingInnerdiv.appendChild(ToyPicture1);
@@ -209,6 +330,12 @@ export function renderWelcomeView() {
     MarketingInnerdiv2.appendChild(ToyPicture3);
     MarketingInnerdiv2.appendChild(ToyPicture4);
     Body4.appendChild(Background2);
+    SOLOSdiv.appendChild(Marketingphoto1);
+    Curateddiv.appendChild(Marketingphoto2);
+    Curateddiv.appendChild(Curatedinnerdiv);
+    Curatedinnerdiv.appendChild(Curated);
+    Curatedinnerdiv.appendChild(Curatedinnerdiv2);
+    Curatedinnerdiv2.appendChild(Curated2);
 
     appContainer.appendChild(PopupButton);
 }
@@ -511,94 +638,5 @@ export function ForgotPassPopup(){
     }
 }
 
-
-// PS creation, EQ Modifying 
-export function renderCreateAccountView() {
-    ComUtils.clearAppContainer();
-    ComUtils.header();
-
-    let heading = document.createElement('h1');
-    heading.textContent = 'Create Your Account!';
-
-    const registerForm = document.createElement('form');
-    registerForm.id = 'register-form';
-
-    let emailAccount = document.createElement('input');
-    emailAccount.type = 'email';
-    emailAccount.placeholder = 'Enter your email';
-    emailAccount.required = true;
-
-    let passwordInput = document.createElement('input');
-    passwordInput.type = 'password';
-    passwordInput.placeholder = 'Enter your password';
-    passwordInput.required = true;
-
-    let emailCheckbox = document.createElement('input');
-    emailCheckbox.type = 'checkbox';
-    emailCheckbox.name = 'emailCheckbox';
-
-    let CheckboxLabel = document.createElement('label');
-    CheckboxLabel.htmlFor = 'emailCheckbox';
-    CheckboxLabel.textContent = 'Send you emails?';
-
-    let CreateAccountButton = document.createElement("button");
-    CreateAccountButton.textContent = 'Create Account';
-    CreateAccountButton.classList.add('LoginButton');
-    CreateAccountButton.type="submit";
-
-    let LoginButton = document.createElement("button");
-    LoginButton.textContent = 'Already have an account? Login';
-    LoginButton.classList.add('LoginButton');
-    LoginButton.addEventListener('click', renderWelcomeView);
-
-    registerForm.addEventListener('submit', (event) => {
-        event.preventDefault();
-
-        const email = emailAccount.value;
-        const password = passwordInput.value;
-        const receives_emails = emailCheckbox.checked; // this returns a true or false value if the checkbox is checked
-
-        //Package all data together in a way like this
-
-        const registrar_Data = {
-            email: email,
-            password: password,
-            receives_emails: receives_emails //passes either true or false
-        };
-
-        // Send the data to our register.php script
-        //
-
-        // call this function when sending data package as apposed to doing the whole fetch method manually
-        ComUtils.apiCall('api/registrar.php', registrar_Data)
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    AccUtils.renderUserAccount();
-                } else {
-                    alert(`Registraion Failed: ${data.message}`);
-                }
-            });
-    });
-
-
-    appContainer.appendChild(heading);
-    appContainer.appendChild(emailAccount);
-    appContainer.appendChild(passwordInput);
-    appContainer.appendChild(emailCheckbox);
-    appContainer.appendChild(CheckboxLabel);
-    appContainer.appendChild(CreateAccountButton);
-    appContainer.appendChild(LoginButton);
-
-}
-function renderLoginView() {
-    ComUtils.clearAppContainer();
-
-    let heading = document.createElement('h1');
-    heading.classList.add('header');
-    heading.textContent = 'Log In To Your Account!';
-
-    appContainer.appendChild(heading);
-}
 
 export const Trait_1 = 'This text is within Authentication_Page.js and testing linking dynamic text';
