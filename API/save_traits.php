@@ -53,14 +53,14 @@ try {
 	$detail_id_6 = save_to_output_details($conn, $new_order_id, $color_1, $color_2, $attribute_1, $attribute_2, $desc_s, $desc_l);
 
 	// now we have saved everything
-    $f_output = gather_output($conn, $customer_id, $new_order_id, $details_id_1, $detail_id_2, $detail_id_3, $detail_id_4, $$detail_id_5, $detail_id_6);
+    //$f_output = gather_output($conn, $customer_id, $new_order_id, $details_id_1, $detail_id_2, $detail_id_3, $detail_id_4, $$detail_id_5, $detail_id_6);
 
 
     $response['success'] = true;
     //$response['message'] = "Successfully generated and saved 6 product ideas.";
 
 	// this needs to be changed to send different data
-    $response['data'] = f_output; 
+    $response['data'] = ; 
 	// Send the data back to the frontend to be displayed.
 
     // === Done, send success response ===
@@ -68,8 +68,7 @@ try {
         'success' => true,
         'message' => 'Saved to SQL successfully',
         'data' => [
-            'order_id' => $order_id,
-            'detail_ids' => $detail_ids
+            'order_id' => $new_order_id,
         ]
     ]);
 

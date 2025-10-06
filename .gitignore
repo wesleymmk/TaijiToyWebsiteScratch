@@ -1,7 +1,9 @@
 # Configuration file with sensitive data
 config.php
 .vs/
+package-lock.json
+package.json
 
 
-# Vendor folders for dependencies (if you use Composer later)
+
 /vendor/
