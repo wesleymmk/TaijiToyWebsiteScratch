@@ -3,6 +3,7 @@ config.php
 .vs/
 package-lock.json
 package.json
+node_modules/
 
 
 
