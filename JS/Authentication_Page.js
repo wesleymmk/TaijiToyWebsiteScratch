@@ -221,7 +221,7 @@ export function renderWelcomeView() {
     //PS added Curated2 text for TaijiToy Marketing list
     const Curated2 = document.createElement('p');
     Curated2.classList.add('pagetextsmallw');
-    Curated2.textContent = '- Spirits of tha compass\n- Duality and change management\n- Trigrams of the I ching\n- Chinese Dragons\n- Chinese zondiac signs\n- Western zodiac signs';
+    Curated2.textContent = '- Spirits of the compass\n- Duality and change management\n- Trigrams of the I ching\n- Chinese Dragons\n- Chinese zondiac signs\n- Western zodiac signs';
     /***************Images to be Inserted into Div containers***************/
     // PS added background image
     const Background = document.createElement('img');

@@ -259,9 +259,13 @@
 .marketingrevealdiv3 {
   display: flex;
   height: 325px;
+  height: 16.927vw;
   width: 240px;
+  width: 12.5vw;
   margin-top: 50px;
+  margin-top: 2.604vw;
   margin-bottom: 50px;
+  margin-bottom: 2.604vw;
   line-height: 200%;
   text-align: right;
 }
@@ -350,22 +354,14 @@
 .curatedinnerdiv,
 .curatedinnerdiv2 {
   display: flex;
-  height: 500px;
-  height: 26.042vw;
   flex-direction: column;
   justify-content: center;
-  width: 400px;
-  width: 20.833vw;
   line-height: 275%;
   white-space: pre-wrap;
-  background-color: aqua;
 }
 /*PS Added*/
 .curatedinnerdiv2 {
-  height: 200px;
-  height: 10.417vw;
   line-height: 200%;
-  background-color: red;
 }
 /*PS Added*/
 .body{
@@ -480,7 +476,7 @@
   border-color: black;
   border: solid;
   height: 71px;
-  height: 5.547vw;
+  height: 3.698vw;
   width: 100%;
 }
 .button1:hover {
