@@ -99,7 +99,10 @@ SubmitGeneration.addEventListener('click', async () => {
 
     }
 }
-);*/
+// add catch/ finally statements
+
+
+);
 
 // ================= BACKEND INTEGRATION END =================
 
