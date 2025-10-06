@@ -221,7 +221,7 @@ export function renderWelcomeView() {
     //PS added Curated2 text for TaijiToy Marketing list
     const Curated2 = document.createElement('p');
     Curated2.classList.add('pagetextsmallw');
-    Curated2.textContent = '- Spirits of tha compass\n- Duality and change management\n- Trigrams of the I ching\n- Chinese Dragons\n- Chinese zondiac signs\n- Western zodiac signs';
+    Curated2.textContent = '- Spirits of the compass\n- Duality and change management\n- Trigrams of the I ching\n- Chinese Dragons\n- Chinese zondiac signs\n- Western zodiac signs';
     /***************Images to be Inserted into Div containers***************/
     // PS added background image
     const Background = document.createElement('img');
@@ -528,7 +528,8 @@ export function showCreateAccountPopup(){
                 .then(data => {
                     if (data.success) {
                         AccUtils.renderUserAccount();
-                        modal.style.display = "none";
+                        window.location.href= '#account';
+                        CAsuccess();
                     } else {
                         alert(`Registration Failed: ${data.message}`);
                     }
@@ -559,7 +560,7 @@ export function showCreateAccountPopup(){
     }
 }
 
-//Popup for the "forgot password" popup
+//Popup for the "forgot password" popup EQ
 export function ForgotPassPopup(){
     let modal=document.getElementById('ForgotPassModal');
     if (!modal) {
@@ -638,5 +639,49 @@ export function ForgotPassPopup(){
     }
 }
 
+export function CAsuccess() {
+    let modal=document.getElementById('CASuccessModal');
+
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'CASuccessModal';
+        modal.classList.add('modal');
+
+        let modalContent = document.createElement('div');
+        modalContent.classList.add('modal-content');
+
+        let closeButton = document.createElement('span');
+        closeButton.classList.add('close-button');
+        closeButton.innerHTML = '&times;'; // The 'x' character
+        closeButton.onclick = () => {
+            modal.style.display = "none";
+        };
+
+        let popupHeading = document.createElement('h2');
+        popupHeading.textContent = 'Account Created Successfully!';
+
+        let ToInputgen = document.createElement("button");
+        ToInputgen.textContent = 'Generate your first order!';
+        ToInputgen.classList.add('LoginButton-2'); // Corrected syntax
+
+        ToInputgen.addEventListener('click', () => {
+            window.location.href = '#order-input';
+            modal.style.display = "none";
+            
+        });
+
+        // Assemble the modal content
+        modalContent.appendChild(closeButton);
+        modalContent.appendChild(popupHeading);
+        modalContent.appendChild(ToInputgen);
+
+        // Add the content to the modal
+        modal.appendChild(modalContent);
+
+        // IMPORTANT: Add the newly created modal to the document body
+        document.body.appendChild(modal);
+    }
+    modal.style.display = 'block';
+}
 
 export const Trait_1 = 'This text is within Authentication_Page.js and testing linking dynamic text';
