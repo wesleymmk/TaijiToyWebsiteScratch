@@ -63,8 +63,7 @@ SubmitGeneration.addEventListener('click', async () => {
     SubmitGeneration.disabled = true;
     SubmitGeneration.textContent = 'Loading...';
 
-    try
-    {
+    try {
         //  Send input to Node.js backend which will call Gemini
         const response = await fetch('http://localhost:3000/generate', {
             method: 'POST',
@@ -79,8 +78,7 @@ SubmitGeneration.addEventListener('click', async () => {
         ComUtils.apiCall('api/save_traits.php', data)
             .then(response => response.json())
             .then(output_data => {
-                if (output_data.success)
-                {
+                if (output_data.success) {
                     const orderId = output_data.data.order_id;
 
                     // Now you can display it in the console
@@ -96,6 +94,14 @@ SubmitGeneration.addEventListener('click', async () => {
 
                 }*/
             })
+
+    }
+    catch
+    {
+
+    }
+    finally
+    {
 
     }
 }
