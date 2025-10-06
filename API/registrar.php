@@ -24,8 +24,20 @@ if (empty($email) || empty($password)) {
     exit();
 }
 
-if (strlen($password) < 8) {
-    echo json_encode(['success' => false, 'message' => 'Password must be at least 8 characters long.']);
+// Regular Expression:
+// ^                     # Start of the string
+// (?=.*[a-z])           # Must contain at least one lowercase letter
+// (?=.*[A-Z])           # Must contain at least one uppercase letter
+// (?=.*[^a-zA-Z0-9])    # Must contain at least one special character (any non-alphanumeric)
+// .{8,}                 # Must be at least 8 characters long
+// $                     # End of the string
+$password_regex = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$/';
+if (!preg_match($password_regex, $password)) {
+    echo json_encode([
+        'success' => false, 
+        // Use \n to create the line breaks in the string
+        'message' => "Password must contain:\n- At least 8 characters\n- One uppercase letter\n- One lowercase letter\n- One special character"
+    ]);
     exit();
 }
 
