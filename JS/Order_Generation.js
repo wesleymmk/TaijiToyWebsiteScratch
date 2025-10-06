@@ -50,7 +50,7 @@ export function renderGenerationInputView() {
 // This section handles the connection between the frontend and the backend Node server.
 
 // Handle "Submit" button
-/*SubmitGeneration.addEventListener('click', async () => {
+SubmitGeneration.addEventListener('click', async () => {
     
     // Get user input
     const coreValues = CustomerInput.value.trim();
@@ -81,19 +81,20 @@ export function renderGenerationInputView() {
             .then(output_data => {
                 if (output_data.success)
                 {
-                    //logic if save_traits.php succeeds
+                    const orderId = output_data.data.order_id;
 
-
+                    // Now you can display it in the console
+                    console.log("The new order ID is:", orderId);
 
 
                 }
-                else
+                /*else
                 {
                     //logic if save_traits.php fails
 
 
 
-                }
+                }*/
             })
 
     }
