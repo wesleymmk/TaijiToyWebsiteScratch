@@ -3,6 +3,7 @@ export const appContainer = document.getElementById('app');
 import * as ComUtils from './Common_Function.js';
 import * as Utils from './Authentication_Page.js';
 import * as AccUtils from './User_Account.js';
+import * as OrderOut from './Order_Gen_Output.js';
 
 // PS creation
 export function renderGenerationInputView() {
@@ -63,7 +64,7 @@ SubmitGeneration.addEventListener('click', async () => {
     SubmitGeneration.disabled = true;
     SubmitGeneration.textContent = 'Loading...';
 
-    try {
+    //try {
         //  Send input to Node.js backend which will call Gemini
         const response = await fetch('http://localhost:3000/generate', {
             method: 'POST',
@@ -76,34 +77,27 @@ SubmitGeneration.addEventListener('click', async () => {
         console.log("Backend returned:", data);
 
         ComUtils.apiCall('api/save_traits.php', data)
-            .then(response => response.json())
-            .then(output_data => {
-                if (output_data.success) {
-                    const orderId = output_data.data.order_id;
+            .then(response => {
+                if (response.success) {
+                    // The process was successful.
+                    // You can now get the new ID from the response.
+                    const order_id = response.data.output_id;
 
-                    // Now you can display it in the console
-                    console.log("The new order ID is:", orderId);
+                    console.log(`The new order ID is: ${order_id}`);
 
-
+                    // uncomment line below this to render output gen calling order_id
+                    //OrderOut.renderGenerationOutputView(order_id)
+                } else {
+                    // Handle the error
+                    displayMessage(response.message, true);
                 }
-                /*else
-                {
-                    //logic if save_traits.php fails
-
-
-
-                }*/
             })
+        //console.log("The new order ID is:", orderId);
+    //}    catch    {
 
-    }
-    catch
-    {
+    /*}    finally    {
 
-    }
-    finally
-    {
-
-    }
+    }*/
 }
 // add catch/ finally statements
 

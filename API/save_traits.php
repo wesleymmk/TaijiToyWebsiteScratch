@@ -56,21 +56,14 @@ try {
     //$f_output = gather_output($conn, $customer_id, $new_order_id, $details_id_1, $detail_id_2, $detail_id_3, $detail_id_4, $$detail_id_5, $detail_id_6);
 
 
+    // Set the main success flag to true.
     $response['success'] = true;
-    //$response['message'] = "Successfully generated and saved 6 product ideas.";
+    $response['message'] = "Successfully generated and saved product ideas.";
 
-	// this needs to be changed to send different data
-    $response['data'] = ; 
-	// Send the data back to the frontend to be displayed.
-
-    // === Done, send success response ===
-    echo json_encode([
-        'success' => true,
-        'message' => 'Saved to SQL successfully',
-        'data' => [
-            'order_id' => $new_order_id,
-        ]
-    ]);
+    // creating data package that contains the new order id to send to the front end
+    $response['data'] = [
+        'output_id' => $new_order_id
+    ];
 
 } catch (Exception $e) {
     echo json_encode([
@@ -80,8 +73,8 @@ try {
 }
 finally 
 {
-		// This block runs whether there was a success or an error.
-		// It's the perfect place to make sure the database connection is always closed.
+		// This block runs whether there was a success or an error
+		// makes sure the database connection is always closed
 		if (isset($conn)) {
 			$conn->close();
 		}
