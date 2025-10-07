@@ -50,6 +50,12 @@ export function renderWelcomeView() {
     // PS added Body8 This will hold marketing text & photo
     const Body8 = document.createElement('div');
     Body8.classList.add('body3');
+    // PS added Body9 This will hold marketing text & photo
+    const Body9 = document.createElement('div');
+    Body9.classList.add('body2');
+    // PS added Body10 This will hold marketing text & photo
+    const Body10 = document.createElement('div');
+    Body10.classList.add('body3');
     /***************Inner Structure Div Containers***************/
     // PS added Titlediv this div will hold all the div elements for the marketing
     const Titlediv = document.createElement('div');
@@ -80,6 +86,12 @@ export function renderWelcomeView() {
     // PS added Curateddiv for curated marketing
     const Curateddiv = document.createElement('div');
     Curateddiv.classList.add('curateddiv');
+    // PS added Tailoreddiv for curated marketing
+    const Tailoreddiv = document.createElement('div');
+    Tailoreddiv.classList.add('tailoreddiv');
+    // PS added Itemsdiv for curated marketing
+    const Itemsdiv = document.createElement('div');
+    Itemsdiv.classList.add('itemsdiv');
     /***************Innermost Div containers holding text or images***************/
     // PS added Descriptiondiv This div will hold the marketing text above the Logo
     const Descriptiondiv = document.createElement('div');
@@ -132,6 +144,18 @@ export function renderWelcomeView() {
     // PS added Curatedinnerdiv2 for curated marketing
     const Curatedinnerdiv2 = document.createElement('div');
     Curatedinnerdiv2.classList.add('curatedinnerdiv2');
+    // PS added Tailoredinnerdiv for curated marketing
+    const Tailoredinnerdiv = document.createElement('div');
+    Tailoredinnerdiv.classList.add('tailoredinnerdiv');
+    // PS added Tailoredinnerdiv2 for curated marketing
+    const Tailoredinnerdiv2 = document.createElement('div');
+    Tailoredinnerdiv2.classList.add('tailoredinnerdiv2');
+    // PS added Itemsinnerdiv for curated marketing
+    const Itemsinnerdiv = document.createElement('div');
+    Itemsinnerdiv.classList.add('itemsinnerdiv');
+    // PS added Itemsinnerdiv2 for curated marketing
+    const Itemsinnerdiv2 = document.createElement('div');
+    Itemsinnerdiv2.classList.add('itemsinnerdiv2');
     /***************Text to be Inserted into Div containers***************/
     // PS added Title
     const Title = document.createElement("p");
@@ -208,11 +232,11 @@ export function renderWelcomeView() {
     SOLOS.textContent = 'TaijiToy (solos)';
     // PS added SOLOS1 text for TaijiToy Marketing
     const SOLOS1 = document.createElement('p');
-    SOLOS1.classList.add('pagetextsmallb');
+    SOLOS1.classList.add('pagetextsmallb1');
     SOLOS1.textContent = '- Assorted colors';
     // PS added SOLOS2 text for TaijiToy Marketing
     const SOLOS2 = document.createElement('p');
-    SOLOS2.classList.add('pagetextsmallb');
+    SOLOS2.classList.add('pagetextsmallb1');
     SOLOS2.textContent = '- Buy in bulk and save';
     //PS added Curated text for TaijiToy Marketing
     const Curated = document.createElement('p');
@@ -220,8 +244,24 @@ export function renderWelcomeView() {
     Curated.textContent = 'Curated\nCollections'
     //PS added Curated2 text for TaijiToy Marketing list
     const Curated2 = document.createElement('p');
-    Curated2.classList.add('pagetextsmallw');
+    Curated2.classList.add('pagetextsmallw1');
     Curated2.textContent = '- Spirits of the compass\n- Duality and change management\n- Trigrams of the I ching\n- Chinese Dragons\n- Chinese zondiac signs\n- Western zodiac signs';
+    //PS added Tailored text for TaijiToy Marketing
+    const Tailored = document.createElement('p');
+    Tailored.classList.add('pagetextlargeb');
+    Tailored.textContent = 'Custom Tailored\nCollections'
+    //PS added Tailored2 text for TaijiToy Marketing list
+    const Tailored2 = document.createElement('p');
+    Tailored2.classList.add('pagetextmediumb');
+    Tailored2.textContent = '- \u221E Infinite Possibilities \u221E :\n- Present 2+ themes: receive a kit\nuniquely tailored to your core values.\nYour pastimes/interest. Your\nAspirations';
+    //PS added Items text for TaijiToy Marketing
+    const Items = document.createElement('p');
+    Items.classList.add('pagetextlargew');
+    Items.textContent = 'Other items'
+    //PS added Items2 text for TaijiToy Marketing list
+    const Items2 = document.createElement('p');
+    Items2.classList.add('pagetextmediumw');
+    Items2.textContent = '-TaijiToy keychains\n-TaijiToy earrings\n-TaijiToy pendants\n-TaijiToy + other party games';
     /***************Images to be Inserted into Div containers***************/
     // PS added background image
     const Background = document.createElement('img');
@@ -255,12 +295,14 @@ export function renderWelcomeView() {
     const Marketingphoto2 = document.createElement('img');
     Marketingphoto2.classList.add('marketimage1');
     Marketingphoto2.src = 'Marketing_Images/collections+banner.jpg';
-
-    /*Pop up button for the login*/
-    let PopupButton = document.createElement("button");
-    PopupButton.textContent = 'Login';
-    PopupButton.classList.add('PopupButton');
-    PopupButton.addEventListener('click', showPopupModal);
+    // PS added marketing3 photo for homepage
+    const Marketingphoto3 = document.createElement('img');
+    Marketingphoto3.classList.add('marketimage1');
+    Marketingphoto3.src = 'Marketing_Images/possibilites+banner.jpg';
+    // PS added marketing3 photo for homepage
+    const Marketingphoto4 = document.createElement('img');
+    Marketingphoto4.classList.add('marketimage1');
+    Marketingphoto4.src = 'Marketing_Images/other+tiems+banner.jpg';
     // These commands just call all the elements to the screen
     /***************Navigation Bar***************/
     appContainer.appendChild(navwrapper);
@@ -273,8 +315,10 @@ export function renderWelcomeView() {
     appContainer.appendChild(Body6);
     appContainer.appendChild(Body7);
     appContainer.appendChild(Body8);
+    appContainer.appendChild(Body9);
+    appContainer.appendChild(Body10);
     /***************Inner structured Div Containers***************/
-    Body.appendChild(Titlediv);+
+    Body.appendChild(Titlediv);
     Body.appendChild(Marketingdiv);
     Body3.appendChild(MarketingRowdiv1);
     Body3.appendChild(MarketingRowdiv2);
@@ -285,6 +329,8 @@ export function renderWelcomeView() {
     Body6.appendChild(Offersdiv);
     Body7.appendChild(SOLOSdiv);
     Body8.appendChild(Curateddiv);
+    Body9.appendChild(Tailoreddiv);
+    Body10.appendChild(Itemsdiv);
     /***************Inner Div containers to hold content***************/
     Titlediv.appendChild(Descriptiondiv);
     Titlediv.appendChild(TradeMarkdiv);
@@ -301,6 +347,8 @@ export function renderWelcomeView() {
     SOLOSdiv.appendChild(SOLOSinnerdiv);
     SOLOSinnerdiv.appendChild(SOLOSinnerdiv1);
     SOLOSinnerdiv.appendChild(SOLOSinnerdiv2);
+    Tailoreddiv.appendChild(Tailoredinnerdiv);
+    Tailoredinnerdiv.appendChild(Tailoredinnerdiv2);
     /***************Text to be inserted in inner div containers structure***************/
     Descriptiondiv.appendChild(Description);
     TradeMarkdiv.appendChild(TradeMark);
@@ -323,6 +371,8 @@ export function renderWelcomeView() {
     SOLOSinnerdiv2.appendChild(SOLOS1);
     SOLOSinnerdiv2.appendChild(SOLOS2);
     SOLOSinnerdiv1.appendChild(SOLOS);
+    Tailoredinnerdiv2.appendChild(Tailored);
+    Tailoredinnerdiv.appendChild(Tailored2);
     /***************Images to be used by page***************/
     Body2.appendChild(Background);
     MarketingInnerdiv.appendChild(ToyPicture1);
@@ -336,352 +386,13 @@ export function renderWelcomeView() {
     Curatedinnerdiv.appendChild(Curated);
     Curatedinnerdiv.appendChild(Curatedinnerdiv2);
     Curatedinnerdiv2.appendChild(Curated2);
-
-    appContainer.appendChild(PopupButton);
-}
-/*Popup function done by Ernesto Q.*/
-//Main purpose is to open up a popup window for the login page. 
-export function showPopupModal(){
-    let modal=document.getElementById('myPopupModal');
-    if (!modal) {
-        modal=document.createElement('div');
-        modal.id='myPopupModal';
-        modal.classList.add('modal');
-
-        let modalContent=document.createElement('div');
-        modalContent.classList.add('modal-content');
-
-        let closeButton = document.createElement('span');
-        closeButton.classList.add('close-button');
-        closeButton.innerHTML = '&times;'; // The 'x' character
-        closeButton.onclick = () => {
-            modal.style.display = "none";
-    };
-    let popupHeading = document.createElement('h2');
-        popupHeading.textContent = 'Login page';
-
-        let emailAccount = document.createElement('input');
-        emailAccount.type = 'email';
-        emailAccount.placeholder = 'Enter your email';
-        emailAccount.required = true;
-
-        let passwordInput = document.createElement('input');
-        passwordInput.type = 'password';
-        passwordInput.placeholder = 'Enter your password';
-        passwordInput.required = true;
-
-        let Signinbutton = document.createElement("button");
-        Signinbutton.textContent = 'Sign in';
-        Signinbutton.classList.add('LoginButton-2');
-
-        let CreateAccountButton = document.createElement("button");
-        CreateAccountButton.textContent = 'Create Account';
-        CreateAccountButton.classList.add('LoginButton-2');
-
-        let ForgotPass=document.createElement("button");
-        ForgotPass.textContent='Forgot Password?';
-        ForgotPass.classList.add('LoginButton-2');
-
-        CreateAccountButton.addEventListener('click', () => {
-            modal.style.display = "none"; // Close the login popup first
-            showCreateAccountPopup();      // Then open the create account popup
-        
-        });     
-
-        ForgotPass.addEventListener('click', ()=> {
-            modal.style.display="none"; //Close the login popup
-            ForgotPassPopup(); //Open "Forgot password popup"
-        });
-
-        //Login Button Functions
-        /*Nathan D*/
-        Signinbutton.addEventListener('click', (event) => {
-            event.preventDefault(); // Prevent default button behavior, though it might not be a form submission
-
-            const email = emailAccount.value;
-            const password = passwordInput.value;
-
-            if (!email || !password) {
-                alert('Please enter both email and password.');
-                return;
-            }
-
-            const login_Data = {
-                email: email,
-                password: password
-            };
-
-            // Send data to the new login.php script
-            ComUtils.apiCall('api/login.php', login_Data)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        // 1. Close the modal
-                        document.getElementById('myPopupModal').style.display = "none";
-
-                        // 2. Redirect to the logged-in view
-                        // Since you import User_Account.js as AccUtils, you should call it here:
-                        AccUtils.renderUserAccount();
-
-                    } else {
-                        // Login failed (e.g., Invalid email or password)
-                        alert(`Login Failed: ${data.message}`);
-                    }
-                })
-                
-        });
-
-        // Append everything together
-        modalContent.appendChild(closeButton);
-        modalContent.appendChild(popupHeading);
-        modalContent.appendChild(emailAccount);
-        modalContent.appendChild(passwordInput)
-        modalContent.appendChild(Signinbutton);
-        modalContent.appendChild(CreateAccountButton);
-        modalContent.appendChild(ForgotPass);
-        modal.appendChild(modalContent);
-
-        // Add the new modal to the main app container
-        appContainer.appendChild(modal);
-}
-         modal.style.display = "block";
-
-    // Add an event listener to close the modal if the user clicks outside of it
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        };
-}
-}
-/* New popup window for the create account popup*/
-/*Done by Ernesto Q.*/
-export function showCreateAccountPopup(){
-    let modal=document.getElementById('myCreateAccountModal');
-    if (!modal) {
-        modal=document.createElement('div');
-        modal.id='myCreateAccountModal';
-        modal.classList.add('modal');
-
-        let modalContent=document.createElement('div');
-        modalContent.classList.add('modal-content');
-
-        let closeButton = document.createElement('span');
-        closeButton.classList.add('close-button');
-        closeButton.innerHTML = '&times;'; // The 'x' character
-        closeButton.onclick = () => {
-            modal.style.display = "none";
-    };
-    let popupHeading = document.createElement('h2');
-        popupHeading.textContent = 'Create Your Account!';
-
-        const registerForm = document.createElement('form');
-        registerForm.id = 'register-form-popup';
-
-        let emailAccount = document.createElement('input');
-        emailAccount.type = 'email';
-        emailAccount.placeholder = 'Enter your email';
-        emailAccount.required = true;
-
-        let passwordInput = document.createElement('input');
-        passwordInput.type = 'password';
-        passwordInput.placeholder = 'Enter your password';
-        passwordInput.required = true;
-
-        let emailCheckbox = document.createElement('input');
-        emailCheckbox.type = 'checkbox';
-        emailCheckbox.id = 'emailCheckboxPopup';
-
-        let CheckboxLabel = document.createElement('label');
-        CheckboxLabel.htmlFor = 'emailCheckboxPopup';
-        CheckboxLabel.textContent = ' Send me emails?';
-
-        let CreateAccountButton = document.createElement("button");
-        CreateAccountButton.textContent = 'Create Account';
-        CreateAccountButton.classList.add('LoginButton-2');
-        CreateAccountButton.type = "submit";
-
-        let Back2Login = document.createElement("button");
-        Back2Login.textContent = 'Already have an account? Log in!';
-        Back2Login.classList.add('LoginButton-2');
-
-        Back2Login.addEventListener('click', () => {
-            modal.style.display = "none"; // Close the account creation popup first
-            showPopupModal();      // Then open the login popup
-        });
-
-        registerForm.addEventListener('submit', (event) => {
-            event.preventDefault();
-    
-            const email = emailAccount.value;
-            const password = passwordInput.value;
-            const receives_emails = emailCheckbox.checked; // this returns a true or false value if the checkbox is checked
-            //Package all data together in a way like this
-            const registrar_Data = {
-                email: email,
-                password: password,
-                receives_emails: receives_emails //passes either true or false
-            };
-            // Send the data to our register.php script
-            // call this function when sending data package as apposed to doing the whole fetch method manually
-            ComUtils.apiCall('api/registrar.php', registrar_Data)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        AccUtils.renderUserAccount();
-                        window.location.href= '#account';
-                        CAsuccess();
-                    } else {
-                        alert(`Registration Failed: ${data.message}`);
-                    }
-                });
-        });
-        
-        // Append everything together
-        modalContent.appendChild(closeButton);
-        modalContent.appendChild(popupHeading);
-        registerForm.appendChild(emailAccount);
-        registerForm.appendChild(passwordInput);
-        registerForm.appendChild(emailCheckbox);
-        registerForm.appendChild(CheckboxLabel);
-        registerForm.appendChild(CreateAccountButton);
-        modalContent.appendChild(registerForm); 
-        modal.appendChild(modalContent);
-        modalContent.appendChild(Back2Login);
-
-        appContainer.appendChild(modal);
-    }
-
-    modal.style.display = "block";
-
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
+    Tailoreddiv.appendChild(Marketingphoto3);
+    Itemsdiv.appendChild(Marketingphoto4);
+    Itemsdiv.appendChild(Itemsinnerdiv);
+    Itemsinnerdiv.appendChild(Items);
+    Itemsinnerdiv.appendChild(Itemsinnerdiv2);
+    Itemsinnerdiv2.appendChild(Items2);
 }
 
-//Popup for the "forgot password" popup EQ
-export function ForgotPassPopup(){
-    let modal=document.getElementById('ForgotPassModal');
-    if (!modal) {
-        modal=document.createElement('div');
-        modal.id='ForgotPassModal';
-        modal.classList.add('modal');
-
-        let modalContent=document.createElement('div');
-        modalContent.classList.add('modal-content');
-
-        let closeButton = document.createElement('span');
-        closeButton.classList.add('close-button');
-        closeButton.innerHTML = '&times;'; // The 'x' character
-        closeButton.onclick = () => {
-            modal.style.display = "none";
-    };
-    let popupHeading = document.createElement('h2');
-        popupHeading.textContent = 'Reset Password';
-
-        const registerForm = document.createElement('form');
-        registerForm.id = 'register-form-popup';
-
-        let emailAccount = document.createElement('input');
-        emailAccount.type = 'email';
-        emailAccount.placeholder = 'Enter your email';
-        emailAccount.required = true;
-
-        let LinkRequest = document.createElement("button");
-        LinkRequest.textContent = 'Send Reset Link';
-        LinkRequest.classList.add=('LoginButton-2');
-        LinkRequest.type = "submit";
-
-        let Back2Login = document.createElement("button");
-        Back2Login.textContent = 'Back to Login';
-        Back2Login.classList.add('LoginButton-2');
-
-        Back2Login.addEventListener('click', () => {
-            modal.style.display = "none"; // Close the account creation popup first
-            showPopupModal();      // Then open the login popup
-        });
-            
-       /* registerForm.addEventListener('submit', (event) => {
-            event.preventDefault();
-            const email = emailAccount.value;
-            const password = passwordInput.value;
-
-            fetch('api/register.php', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email: email, password: password })
-            })
-            .then(response => response.json())
-            .then(data => {
-                modal.style.display = "none"; 
-                renderStatusView(data.success, data.message, email);
-            });
-        });*/ //Function is commented out as this was copied and pasted from other exisitng code.
-
-        // Append everything together
-        modalContent.appendChild(closeButton);
-        modalContent.appendChild(popupHeading);
-        registerForm.appendChild(emailAccount);
-        registerForm.appendChild(LinkRequest);
-        modalContent.appendChild(registerForm); 
-        modal.appendChild(modalContent);
-        modalContent.appendChild(Back2Login);
-        appContainer.appendChild(modal);
-    }
-
-    modal.style.display = "block";
-
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
-}
-
-export function CAsuccess() {
-    let modal=document.getElementById('CASuccessModal');
-
-    if (!modal) {
-        modal = document.createElement('div');
-        modal.id = 'CASuccessModal';
-        modal.classList.add('modal');
-
-        let modalContent = document.createElement('div');
-        modalContent.classList.add('modal-content');
-
-        let closeButton = document.createElement('span');
-        closeButton.classList.add('close-button');
-        closeButton.innerHTML = '&times;'; // The 'x' character
-        closeButton.onclick = () => {
-            modal.style.display = "none";
-        };
-
-        let popupHeading = document.createElement('h2');
-        popupHeading.textContent = 'Account Created Successfully!';
-
-        let ToInputgen = document.createElement("button");
-        ToInputgen.textContent = 'Generate your first order!';
-        ToInputgen.classList.add('LoginButton-2'); // Corrected syntax
-
-        ToInputgen.addEventListener('click', () => {
-            window.location.href = '#order-input';
-            modal.style.display = "none";
-            
-        });
-
-        // Assemble the modal content
-        modalContent.appendChild(closeButton);
-        modalContent.appendChild(popupHeading);
-        modalContent.appendChild(ToInputgen);
-
-        // Add the content to the modal
-        modal.appendChild(modalContent);
-
-        // IMPORTANT: Add the newly created modal to the document body
-        document.body.appendChild(modal);
-    }
-    modal.style.display = 'block';
-}
 
 export const Trait_1 = 'This text is within Authentication_Page.js and testing linking dynamic text';
