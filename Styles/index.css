@@ -67,7 +67,7 @@
   font-family: 'Chinese Rocks Rg', sana-serif;
   font-size: 47px;
   font-size: 2.448vw;
-  font-weight: 900;
+  font-weight: 400;
   cursor: default;
   margin: 0;
   color: white;
@@ -77,7 +77,7 @@
   font-family: 'Chinese Rocks Rg', sana-serif;
   font-size: 37px;
   font-size: 1.927vw;
-  font-weight: 900;
+  font-weight: 400;
   cursor: default;
   margin: 0;
   color: white;
@@ -86,7 +86,7 @@
   font-family: 'Chinese Rocks Rg', sana-serif;
   font-size: 22px;
   font-size: 1.146vw;
-  font-weight: 900;
+  font-weight: 400;
   cursor: default;
   margin: 0;
   color: white;
@@ -96,7 +96,7 @@
   font-family: 'Chinese Rocks Rg', sana-serif;
   font-size: 20px;
   font-size: 1.042vw;
-  font-weight: 900;
+  font-weight: 400;
   cursor: default;
   margin: 0;
   color: white;
@@ -105,7 +105,7 @@
   font-family: 'Chinese Rocks Rg', sana-serif;
   font-size: 47px;
   font-size: 2.448vw;
-  font-weight: 900;
+  font-weight: 400;
   cursor: default;
   margin: 0;
   color: black;
@@ -115,7 +115,7 @@
   font-family: 'Chinese Rocks Rg', sana-serif;
   font-size: 37px;
   font-size: 1.927vw;
-  font-weight: 900;
+  font-weight: 400;
   cursor: default;
   margin: 0;
   color: black;
@@ -125,7 +125,7 @@
   font-family: 'Chinese Rocks Rg', sana-serif;
   font-size: 22px;
   font-size: 1.146vw;
-  font-weight: 900;
+  font-weight: 400;
   cursor: default;
   margin: 0;
   color: black;
@@ -135,7 +135,7 @@
   font-family: 'Chinese Rocks Rg', sana-serif;
   font-size: 20px;
   font-size: 1.042vw;
-  font-weight: 900;
+  font-weight: 400;
   cursor: default;
   margin: 0;
   color: black;
@@ -182,6 +182,7 @@
   grid-template-rows: auto;
   text-align: center;
   margin-top: 50px;
+  margin-top: 2.604vw;
   width: 100%;
 }
 /*PS Added*/
@@ -190,6 +191,7 @@
   margin-top: 50px;
   margin-top: 2.604vw;
   margin-left: 25px;
+  margin-left: 1.302vw;
   background-color: black;
 }
 /*PS Added*/
@@ -228,10 +230,11 @@
   flex-direction: column;
   text-align: center;
   height: 325px;
-  height: 17vw;
+  height: 16.927vw;
   width: 675px;
-  width: 35.16vw;
+  width: 35.156vw;
   margin-top: 50px;
+  margin-top: 2.604vw;
   justify-content: space-between;
 }
 /*PS Added*/
@@ -346,8 +349,8 @@
   justify-content: space-evenly;
   margin-top: 120px;
   margin-top: 6.25vw;
-  margin-bottom: 185px;
-  margin-bottom: 9.635vw;
+  margin-bottom: 180px;
+  margin-bottom: 9.375vw;
   width: 100%;
 }
 /*PS Added*/
@@ -356,11 +359,52 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  line-height: 275%;
+  line-height: 350%;
   white-space: pre-wrap;
 }
 /*PS Added*/
 .curatedinnerdiv2 {
+  line-height: 200%;
+}
+/*PS Added*/
+.tailoreddiv {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 120px;
+  margin-top: 6.25vw;
+  margin-bottom: 180px;
+  margin-bottom: 9.375vw;
+  width: 100%;
+}
+/*PS Added*/
+.tailoredinnerdiv,
+.tailoredinnerdiv2 {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  margin-top: 1.042vw;
+  text-align: left;
+  white-space: pre-wrap;
+}
+/*PS Added*/
+.itemsdiv {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 120px;
+  margin-top: 6.25vw;
+  margin-bottom: 180px;
+  margin-bottom: 9.375vw;
+  width: 100%;
+}
+/*PS Added*/
+.itemsinnerdiv,
+.itemsinnerdiv2 {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  margin-top: 1.042vw;
+  text-align: left;
+  white-space: pre-wrap;
   line-height: 200%;
 }
 /*PS Added*/
