@@ -107,7 +107,7 @@ app.post('/generate', async (req, res) => {
         sqlData: saveToPHP.data.data 
       });
     } else {
-      throw new Error("Failed to save traits to PHP");
+       throw new Error("Failed to save traits to PHP: " + saveToPHP.data.message);
     }
 
   } catch (error) {

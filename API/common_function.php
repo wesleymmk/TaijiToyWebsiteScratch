@@ -50,12 +50,12 @@ function check_deliverables($generated_products)
 		//redefine variable to prevent errors
 		$product = $generated_products[$i];
 		if (
-			!isset(product['color_1']) || 
-			!isset(product['color_2']) || 
-			!isset(product['attribute_1']) || 
-			!isset(product['attribute_2']) || 
-			!isset(product['desc_short']) || 
-			!isset(product['desc_long'])
+			!isset($product['color_1']) || 
+			!isset($product['color_2']) || 
+			!isset($product['attribute_1']) || 
+			!isset($product['attribute_2']) || 
+			!isset($product['desc_short']) || 
+			!isset($product['desc_long'])
 		) {
 			throw new Exception('Error in product data at index ' . $i . '.');
 			// this should throw an exception that lists the line where the error occured 
@@ -175,19 +175,19 @@ function getOutputDetailsByOrderId($conn, $order_id)
 
     // Packaging logic
     // Creates an array to package the entire order
-    $details_array = [];
+    $id_array = [];
     
     // Uses a loop to put each row into the data
     while ($row = $result->fetch_assoc()) {
         // add the current row to the array
-        $details_array[] = $row;
+        $id_array[] = $row;
     }
 
     // close the statement to prevent Memory leak
     $stmt->close();
     
     // return the array
-    return $details_array;
+    return $id_array;
 }
 /* Use case & Syntax: takes an order id and fetches all 6 rows associated with it in outputs_details
 // explanation
@@ -307,7 +307,25 @@ $order_output = gather_output($conn, $customer_id, $order_id, $order_details_id_
 */
 //--------------------  END OF FUNCTION  --------------------
 
+//-------------------- Get all ID's --------------------
+// Created by: WAM
+// Date created: 10/8/25
 
+
+function get_order_IDs($conn, $customer_id, $order_id)
+{
+
+
+    return $details_array;
+}
+
+/* Use case & Syntax:
+// explanation
+
+ show use case
+
+*/
+//--------------------  END OF FUNCTION  --------------------
 
 
 //---------------------------------------------------------------------------------------------------------------

@@ -75,7 +75,7 @@ SubmitGeneration.addEventListener('click', async () => {
         // Parse the response from backend
         const data = await response.json();
         console.log("Backend returned:", data);
-
+        /*
         ComUtils.apiCall('api/save_traits.php', data)
             .then(response => {
                 if (response.success) {
@@ -92,6 +92,7 @@ SubmitGeneration.addEventListener('click', async () => {
                     displayMessage(response.message, true);
                 }
             })
+            */
         //console.log("The new order ID is:", orderId);
     //}    catch    {
 
