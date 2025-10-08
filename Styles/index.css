@@ -261,8 +261,6 @@
 .marketingrevealdiv1,
 .marketingrevealdiv3 {
   display: flex;
-  height: 325px;
-  height: 16.927vw;
   width: 240px;
   width: 12.5vw;
   margin-top: 50px;
@@ -359,7 +357,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  line-height: 350%;
+  line-height: 300%;
   white-space: pre-wrap;
 }
 /*PS Added*/
@@ -408,7 +406,87 @@
   line-height: 200%;
 }
 /*PS Added*/
-.body{
+.closerdiv {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 80px;
+  margin-top: 4.167vw;
+  margin-bottom: 60px;
+  margin-bottom: 3.125vw;
+  width: 100%;
+}
+/*PS Added*/
+.closerinnerdiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 20px;
+  margin-top: 1.042vw;
+  text-align: left;
+  white-space: pre-wrap;
+}
+.closerinnerdiv2 {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  margin-top: 20px;
+  margin-top: 1.042vw;
+}
+/*PS Added*/
+.closercolumndiv1,
+.closercolumndiv2,
+.closercolumndiv3 {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-right: 20px;
+  margin-right: 1.042vw;
+  height: 480px;
+  height: 25vw;
+}
+/*PS Added*/
+.closercolumndiv2 {
+  margin-bottom: 40px;
+  margin-bottom: 2.083vw;
+}
+/*PS Added*/
+.closercolumndiv3 {
+  margin-bottom: 80px;
+  margin-bottom: 4.167vw;
+}
+/*PS Added*/
+.footerdiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 80px;
+  margin-top: 4.167vw;
+  margin-bottom: 60px;
+  margin-bottom: 3.125vw;
+  width: 100%;
+}
+/*PS Added*/
+.footerinnerdiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 350px;
+  width: 18.229vw;
+  height: 90px;
+  height: 4.688vw;
+}
+/*PS Added*/
+.footerinnerdiv2,
+.footerinnerdiv3 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 470px;
+  width: 24.479vw;
+}
+/*PS Added*/
+.body {
   background-color: black;
   display: flex;
   flex-direction: column;
@@ -418,6 +496,15 @@
 }
 /*PS Added*/
 .body2 {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+/*PS Added*/
+.body3 {
   background-color: white;
   display: flex;
   flex-direction: row;
@@ -430,7 +517,7 @@
   margin: 0;
 }
 /*PS Added*/
-.body3 {
+.body4 {
   background-color: black;
   display: flex;
   flex-direction: row;

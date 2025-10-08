@@ -34,28 +34,37 @@ export function renderWelcomeView() {
     Body2.classList.add('body');
     // PS added Body3 this will hold some marketing pictures & button
     const Body3 = document.createElement('div');
-    Body3.classList.add('body2');
+    Body3.classList.add('body3');
     // PS added Body4 This will hold a transitional background
     const Body4 = document.createElement('div');
     Body4.classList.add('body');
     // PS added Body5 This will hold marketing text
     const Body5 = document.createElement('div');
-    Body5.classList.add('body3');
+    Body5.classList.add('body4');
     // PS added Body6 This will hold marketing Title text
     const Body6 = document.createElement('div');
-    Body6.classList.add('body2');
+    Body6.classList.add('body3');
     // PS added Body7 This will hold marketing text & photo
     const Body7 = document.createElement('div');
-    Body7.classList.add('body2');
+    Body7.classList.add('body3');
     // PS added Body8 This will hold marketing text & photo
     const Body8 = document.createElement('div');
-    Body8.classList.add('body3');
+    Body8.classList.add('body4');
     // PS added Body9 This will hold marketing text & photo
     const Body9 = document.createElement('div');
-    Body9.classList.add('body2');
+    Body9.classList.add('body3');
     // PS added Body10 This will hold marketing text & photo
     const Body10 = document.createElement('div');
-    Body10.classList.add('body3');
+    Body10.classList.add('body4');
+    // PS added Body11 This will hold marketing text & photo
+    const Body11 = document.createElement('div');
+    Body11.classList.add('body4');
+    // PS added Body12 This will hold a transitional background
+    const Body12 = document.createElement('div');
+    Body12.classList.add('body');
+    // PS added Body12 This will hold teh footer
+    const Body13 = document.createElement('div');
+    Body13.classList.add('body2');
     /***************Inner Structure Div Containers***************/
     // PS added Titlediv this div will hold all the div elements for the marketing
     const Titlediv = document.createElement('div');
@@ -92,6 +101,12 @@ export function renderWelcomeView() {
     // PS added Itemsdiv for curated marketing
     const Itemsdiv = document.createElement('div');
     Itemsdiv.classList.add('itemsdiv');
+    // PS added Closerdiv for curated marketing
+    const Closerdiv = document.createElement('div');
+    Closerdiv.classList.add('closerdiv');
+    // PS added Footerdiv for footer
+    const Footerdiv = document.createElement('div');
+    Footerdiv.classList.add('footerdiv');
     /***************Innermost Div containers holding text or images***************/
     // PS added Descriptiondiv This div will hold the marketing text above the Logo
     const Descriptiondiv = document.createElement('div');
@@ -144,18 +159,48 @@ export function renderWelcomeView() {
     // PS added Curatedinnerdiv2 for curated marketing
     const Curatedinnerdiv2 = document.createElement('div');
     Curatedinnerdiv2.classList.add('curatedinnerdiv2');
-    // PS added Tailoredinnerdiv for curated marketing
+    // PS added Tailoredinnerdiv for tailored marketing
     const Tailoredinnerdiv = document.createElement('div');
     Tailoredinnerdiv.classList.add('tailoredinnerdiv');
-    // PS added Tailoredinnerdiv2 for curated marketing
+    // PS added Tailoredinnerdiv2 for tailored marketing
     const Tailoredinnerdiv2 = document.createElement('div');
     Tailoredinnerdiv2.classList.add('tailoredinnerdiv2');
-    // PS added Itemsinnerdiv for curated marketing
+    // PS added Itemsinnerdiv for items marketing
     const Itemsinnerdiv = document.createElement('div');
     Itemsinnerdiv.classList.add('itemsinnerdiv');
-    // PS added Itemsinnerdiv2 for curated marketing
+    // PS added Itemsinnerdiv2 for items marketing
     const Itemsinnerdiv2 = document.createElement('div');
     Itemsinnerdiv2.classList.add('itemsinnerdiv2');
+    // PS added Closerinnerdiv for closer marketing
+    const Closerinnerdiv = document.createElement('div');
+    Closerinnerdiv.classList.add('closerinnerdiv');
+    // PS added Closerinnerdiv2 for closer marketing
+    const Closerinnerdiv2 = document.createElement('div');
+    Closerinnerdiv2.classList.add('closerinnerdiv2');
+    // PS added Closercolumndiv1 for photo organizing
+    const Closercolumndiv1 = document.createElement('div');
+    Closercolumndiv1.classList.add('closercolumndiv1');
+    // PS added Closercolumndiv2 for photo organizing
+    const Closercolumndiv2 = document.createElement('div');
+    Closercolumndiv2.classList.add('closercolumndiv2');
+    // PS added Closercolumndiv3 for photo organizing
+    const Closercolumndiv3 = document.createElement('div');
+    Closercolumndiv3.classList.add('closercolumndiv1');
+    // PS added Closercolumndiv4 for photo organizing
+    const Closercolumndiv4 = document.createElement('div');
+    Closercolumndiv4.classList.add('closercolumndiv2');
+    // PS added Closercolumndiv5 for photo organizing
+    const Closercolumndiv5 = document.createElement('div');
+    Closercolumndiv5.classList.add('closercolumndiv3');
+    // PS added Footerinnerdiv for footer
+    const Footerinnerdiv = document.createElement('div');
+    Footerinnerdiv.classList.add('footerinnerdiv');
+    // PS added Footerinnerdiv2 for footer
+    const Footerinnerdiv2 = document.createElement('div');
+    Footerinnerdiv2.classList.add('footerinnerdiv2');
+    // PS added Footerinnerdiv3 for footer
+    const Footerinnerdiv3 = document.createElement('div');
+    Footerinnerdiv3.classList.add('footerinnerdiv3');
     /***************Text to be Inserted into Div containers***************/
     // PS added Title
     const Title = document.createElement("p");
@@ -204,11 +249,11 @@ export function renderWelcomeView() {
     Explore2.textContent = 'Explore Collections';
     // PS added represent1 text for markting
     const Represent1 = document.createElement('p');
-    Represent1.classList.add('pagetextsmallw1');
+    Represent1.classList.add('pagetextmediumw');
     Represent1.textContent = 'Yin and Yang represent the inherent duality in all things. A Continuous dance of opposing yet interconnected and complementary forces striving for balance and harmony.';
     // PS added represent2 text for markting
     const Represent2 = document.createElement('p');
-    Represent2.classList.add('pagetextsmallw1');
+    Represent2.classList.add('pagetextmediumw');
     Represent2.textContent = "Taiji (the Supreme Ultimate) represents the universe's initial state of undifferentiated unity, where the opposing forces of yin and yang exist in perfect balance and mutual interaction.";
     // PS added Reveals text for TaijiToy Marketing
     const Reveals = document.createElement('p');
@@ -220,7 +265,7 @@ export function renderWelcomeView() {
     Halves.textContent = 'How two halves make a whole.';
     // PS added First text for TaijiToy Marketing
     const First = document.createElement('p');
-    First.classList.add('pagetextsmallw1');
+    First.classList.add('pagetextmediumw');
     First.textContent = 'For the first time. You see the inner-workings of yin-yang';
     // PS added Offer text for TaijiToy Marketing
     const Offer = document.createElement('p');
@@ -232,24 +277,24 @@ export function renderWelcomeView() {
     SOLOS.textContent = 'TaijiToy (solos)';
     // PS added SOLOS1 text for TaijiToy Marketing
     const SOLOS1 = document.createElement('p');
-    SOLOS1.classList.add('pagetextsmallb1');
+    SOLOS1.classList.add('pagetextmediumb');
     SOLOS1.textContent = '- Assorted colors';
     // PS added SOLOS2 text for TaijiToy Marketing
     const SOLOS2 = document.createElement('p');
-    SOLOS2.classList.add('pagetextsmallb1');
+    SOLOS2.classList.add('pagetextmediumb');
     SOLOS2.textContent = '- Buy in bulk and save';
     //PS added Curated text for TaijiToy Marketing
     const Curated = document.createElement('p');
     Curated.classList.add('pagetextlargew');
-    Curated.textContent = 'Curated\nCollections'
+    Curated.textContent = 'Curated\nCollections';
     //PS added Curated2 text for TaijiToy Marketing list
     const Curated2 = document.createElement('p');
-    Curated2.classList.add('pagetextsmallw1');
+    Curated2.classList.add('pagetextmediumw');
     Curated2.textContent = '- Spirits of the compass\n- Duality and change management\n- Trigrams of the I ching\n- Chinese Dragons\n- Chinese zondiac signs\n- Western zodiac signs';
     //PS added Tailored text for TaijiToy Marketing
     const Tailored = document.createElement('p');
     Tailored.classList.add('pagetextlargeb');
-    Tailored.textContent = 'Custom Tailored\nCollections'
+    Tailored.textContent = 'Custom Tailored\nCollections';
     //PS added Tailored2 text for TaijiToy Marketing list
     const Tailored2 = document.createElement('p');
     Tailored2.classList.add('pagetextmediumb');
@@ -257,11 +302,19 @@ export function renderWelcomeView() {
     //PS added Items text for TaijiToy Marketing
     const Items = document.createElement('p');
     Items.classList.add('pagetextlargew');
-    Items.textContent = 'Other items'
+    Items.textContent = 'Other items';
     //PS added Items2 text for TaijiToy Marketing list
     const Items2 = document.createElement('p');
     Items2.classList.add('pagetextmediumw');
     Items2.textContent = '-TaijiToy keychains\n-TaijiToy earrings\n-TaijiToy pendants\n-TaijiToy + other party games';
+    //PS added Closer text for TaijiToy Marketing
+    const Closer = document.createElement('p');
+    Closer.classList.add('pagetextlargew');
+    Closer.textContent = 'A closer look at the \ntaiji toy...';
+    //PS added Footer text for footer
+    const Footer = document.createElement('p');
+    Footer.classList.add('pagetextsmallb');
+    Footer.textContent = '\u00A9 YY Design. LLC 2025. All Rights Reserved. Patent Pending';
     /***************Images to be Inserted into Div containers***************/
     // PS added background image
     const Background = document.createElement('img');
@@ -271,6 +324,10 @@ export function renderWelcomeView() {
     const Background2 = document.createElement('img');
     Background2.classList.add('Background');
     Background2.src = 'Background/Background2.png';
+    // PS added background image
+    const Background3 = document.createElement('img');
+    Background3.classList.add('Background');
+    Background3.src = 'Background/Background1.png';
     // PS added marketing photo for homepage
     const ToyPicture1 = document.createElement('img');
     ToyPicture1.classList.add('marketimage');
@@ -303,6 +360,78 @@ export function renderWelcomeView() {
     const Marketingphoto4 = document.createElement('img');
     Marketingphoto4.classList.add('marketimage1');
     Marketingphoto4.src = 'Marketing_Images/other+tiems+banner.jpg';
+    // PS added Closerphoto1 photo for homepage
+    const Closerphoto1 = document.createElement('img');
+    Closerphoto1.classList.add('marketimage2');
+    Closerphoto1.src = 'Marketing_Images/DSC00176.jpg';
+    // PS added Closerphoto2 photo for homepage
+    const Closerphoto2 = document.createElement('img');
+    Closerphoto2.classList.add('marketimage2');
+    Closerphoto2.src = 'Marketing_Images/DSC00154.jpg';
+    // PS added Closerphoto3 photo for homepage
+    const Closerphoto3 = document.createElement('img');
+    Closerphoto3.classList.add('marketimage2');
+    Closerphoto3.src = 'Marketing_Images/DSC00201.jpg';
+    // PS added Closerphoto4 photo for homepage
+    const Closerphoto4 = document.createElement('img');
+    Closerphoto4.classList.add('marketimage2');
+    Closerphoto4.src = 'Marketing_Images/DSC00212.jpg';
+    // PS added Closerphoto5 photo for homepage
+    const Closerphoto5 = document.createElement('img');
+    Closerphoto5.classList.add('marketimage2');
+    Closerphoto5.src = 'Marketing_Images/DSC00163.jpg';
+    // PS added Closerphoto6 photo for homepage
+    const Closerphoto6 = document.createElement('img');
+    Closerphoto6.classList.add('marketimage2');
+    Closerphoto6.src = 'Marketing_Images/DSC00202.jpg';
+    // PS added Closerphoto7 photo for homepage
+    const Closerphoto7 = document.createElement('img');
+    Closerphoto7.classList.add('marketimage2');
+    Closerphoto7.src = 'Marketing_Images/DSC00200.jpg';
+    // PS added Closerphoto8 photo for homepage
+    const Closerphoto8 = document.createElement('img');
+    Closerphoto8.classList.add('marketimage2');
+    Closerphoto8.src = 'Marketing_Images/DSC00156.jpg';
+    // PS added Closerphoto9 photo for homepage
+    const Closerphoto9 = document.createElement('img');
+    Closerphoto9.classList.add('marketimage2');
+    Closerphoto9.src = 'Marketing_Images/DSC00208.jpg';
+    // PS added Closerphoto10 photo for homepage
+    const Closerphoto10 = document.createElement('img');
+    Closerphoto10.classList.add('marketimage2');
+    Closerphoto10.src = 'Marketing_Images/DSC00151.jpg';
+    // PS added Socialmediaicon1 photo for footer
+    const Socialmediaicon1 = document.createElement('img');
+    Socialmediaicon1.classList.add('socialmediaicon');
+    Socialmediaicon1.src = 'Footer_Icons/Instagram_Glyph_Black.png';
+    // PS added Socialmediaicon2 photo for footer
+    const Socialmediaicon2 = document.createElement('img');
+    Socialmediaicon2.classList.add('socialmediaicon');
+    Socialmediaicon2.src = 'Footer_Icons/Facebook_Logo_Primary.png';
+    // PS added Socialmediaicon3 photo for footer
+    const Socialmediaicon3 = document.createElement('img');
+    Socialmediaicon3.classList.add('socialmediaicon');
+    Socialmediaicon3.src = 'Footer_Icons/InBug-Black.png';
+    // PS added Socialmediaicon4 photo for footer
+    const Socialmediaicon4 = document.createElement('img');
+    Socialmediaicon4.classList.add('socialmediaicon');
+    Socialmediaicon4.src = 'Footer_Icons/PT14361.jpg';
+    // PS added Socialmediaicon5 photo for footer
+    const Socialmediaicon5 = document.createElement('img');
+    Socialmediaicon5.classList.add('socialmediaicon');
+    Socialmediaicon5.src = 'Footer_Icons/TikTok_Icon_Black_Circle.png';
+    // PS added Socialmediaicon6 photo for footer
+    const Socialmediaicon6 = document.createElement('img');
+    Socialmediaicon6.classList.add('socialmediaicon');
+    Socialmediaicon6.src = 'Footer_Icons/logo-black.png';
+    // PS added Brand photo for footer
+    const Brand = document.createElement('img');
+    Brand.classList.add('brand');
+    Brand.src = 'Footer_Icons/TT+logo+transparent.png';
+    // PS added Texan photo for footer
+    const Texan = document.createElement('img');
+    Texan.classList.add('texan');
+    Texan.src = 'Footer_Icons/gotexan-logo_2014_black.png';
     // These commands just call all the elements to the screen
     /***************Navigation Bar***************/
     appContainer.appendChild(navwrapper);
@@ -317,6 +446,9 @@ export function renderWelcomeView() {
     appContainer.appendChild(Body8);
     appContainer.appendChild(Body9);
     appContainer.appendChild(Body10);
+    appContainer.appendChild(Body11);
+    appContainer.appendChild(Body12);
+    appContainer.appendChild(Body13);
     /***************Inner structured Div Containers***************/
     Body.appendChild(Titlediv);
     Body.appendChild(Marketingdiv);
@@ -331,6 +463,8 @@ export function renderWelcomeView() {
     Body8.appendChild(Curateddiv);
     Body9.appendChild(Tailoreddiv);
     Body10.appendChild(Itemsdiv);
+    Body11.appendChild(Closerdiv);
+    Body13.appendChild(Footerdiv);
     /***************Inner Div containers to hold content***************/
     Titlediv.appendChild(Descriptiondiv);
     Titlediv.appendChild(TradeMarkdiv);
@@ -349,6 +483,16 @@ export function renderWelcomeView() {
     SOLOSinnerdiv.appendChild(SOLOSinnerdiv2);
     Tailoreddiv.appendChild(Tailoredinnerdiv);
     Tailoredinnerdiv.appendChild(Tailoredinnerdiv2);
+    Closerdiv.appendChild(Closerinnerdiv);
+    Closerdiv.appendChild(Closerinnerdiv2);
+    Closerinnerdiv2.appendChild(Closercolumndiv1);
+    Closerinnerdiv2.appendChild(Closercolumndiv2);
+    Closerinnerdiv2.appendChild(Closercolumndiv3);
+    Closerinnerdiv2.appendChild(Closercolumndiv4);
+    Closerinnerdiv2.appendChild(Closercolumndiv5);
+    Footerdiv.appendChild(Footerinnerdiv);
+    Footerdiv.appendChild(Footerinnerdiv2);
+    Footerdiv.appendChild(Footerinnerdiv3);
     /***************Text to be inserted in inner div containers structure***************/
     Descriptiondiv.appendChild(Description);
     TradeMarkdiv.appendChild(TradeMark);
@@ -373,6 +517,8 @@ export function renderWelcomeView() {
     SOLOSinnerdiv1.appendChild(SOLOS);
     Tailoredinnerdiv2.appendChild(Tailored);
     Tailoredinnerdiv.appendChild(Tailored2);
+    Closerinnerdiv.appendChild(Closer);
+    Footerinnerdiv2.appendChild(Footer);
     /***************Images to be used by page***************/
     Body2.appendChild(Background);
     MarketingInnerdiv.appendChild(ToyPicture1);
@@ -392,6 +538,25 @@ export function renderWelcomeView() {
     Itemsinnerdiv.appendChild(Items);
     Itemsinnerdiv.appendChild(Itemsinnerdiv2);
     Itemsinnerdiv2.appendChild(Items2);
+    Closercolumndiv1.appendChild(Closerphoto1);
+    Closercolumndiv1.appendChild(Closerphoto2);
+    Closercolumndiv2.appendChild(Closerphoto3);
+    Closercolumndiv2.appendChild(Closerphoto4);
+    Closercolumndiv3.appendChild(Closerphoto5);
+    Closercolumndiv3.appendChild(Closerphoto6);
+    Closercolumndiv4.appendChild(Closerphoto7);
+    Closercolumndiv4.appendChild(Closerphoto8);
+    Closercolumndiv5.appendChild(Closerphoto9);
+    Closercolumndiv5.appendChild(Closerphoto10);
+    Body12.appendChild(Background3);
+    Footerinnerdiv.appendChild(Socialmediaicon1);
+    Footerinnerdiv.appendChild(Socialmediaicon2);
+    Footerinnerdiv.appendChild(Socialmediaicon3);
+    Footerinnerdiv.appendChild(Socialmediaicon4);
+    Footerinnerdiv.appendChild(Socialmediaicon5);
+    Footerinnerdiv.appendChild(Socialmediaicon6);
+    Footerinnerdiv3.appendChild(Brand);
+    Footerinnerdiv3.appendChild(Texan);
 }
 
 

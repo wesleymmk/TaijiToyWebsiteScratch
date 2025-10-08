@@ -16,6 +16,7 @@
 .Background {
   width: 100%;
   height: 571px;
+  height: 29.74vw;
   object-fit: cover;
   object-position: center;
 }
@@ -30,6 +31,40 @@
 .marketimage1 {
   width: 871px;
   width: 45.365vw;
+  object-fit: contain;
+  object-position: center;
+}
+
+.marketimage2 {
+  height: 235.6px;
+  height: 12.271vw;
+  width: 157.3px;
+  width: 8.193vw;
+  object-fit: contain;
+  object-position: center;
+}
+
+.socialmediaicon {
+  width: 27px;
+  width: 1.406vw;
+  height: 27px;
+  height: 1.406vw;
+  padding-right: 15px;
+  padding-right: 0.781vw;
+  object-fit: contain;
+  object-position: center;
+}
+
+.brand {
+  width: 230px;
+  width: 11.979vw;
+  object-fit: contain;
+  object-position: center;
+}
+
+.texan {
+  width: 72px;
+  width: 3.75vw;
   object-fit: contain;
   object-position: center;
 }
