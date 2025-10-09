@@ -33,60 +33,35 @@ export function renderUserAccount() {
 
     /*Done by EQ*/
     /*Currently not done*/
-    function scrollingwindow(){
-    let scoll=document.getElementById('permanentWindow');
-    if (!scoll) {
-        scoll=document.createElement('div');
-        scoll.id='permanentWindow';
-        scoll.classList.add('modal');
 
-        let scollContent=document.createElement('div');
-        scollContent.classList.add('modal-content');    
+const scrollableContent = document.createElement('div');
+scrollableContent.classList.add('scrollable-content');
 
-    const header = document.createElement('h2');
-    scollContent.textContent = 'Previous Orders';
-    scoll.classList.add('modal');
-    scollContent.appendChild(header);
-
-    for(let i=1; i<=20; i++){
-        const p= document.createElement('p');
-        p.textContent='Order number: ';
-        scollContent.appendChild(p);
-    }
-     document.body.appendChild(scollContent);
-     
+    // 2. Add some content so there is something to scroll!
+    for (let i = 1; i <= 20; i++) {
+        const p = document.createElement('p');
+        p.textContent = `Order number: ${i}...`;
+        scrollableContent.appendChild(p);
     }
 
+    // 3. Create a button to trigger the scroll action
+    const scrollButton = document.createElement('button');
+    scrollButton.textContent = 'Scroll to Bottom';
+
+    // 4. Define the function to scroll the element
+    function scrollToBottom() {
+        // We use the 'scrollableContent' variable we just created
+        scrollableContent.scrollTop = scrollableContent.scrollHeight;
+    }
+
+    // 5. Add event listeners
+    scrollButton.addEventListener('click', scrollToBottom);
+
+    scrollableContent.addEventListener('scroll', () => {
+        console.log('Scrolled!');
+    });
+
+    // 6. Append the new elements to the page
+    appContainer.appendChild(scrollableContent);
+    appContainer.appendChild(scrollButton);
 }
-//document.addEventListener('DOMContentLoaded', scrollingwindow);
-//Do not comment this one out or the order list will be in every screen, EQ.
-} 
-
-/*Small window with a scollbar by EQ
-export function scrollingwindow(){
-    let modal=document.getElementById('permanentWindow');
-    if (!modal) {
-        modal=document.createElement('div');
-        modal.id='permanentWindow';
-        modal.classList.add('modal');
-
-        let modalContent=document.createElement('div');
-        modalContent.classList.add('modal-content');    
-
-    const header = document.createElement('h2');
-    modalContent.textContent = 'Previous Orders';
-    modal.classList.add('modal');
-    modalContent.appendChild(header);
-
-    for(let i=1; i<=20; i++){
-        const p= document.createElement('p');
-        p.textContent='Order number: ';
-        modalContent.appendChild(p);
-    }
-     document.body.appendChild(modalContent);
-     
-    }
-
-}
-document.addEventListener('DOMContentLoaded', scrollingwindow);*/
-//Currently commented out for safekeeping.

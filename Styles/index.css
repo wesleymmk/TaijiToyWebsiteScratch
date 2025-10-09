@@ -656,7 +656,7 @@
   display: inline-block;
 }
 
-/*Popup button temporary*/
+
 .PopupButton{
   background-color: rgb(0, 0, 0);
   color: white;
@@ -700,6 +700,23 @@
   color: white;
   font-size: 30px;
   font-weight: bold;
+}
+
+/*Scroolable windown in the user accounts page*/
+.scrollable-content {
+  /* --- Core functionality --- */
+  height: 250px; /* Gives the window a fixed height */
+  width: 350px; /* Gives the window a fixed width */
+  overflow-y: scroll; /* ALWAYS show a vertical scrollbar */
+  /* Use 'auto' if you only want the scrollbar to appear when needed */
+
+  /* --- "Window" styling --- */
+  background-color: #f9f9f9; /* A light background for the window */
+  border: 1px solid #ccc;     /* A border to create the frame */
+  border-radius: 8px;          /* Rounds the corners for a modern look */
+  padding: 15px;               /* Space between the border and the text */
+  margin: 20px auto;           /* Adds space around the window and centers it */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* A subtle shadow to lift it off the page */
 }
 
 .PopupButton:hover{

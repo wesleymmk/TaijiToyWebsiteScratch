@@ -350,7 +350,7 @@ export function ForgotPassPopup() {
         }
     }
 }
-
+/*Last popup page for when the user creates a new account*/
 export function CAsuccess() {
     let modal = document.getElementById('CASuccessModal');
 
