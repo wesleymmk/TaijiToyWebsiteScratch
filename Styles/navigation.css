@@ -1,0 +1,29 @@
+/*PS Added*/
+.account-menu{
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  justify-content: flex-end;
+  background-color: black;
+}
+/*PS Added*/
+.nav-menu{
+  display: flex;
+  flex-direction: row;
+  flex: 5;
+  justify-content: flex-end;
+  background-color: black;
+  padding-left: 40px;
+  padding-left: 2.083vw;
+}
+/*PS Added*/
+.nav-wrapper {
+  display: flex;
+  flex-direction: row;
+  padding-inline: 50px;
+  padding-inline: 3.906vw;
+  align-items: center;
+  height: 60px;
+  height: 4.688vw;
+  background-color: black;
+}

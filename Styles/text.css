@@ -1,0 +1,165 @@
+/*PS Added*/
+#home .home{
+  text-decoration: underline;
+}
+/*PS Added*/
+#account .account{
+  text-decoration: underline;
+}
+/*PS Added*/
+#order-input .inputorder{
+  text-decoration: underline;
+}
+/*PS Added*/
+#order-output .outputorder{
+  text-decoration: underline;
+}
+/*PS Added*/
+.title {
+  font-family: 'Chinese Rocks Rg', sana-serif;
+  margin: 0;
+  font-size: 150px;
+  font-size: 11.719vw;
+  font-weight: 900;
+  cursor: default;
+  color: white;
+}
+/*PS Added*/
+.pagetexttitle {
+  font-family: 'Chinese Rocks Rg', sana-serif;
+  font-size: 27px;
+  font-size: 1.406vw;
+  font-weight: 900;
+  cursor: default;
+  margin-top: 45px;
+  margin-bottom: 20px;
+  color: white;
+}
+/*PS Added*/
+.pagetexttitleb {
+  font-family: 'Chinese Rocks Rg', sana-serif;
+  font-size: 150px;
+  font-size: 7.813vw;
+  font-weight: 900;
+  cursor: default;
+  margin: 0;
+  color: black;
+}
+/*PS Added*/
+.pagetexttitlew {
+  font-family: 'Chinese Rocks Rg', sana-serif;
+  font-size: 150px;
+  font-size: 7.813vw;
+  font-weight: 900;
+  cursor: default;
+  margin: 0;
+  color: white;
+}
+/*PS Added*/
+.pagetextlargew {
+  font-family: 'Chinese Rocks Rg', sana-serif;
+  font-size: 47px;
+  font-size: 2.448vw;
+  font-weight: 400;
+  cursor: default;
+  margin: 0;
+  color: white;
+}
+/*PS Added*/
+.pagetextmediumw {
+  font-family: 'Chinese Rocks Rg', sana-serif;
+  font-size: 37px;
+  font-size: 1.927vw;
+  font-weight: 400;
+  cursor: default;
+  margin: 0;
+  color: white;
+}
+.pagetextsmallw1 {
+  font-family: 'Chinese Rocks Rg', sana-serif;
+  font-size: 22px;
+  font-size: 1.146vw;
+  font-weight: 400;
+  cursor: default;
+  margin: 0;
+  color: white;
+}
+/*PS Added*/
+.pagetextsmallw {
+  font-family: 'Chinese Rocks Rg', sana-serif;
+  font-size: 20px;
+  font-size: 1.042vw;
+  font-weight: 400;
+  cursor: default;
+  margin: 0;
+  color: white;
+}
+.pagetextlargeb {
+  font-family: 'Chinese Rocks Rg', sana-serif;
+  font-size: 47px;
+  font-size: 2.448vw;
+  font-weight: 400;
+  cursor: default;
+  margin: 0;
+  color: black;
+}
+/*PS Added*/
+.pagetextmediumb {
+  font-family: 'Chinese Rocks Rg', sana-serif;
+  font-size: 37px;
+  font-size: 1.927vw;
+  font-weight: 400;
+  cursor: default;
+  margin: 0;
+  color: black;
+}
+/*PS Added*/
+.pagetextsmallb1 {
+  font-family: 'Chinese Rocks Rg', sana-serif;
+  font-size: 22px;
+  font-size: 1.146vw;
+  font-weight: 400;
+  cursor: default;
+  margin: 0;
+  color: black;
+}
+/*PS Added*/
+.pagetextsmallb {
+  font-family: 'Chinese Rocks Rg', sana-serif;
+  font-size: 20px;
+  font-size: 1.042vw;
+  font-weight: 400;
+  cursor: default;
+  margin: 0;
+  color: black;
+}
+/*PS Added*/
+.trademarktitle {
+  margin-top: 77px;
+  margin-top: 4.01vw;
+  margin-bottom: 0px;
+}
+/*PS Added*/
+.textnavmenu {
+  margin: 0;
+  margin-left: 25px;
+  margin-left: 1.953vw;
+  font-family: opensans, Arial;
+  color: white;
+  font-weight: 80;
+  cursor: pointer;
+  font-size: 20px;
+  font-size: 1.563vw;
+}
+/*PS Added*/
+.textaccountmenu {
+  margin: 0;
+  margin-left: 25px;
+  margin-left: 1.953vw;
+  font-family: opensans, Arial;
+  color: white;
+  font-weight: 80;
+  cursor: pointer;
+  font-size: 20px;
+  font-size: 1.563vw;
+}

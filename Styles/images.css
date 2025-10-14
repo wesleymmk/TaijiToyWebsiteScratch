@@ -1,0 +1,96 @@
+/*PS Added*/
+.ImageBox {
+  width: 200px;
+  height: 200px;
+  float: right;
+}
+/*PS Added*/
+.LogoBox {
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+}
+/*PS Added*/
+.Background {
+  width: 100%;
+  height: 571px;
+  height: 29.74vw;
+  object-fit: cover;
+  object-position: center;
+}
+/*PS Added*/
+.marketimage {
+  width: 277px;
+  width: 14.5vw;
+  height: 277px;
+  height: 14.5vw;
+}
+/*PS Added*/
+.marketimage1 {
+  width: 871px;
+  width: 45.365vw;
+  object-fit: contain;
+  object-position: center;
+}
+/*PS Added*/
+.marketimage2 {
+  height: 235.6px;
+  height: 12.271vw;
+  width: 157.3px;
+  width: 8.193vw;
+  object-fit: contain;
+  object-position: center;
+}
+/*PS Added*/
+.socialmediaicon {
+  width: 27px;
+  width: 1.406vw;
+  height: 27px;
+  height: 1.406vw;
+  padding-right: 15px;
+  padding-right: 0.781vw;
+  object-fit: contain;
+  object-position: center;
+}
+/*PS Added*/
+.brand {
+  width: 230px;
+  width: 11.979vw;
+  object-fit: contain;
+  object-position: center;
+}
+/*PS Added*/
+.texan {
+  width: 72px;
+  width: 3.75vw;
+  object-fit: contain;
+  object-position: center;
+}
+/*PS Added*/
+.traits{
+  font-size:20px;
+  color:black;
+  align-items:left;
+  text-align:left;
+  width: 300px;
+}
+
+.RegenText{
+  background-color: white;
+  color: black;
+  border: 5px solid black;
+  /*border-radius: 100px;*/
+  font-size: 35px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  padding-left: 90px;
+  padding-right: 90px;
+  border-radius: 2px;
+  cursor: pointer;
+  font-family: 'Chinese Rocks Rg', sana-serif;
+  margin-right: 8px;
+  margin-left: 8px;
+  margin-bottom: 10px;
+  transition: opacity 0.15s;
+  display: block;
+}

@@ -1,0 +1,308 @@
+/*PS Added*/
+.titlesection {
+  background-color: black;
+  display: grid;
+  grid-template-columns: auto 105px auto 105px auto;
+  grid-template-columns: auto 5.469vw auto 5.469vw auto;
+  grid-template-rows: auto auto;
+}
+/*PS Added*/
+.titlesection-a {
+  grid-column: 3;
+  grid-row: 1;
+  background-color: black;
+  text-align: center;
+}
+/*PS Added*/
+.titlesection-b {
+  grid-column: 3;
+  grid-row: 2;
+  background-color: black;
+}
+/*PS Added*/
+.titlesection-c {
+  grid-column: 4;
+  grid-row: 1 / span 2;
+  background-color: black;
+  text-align: right;
+}
+/*PS Added*/
+.marketing {
+  background-color: black;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr 2fr;
+  grid-template-rows: auto;
+  text-align: center;
+  margin-top: 50px;
+  margin-top: 2.604vw;
+  width: 100%;
+}
+/*PS Added*/
+.marketing-a {
+  grid-column: 1;
+  margin-top: 50px;
+  margin-top: 2.604vw;
+  margin-left: 25px;
+  margin-left: 1.302vw;
+  background-color: black;
+}
+/*PS Added*/
+.marketing-b {
+  grid-column: 2;
+  background-color: black;
+}
+/*PS Added*/
+.marketing-c {
+  grid-column: 3;
+  background-color: black;
+}
+/*PS Added*/
+.marketing-d {
+  grid-column: 4;
+  background-color: black;
+}
+/*PS Added*/
+.marketing-e {
+  grid-column: 5;
+  background-color: black;
+}
+/*PS Added*/
+.marketing-f {
+  grid-column: 6;
+  margin-top: 50px;
+  margin-top: 2.604vw;
+  margin-right: 25px;
+  margin-right: 1.302vw;
+  background-color: black;
+}
+/*PS Added*/
+.marketingdiv3,
+.marketingdiv {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  height: 325px;
+  height: 16.927vw;
+  width: 675px;
+  width: 35.156vw;
+  margin-top: 50px;
+  margin-top: 2.604vw;
+  justify-content: space-between;
+}
+/*PS Added*/
+.marketingdiv2 {
+  display: flex;
+  flex-direction: column;
+  height: 325px;
+  width: 350px;
+  width: 18.2vw;
+  margin-top: 50px;
+  margin-top: 2.604vw;
+  justify-content: center;
+}
+/*PS Added*/
+.marketinner {
+  display: flex;
+  height: 277px;
+  height: 14.5vw;
+  width: 675px;
+  width: 35vw;
+  justify-content: space-between;
+}
+/*PS Added*/
+.marketingrevealdiv1,
+.marketingrevealdiv3 {
+  display: flex;
+  width: 240px;
+  width: 12.5vw;
+  margin-top: 50px;
+  margin-top: 2.604vw;
+  margin-bottom: 50px;
+  margin-bottom: 2.604vw;
+  line-height: 200%;
+  text-align: right;
+}
+/*PS Added*/
+.marketingrevealdiv3 {
+  text-align: left;
+}
+/*PS Added*/
+.marketingrevealdiv2 {
+  display: flex;
+  flex-direction: column;
+  height: 325px;
+  height: 16.927vw;
+  width: 580px;
+  width: 30.208vw;
+  margin-top: 90px;
+  margin-top: 4.688vw;
+  margin-bottom: 90px;
+  margin-bottom: 4.688vw;
+  line-height: 350%;
+  text-align: center;
+}
+/*PS Added*/
+.marketrevealinner {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+  margin-top: 2.604vw;
+}
+/*PS Added*/
+.offersdiv {
+  display: flex;
+  justify-content: center;
+  margin-top: 70px;
+  margin-top: 3.646vw;
+  margin-bottom: 100px;
+  margin-bottom: 5.208vw;
+  width: 100%;
+}
+/*PS Added*/
+.solosdiv {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 70px;
+  margin-top: 3.646vw;
+  margin-bottom: 140px;
+  margin-bottom: 7.292vw;
+  width: 100%;
+}
+/*PS Added*/
+.solosinnerdiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  text-align: center;
+  width: 330px;
+  width: 17.188vw;
+}
+/*PS Added*/
+.solosinnerdiv1,
+.solosinnerdiv2 {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  margin-top: 1.042vw;
+  text-align: center;
+}
+/*PS Added*/
+.solosinnerdiv2 {
+  margin-top: 0px;
+  margin-bottom: 40px;
+  margin-bottom: 2.083vw;
+  text-align: left;
+}
+/*PS Added*/
+.curateddiv {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 120px;
+  margin-top: 6.25vw;
+  margin-bottom: 180px;
+  margin-bottom: 9.375vw;
+  width: 100%;
+}
+/*PS Added*/
+.curatedinnerdiv,
+.curatedinnerdiv2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  line-height: 300%;
+  white-space: pre-wrap;
+}
+/*PS Added*/
+.curatedinnerdiv2 {
+  line-height: 200%;
+}
+/*PS Added*/
+.tailoreddiv {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 120px;
+  margin-top: 6.25vw;
+  margin-bottom: 180px;
+  margin-bottom: 9.375vw;
+  width: 100%;
+}
+/*PS Added*/
+.tailoredinnerdiv,
+.tailoredinnerdiv2 {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  margin-top: 1.042vw;
+  text-align: left;
+  white-space: pre-wrap;
+}
+/*PS Added*/
+.itemsdiv {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 120px;
+  margin-top: 6.25vw;
+  margin-bottom: 180px;
+  margin-bottom: 9.375vw;
+  width: 100%;
+}
+/*PS Added*/
+.itemsinnerdiv,
+.itemsinnerdiv2 {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  margin-top: 1.042vw;
+  text-align: left;
+  white-space: pre-wrap;
+  line-height: 200%;
+}
+/*PS Added*/
+.closerdiv {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 80px;
+  margin-top: 4.167vw;
+  margin-bottom: 60px;
+  margin-bottom: 3.125vw;
+  width: 100%;
+}
+/*PS Added*/
+.closerinnerdiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 20px;
+  margin-top: 1.042vw;
+  text-align: left;
+  white-space: pre-wrap;
+}
+.closerinnerdiv2 {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  margin-top: 20px;
+  margin-top: 1.042vw;
+}
+/*PS Added*/
+.closercolumndiv1,
+.closercolumndiv2,
+.closercolumndiv3 {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-right: 20px;
+  margin-right: 1.042vw;
+  height: 480px;
+  height: 25vw;
+}
+/*PS Added*/
+.closercolumndiv2 {
+  margin-bottom: 40px;
+  margin-bottom: 2.083vw;
+}
+/*PS Added*/
+.closercolumndiv3 {
+  margin-bottom: 80px;
+  margin-bottom: 4.167vw;
+}
