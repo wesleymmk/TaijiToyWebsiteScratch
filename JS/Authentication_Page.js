@@ -560,4 +560,4 @@ export function renderWelcomeView() {
 }
 
 
-export const Trait_1 = 'This text is within Authentication_Page.js and testing linking dynamic text';
+//export const Trait_1 = 'This text is within Authentication_Page.js and testing linking dynamic text';

@@ -92,7 +92,22 @@
   opacity: 0.5;
 }
 
+/*EQ added*/
+.generatedcontent-space{
+  display: flex;
+  justify-content: center; /* Optional: centers the buttons horizontally */
+  gap: 20px;
+  height: 500px;
+}
 
+/*Added in by EQ*/
+.button-container{
+  display: flex;
+  justify-content: center; /* Optional: centers the buttons horizontally */
+  gap: 20px;
+}
+
+/*Added in by EQ*/
 .RegenText{
   background-color: white;
   color: black;
@@ -101,8 +116,8 @@
   font-size: 35px;
   padding-top: 30px;
   padding-bottom: 30px;
-  padding-left: 90px;
-  padding-right: 90px;
+  padding-left: 220px;
+  padding-right: 220px;
   border-radius: 2px;
   cursor: pointer;
   font-family: 'Chinese Rocks Rg', sana-serif;
@@ -110,7 +125,6 @@
   margin-left: 8px;
   margin-bottom: 10px;
   transition: opacity 0.15s;
-  display: block;
 }
 
 .Regen-img-color{
