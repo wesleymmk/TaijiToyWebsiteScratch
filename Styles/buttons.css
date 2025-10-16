@@ -40,6 +40,7 @@
   display: inline-block;
 }
 
+/*EQ added*/
 .LoginButton-2{
   background-color: white;
   color: black;
@@ -55,6 +56,25 @@
   transition: opacity 0.15s;
   vertical-align: top;
   display: inline-block;
+  margin-bottom: 10px;
+}
+
+.LoginButton-3{
+  background-color: white;
+  color: black;
+  border: none;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 130px;
+  padding-right: 130px;
+  border-radius: 2px;
+  cursor: pointer;
+  margin-right: 8px;
+  margin-left: 8px;
+  transition: opacity 0.15s;
+  vertical-align: top;
+  display: inline-block;
+  margin-bottom: 10px;
 }
 
 

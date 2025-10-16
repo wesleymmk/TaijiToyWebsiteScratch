@@ -72,19 +72,33 @@ export function showPopupModal() {
         let popupHeading = document.createElement('h2');
         popupHeading.textContent = 'Login page';
 
+        let inputspcaing=document.createElement('div');
+        inputspcaing.classList.add('inputspcaing')
+
         let emailAccount = document.createElement('input');
         emailAccount.type = 'email';
         emailAccount.placeholder = 'Enter your email';
+        emailAccount.classList.add('inputbar');
         emailAccount.required = true;
+
+        let inputspcaing_2=document.createElement('div');
+        inputspcaing_2.classList.add('inputspcaing')
 
         let passwordInput = document.createElement('input');
         passwordInput.type = 'password';
         passwordInput.placeholder = 'Enter your password';
+        passwordInput.classList.add('inputbar');
         passwordInput.required = true;
+
+        let buttonspcaing= document.createElement('div');
+        buttonspcaing.classList.add('buttonspcaing');
 
         let Signinbutton = document.createElement("button");
         Signinbutton.textContent = 'Sign in';
-        Signinbutton.classList.add('LoginButton-2');
+        Signinbutton.classList.add('LoginButton-3');
+
+        let buttonspcaing_2=document.createElement('div');
+        buttonspcaing_2.classList.add('buttonspcaing')
 
         let CreateAccountButton = document.createElement("button");
         CreateAccountButton.textContent = 'Create Account';
@@ -146,11 +160,15 @@ export function showPopupModal() {
         // Append everything together
         modalContent.appendChild(closeButton);
         modalContent.appendChild(popupHeading);
-        modalContent.appendChild(emailAccount);
-        modalContent.appendChild(passwordInput)
-        modalContent.appendChild(Signinbutton);
-        modalContent.appendChild(CreateAccountButton);
-        modalContent.appendChild(ForgotPass);
+        modalContent.appendChild(inputspcaing);
+        modalContent.appendChild(inputspcaing_2);
+        inputspcaing.appendChild(emailAccount);
+        inputspcaing_2.appendChild(passwordInput);
+        modalContent.appendChild(buttonspcaing);
+        buttonspcaing.appendChild(Signinbutton);
+        modalContent.appendChild(buttonspcaing_2);
+        buttonspcaing_2.appendChild(CreateAccountButton);
+        buttonspcaing_2.appendChild(ForgotPass);
         modal.appendChild(modalContent);
 
         // Add the new modal to the main app container
@@ -189,15 +207,28 @@ export function showCreateAccountPopup() {
         const registerForm = document.createElement('form');
         registerForm.id = 'register-form-popup';
 
+        let inputspcaing=document.createElement('div');
+        inputspcaing.classList.add('inputspcaing')
+
+
         let emailAccount = document.createElement('input');
         emailAccount.type = 'email';
         emailAccount.placeholder = 'Enter your email';
+        emailAccount.classList.add('inputbar');
         emailAccount.required = true;
+
+        let inputspcaing_2=document.createElement('div');
+        inputspcaing_2.classList.add('inputspcaing')
+
 
         let passwordInput = document.createElement('input');
         passwordInput.type = 'password';
         passwordInput.placeholder = 'Enter your password';
+        passwordInput.classList.add('inputbar');
         passwordInput.required = true;
+
+        let buttonspcaing= document.createElement('div');
+        buttonspcaing.classList.add('buttonspcaing');
 
         let emailCheckbox = document.createElement('input');
         emailCheckbox.type = 'checkbox';
@@ -211,6 +242,9 @@ export function showCreateAccountPopup() {
         CreateAccountButton.textContent = 'Create Account';
         CreateAccountButton.classList.add('LoginButton-2');
         CreateAccountButton.type = "submit";
+
+        let buttonspcaing_2= document.createElement('div');
+        buttonspcaing_2.classList.add('buttonspcaing');
 
         let Back2Login = document.createElement("button");
         Back2Login.textContent = 'Already have an account? Log in!';
@@ -251,14 +285,18 @@ export function showCreateAccountPopup() {
         // Append everything together
         modalContent.appendChild(closeButton);
         modalContent.appendChild(popupHeading);
-        registerForm.appendChild(emailAccount);
-        registerForm.appendChild(passwordInput);
-        registerForm.appendChild(emailCheckbox);
-        registerForm.appendChild(CheckboxLabel);
-        registerForm.appendChild(CreateAccountButton);
+        registerForm.appendChild(inputspcaing);
+        inputspcaing.appendChild(emailAccount);
+        registerForm.appendChild(inputspcaing_2);
+        inputspcaing_2.appendChild(passwordInput);
+        registerForm.appendChild(buttonspcaing);
+        buttonspcaing.appendChild(emailCheckbox);
+        buttonspcaing.appendChild(CheckboxLabel);
+        buttonspcaing.appendChild(CreateAccountButton);
         modalContent.appendChild(registerForm);
         modal.appendChild(modalContent);
-        modalContent.appendChild(Back2Login);
+        modalContent.appendChild(buttonspcaing_2)
+        buttonspcaing_2.appendChild(Back2Login);
 
         appContainer.appendChild(modal);
     }
@@ -295,15 +333,25 @@ export function ForgotPassPopup() {
         const registerForm = document.createElement('form');
         registerForm.id = 'register-form-popup';
 
+        let inputspcaing=document.createElement('div');
+        inputspcaing.classList.add('inputspcaing')
+
         let emailAccount = document.createElement('input');
         emailAccount.type = 'email';
         emailAccount.placeholder = 'Enter your email';
+        emailAccount.classList.add('inputbar');
         emailAccount.required = true;
+
+        let buttonspcaing= document.createElement('div');
+        buttonspcaing.classList.add('buttonspcaing');
 
         let LinkRequest = document.createElement("button");
         LinkRequest.textContent = 'Send Reset Link';
-        LinkRequest.classList.add = ('LoginButton-2');
+        LinkRequest.classList.add('LoginButton-3');
         LinkRequest.type = "submit";
+
+        let buttonspcaing_2= document.createElement('div');
+        buttonspcaing_2.classList.add('buttonspcaing');
 
         let Back2Login = document.createElement("button");
         Back2Login.textContent = 'Back to Login';
@@ -334,11 +382,14 @@ export function ForgotPassPopup() {
         // Append everything together
         modalContent.appendChild(closeButton);
         modalContent.appendChild(popupHeading);
-        registerForm.appendChild(emailAccount);
-        registerForm.appendChild(LinkRequest);
+        modalContent.appendChild(inputspcaing);
+        inputspcaing.appendChild(emailAccount);
+        modalContent.appendChild(buttonspcaing);
+        buttonspcaing.appendChild(LinkRequest);
         modalContent.appendChild(registerForm);
         modal.appendChild(modalContent);
-        modalContent.appendChild(Back2Login);
+        modalContent.appendChild(buttonspcaing_2);
+        buttonspcaing_2.appendChild(Back2Login);
         appContainer.appendChild(modal);
     }
 
@@ -351,6 +402,7 @@ export function ForgotPassPopup() {
     }
 }
 /*Last popup page for when the user creates a new account*/
+/*Added by EQ*/
 export function CAsuccess() {
     let modal = document.getElementById('CASuccessModal');
 
