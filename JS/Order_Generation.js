@@ -7,22 +7,22 @@ import * as OrderOut from './Order_Gen_Output.js';
 
 // PS creation
 export function renderGenerationInputView() {
-    ComUtils.clearAppContainer();
+    ComUtils.clearAppContainer(); // Clear the screen first
     //PS added navwrapper, This is the new implementation of the navbar. Removed html version.
     const navwrapper = document.createElement('div');
-    navwrapper.id = 'order-input';
-    navwrapper.classList.add('nav-wrapper');
-    navwrapper.appendChild(ComUtils.HomeLogo);
-    navwrapper.appendChild(ComUtils.navmenu);
-    navwrapper.appendChild(ComUtils.accountmenu);
-    ComUtils.Home.classList.remove('home');
-    ComUtils.GenerateInputOption.classList.add('inputorder');
-    ComUtils.GenerateOutputOption.classList.remove('outputorder');
-    ComUtils.AccountOption.classList.remove('account');
-    ComUtils.navmenu.appendChild(ComUtils.Home);
-    ComUtils.navmenu.appendChild(ComUtils.GenerateInputOption);
-    ComUtils.navmenu.appendChild(ComUtils.GenerateOutputOption);
-    ComUtils.accountmenu.appendChild(ComUtils.AccountOption);
+    navwrapper.id = 'order-input'; // This is adding an id for the css class to specifically target this attribute
+    navwrapper.classList.add('nav-wrapper'); // Class added
+    navwrapper.appendChild(ComUtils.HomeLogo); // Grab button from Common_Function.js
+    navwrapper.appendChild(ComUtils.navmenu); // Grab button from Common_Function.js
+    navwrapper.appendChild(ComUtils.accountmenu); // Grab button from Common_Function.js
+    ComUtils.Home.classList.remove('home'); // Class removed
+    ComUtils.GenerateInputOption.classList.add('inputorder'); // Class added
+    ComUtils.GenerateOutputOption.classList.remove('outputorder'); // Class removed
+    ComUtils.AccountOption.classList.remove('account'); // Class removed
+    ComUtils.navmenu.appendChild(ComUtils.Home); // Grab button from Common_Function.js
+    ComUtils.navmenu.appendChild(ComUtils.GenerateInputOption); // Grab button from Common_Function.js
+    ComUtils.navmenu.appendChild(ComUtils.GenerateOutputOption); // Grab button from Common_Function.js
+    ComUtils.accountmenu.appendChild(ComUtils.AccountOption); // Grab button from Common_Function.js
 
     let heading = document.createElement('h1');
     heading.classList.add('header');
@@ -104,6 +104,7 @@ SubmitGeneration.addEventListener('click', async () => {
 
                     // Now you can render the output view with the data
                     OrderOut.renderGenerationOutputView(allToyDetails);
+                    window.location.href = '#order-output';
                 } else {
                     // The PHP script returned a handled error
                     console.error("Error from PHP script:", parsedData.message);

@@ -12,7 +12,7 @@ export function renderWelcomeView() {
     ComUtils.clearAppContainer(); // Clear the screen first
     //PS added navwrapper, This is the new implementation of the navbar. Removed html version.
     const navwrapper = document.createElement('div');
-    navwrapper.id = 'home'; // This is adding an id for the css clas sto specifically target this attribute
+    navwrapper.id = 'home'; // This is adding an id for the css class to specifically target this attribute
     navwrapper.classList.add('nav-wrapper'); // Class added
     navwrapper.appendChild(ComUtils.HomeLogo); // Grab button from Common_Function.js
     navwrapper.appendChild(ComUtils.navmenu); // Grab button from Common_Function.js
