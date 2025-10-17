@@ -14,7 +14,7 @@ $conn = null;
 
 try
 {
-    $customer_id = 7; //get_user_ID();
+    $customer_id = 9; //get_user_ID();
     /*
     $request_data = json_decode(file_get_contents('php://input'), true);
     if (!isset($request_data['order_id']) || !is_numeric($request_data['order_id'])) {
