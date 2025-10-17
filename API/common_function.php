@@ -206,7 +206,7 @@ function getOutputDetailsByOrderId($conn, $order_id)
 function SQL_checker($conn, $order_id, $order_details_id)
 {
     // The SQL command asks the database to COUNT how many rows match our criteria.
-    $sql = "SELECT COUNT(*) FROM outputs WHERE order_id = ? AND id = ?";
+    $sql = "SELECT COUNT(*) FROM outputs_details WHERE order_id = ? AND id = ?";
     
     $stmt = $conn->prepare($sql);
     // checks if the statement will work and throws error if it doesnt work
@@ -246,10 +246,20 @@ function SQL_checker($conn, $order_id, $order_details_id)
 // Date created: 9/30/25
 
 
-function gather_output($conn, $customer_id, $order_id, $order_details_id_1, $order_details_id_2, $order_details_id_3, $order_details_id_4, $order_details_id_5, $order_details_id_6)
+function gather_output($conn, $customer_id, $order_id)
 {
 	//first create a loop to check and make sure that all the outputs exist inside of the SQL server
 	// set up SQL statement to count number of rows where the order and customer ID's match the inputs
+
+    $detail_ids = get_order_IDs($conn, $customer_id, $order_id);
+
+    $order_details_id_1 = $detail_ids[0];
+    $order_details_id_2 = $detail_ids[1];
+    $order_details_id_3 = $detail_ids[2];
+    $order_details_id_4 = $detail_ids[3];
+    $order_details_id_5 = $detail_ids[4];
+    $order_details_id_6 = $detail_ids[5];
+
     $sql = "SELECT COUNT(*) FROM outputs WHERE order_id = ? AND customer_id = ?";
     
     $stmt = $conn->prepare($sql);
@@ -258,7 +268,7 @@ function gather_output($conn, $customer_id, $order_id, $order_details_id_1, $ord
         throw new Exception("Failed to prepare statement: ");
     }
     // Turn the inputs to strings to prevent direct SQL injection
-    $stmt->bind_param("ii", $output_id, $customer_id);
+    $stmt->bind_param("ii", $order_id, $customer_id);
     if (!$stmt->execute()) {
         throw new Exception("Failed to execute statement: ");
     }
@@ -273,6 +283,8 @@ function gather_output($conn, $customer_id, $order_id, $order_details_id_1, $ord
 	{
 		throw new Exception("Failed to find order with specified customer and order IDs: ");
 	}
+
+    /*
 	// check1-check6 are all True/False values assigned based on if an order ID is found for 
 	$check1 = SQL_checker($conn, $order_id, $order_details_id_1);
 	$check2 = SQL_checker($conn, $order_id, $order_details_id_2);
@@ -286,6 +298,9 @@ function gather_output($conn, $customer_id, $order_id, $order_details_id_1, $ord
 	{
 		throw new Exception("Failed to find order with specified detail and order IDs: ");
 	}
+
+
+    */
 
 	// At this point we have confirmed the entire order exists in the SQL database and that we have the correct order number values
 	// now we can get all of the order information out of the SQL server for this specific order 
@@ -314,9 +329,41 @@ $order_output = gather_output($conn, $customer_id, $order_id, $order_details_id_
 
 function get_order_IDs($conn, $customer_id, $order_id)
 {
+    // Verify Ownership
+    // 'outputs' record exists and belongs to the correct user.
+    if (!output_customer_ID_match($conn, $order_id, $customer_id)) {
+        // If the check fails, throw an exception to stop the process.
+        throw new Exception("Access Denied: The specified order does not exist or does not belong to this user.");
+    }
 
-
-    return $details_array;
+    $sql = "SELECT id FROM outputs_details WHERE order_id = ?";
+    
+    $stmt = $conn->prepare($sql);
+    if ($stmt === false) {
+        throw new Exception("Failed to prepare statement for fetching detail IDs: " . $conn->error);
+    }
+    
+    $stmt->bind_param("i", $order_id);
+    
+    if (!$stmt->execute()) {
+        throw new Exception("Failed to execute statement for fetching detail IDs: " . $stmt->error);
+    }
+    
+    $result = $stmt->get_result();
+    
+    // --- STEP 3: PACKAGE THE IDs INTO A SIMPLE ARRAY ---
+    $detail_ids = []; // Create an empty array to hold the IDs.
+    
+    // Loop through each row found by the query.
+    while ($row = $result->fetch_assoc()) {
+        // For each row, add just the value of the 'id' column to our array.
+        $detail_ids[] = $row['id'];
+    }
+    
+    $stmt->close();
+    
+    // --- STEP 4: RETURN THE FINAL ARRAY ---
+    return $detail_ids;
 }
 
 /* Use case & Syntax:
@@ -327,6 +374,41 @@ function get_order_IDs($conn, $customer_id, $order_id)
 */
 //--------------------  END OF FUNCTION  --------------------
 
+//-------------------- New general function --------------------
+// Created by: WAM
+// Date created: 10/15/25
+
+
+function output_customer_ID_match($conn, $output_id, $customer_id)
+{
+    // Checks the SQL server for an entry in the outputs table that has the passed customer and output ID's'
+    $sql = "SELECT COUNT(*) FROM outputs WHERE order_id = ? AND customer_id = ?";
+
+    // Prepare statement (checks that the statement makes sense to SQL)
+    $stmt = $conn->prepare($sql);
+    if ($stmt === false) {
+        throw new Exception("Failed prepare statement: " . $conn->error);
+    }
+    $stmt->bind_param("ii", $output_id, $customer_id);
+    if (!$stmt->execute()) {
+        throw new Exception("Failed execute statement: " . $stmt->error);
+    }
+
+    // standard SQL statements see above modules if you want an in depth explanation
+    $stmt->bind_result($count);
+    $stmt->fetch();
+    $stmt->close();
+
+    return $count == 1;
+}
+
+/* Use case & Syntax:
+// Takes the connection, output and customer ID's and returns true/fasle on whether there is an order ID 
+
+ if (!output_customer_ID_match($conn, $order_id, $customer_id))
+
+*/
+//--------------------  END OF FUNCTION  --------------------
 
 //---------------------------------------------------------------------------------------------------------------
 //                                    Template created by WAM

@@ -1,4 +1,7 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 // Made by Anthony Guzman 10/1/25 
 // save_traits.php — Receives Gemini traits from Node/JS frontend and saves to SQL
 // === Load dependencies ===
@@ -13,7 +16,7 @@ try {
     // === Grab raw POST body and decode JSON ===
     $input = json_decode(file_get_contents('php://input'), true);
 
-    $customer_id = get_user_ID();
+    $customer_id = 7; //get_user_ID();
 
     if (!isset($input['prompt']) || !isset($input['traits'])) {
         throw new Exception("Missing prompt or traits in request");
@@ -99,7 +102,6 @@ finally
     $response['message'] = "Saved to SQL successfully.";
     $response['data'] = [
         'output_id' => $new_order_id,
-        'detail_ids' => $detail_ids
     ];
 
 } catch (Exception $e) {
