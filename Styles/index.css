@@ -134,6 +134,7 @@
   border: 2px solid #ddd; /* A subtle border */
   box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* A soft shadow for depth */
   width: 350px;
+  width: 24.277vw;
   margin-bottom: 20px;
 }
 
@@ -166,6 +167,7 @@
   /* --- Core functionality --- */
   height: 250px; /* Gives the window a fixed height */
   width: 350px; /* Gives the window a fixed width */
+  width: 25.092vw;
   overflow-y: scroll; /* ALWAYS show a vertical scrollbar */
   /* Use 'auto' if you only want the scrollbar to appear when needed */
 
