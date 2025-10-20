@@ -14,14 +14,14 @@ $conn = null;
 
 try
 {
-    $customer_id = 9; //get_user_ID();
-    /*
+    $customer_id = 9;//get_user_ID();
+    
     $request_data = json_decode(file_get_contents('php://input'), true);
     if (!isset($request_data['order_id']) || !is_numeric($request_data['order_id'])) {
         throw new Exception("A valid order_id is required.");
     }
-    */
-    $order_id = 10;//$request_data['order_id'];
+    
+    $order_id = $request_data['order_id'];
 	
 	// defines the $conn variable which is directions on where the script should look for a place to save the order information
 	// This is defined in config.php a hidden file only placeholders are used here to identify it for security

@@ -93,22 +93,14 @@ app.post('/generate', async (req, res) => {
     const traitsArray = JSON.parse(jsonString);
     console.log("Parsed traits:", traitsArray);
 
-    //  Send to PHP endpoint to store in SQL
-    const saveToPHP = await axios.post("http://localhost/TaijiToyWebsiteScratch/api/save_traits.php", {
+    res.json({
+          success: true,
+          message: "AI traits generated successfully (PHP step skipped).",
+          data: {
       prompt: coreValues,
       traits: traitsArray
-    });
-
-    //  Confirm PHP success and send response to frontend
-    if (saveToPHP.data.success) {
-      res.json({
-        success: true,
-        message: "Traits saved to SQL",
-        sqlData: saveToPHP.data.data 
+          }
       });
-    } else {
-       throw new Error("Failed to save traits to PHP: " + saveToPHP.data.message);
-    }
 
   } catch (error) {
     console.error("Error in /generate route:", error.message);

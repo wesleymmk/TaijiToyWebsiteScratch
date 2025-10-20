@@ -6,21 +6,21 @@ header('Content-Type: application/json');
 // =================================================================
 // This file is a log in check function callable by the front end to ensure the user accessing the page is logged in
 // Created by WAM on 9/29/25
+// Updated by WAM on 10/20/25
 // =================================================================
 
 
-// Check if the 'customer_id' is set in the session.
-if (isset($_SESSION['customer_id'])) 
-{
-    echo json_encode
-    ([
-        'loggedin' => true
+if (isset($_SESSION['customer_id'])) {
+    // If the key exists, the user is authenticated.
+    echo json_encode([
+        'success' => true,
+        'isLoggedIn' => true
     ]);
-} 
-else {
-    echo json_encode
-    ([
-        'loggedin' => false
+} else {
+    // If the key does not exist, the user is not authenticated.
+    echo json_encode([
+        'success' => true,
+        'isLoggedIn' => false
     ]);
 }
 

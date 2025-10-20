@@ -76,44 +76,43 @@ SubmitGeneration.addEventListener('click', async () => {
         const data = await response.json();
         console.log("Backend returned:", data);
 
+        if (!data.success) {
+            alert(`An error occurred: ${data.message}`);
+    }
         
-        
+        const traitsArray = data.data.traits;
+        const prompt = data.data.prompt;
         const dataForPHP = {
-            order_id: data.sqlData.output_id
-        };
+        prompt: prompt,
+        traits: traitsArray
+        }
 
-        // Call your existing apiCall helper function
-        ComUtils.apiCall('api/display_traits.php', dataForPHP)
-            // STEP 1: Open the "sealed envelope". This is the missing step.
-            // This takes the raw response and parses the JSON body.
+
+        ComUtils.apiCall('api/save_traits.php', dataForPHP)
             .then(rawResponse => {
-                // Also a good idea to check for network errors here
                 if (!rawResponse.ok) {
                     throw new Error(`Network error: ${rawResponse.statusText}`);
                 }
                 return rawResponse.json();
             })
-            // STEP 2: Now you have the final, parsed data.
             .then(parsedData => {
-                // 'parsedData' is the final JavaScript object from your PHP script.
+
                 console.log("Final Parsed Response from PHP:", parsedData);
 
                 if (parsedData.success) {
-                    const allToyDetails = parsedData.data;
-                    console.log("Successfully fetched toy details:", allToyDetails);
+                    const saved_ID = parsedData.output_id;
+                    console.log("Successfully saved order ID:", saved_ID);
 
-                    // Now you can render the output view with the data
-                    OrderOut.renderGenerationOutputView(allToyDetails);
-                    window.location.href = '#order-output';
+                    OrderOut.renderGenerationOutputView(saved_ID);
+                    //window.location.href = '#order-output';
                 } else {
-                    // The PHP script returned a handled error
                     console.error("Error from PHP script:", parsedData.message);
                     alert(`Error from PHP: ${parsedData.message}`);
                 }
             })
             .catch(error => {
                 // This .catch() will now handle network errors or JSON parsing errors.
-                console.error("An error occurred during the fetch process:", error);
+                console.error("An error occurred during the saving process:", error);
                 alert("An error occurred. Check the console for more details.");
             });
             

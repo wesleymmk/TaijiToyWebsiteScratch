@@ -16,7 +16,7 @@ try {
     // === Grab raw POST body and decode JSON ===
     $input = json_decode(file_get_contents('php://input'), true);
 
-    $customer_id = 9; //get_user_ID();
+    $customer_id = 9;//get_user_ID();
 
     if (!isset($input['prompt']) || !isset($input['traits'])) {
         throw new Exception("Missing prompt or traits in request");
@@ -100,9 +100,7 @@ finally
     // --- Prepare the final successful response ---
     $response['success'] = true;
     $response['message'] = "Saved to SQL successfully.";
-    $response['data'] = [
-        'output_id' => $new_order_id,
-    ];
+    $response['output_id'] = $new_order_id;
 
 } catch (Exception $e) {
     // If any error occurred, undo all database changes.
