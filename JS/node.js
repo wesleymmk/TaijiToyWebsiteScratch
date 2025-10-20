@@ -95,7 +95,7 @@ app.post('/generate', async (req, res) => {
 
     res.json({
           success: true,
-          message: "AI traits generated successfully (PHP step skipped).",
+          message: "AI traits generated successfully.",
           data: {
       prompt: coreValues,
       traits: traitsArray
