@@ -18,11 +18,15 @@ require_once 'common_functions.php';
 
 function get_user_ID() 
 {
-	if (!isset($_SESSION['customer_id'])) {
+	if (!isset($_SESSION['user_id'])) {
         throw new Exception("Not logged in");
     }
-    $customer_id = $_SESSION['customer_id'];
-    return $customer_id;
+    $customer_id = $_SESSION['user_id'];
+    if(!is_numeric($customer_id) || $customer_id <= 0 ){
+        throw new Exception("Invalid session ID format");
+    }
+
+    return (int)$customer_id;
 }
 
 /* Use case & Syntax:

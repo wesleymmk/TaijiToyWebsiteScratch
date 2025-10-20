@@ -16,7 +16,7 @@ try {
     // === Grab raw POST body and decode JSON ===
     $input = json_decode(file_get_contents('php://input'), true);
 
-    $customer_id = 9;//get_user_ID();
+    $customer_id = get_user_ID();
 
     if (!isset($input['prompt']) || !isset($input['traits'])) {
         throw new Exception("Missing prompt or traits in request");
