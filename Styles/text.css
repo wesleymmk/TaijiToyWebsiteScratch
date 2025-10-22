@@ -141,6 +141,7 @@
 }
 /*PS Added*/
 .textnavmenu {
+  animation: fade-inout 1s;
   margin: 0;
   margin-left: 25px;
   margin-left: 1.953vw;
@@ -153,6 +154,7 @@
 }
 /*PS Added*/
 .textaccountmenu {
+  animation: fade-inout 1s;
   margin: 0;
   margin-left: 25px;
   margin-left: 1.953vw;
@@ -162,4 +164,10 @@
   cursor: pointer;
   font-size: 20px;
   font-size: 1.563vw;
+}
+p {
+  animation-duration: 3s;
+  animation-name: slide-in;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
 }

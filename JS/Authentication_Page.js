@@ -104,6 +104,7 @@ export function renderWelcomeView() {
     // PS added Closerdiv for curated marketing
     const Closerdiv = document.createElement('div');
     Closerdiv.classList.add('closerdiv');
+    Closerdiv.classList.add('myAnimation');
     // PS added Footerdiv for footer
     const Footerdiv = document.createElement('div');
     Footerdiv.classList.add('footerdiv');

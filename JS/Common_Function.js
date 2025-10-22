@@ -19,6 +19,7 @@ navmenu.classList.add('nav-menu');
 
 export const accountmenu = document.createElement('div');
 accountmenu.classList.add('account-menu');
+accountmenu.classList.add('animationafadein');
 
 export const Home = document.createElement('p');
 Home.textContent = 'Home';

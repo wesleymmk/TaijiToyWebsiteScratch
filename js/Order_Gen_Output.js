@@ -6,8 +6,9 @@ export const appContainer = document.getElementById('app');
 import * as AccUtils from './User_Account.js';
 
 export function renderGenerationOutputView(order_ID) {
+    
     ComUtils.clearAppContainer();
-
+    
     const dataForPHP = {
         order_id: order_ID
     };
@@ -16,7 +17,6 @@ export function renderGenerationOutputView(order_ID) {
     const navwrapper = document.createElement('div');
     navwrapper.id = 'order-output';
     navwrapper.classList.add('nav-wrapper');
-    // ... (Your navbar append logic can go here) Copied from User_Accounts code...
     navwrapper.appendChild(ComUtils.HomeLogo);
     navwrapper.appendChild(ComUtils.navmenu);
     navwrapper.appendChild(ComUtils.accountmenu);
@@ -34,6 +34,22 @@ export function renderGenerationOutputView(order_ID) {
     heading.classList.add('header');
     heading.textContent = 'Generation Output Page';
     appContainer.appendChild(heading);
+
+    const Body2 = document.createElement('div');
+    Body2.classList.add('body3');
+    // PS added Body3 this will hold some marketing pictures & button
+    const Body3 = document.createElement('div');
+    Body3.classList.add('body3');
+    // PS added Body4 This will hold a transitional background
+    const Body4 = document.createElement('div');
+    Body4.classList.add('body3');
+    // PS added Body5 This will hold marketing text
+    const Body5 = document.createElement('div');
+    Body5.classList.add('body3');
+    appContainer.appendChild(Body2);
+    appContainer.appendChild(Body3);
+    appContainer.appendChild(Body4);
+    appContainer.appendChild(Body5);
 
     let generatedcontent_space = document.createElement('div');
     generatedcontent_space.classList.add('generatedcontent-space');
@@ -85,6 +101,7 @@ export function renderGenerationOutputView(order_ID) {
 
                 // Clear the 'Loading...' message
                 generatedcontent_space.innerHTML = '';
+                
 
                 // --- DATA UNPACKING (Your Original Code) ---
                 const allToysArray = parsedData.data;
@@ -119,7 +136,6 @@ export function renderGenerationOutputView(order_ID) {
                 const output_color_10 = toy5.color_2
                 const output_color_11 = toy6.color_1
                 const output_color_12 = toy6.color_2
-
                 // ... all your other variable assignments ...
 
                 // --- DISPLAY LOGIC (Your Original Code) ---
