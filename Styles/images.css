@@ -6,7 +6,6 @@
 }
 /*PS Added*/
 .LogoBox {
-  animation: fade-inout 1s;
   width: 60px;
   height: 60px;
   cursor: pointer;
@@ -21,7 +20,6 @@
 }
 /*PS Added*/
 .marketimage {
-  animation: fade-inout 1s;
   width: 277px;
   width: 14.5vw;
   height: 277px;
@@ -49,10 +47,11 @@
   width: 1.406vw;
   height: 27px;
   height: 1.406vw;
-  padding-right: 15px;
-  padding-right: 0.781vw;
+  margin-right: 15px;
+  margin-right: 0.781vw;
   object-fit: contain;
   object-position: center;
+  cursor: pointer;
 }
 /*PS Added*/
 .brand {

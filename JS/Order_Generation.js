@@ -8,6 +8,15 @@ import * as OrderOut from './Order_Gen_Output.js';
 // PS creation
 export function renderGenerationInputView() {
     ComUtils.clearAppContainer(); // Clear the screen first
+    /***************Loading Function on Scroll***************/
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                return;
+            }
+        });
+    }, { threshold: 0.8 });
     //PS added navwrapper, This is the new implementation of the navbar. Removed html version.
     const navwrapper = document.createElement('div');
     navwrapper.id = 'order-input'; // This is adding an id for the css class to specifically target this attribute
@@ -23,15 +32,21 @@ export function renderGenerationInputView() {
     ComUtils.navmenu.appendChild(ComUtils.GenerateInputOption); // Grab button from Common_Function.js
     ComUtils.navmenu.appendChild(ComUtils.GenerateOutputOption); // Grab button from Common_Function.js
     ComUtils.accountmenu.appendChild(ComUtils.AccountOption); // Grab button from Common_Function.js
-
+    /***************Parent Div Containers***************/
+    // PS added Body This div will hold the title & other div elements
+    const Body = document.createElement('div');
+    Body.classList.add('body');
+    /***************Inner Structure Div Containers***************/
     let heading = document.createElement('h1');
     heading.classList.add('header');
     heading.textContent = 'Generation Input Page';
+    /***************Innermost Div containers holding text or images***************/
 
+    /***************Text to be Inserted into Div containers***************/
     let GiftOption = document.createElement('input');
     GiftOption.type = 'checkbox';
     GiftOption.name = 'giftOption';
-
+    /***************Images to be Inserted into Div containers***************/
     let CheckboxLabel = document.createElement('label');
     CheckboxLabel.htmlFor = 'GiftOption';
     CheckboxLabel.textContent = 'Is This a Gift?';
@@ -129,12 +144,35 @@ SubmitGeneration.addEventListener('click', async () => {
 );
 
 // ================= BACKEND INTEGRATION END =================
-
+    // These commands just call all the elements to the screen
+    /***************Navigation Bar***************/
     appContainer.appendChild(navwrapper);
+    /***************Parent Div containers***************/
+    appContainer.appendChild(Body);
     appContainer.appendChild(heading);
     appContainer.appendChild(GiftOption);
     appContainer.appendChild(CheckboxLabel);
     appContainer.appendChild(CustomerInput);
     appContainer.appendChild(SubmitGeneration);
-
+    appContainer.appendChild(ComUtils.FooterBody);
+    /***************Inner structured Div Containers***************/
+    ComUtils.FooterBody.appendChild(ComUtils.Footerdiv);
+    /***************Inner Div containers to hold content***************/
+    ComUtils.Footerdiv.appendChild(ComUtils.Footerinnerdiv);
+    ComUtils.Footerdiv.appendChild(ComUtils.Footerinnerdiv2);
+    ComUtils.Footerdiv.appendChild(ComUtils.Footerinnerdiv3);
+    /***************Text to be inserted in inner div containers structure***************/
+    ComUtils.Footerinnerdiv2.appendChild(ComUtils.Footer);
+    /***************Images to be used by page***************/
+    ComUtils.Footerinnerdiv.appendChild(ComUtils.Socialmediaicon1);
+    ComUtils.Footerinnerdiv.appendChild(ComUtils.Socialmediaicon2);
+    ComUtils.Footerinnerdiv.appendChild(ComUtils.Socialmediaicon3);
+    ComUtils.Footerinnerdiv.appendChild(ComUtils.Socialmediaicon4);
+    ComUtils.Footerinnerdiv.appendChild(ComUtils.Socialmediaicon5);
+    ComUtils.Footerinnerdiv.appendChild(ComUtils.Socialmediaicon6);
+    ComUtils.Footerinnerdiv3.appendChild(ComUtils.Brand);
+    ComUtils.Footerinnerdiv3.appendChild(ComUtils.Texan);
+    /***************Observer Code Searching for Animations***************/
+    const allAnimationedElements = document.querySelectorAll('.animation');
+    allAnimationedElements.forEach((element) => observer.observe(element));
 }
