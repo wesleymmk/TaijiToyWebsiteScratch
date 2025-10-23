@@ -10,6 +10,15 @@ import * as Gen2Utils from './Order_Gen_Output.js';
 //PS Creation & EQ collaboration
 export function renderWelcomeView() {
     ComUtils.clearAppContainer(); // Clear the screen first
+    /***************Loading Function on Scroll***************/
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                return;
+            }
+        });
+    }, { threshold: 0.8 });
     //PS added navwrapper, This is the new implementation of the navbar. Removed html version.
     const navwrapper = document.createElement('div');
     navwrapper.id = 'home'; // This is adding an id for the css class to specifically target this attribute
@@ -62,9 +71,6 @@ export function renderWelcomeView() {
     // PS added Body12 This will hold a transitional background
     const Body12 = document.createElement('div');
     Body12.classList.add('body');
-    // PS added Body12 This will hold teh footer
-    const Body13 = document.createElement('div');
-    Body13.classList.add('body2');
     /***************Inner Structure Div Containers***************/
     // PS added Titlediv this div will hold all the div elements for the marketing
     const Titlediv = document.createElement('div');
@@ -105,9 +111,6 @@ export function renderWelcomeView() {
     const Closerdiv = document.createElement('div');
     Closerdiv.classList.add('closerdiv');
     Closerdiv.classList.add('myAnimation');
-    // PS added Footerdiv for footer
-    const Footerdiv = document.createElement('div');
-    Footerdiv.classList.add('footerdiv');
     /***************Innermost Div containers holding text or images***************/
     // PS added Descriptiondiv This div will hold the marketing text above the Logo
     const Descriptiondiv = document.createElement('div');
@@ -193,129 +196,115 @@ export function renderWelcomeView() {
     // PS added Closercolumndiv5 for photo organizing
     const Closercolumndiv5 = document.createElement('div');
     Closercolumndiv5.classList.add('closercolumndiv3');
-    // PS added Footerinnerdiv for footer
-    const Footerinnerdiv = document.createElement('div');
-    Footerinnerdiv.classList.add('footerinnerdiv');
-    // PS added Footerinnerdiv2 for footer
-    const Footerinnerdiv2 = document.createElement('div');
-    Footerinnerdiv2.classList.add('footerinnerdiv2');
-    // PS added Footerinnerdiv3 for footer
-    const Footerinnerdiv3 = document.createElement('div');
-    Footerinnerdiv3.classList.add('footerinnerdiv3');
     /***************Text to be Inserted into Div containers***************/
     // PS added Title
     const Title = document.createElement("p");
-    Title.classList.add('title');
+    Title.classList.add('title', 'animation');
     Title.textContent = 'TaijiToy';
     // PS added Description
     const Description = document.createElement('p');
-    Description.classList.add('pagetexttitle');
+    Description.classList.add('pagetexttitle', 'animation');
     Description.textContent = '3D yin-yang';
     // PS added TradeMark
     const TradeMark = document.createElement('p');
-    TradeMark.classList.add('pagetexttitle');
-    TradeMark.classList.add('trademarktitle');
+    TradeMark.classList.add('pagetexttitle', 'trademarktitle', 'animation');
     TradeMark.textContent = 'TM';
     // PS added Location of manufacturing
     const Location = document.createElement('p');
-    Location.classList.add('pagetextsmallw');
+    Location.classList.add('pagetextsmallw', 'animation');
     Location.textContent = 'Made In Boerne, Texas, USA';
     // PS added Connect marketing text
     const Connect = document.createElement('p');
-    Connect.classList.add('pagetextlargew');
+    Connect.classList.add('pagetextlargew', 'animation');
     Connect.textContent = 'Connect';
     // PS added Combine marketing text
     const Combine = document.createElement('p');
-    Combine.classList.add('pagetextlargew');
+    Combine.classList.add('pagetextlargew', 'animation');
     Combine.textContent = 'Combine';
     // PS added Combine marketing text
     const Collect = document.createElement('p');
-    Collect.classList.add('pagetextlargew');
+    Collect.classList.add('pagetextlargew', 'animation');
     Collect.textContent = 'Collect';
     // PS added Share marketing text
     const Share = document.createElement('p');
-    Share.classList.add('pagetextlargew');
+    Share.classList.add('pagetextlargew', 'animation');
     Share.textContent = 'Share';
     // PS added Ages marketing text
     const Ages = document.createElement('p');
-    Ages.classList.add('pagetextsmallw');
+    Ages.classList.add('pagetextsmallw', 'animation');
     Ages.textContent = 'Made For Ages 3 + UP';
     // PS added Explore to market Toy
     const Explore = document.createElement('p');
-    Explore.classList.add('pagetextmediumb');
+    Explore.classList.add('pagetextmediumb', 'animation');
     Explore.textContent = 'Explore The Yin-Yang';
     // PS added Explore2 to market Toy
     const Explore2 = document.createElement('p');
-    Explore2.classList.add('pagetextmediumb');
+    Explore2.classList.add('pagetextmediumb', 'animation');
     Explore2.textContent = 'Explore Collections';
     // PS added represent1 text for markting
     const Represent1 = document.createElement('p');
-    Represent1.classList.add('pagetextmediumw');
+    Represent1.classList.add('pagetextmediumw', 'animation');
     Represent1.textContent = 'Yin and Yang represent the inherent duality in all things. A Continuous dance of opposing yet interconnected and complementary forces striving for balance and harmony.';
     // PS added represent2 text for markting
     const Represent2 = document.createElement('p');
-    Represent2.classList.add('pagetextmediumw');
+    Represent2.classList.add('pagetextmediumw', 'animation');
     Represent2.textContent = "Taiji (the Supreme Ultimate) represents the universe's initial state of undifferentiated unity, where the opposing forces of yin and yang exist in perfect balance and mutual interaction.";
     // PS added Reveals text for TaijiToy Marketing
     const Reveals = document.createElement('p');
-    Reveals.classList.add('pagetextlargew');
+    Reveals.classList.add('pagetextlargew', 'animation');
     Reveals.textContent = 'TaijiToy Reveals';
     // PS added Halves text for TaijiToy Marketing
     const Halves = document.createElement('p');
-    Halves.classList.add('pagetextlargew');
+    Halves.classList.add('pagetextlargew', 'animation');
     Halves.textContent = 'How two halves make a whole.';
     // PS added First text for TaijiToy Marketing
     const First = document.createElement('p');
-    First.classList.add('pagetextmediumw');
+    First.classList.add('pagetextmediumw', 'animation');
     First.textContent = 'For the first time. You see the inner-workings of yin-yang';
     // PS added Offer text for TaijiToy Marketing
     const Offer = document.createElement('p');
-    Offer.classList.add('pagetexttitleb');
+    Offer.classList.add('pagetexttitleb', 'animation');
     Offer.textContent = 'What TaijiToy Offers...';
     // PS added SOLOS text for TaijiToy Marketing
     const SOLOS = document.createElement('p');
-    SOLOS.classList.add('pagetextlargeb');
+    SOLOS.classList.add('pagetextlargeb', 'animation');
     SOLOS.textContent = 'TaijiToy (solos)';
     // PS added SOLOS1 text for TaijiToy Marketing
     const SOLOS1 = document.createElement('p');
-    SOLOS1.classList.add('pagetextmediumb');
+    SOLOS1.classList.add('pagetextmediumb', 'animation');
     SOLOS1.textContent = '- Assorted colors';
     // PS added SOLOS2 text for TaijiToy Marketing
     const SOLOS2 = document.createElement('p');
-    SOLOS2.classList.add('pagetextmediumb');
+    SOLOS2.classList.add('pagetextmediumb', 'animation');
     SOLOS2.textContent = '- Buy in bulk and save';
     //PS added Curated text for TaijiToy Marketing
     const Curated = document.createElement('p');
-    Curated.classList.add('pagetextlargew');
+    Curated.classList.add('pagetextlargew', 'animation');
     Curated.textContent = 'Curated\nCollections';
     //PS added Curated2 text for TaijiToy Marketing list
     const Curated2 = document.createElement('p');
-    Curated2.classList.add('pagetextmediumw');
+    Curated2.classList.add('pagetextmediumw', 'animation');
     Curated2.textContent = '- Spirits of the compass\n- Duality and change management\n- Trigrams of the I ching\n- Chinese Dragons\n- Chinese zondiac signs\n- Western zodiac signs';
     //PS added Tailored text for TaijiToy Marketing
     const Tailored = document.createElement('p');
-    Tailored.classList.add('pagetextlargeb');
+    Tailored.classList.add('pagetextlargeb', 'animation');
     Tailored.textContent = 'Custom Tailored\nCollections';
     //PS added Tailored2 text for TaijiToy Marketing list
     const Tailored2 = document.createElement('p');
-    Tailored2.classList.add('pagetextmediumb');
+    Tailored2.classList.add('pagetextmediumb', 'animation');
     Tailored2.textContent = '- \u221E Infinite Possibilities \u221E :\n- Present 2+ themes: receive a kit\nuniquely tailored to your core values.\nYour pastimes/interest. Your\nAspirations';
     //PS added Items text for TaijiToy Marketing
     const Items = document.createElement('p');
-    Items.classList.add('pagetextlargew');
+    Items.classList.add('pagetextlargew', 'animation');
     Items.textContent = 'Other items';
     //PS added Items2 text for TaijiToy Marketing list
     const Items2 = document.createElement('p');
-    Items2.classList.add('pagetextmediumw');
+    Items2.classList.add('pagetextmediumw', 'animation');
     Items2.textContent = '-TaijiToy keychains\n-TaijiToy earrings\n-TaijiToy pendants\n-TaijiToy + other party games';
     //PS added Closer text for TaijiToy Marketing
     const Closer = document.createElement('p');
-    Closer.classList.add('pagetextlargew');
+    Closer.classList.add('pagetextlargew', 'animation');
     Closer.textContent = 'A closer look at the \ntaiji toy...';
-    //PS added Footer text for footer
-    const Footer = document.createElement('p');
-    Footer.classList.add('pagetextsmallb');
-    Footer.textContent = '\u00A9 YY Design. LLC 2025. All Rights Reserved. Patent Pending';
     /***************Images to be Inserted into Div containers***************/
     // PS added background image
     const Background = document.createElement('img');
@@ -331,108 +320,76 @@ export function renderWelcomeView() {
     Background3.src = 'Background/Background1.png';
     // PS added marketing photo for homepage
     const ToyPicture1 = document.createElement('img');
-    ToyPicture1.classList.add('marketimage');
+    ToyPicture1.classList.add('marketimage', 'animation');
     ToyPicture1.src = 'Marketing_Images/TT+product+Image+001.jpg'
     // PS added marketing photo for homepage
     const ToyPicture2 = document.createElement('img');
-    ToyPicture2.classList.add('marketimage');
+    ToyPicture2.classList.add('marketimage', 'animation');
     ToyPicture2.src = 'Marketing_Images/TT+product+Image+002.jpg'
     // PS added marketing photo for homepage
     const ToyPicture3 = document.createElement('img');
-    ToyPicture3.classList.add('marketimage');
+    ToyPicture3.classList.add('marketimage', 'animation');
     ToyPicture3.src = 'Marketing_Images/TT+product+Image+003.jpg'
     // PS added marketing photo for homepage
     const ToyPicture4 = document.createElement('img');
-    ToyPicture4.classList.add('marketimage');
+    ToyPicture4.classList.add('marketimage', 'animation');
     ToyPicture4.src = 'Marketing_Images/TT+product+Image+004.jpg'
     // PS added marketing photo for homepage
     const Marketingphoto1 = document.createElement('img');
-    Marketingphoto1.classList.add('marketimage1');
+    Marketingphoto1.classList.add('marketimage1', 'animation');
     Marketingphoto1.src = 'Marketing_Images/Taji-Color206.png'
     // PS added marketing2 photo for homepage
     const Marketingphoto2 = document.createElement('img');
-    Marketingphoto2.classList.add('marketimage1');
+    Marketingphoto2.classList.add('marketimage1', 'animation');
     Marketingphoto2.src = 'Marketing_Images/collections+banner.jpg';
     // PS added marketing3 photo for homepage
     const Marketingphoto3 = document.createElement('img');
-    Marketingphoto3.classList.add('marketimage1');
+    Marketingphoto3.classList.add('marketimage1', 'animation');
     Marketingphoto3.src = 'Marketing_Images/possibilites+banner.jpg';
     // PS added marketing3 photo for homepage
     const Marketingphoto4 = document.createElement('img');
-    Marketingphoto4.classList.add('marketimage1');
+    Marketingphoto4.classList.add('marketimage1', 'animation');
     Marketingphoto4.src = 'Marketing_Images/other+tiems+banner.jpg';
     // PS added Closerphoto1 photo for homepage
     const Closerphoto1 = document.createElement('img');
-    Closerphoto1.classList.add('marketimage2');
+    Closerphoto1.classList.add('marketimage2', 'animation');
     Closerphoto1.src = 'Marketing_Images/DSC00176.jpg';
     // PS added Closerphoto2 photo for homepage
     const Closerphoto2 = document.createElement('img');
-    Closerphoto2.classList.add('marketimage2');
+    Closerphoto2.classList.add('marketimage2', 'animation');
     Closerphoto2.src = 'Marketing_Images/DSC00154.jpg';
     // PS added Closerphoto3 photo for homepage
     const Closerphoto3 = document.createElement('img');
-    Closerphoto3.classList.add('marketimage2');
+    Closerphoto3.classList.add('marketimage2', 'animation');
     Closerphoto3.src = 'Marketing_Images/DSC00201.jpg';
     // PS added Closerphoto4 photo for homepage
     const Closerphoto4 = document.createElement('img');
-    Closerphoto4.classList.add('marketimage2');
+    Closerphoto4.classList.add('marketimage2', 'animation');
     Closerphoto4.src = 'Marketing_Images/DSC00212.jpg';
     // PS added Closerphoto5 photo for homepage
     const Closerphoto5 = document.createElement('img');
-    Closerphoto5.classList.add('marketimage2');
+    Closerphoto5.classList.add('marketimage2', 'animation');
     Closerphoto5.src = 'Marketing_Images/DSC00163.jpg';
     // PS added Closerphoto6 photo for homepage
     const Closerphoto6 = document.createElement('img');
-    Closerphoto6.classList.add('marketimage2');
+    Closerphoto6.classList.add('marketimage2', 'animation');
     Closerphoto6.src = 'Marketing_Images/DSC00202.jpg';
     // PS added Closerphoto7 photo for homepage
     const Closerphoto7 = document.createElement('img');
-    Closerphoto7.classList.add('marketimage2');
+    Closerphoto7.classList.add('marketimage2', 'animation');
     Closerphoto7.src = 'Marketing_Images/DSC00200.jpg';
     // PS added Closerphoto8 photo for homepage
     const Closerphoto8 = document.createElement('img');
-    Closerphoto8.classList.add('marketimage2');
+    Closerphoto8.classList.add('marketimage2', 'animation');
     Closerphoto8.src = 'Marketing_Images/DSC00156.jpg';
     // PS added Closerphoto9 photo for homepage
     const Closerphoto9 = document.createElement('img');
-    Closerphoto9.classList.add('marketimage2');
+    Closerphoto9.classList.add('marketimage2', 'animation');
     Closerphoto9.src = 'Marketing_Images/DSC00208.jpg';
     // PS added Closerphoto10 photo for homepage
     const Closerphoto10 = document.createElement('img');
-    Closerphoto10.classList.add('marketimage2');
+    Closerphoto10.classList.add('marketimage2', 'animation');
     Closerphoto10.src = 'Marketing_Images/DSC00151.jpg';
-    // PS added Socialmediaicon1 photo for footer
-    const Socialmediaicon1 = document.createElement('img');
-    Socialmediaicon1.classList.add('socialmediaicon');
-    Socialmediaicon1.src = 'Footer_Icons/Instagram_Glyph_Black.png';
-    // PS added Socialmediaicon2 photo for footer
-    const Socialmediaicon2 = document.createElement('img');
-    Socialmediaicon2.classList.add('socialmediaicon');
-    Socialmediaicon2.src = 'Footer_Icons/Facebook_Logo_Primary.png';
-    // PS added Socialmediaicon3 photo for footer
-    const Socialmediaicon3 = document.createElement('img');
-    Socialmediaicon3.classList.add('socialmediaicon');
-    Socialmediaicon3.src = 'Footer_Icons/InBug-Black.png';
-    // PS added Socialmediaicon4 photo for footer
-    const Socialmediaicon4 = document.createElement('img');
-    Socialmediaicon4.classList.add('socialmediaicon');
-    Socialmediaicon4.src = 'Footer_Icons/PT14361.jpg';
-    // PS added Socialmediaicon5 photo for footer
-    const Socialmediaicon5 = document.createElement('img');
-    Socialmediaicon5.classList.add('socialmediaicon');
-    Socialmediaicon5.src = 'Footer_Icons/TikTok_Icon_Black_Circle.png';
-    // PS added Socialmediaicon6 photo for footer
-    const Socialmediaicon6 = document.createElement('img');
-    Socialmediaicon6.classList.add('socialmediaicon');
-    Socialmediaicon6.src = 'Footer_Icons/logo-black.png';
-    // PS added Brand photo for footer
-    const Brand = document.createElement('img');
-    Brand.classList.add('brand');
-    Brand.src = 'Footer_Icons/TT+logo+transparent.png';
-    // PS added Texan photo for footer
-    const Texan = document.createElement('img');
-    Texan.classList.add('texan');
-    Texan.src = 'Footer_Icons/gotexan-logo_2014_black.png';
     // These commands just call all the elements to the screen
     /***************Navigation Bar***************/
     appContainer.appendChild(navwrapper);
@@ -449,7 +406,7 @@ export function renderWelcomeView() {
     appContainer.appendChild(Body10);
     appContainer.appendChild(Body11);
     appContainer.appendChild(Body12);
-    appContainer.appendChild(Body13);
+    appContainer.appendChild(ComUtils.FooterBody);
     /***************Inner structured Div Containers***************/
     Body.appendChild(Titlediv);
     Body.appendChild(Marketingdiv);
@@ -465,7 +422,7 @@ export function renderWelcomeView() {
     Body9.appendChild(Tailoreddiv);
     Body10.appendChild(Itemsdiv);
     Body11.appendChild(Closerdiv);
-    Body13.appendChild(Footerdiv);
+    ComUtils.FooterBody.appendChild(ComUtils.Footerdiv);
     /***************Inner Div containers to hold content***************/
     Titlediv.appendChild(Descriptiondiv);
     Titlediv.appendChild(TradeMarkdiv);
@@ -491,9 +448,9 @@ export function renderWelcomeView() {
     Closerinnerdiv2.appendChild(Closercolumndiv3);
     Closerinnerdiv2.appendChild(Closercolumndiv4);
     Closerinnerdiv2.appendChild(Closercolumndiv5);
-    Footerdiv.appendChild(Footerinnerdiv);
-    Footerdiv.appendChild(Footerinnerdiv2);
-    Footerdiv.appendChild(Footerinnerdiv3);
+    ComUtils.Footerdiv.appendChild(ComUtils.Footerinnerdiv);
+    ComUtils.Footerdiv.appendChild(ComUtils.Footerinnerdiv2);
+    ComUtils.Footerdiv.appendChild(ComUtils.Footerinnerdiv3);
     /***************Text to be inserted in inner div containers structure***************/
     Descriptiondiv.appendChild(Description);
     TradeMarkdiv.appendChild(TradeMark);
@@ -519,7 +476,7 @@ export function renderWelcomeView() {
     Tailoredinnerdiv2.appendChild(Tailored);
     Tailoredinnerdiv.appendChild(Tailored2);
     Closerinnerdiv.appendChild(Closer);
-    Footerinnerdiv2.appendChild(Footer);
+    ComUtils.Footerinnerdiv2.appendChild(ComUtils.Footer);
     /***************Images to be used by page***************/
     Body2.appendChild(Background);
     MarketingInnerdiv.appendChild(ToyPicture1);
@@ -550,15 +507,22 @@ export function renderWelcomeView() {
     Closercolumndiv5.appendChild(Closerphoto9);
     Closercolumndiv5.appendChild(Closerphoto10);
     Body12.appendChild(Background3);
-    Footerinnerdiv.appendChild(Socialmediaicon1);
-    Footerinnerdiv.appendChild(Socialmediaicon2);
-    Footerinnerdiv.appendChild(Socialmediaicon3);
-    Footerinnerdiv.appendChild(Socialmediaicon4);
-    Footerinnerdiv.appendChild(Socialmediaicon5);
-    Footerinnerdiv.appendChild(Socialmediaicon6);
-    Footerinnerdiv3.appendChild(Brand);
-    Footerinnerdiv3.appendChild(Texan);
+    ComUtils.Footerinnerdiv.appendChild(ComUtils.Socialmediaicon1);
+    ComUtils.Footerinnerdiv.appendChild(ComUtils.Socialmediaicon2);
+    ComUtils.Footerinnerdiv.appendChild(ComUtils.Socialmediaicon3);
+    ComUtils.Footerinnerdiv.appendChild(ComUtils.Socialmediaicon4);
+    ComUtils.Footerinnerdiv.appendChild(ComUtils.Socialmediaicon5);
+    ComUtils.Footerinnerdiv.appendChild(ComUtils.Socialmediaicon6);
+    ComUtils.Footerinnerdiv3.appendChild(ComUtils.Brand);
+    ComUtils.Footerinnerdiv3.appendChild(ComUtils.Texan);
+    /***************Observer Code Searching for Animations***************/
+    const allAnimationedElements = document.querySelectorAll('.animation');
+    allAnimationedElements.forEach((element) => observer.observe(element));
 }
+
+
+
+
 
 
 //export const Trait_1 = 'This text is within Authentication_Page.js and testing linking dynamic text';

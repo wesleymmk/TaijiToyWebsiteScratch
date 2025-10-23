@@ -14,43 +14,120 @@ export function clearAppContainer()  // WM code // from online modified it so th
 // PS Added navmenu, accountmenu, Home, GenerateInputOption, GenerateOutputOption, AccountOption, HomeLogo.
 /* These are just the buttons for the header that each webapge will call to simplify each file and reduce
 repeating code*/
+/***************Parent Div Containers***************/
+// PS added FooterBody This will hold the footer
+export const FooterBody = document.createElement('div');
+FooterBody.classList.add('body2');
+/***************Inner Structure Div Containers***************/
+// PS added Footerdiv for footer
+export const Footerdiv = document.createElement('div');
+Footerdiv.classList.add('footerdiv');
+/***************Innermost Div containers holding text or images***************/
+// PS added navmenu to hold the navigation options
 export const navmenu = document.createElement('div');
 navmenu.classList.add('nav-menu');
-
+// PS added accountmenu to hold the account option
 export const accountmenu = document.createElement('div');
 accountmenu.classList.add('account-menu');
-accountmenu.classList.add('animationafadein');
-
+// PS added Footerinnerdiv for footer
+export const Footerinnerdiv = document.createElement('div');
+Footerinnerdiv.classList.add('footerinnerdiv');
+// PS added Footerinnerdiv2 for footer
+export const Footerinnerdiv2 = document.createElement('div');
+Footerinnerdiv2.classList.add('footerinnerdiv2');
+// PS added Footerinnerdiv3 for footer
+export const Footerinnerdiv3 = document.createElement('div');
+Footerinnerdiv3.classList.add('footerinnerdiv3');
+/***************Text to be Inserted into Div containers***************/
+// PS added the Home field tro navigate to the homepage
 export const Home = document.createElement('p');
 Home.textContent = 'Home';
-Home.classList.add('textnavmenu');
+Home.classList.add('textnavmenu', 'animation');
 Home.addEventListener('click', function () { window.location.href = '#welcome-page'; });
-
+// PS added the GenerateInputOption to direct to the input Generation page
 export const GenerateInputOption = document.createElement('p');
 GenerateInputOption.textContent = 'Input-Order';
-GenerateInputOption.classList.add('textnavmenu');
+GenerateInputOption.classList.add('textnavmenu', 'animation');
 GenerateInputOption.addEventListener('click', function () { window.location.href = '#order-input'; });
-
+// PS added TEMPORARY!!!! GenerateOutputOption to quickly navigate to output page
 export const GenerateOutputOption = document.createElement('p');
 GenerateOutputOption.textContent = 'Output-Order';
-GenerateOutputOption.classList.add('textnavmenu');
+GenerateOutputOption.classList.add('textnavmenu', 'animation');
 GenerateOutputOption.addEventListener('click', function () { window.location.href = '#order-output'; });
-
+// PS added AccountOption to direct to the account page
 export const AccountOption = document.createElement('p');
 AccountOption.textContent = 'Account';
-AccountOption.classList.add('textaccountmenu');
+AccountOption.classList.add('textaccountmenu', 'animation');
 AccountOption.addEventListener('click', showPopupModal);
-
+//PS added Footer text for footer
+export const Footer = document.createElement('p');
+Footer.classList.add('pagetextsmallb', 'animation');
+Footer.textContent = '\u00A9 YY Design. LLC 2025. All Rights Reserved. Patent Pending';
+/***************Images to be Inserted into Div containers***************/
+// PS added HomeLogo to direct to the homepage
 export const HomeLogo = document.createElement('img');
-HomeLogo.classList.add('LogoBox');
+HomeLogo.classList.add('LogoBox', 'animation');
 HomeLogo.src = 'Brand_Logos/Taijitoylogolight.png';
 HomeLogo.alt = 'HOME';
 HomeLogo.addEventListener('click', function () { window.location.href = '#welcome-page' });
-
+// PS added Socialmediaicon1 photo for footer and linking to social media
+export const Socialmediaicon1 = document.createElement('img');
+Socialmediaicon1.classList.add('socialmediaicon', 'animation');
+Socialmediaicon1.src = 'Footer_Icons/Instagram_Glyph_Black.png';
+Socialmediaicon1.addEventListener('click', function () {
+    window.open('https://www.instagram.com/taijitoy/');
+});
+// PS added Socialmediaicon2 photo for footer and linking to social media
+export const Socialmediaicon2 = document.createElement('img');
+Socialmediaicon2.classList.add('socialmediaicon', 'animation');
+Socialmediaicon2.src = 'Footer_Icons/Facebook_Logo_Primary.png';
+Socialmediaicon2.addEventListener('click', function () {
+    window.open('https://www.facebook.com/people/TaijiToy/61571429690590/');
+});
+// PS added Socialmediaicon3 photo for footer and linking to social media
+export const Socialmediaicon3 = document.createElement('img');
+Socialmediaicon3.classList.add('socialmediaicon', 'animation');
+Socialmediaicon3.src = 'Footer_Icons/InBug-Black.png';
+Socialmediaicon3.addEventListener('click', function () {
+    window.open('https://www.linkedin.com/company/taiji-toy/');
+});
+// PS added Socialmediaicon4 photo for footer and linking to social media
+export const Socialmediaicon4 = document.createElement('img');
+Socialmediaicon4.classList.add('socialmediaicon', 'animation');
+Socialmediaicon4.src = 'Footer_Icons/PT14361.jpg';
+Socialmediaicon4.addEventListener('click', function () {
+    window.open('https://www.pinterest.com/taijitoy/');
+});
+// PS added Socialmediaicon5 photo for footer and linking to social media
+export const Socialmediaicon5 = document.createElement('img');
+Socialmediaicon5.classList.add('socialmediaicon', 'animation');
+Socialmediaicon5.src = 'Footer_Icons/TikTok_Icon_Black_Circle.png';
+Socialmediaicon5.addEventListener('click', function () {
+    window.open('https://www.tiktok.com/@taijitoy');
+});
+// PS added Socialmediaicon6 photo for footer and linking to social media
+export const Socialmediaicon6 = document.createElement('img');
+Socialmediaicon6.classList.add('socialmediaicon', 'animation');
+Socialmediaicon6.src = 'Footer_Icons/logo-black.png';
+Socialmediaicon6.addEventListener('click', function () {
+    window.open('https://www.x.com/taijitoy');
+});
+// PS added Brand photo for footer
+export const Brand = document.createElement('img');
+Brand.classList.add('brand', 'animation');
+Brand.src = 'Footer_Icons/TT+logo+transparent.png';
+// PS added Texan photo for footer
+export const Texan = document.createElement('img');
+Texan.classList.add('texan', 'animation');
+Texan.src = 'Footer_Icons/gotexan-logo_2014_black.png';
+/***************Buttons to be Inserted into Div containers***************/
+// PS added ShopNowButton to direct to Official TaijiToy shopping page
 export const ShopNowButton = document.createElement('button');
-ShopNowButton.classList.add('button1');
-ShopNowButton.classList.add('pagetextmediumb');
+ShopNowButton.classList.add('button1', 'pagetextmediumb', 'animation');
 ShopNowButton.textContent = 'Shop Now';
+ShopNowButton.addEventListener('click', function () {
+    window.location.href = "https://www.taijitoy.com/store";
+});
 
 /*Popup function done by Ernesto Q.*/
 //Main purpose is to open up a popup window for the login page. 
