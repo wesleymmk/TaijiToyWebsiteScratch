@@ -261,7 +261,7 @@ export function renderGenerationOutputView(order_ID) {
                 LongText5.textContent = output_desc_long_toy5;
 
                 const ShortText6 = document.createElement("p");
-                ShortText1.textContent = output_desc_short_toy6;
+                ShortText6.textContent = output_desc_short_toy6;
 
                 const LongText6 = document.createElement("p");
                 LongText6.textContent = output_desc_long_toy6;
