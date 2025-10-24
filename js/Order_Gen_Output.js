@@ -12,75 +12,63 @@ export function renderGenerationOutputView(order_ID) {
     const dataForPHP = {
         order_id: order_ID
     };
-
-    // --- NAVBAR SETUP (Moved here to show loading state immediately) ---
+    /***************Animation Function on Scroll***************/
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                return;
+            }
+        });
+    }, { threshold: 0.8 });
+    //PS added navwrapper, This is the new implementation of the navbar. Removed html version.
     const navwrapper = document.createElement('div');
-    navwrapper.id = 'order-output';
-    navwrapper.classList.add('nav-wrapper');
-    navwrapper.appendChild(ComUtils.HomeLogo);
-    navwrapper.appendChild(ComUtils.navmenu);
-    navwrapper.appendChild(ComUtils.accountmenu);
-    ComUtils.Home.classList.remove('home');
-    ComUtils.GenerateInputOption.classList.remove('inputorder');
-    ComUtils.GenerateOutputOption.classList.remove('outputorder');
-    ComUtils.AccountOption.classList.add('account');
-    ComUtils.navmenu.appendChild(ComUtils.Home);
-    ComUtils.navmenu.appendChild(ComUtils.GenerateInputOption);
-    ComUtils.navmenu.appendChild(ComUtils.GenerateOutputOption);
-    ComUtils.accountmenu.appendChild(ComUtils.AccountOption);    
-    appContainer.appendChild(navwrapper);
+    navwrapper.id = 'order-output'; // This is adding an id for the css class to specifically target this attribute
+    navwrapper.classList.add('nav-wrapper'); // Class added
+    navwrapper.appendChild(ComUtils.HomeLogo); // Grab button from Common_Function.js
+    navwrapper.appendChild(ComUtils.navmenu); // Grab button from Common_Function.js
+    navwrapper.appendChild(ComUtils.accountmenu); // Grab button from Common_Function.js
+    ComUtils.Home.classList.remove('home'); // Class removed
+    ComUtils.GenerateInputOption.classList.remove('inputorder'); // Class removed
+    ComUtils.GenerateOutputOption.classList.add('outputorder'); // Class added
+    ComUtils.AccountOption.classList.remove('account'); // Class removed
+    ComUtils.navmenu.appendChild(ComUtils.Home); // Grab button from Common_Function.js
+    ComUtils.navmenu.appendChild(ComUtils.GenerateInputOption); // Grab button from Common_Function.js
+    ComUtils.navmenu.appendChild(ComUtils.GenerateOutputOption); // Grab button from Common_Function.js
+    ComUtils.accountmenu.appendChild(ComUtils.AccountOption); // Grab button from Common_Function.js
 
     let heading = document.createElement('h1');
     heading.classList.add('header');
     heading.textContent = 'Generation Output Page';
-    appContainer.appendChild(heading);
-
-    const Body2 = document.createElement('div');
-    Body2.classList.add('body3');
-    // PS added Body3 this will hold some marketing pictures & button
-    const Body3 = document.createElement('div');
-    Body3.classList.add('body3');
-    // PS added Body4 This will hold a transitional background
-    const Body4 = document.createElement('div');
-    Body4.classList.add('body3');
-    // PS added Body5 This will hold marketing text
-    const Body5 = document.createElement('div');
-    Body5.classList.add('body3');
-    appContainer.appendChild(Body2);
-    appContainer.appendChild(Body3);
-    appContainer.appendChild(Body4);
-    appContainer.appendChild(Body5);
 
     let generatedcontent_space = document.createElement('div');
     generatedcontent_space.classList.add('generatedcontent-space');
     generatedcontent_space.textContent = 'Loading your generated toys...'; // Show a loading message
-    appContainer.appendChild(generatedcontent_space);
+    
 
     let generatedcontent_space_2 = document.createElement('div');
     generatedcontent_space_2.classList.add('generatedcontent-space');
     //generatedcontent_space_2.textContent = 'Loading your generated toys...'; // Show a loading message
-    appContainer.appendChild(generatedcontent_space_2);
+    
 
     let generatedcontent_space_3 = document.createElement('div');
     generatedcontent_space_3.classList.add('generatedcontent-space');
     //generatedcontent_space_2.textContent = 'Loading your generated toys...'; // Show a loading message
-    appContainer.appendChild(generatedcontent_space_3);
+    
 
     let generatedcontent_space_4 = document.createElement('div');
     generatedcontent_space_4.classList.add('generatedcontent-space');
     //generatedcontent_space_2.textContent = 'Loading your generated toys...'; // Show a loading message
-    appContainer.appendChild(generatedcontent_space_4);
+    
 
     let generatedcontent_space_5 = document.createElement('div');
     generatedcontent_space_5.classList.add('generatedcontent-space');
     //generatedcontent_space_2.textContent = 'Loading your generated toys...'; // Show a loading message
-    appContainer.appendChild(generatedcontent_space_5);
-
+    
     let generatedcontent_space_6 = document.createElement('div');
     generatedcontent_space_6.classList.add('generatedcontent-space');
     //generatedcontent_space_2.textContent = 'Loading your generated toys...'; // Show a loading message
-    appContainer.appendChild(generatedcontent_space_6);
-
+    
 
 
     // --- API CALL AND DATA HANDLING ---
@@ -331,7 +319,38 @@ export function renderGenerationOutputView(order_ID) {
     placeorder.textContent = 'Place an order';
     placeorder.classList.add('RegenText')
 
+    /***************Navigation Bar***************/
+    appContainer.appendChild(navwrapper);
+    /***************Parent Div containers***************/
+    appContainer.appendChild(heading);
+    appContainer.appendChild(generatedcontent_space);
+    appContainer.appendChild(generatedcontent_space_2);
+    appContainer.appendChild(generatedcontent_space_3);
+    appContainer.appendChild(generatedcontent_space_4);
+    appContainer.appendChild(generatedcontent_space_5);
+    appContainer.appendChild(generatedcontent_space_6);
     appContainer.appendChild(buttonContainer);
     buttonContainer.appendChild(RegenAll);
     buttonContainer.appendChild(placeorder);
+    appContainer.appendChild(ComUtils.FooterBody);
+    /***************Inner structured Div Containers***************/
+    ComUtils.FooterBody.appendChild(ComUtils.Footerdiv);
+    /***************Inner Div containers to hold content***************/
+    ComUtils.Footerdiv.appendChild(ComUtils.Footerinnerdiv);
+    ComUtils.Footerdiv.appendChild(ComUtils.Footerinnerdiv2);
+    ComUtils.Footerdiv.appendChild(ComUtils.Footerinnerdiv3);
+    /***************Text to be inserted in inner div containers structure***************/
+    ComUtils.Footerinnerdiv2.appendChild(ComUtils.Footer);
+    /***************Images to be used by page***************/
+    ComUtils.Footerinnerdiv.appendChild(ComUtils.Socialmediaicon1);
+    ComUtils.Footerinnerdiv.appendChild(ComUtils.Socialmediaicon2);
+    ComUtils.Footerinnerdiv.appendChild(ComUtils.Socialmediaicon3);
+    ComUtils.Footerinnerdiv.appendChild(ComUtils.Socialmediaicon4);
+    ComUtils.Footerinnerdiv.appendChild(ComUtils.Socialmediaicon5);
+    ComUtils.Footerinnerdiv.appendChild(ComUtils.Socialmediaicon6);
+    ComUtils.Footerinnerdiv3.appendChild(ComUtils.Brand);
+    ComUtils.Footerinnerdiv3.appendChild(ComUtils.Texan);
+    /***************Observer Code Searching for Animations***************/
+    const allAnimationedElements = document.querySelectorAll('.animation');
+    allAnimationedElements.forEach((element) => observer.observe(element));
 }

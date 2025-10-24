@@ -3,7 +3,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 // Made by WAM 10/6/25 
-// display_traits.php — Receives unique order ID and accesses SQL to get all the traits
+// display_traits.php ï¿½ Receives unique order ID and accesses SQL to get all the traits
 // === Load dependencies ===
 require_once 'config.php';
 require_once 'common_function.php';
@@ -14,7 +14,7 @@ $conn = null;
 
 try
 {
-    $customer_id = 9;//get_user_ID();
+    $customer_id = get_user_ID();
     
     $request_data = json_decode(file_get_contents('php://input'), true);
     if (!isset($request_data['order_id']) || !is_numeric($request_data['order_id'])) {

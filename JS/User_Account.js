@@ -7,28 +7,36 @@ import * as ComUtils from './Common_Function.js';
 
 export function renderUserAccount() {
     ComUtils.clearAppContainer();
+    /***************Animation Function on Scroll***************/
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                return;
+            }
+        });
+    }, { threshold: 0.8 });
     //PS added navwrapper, This is the new implementation of the navbar. Removed html version.
     const navwrapper = document.createElement('div');
-    navwrapper.id = 'account';
-    navwrapper.classList.add('nav-wrapper');
-    navwrapper.appendChild(ComUtils.HomeLogo);
-    navwrapper.appendChild(ComUtils.navmenu);
-    navwrapper.appendChild(ComUtils.accountmenu);
-    ComUtils.Home.classList.remove('home');
-    ComUtils.GenerateInputOption.classList.remove('inputorder');
-    ComUtils.GenerateOutputOption.classList.remove('outputorder');
-    ComUtils.AccountOption.classList.add('account');
-    ComUtils.navmenu.appendChild(ComUtils.Home);
-    ComUtils.navmenu.appendChild(ComUtils.GenerateInputOption);
-    ComUtils.navmenu.appendChild(ComUtils.GenerateOutputOption);
-    ComUtils.accountmenu.appendChild(ComUtils.AccountOption);
+    navwrapper.id = 'account'; // This is adding an id for the css class to specifically target this attribute
+    navwrapper.classList.add('nav-wrapper'); // Class added
+    navwrapper.appendChild(ComUtils.HomeLogo); // Grab button from Common_Function.js
+    navwrapper.appendChild(ComUtils.navmenu); // Grab button from Common_Function.js
+    navwrapper.appendChild(ComUtils.accountmenu); // Grab button from Common_Function.js
+    ComUtils.Home.classList.remove('home'); // Class removed
+    ComUtils.GenerateInputOption.classList.remove('inputorder'); // Class removed
+    ComUtils.GenerateOutputOption.classList.remove('outputorder'); // Class removed
+    ComUtils.AccountOption.classList.add('account'); // Class added
+    ComUtils.navmenu.appendChild(ComUtils.Home); // Grab button from Common_Function.js
+    ComUtils.navmenu.appendChild(ComUtils.GenerateInputOption); // Grab button from Common_Function.js
+    ComUtils.navmenu.appendChild(ComUtils.GenerateOutputOption); // Grab button from Common_Function.js
+    ComUtils.accountmenu.appendChild(ComUtils.AccountOption); // Grab button from Common_Function.js
 
     let heading = document.createElement('h1');
     heading.classList.add('header');
     heading.textContent = 'User Account';
 
-    appContainer.appendChild(navwrapper);
-    appContainer.appendChild(heading);
+    
 
 
     /*Done by EQ*/
@@ -61,7 +69,34 @@ scrollableContent.classList.add('scrollable-content');
         console.log('Scrolled!');
     });
 
+    
+
+    /***************Navigation Bar***************/
+    appContainer.appendChild(navwrapper);
+    /***************Parent Div containers***************/
+    appContainer.appendChild(heading);
     // 6. Append the new elements to the page
     appContainer.appendChild(scrollableContent);
     appContainer.appendChild(scrollButton);
+    appContainer.appendChild(ComUtils.FooterBody);
+    /***************Inner structured Div Containers***************/
+    ComUtils.FooterBody.appendChild(ComUtils.Footerdiv);
+    /***************Inner Div containers to hold content***************/
+    ComUtils.Footerdiv.appendChild(ComUtils.Footerinnerdiv);
+    ComUtils.Footerdiv.appendChild(ComUtils.Footerinnerdiv2);
+    ComUtils.Footerdiv.appendChild(ComUtils.Footerinnerdiv3);
+    /***************Text to be inserted in inner div containers structure***************/
+    ComUtils.Footerinnerdiv2.appendChild(ComUtils.Footer);
+    /***************Images to be used by page***************/
+    ComUtils.Footerinnerdiv.appendChild(ComUtils.Socialmediaicon1);
+    ComUtils.Footerinnerdiv.appendChild(ComUtils.Socialmediaicon2);
+    ComUtils.Footerinnerdiv.appendChild(ComUtils.Socialmediaicon3);
+    ComUtils.Footerinnerdiv.appendChild(ComUtils.Socialmediaicon4);
+    ComUtils.Footerinnerdiv.appendChild(ComUtils.Socialmediaicon5);
+    ComUtils.Footerinnerdiv.appendChild(ComUtils.Socialmediaicon6);
+    ComUtils.Footerinnerdiv3.appendChild(ComUtils.Brand);
+    ComUtils.Footerinnerdiv3.appendChild(ComUtils.Texan);
+    /***************Observer Code Searching for Animations***************/
+    const allAnimationedElements = document.querySelectorAll('.animation');
+    allAnimationedElements.forEach((element) => observer.observe(element));
 }

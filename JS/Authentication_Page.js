@@ -10,7 +10,7 @@ import * as Gen2Utils from './Order_Gen_Output.js';
 //PS Creation & EQ collaboration
 export function renderWelcomeView() {
     ComUtils.clearAppContainer(); // Clear the screen first
-    /***************Loading Function on Scroll***************/
+    /***************Animation Function on Scroll***************/
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
             if (entry.isIntersecting) {
@@ -519,10 +519,3 @@ export function renderWelcomeView() {
     const allAnimationedElements = document.querySelectorAll('.animation');
     allAnimationedElements.forEach((element) => observer.observe(element));
 }
-
-
-
-
-
-
-//export const Trait_1 = 'This text is within Authentication_Page.js and testing linking dynamic text';
