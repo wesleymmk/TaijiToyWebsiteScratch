@@ -414,6 +414,58 @@ function output_customer_ID_match($conn, $output_id, $customer_id)
 */
 //--------------------  END OF FUNCTION  --------------------
 
+//-------------------- New general function --------------------
+// Created by: 
+// Date created: 
+
+function getCustomerOrderHistory($conn, $customer_id)
+{
+    // 1. Define the SQL query to find all order_ids for a given customer
+    $sql = "SELECT order_id FROM outputs WHERE customer_id = ?";
+    
+    $stmt = $conn->prepare($sql);
+    if ($stmt === false) {
+        throw new Exception("Failed to prepare statement for order history: " . $conn->error);
+    }
+    
+    // 2. Bind the customer_id
+    $stmt->bind_param("i", $customer_id);
+    
+    if (!$stmt->execute()) {
+        throw new Exception("Failed to execute statement for order history: " . $stmt->error);
+    }
+    
+    // 3. Get the full result set
+    $result = $stmt->get_result();
+    
+    // 4. Loop through the results and package them
+    $order_ids = []; // An array to store the list of IDs
+    while ($row = $result->fetch_assoc()) {
+        $order_ids[] = $row['order_id'];
+    }
+    
+    $stmt->close();
+    
+    // 5. Create the final output package as requested
+    $output = [
+        'total_orders' => count($order_ids),
+        'order_list' => $order_ids
+    ];
+    
+    return $output;
+}
+
+
+/* Use case & Syntax:
+// explanation
+
+ show use case
+
+*/
+//--------------------  END OF FUNCTION  --------------------
+
+
+
 //---------------------------------------------------------------------------------------------------------------
 //                                    Template created by WAM
 //---------------------------------------------------------------------------------------------------------------
