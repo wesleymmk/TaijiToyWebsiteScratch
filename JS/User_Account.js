@@ -58,6 +58,7 @@ scrollableContent.classList.add('scrollable-content');
     // 3. Create a button to trigger the scroll action
     const scrollButton = document.createElement('button');
     scrollButton.textContent = 'Scroll to Bottom';
+    scrollButton.classList.add('LoginButton');
 
     // 4. Define the function to scroll the element
     function scrollToBottom() {

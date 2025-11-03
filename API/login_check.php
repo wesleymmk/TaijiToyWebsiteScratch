@@ -10,7 +10,7 @@ header('Content-Type: application/json');
 // =================================================================
 
 
-if (isset($_SESSION['customer_id'])) {
+if (isset($_SESSION['user_id'])) {
     // If the key exists, the user is authenticated.
     echo json_encode([
         'success' => true,
