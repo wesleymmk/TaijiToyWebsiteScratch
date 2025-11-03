@@ -48,6 +48,21 @@ export const GenerateInputOption = document.createElement('p');
 GenerateInputOption.textContent = 'Input-Order';
 GenerateInputOption.classList.add('textnavmenu', 'animation');
 GenerateInputOption.addEventListener('click', function () { window.location.href = '#order-input'; });
+// PS added the StoreOption to direct to the input Generation page
+export const StoreOption = document.createElement('p');
+StoreOption.textContent = 'Store';
+StoreOption.classList.add('textnavmenu', 'animation');
+StoreOption.addEventListener('click', function () { window.location.href = "https://www.taijitoy.com/store"; });
+// PS added the AboutOption to direct to the input Generation page
+export const AboutOption = document.createElement('p');
+AboutOption.textContent = 'About';
+AboutOption.classList.add('textnavmenu', 'animation');
+AboutOption.addEventListener('click', function () { window.location.href = "https://www.taijitoy.com/about"; });
+// PS added the ContactOption to direct to the input Generation page
+export const ContactOption = document.createElement('p');
+ContactOption.textContent = 'Contact';
+ContactOption.classList.add('textnavmenu', 'animation');
+ContactOption.addEventListener('click', function () { window.location.href = "https://www.taijitoy.com/contact"; });
 // PS added TEMPORARY!!!! GenerateOutputOption to quickly navigate to output page
 export const GenerateOutputOption = document.createElement('p');
 GenerateOutputOption.textContent = 'Output-Order';
@@ -57,7 +72,23 @@ GenerateOutputOption.addEventListener('click', function () { window.location.hre
 export const AccountOption = document.createElement('p');
 AccountOption.textContent = 'Account';
 AccountOption.classList.add('textaccountmenu', 'animation');
-AccountOption.addEventListener('click', showPopupModal);
+AccountOption.addEventListener('click', (event) => {
+
+    apiCall('api/login_check.php')
+
+        .then(response => response.json())
+        .then(data => {
+            if (data.success && data.isLoggedIn) {
+
+                window.location.href = '#account';
+
+            } else {
+                // Login failed (e.g., Invalid email or password)
+                alert(`Login Failed: ${data.message}`);
+                showPopupModal();
+            }
+        })
+});
 //PS added Footer text for footer
 export const Footer = document.createElement('p');
 Footer.classList.add('pagetextsmallb', 'animation');

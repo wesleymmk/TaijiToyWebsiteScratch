@@ -31,6 +31,9 @@ export function renderWelcomeView() {
     ComUtils.GenerateOutputOption.classList.remove('outputorder'); // Class removed
     ComUtils.AccountOption.classList.remove('account'); // Class removed
     ComUtils.navmenu.appendChild(ComUtils.Home); // Grab button from Common_Function.js
+    ComUtils.navmenu.appendChild(ComUtils.StoreOption); // Grab button from Common_Function.js
+    ComUtils.navmenu.appendChild(ComUtils.AboutOption); // Grab button from Common_Function.js
+    ComUtils.navmenu.appendChild(ComUtils.ContactOption); // Grab button from Common_Function.js
     ComUtils.navmenu.appendChild(ComUtils.GenerateInputOption); // Grab button from Common_Function.js
     ComUtils.navmenu.appendChild(ComUtils.GenerateOutputOption); // Grab button from Common_Function.js
     ComUtils.accountmenu.appendChild(ComUtils.AccountOption); // Grab button from Common_Function.js

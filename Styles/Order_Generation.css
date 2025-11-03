@@ -1,13 +1,32 @@
-
-@import url('https://fonts.cdnfonts.com/css/chinese-rocks');
-
-
-
-
-
-
-
-
-
-
-
+/*PS Added*/
+.customtailoredtitlediv {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+  margin-top: 3.906vw;
+  margin-bottom: 50px;
+  margin-bottom: 3.906vw;
+  width: 100%;
+}
+/*PS Added*/
+.customtailoreddiv1,
+.customtailoreddiv2,
+.customtailoreddiv3 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/*PS Added*/
+.customtailoreddiv2 {
+  width: 100%;
+  justify-content: space-evenly;
+}
+/*PS Addded*/
+.customtailoreddiv3 {
+  margin-top: 15px;
+  margin-top: 1.172vw;
+  margin-bottom: 15px;
+  margin-bottom: 1.172vw;
+}

@@ -56,6 +56,26 @@
   color: white;
 }
 /*PS Added*/
+.pagetexttitle2b {
+  font-family: 'Chinese Rocks Rg', sana-serif;
+  font-size: 100px;
+  /*font-size: 7.813vw;*/
+  font-weight: 900;
+  cursor: default;
+  margin: 0;
+  color: black;
+}
+/*PS Added*/
+.pagetexttitle2w {
+  font-family: 'Chinese Rocks Rg', sana-serif;
+  font-size: 100px;
+  /*font-size: 7.813vw;*/
+  font-weight: 900;
+  cursor: default;
+  margin: 0;
+  color: white;
+}
+/*PS Added*/
 .pagetextlargew {
   font-family: 'Chinese Rocks Rg', sana-serif;
   font-size: 47px;

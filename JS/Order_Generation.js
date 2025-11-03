@@ -29,6 +29,9 @@ export function renderGenerationInputView() {
     ComUtils.GenerateOutputOption.classList.remove('outputorder'); // Class removed
     ComUtils.AccountOption.classList.remove('account'); // Class removed
     ComUtils.navmenu.appendChild(ComUtils.Home); // Grab button from Common_Function.js
+    ComUtils.navmenu.appendChild(ComUtils.StoreOption); // Grab button from Common_Function.js
+    ComUtils.navmenu.appendChild(ComUtils.AboutOption); // Grab button from Common_Function.js
+    ComUtils.navmenu.appendChild(ComUtils.ContactOption); // Grab button from Common_Function.js
     ComUtils.navmenu.appendChild(ComUtils.GenerateInputOption); // Grab button from Common_Function.js
     ComUtils.navmenu.appendChild(ComUtils.GenerateOutputOption); // Grab button from Common_Function.js
     ComUtils.accountmenu.appendChild(ComUtils.AccountOption); // Grab button from Common_Function.js
@@ -37,16 +40,42 @@ export function renderGenerationInputView() {
     const Body = document.createElement('div');
     Body.classList.add('body');
     /***************Inner Structure Div Containers***************/
-    let heading = document.createElement('h1');
-    heading.classList.add('header');
-    heading.textContent = 'Generation Input Page';
+    // PS added CustomTailoredTitleDiv to be the outermost div element for the title
+    const CustomTailoredTitleDiv = document.createElement('div');
+    CustomTailoredTitleDiv.classList.add('customtailoredtitlediv');
     /***************Innermost Div containers holding text or images***************/
-
+    // PS added CustomTailoredDiv1 to hold the text containing marketing
+    const CustomTailoredDiv1 = document.createElement('div');
+    CustomTailoredDiv1.classList.add('customtailoreddiv1');
+    // PS added CustomTailoredDiv2 to hold the text containing marketing
+    const CustomTailoredDiv2 = document.createElement('div');
+    CustomTailoredDiv2.classList.add('customtailoreddiv2');
+    // PS added CustomTailoredDiv3 to hold the text containing marketing
+    const CustomTailoredDiv3 = document.createElement('div');
+    CustomTailoredDiv3.classList.add('customtailoreddiv3');
     /***************Text to be Inserted into Div containers***************/
+    // PS added CustomTailoredText for the title text
+    const CustomTailoredText = document.createElement('p');
+    CustomTailoredText.classList.add('pagetexttitle2w', 'animation');
+    CustomTailoredText.textContent = 'Custom Tailored Collections';
+    // PS added TailoredText for the title text
+    const TailoredText = document.createElement('p');
+    TailoredText.classList.add('pagetextlargew', 'animation');
+    TailoredText.textContent = 'Unique Kit Tailored To Your Core Values, Pastimes, Interests, And Your Aspirations';
+
     let GiftOption = document.createElement('input');
     GiftOption.type = 'checkbox';
     GiftOption.name = 'giftOption';
     /***************Images to be Inserted into Div containers***************/
+    // PS added Marketingphoto1 for homepage
+    const Marketingphoto1 = document.createElement('img');
+    Marketingphoto1.classList.add('marketimage1', 'animation');
+    Marketingphoto1.src = 'Marketing_Images/Taji-Color206.png'
+    // PS added Marketingphoto2 for homepage
+    const Marketingphoto2 = document.createElement('img');
+    Marketingphoto2.classList.add('marketimage1', 'animation');
+    Marketingphoto2.src = 'Marketing_Images/possibilites+banner.jpg';
+
     let CheckboxLabel = document.createElement('label');
     CheckboxLabel.htmlFor = 'GiftOption';
     CheckboxLabel.textContent = 'Is This a Gift?';
@@ -58,7 +87,7 @@ export function renderGenerationInputView() {
 
     let SubmitGeneration = document.createElement("button");
     SubmitGeneration.textContent = 'Submit';
-    SubmitGeneration.classList.add('LoginButton');
+    SubmitGeneration.classList.add('button1', 'pagetextmediumb', 'animation');
     SubmitGeneration.type = "submit";
 
       // ================= BACKEND INTEGRATION START =================
@@ -149,21 +178,28 @@ SubmitGeneration.addEventListener('click', async () => {
     appContainer.appendChild(navwrapper);
     /***************Parent Div containers***************/
     appContainer.appendChild(Body);
-    appContainer.appendChild(heading);
     appContainer.appendChild(GiftOption);
     appContainer.appendChild(CheckboxLabel);
     appContainer.appendChild(CustomerInput);
     appContainer.appendChild(SubmitGeneration);
     appContainer.appendChild(ComUtils.FooterBody);
     /***************Inner structured Div Containers***************/
+    Body.appendChild(CustomTailoredTitleDiv);
     ComUtils.FooterBody.appendChild(ComUtils.Footerdiv);
     /***************Inner Div containers to hold content***************/
+    CustomTailoredTitleDiv.appendChild(CustomTailoredDiv1);
+    CustomTailoredTitleDiv.appendChild(CustomTailoredDiv2);
+    CustomTailoredTitleDiv.appendChild(CustomTailoredDiv3);
     ComUtils.Footerdiv.appendChild(ComUtils.Footerinnerdiv);
     ComUtils.Footerdiv.appendChild(ComUtils.Footerinnerdiv2);
     ComUtils.Footerdiv.appendChild(ComUtils.Footerinnerdiv3);
     /***************Text to be inserted in inner div containers structure***************/
+    CustomTailoredDiv1.appendChild(CustomTailoredText);
+    CustomTailoredDiv3.appendChild(TailoredText);
     ComUtils.Footerinnerdiv2.appendChild(ComUtils.Footer);
     /***************Images to be used by page***************/
+    CustomTailoredDiv2.appendChild(Marketingphoto1);
+    CustomTailoredDiv2.appendChild(Marketingphoto2);
     ComUtils.Footerinnerdiv.appendChild(ComUtils.Socialmediaicon1);
     ComUtils.Footerinnerdiv.appendChild(ComUtils.Socialmediaicon2);
     ComUtils.Footerinnerdiv.appendChild(ComUtils.Socialmediaicon3);
