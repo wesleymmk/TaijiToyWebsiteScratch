@@ -59,6 +59,16 @@
   margin-bottom: 10px;
 }
 
+.LoginButton-2:hover{
+   opacity: 0.8;
+}
+
+.LoginButton-2:active{
+  transition: 0.10s;
+  opacity: 0.5;
+}
+
+
 .LoginButton-3{
   background-color: white;
   color: black;
@@ -75,6 +85,15 @@
   vertical-align: top;
   display: inline-block;
   margin-bottom: 10px;
+}
+
+.LoginButton-3:hover{
+  opacity: 0.8;
+}
+
+.LoginButton-3:active{
+  transition: 0.10s;
+  opacity: 0.5;
 }
 
 
@@ -145,6 +164,17 @@
   margin-left: 8px;
   margin-bottom: 10px;
   transition: opacity 0.15s;
+}
+
+.RegenText:hover{
+  background-color: black;
+  color: white;
+  border: white;
+  transition: 0.35s;
+}
+
+.RegenText:active{
+  opacity: 0.5;
 }
 
 .Regen-img-color{
