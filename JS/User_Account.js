@@ -39,6 +39,9 @@ export function renderUserAccount() {
     heading.classList.add('header');
     heading.textContent = 'User Account';
 
+    let logoutButton=document.createElement('button');
+    logoutButton.textContent='Logout';
+    logoutButton.classList.add('LoginButton')
     
 
 
@@ -82,6 +85,7 @@ scrollableContent.classList.add('scrollable-content');
     // 6. Append the new elements to the page
     appContainer.appendChild(scrollableContent);
     appContainer.appendChild(scrollButton);
+    appContainer.appendChild(logoutButton);
     appContainer.appendChild(ComUtils.FooterBody);
     /***************Inner structured Div Containers***************/
     ComUtils.FooterBody.appendChild(ComUtils.Footerdiv);
