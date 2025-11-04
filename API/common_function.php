@@ -418,38 +418,53 @@ function output_customer_ID_match($conn, $output_id, $customer_id)
 // Created by: 
 // Date created: 
 
-function getCustomerOrderHistory($conn, $customer_id)
+function getCustomerOrderSummaries($conn, $customer_id)
 {
-    // 1. Define the SQL query to find all order_ids for a given customer
-    $sql = "SELECT order_id FROM outputs WHERE customer_id = ?";
+    // sql interface line
+    $sql = "SELECT 
+                o.order_id,
+                MIN(od.attribute_1) as trait_1,
+                MIN(od.attribute_2) as trait_2
+            FROM 
+                outputs o
+            JOIN 
+                outputs_details od ON o.order_id = od.order_id
+            WHERE 
+                o.customer_id = ?
+            GROUP BY 
+                o.order_id
+            ORDER BY
+                o.order_id DESC"; // Show newest orders first
     
     $stmt = $conn->prepare($sql);
     if ($stmt === false) {
-        throw new Exception("Failed to prepare statement for order history: " . $conn->error);
+        throw new Exception("Failed to prepare statement for order summary: " . $conn->error);
     }
     
     // 2. Bind the customer_id
     $stmt->bind_param("i", $customer_id);
     
     if (!$stmt->execute()) {
-        throw new Exception("Failed to execute statement for order history: " . $stmt->error);
+        throw new Exception("Failed to execute statement for order summary: " . $stmt->error);
     }
     
     // 3. Get the full result set
     $result = $stmt->get_result();
     
     // 4. Loop through the results and package them
-    $order_ids = []; // An array to store the list of IDs
+    $order_summaries = []; // An array to store the summary objects
     while ($row = $result->fetch_assoc()) {
-        $order_ids[] = $row['order_id'];
+        // $row looks like: ['order_id' => 10, 'trait_1' => 'Stability', 'trait_2' => 'Adventure']
+        $order_summaries[] = $row;
     }
     
     $stmt->close();
     
     // 5. Create the final output package as requested
+    //    This now contains the total count ("length") and the array of order summaries.
     $output = [
-        'total_orders' => count($order_ids),
-        'order_list' => $order_ids
+        'total_orders' => count($order_summaries),
+        'orders' => $order_summaries
     ];
     
     return $output;

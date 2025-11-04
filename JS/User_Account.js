@@ -39,8 +39,7 @@ export function renderUserAccount() {
     heading.classList.add('header');
     heading.textContent = 'User Account';
 
-    
-
+    testFetchOrderHistory();
 
     /*Done by EQ*/
     /*Currently not done*/
@@ -103,4 +102,38 @@ scrollableContent.classList.add('scrollable-content');
     /***************Observer Code Searching for Animations***************/
     const allAnimationedElements = document.querySelectorAll('.animation');
     allAnimationedElements.forEach((element) => observer.observe(element));
+}
+
+// Function to test fetching the order history
+function testFetchOrderHistory() {
+    console.log("Attempting to fetch order history...");
+
+    ComUtils.apiCall('api/acc_pg.php', {})
+        .then(rawResponse => {
+            if (!rawResponse.ok) {
+                throw new Error(`Network error: ${rawResponse.statusText}`);
+            }
+            return rawResponse.json(); 
+        })
+        .then(parsedData => {
+
+            console.log("--- Response Received from Server ---");
+
+            if (parsedData.success) {
+                console.log("Status: SUCCESS");
+                console.log("Total Orders:", parsedData.data.total_orders);
+                console.log("Order List:", parsedData.data.order_list);
+            } else {
+                console.error("Status: FAILED");
+                console.error("Error Message:", parsedData.message);
+            }
+
+            console.log("-------------------------------------");
+            console.log("Full raw data object:", parsedData);
+        })
+        .catch(error => {
+            console.error("--- A CRITICAL ERROR OCCURRED ---");
+            console.error(error.message);
+            console.log("-------------------------------------");
+        });
 }

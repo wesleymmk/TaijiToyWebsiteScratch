@@ -16,13 +16,13 @@ try {
     $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
     $conn->set_charset("utf8mb4");
 
-    // 3. Call our new function to get the order data
-    $order_data = getCustomerOrderHistory($conn, $customer_id);
+    // 3. Call the new function to get the packaged order summaries
+    $order_data = getCustomerOrderSummaries($conn, $customer_id);
 
     // 4. Prepare the successful response
     $response['success'] = true;
-    $response['message'] = "Successfully retrieved order history.";
-    $response['data'] = $order_data;
+    $response['message'] = "Successfully retrieved " . $order_data['total_orders'] . " orders.";
+    $response['data'] = $order_data; // Send the full package
 
 } catch (Exception $e) {
     // If any 'throw new Exception' was triggered
