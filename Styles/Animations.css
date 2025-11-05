@@ -16,12 +16,16 @@
 
   from {
     width: 50px;
+    width: 3.906vw;
     height: 22px;
+    height: 1.719vw;
   }
 
   to {
     width: 1800px;
+    width: 93.75vw;
     height: 300px;
+    height: 15.625vw;
   }
 }
 /*PS Added*/

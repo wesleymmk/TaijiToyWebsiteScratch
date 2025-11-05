@@ -83,9 +83,12 @@ export function renderGenerationInputView() {
         // Start the animation loop
         window.requestAnimationFrame(animationStep);
     }
-    setTimeout(() => {
+    const ScrollTimePause = setTimeout(() => {
         manualScrollToElement('.inputinnerdiv1', 3000);
-    }, 3000);
+    }, 1200);
+    window.addEventListener('scroll', function () {
+        clearTimeout(ScrollTimePause);
+    });
     /***************Parent Div Containers***************/
     // PS added Loading This div will be used as a loading screen as generation occurs
     const Loading = document.createElement('div');
@@ -142,6 +145,10 @@ export function renderGenerationInputView() {
     const LoadingText = document.createElement('p');
     LoadingText.classList.add('pagetextmediumw');
     LoadingText.textContent = 'Generating Your Order';
+    // PS added LoadingText2 to display to the customer that the order is being generated
+    const LoadingText2 = document.createElement('p');
+    LoadingText2.classList.add('pagetextsmallw');
+    LoadingText2.textContent = 'Sending Details to Gemini';
 
     let GiftOption = document.createElement('input');
     GiftOption.type = 'checkbox';
@@ -203,6 +210,8 @@ SubmitGeneration.addEventListener('click', async () => {
     appContainer.appendChild(Loading);
     Loading.appendChild(LoadingLogo);
     Loading.appendChild(LoadingText);
+    Loading.appendChild(LoadingText2);
+    
     //try {
         //  Send input to Node.js backend which will call Gemini
         const response = await fetch('http://localhost:3000/generate', {
@@ -210,14 +219,16 @@ SubmitGeneration.addEventListener('click', async () => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ coreValues })
         });
+        
+        LoadingText2.textContent = "Your Results are Ready";
 
         // Parse the response from backend
         const data = await response.json();
         console.log("Backend returned:", data);
-
+    
         if (!data.success) {
             alert(`An error occurred: ${data.message}`);
-    }
+        }
         
         const traitsArray = data.data.traits;
         const prompt = data.data.prompt;
@@ -225,7 +236,7 @@ SubmitGeneration.addEventListener('click', async () => {
         prompt: prompt,
         traits: traitsArray
         }
-
+    
 
         ComUtils.apiCall('api/save_traits.php', dataForPHP)
             .then(rawResponse => {
@@ -241,8 +252,10 @@ SubmitGeneration.addEventListener('click', async () => {
                 if (parsedData.success) {
                     const saved_ID = parsedData.output_id;
                     console.log("Successfully saved order ID:", saved_ID);
-
-                    OrderOut.renderGenerationOutputView(saved_ID);
+                    setTimeout(() => {
+                        OrderOut.renderGenerationOutputView(saved_ID);
+                    }, 2000);
+                    
                     //window.location.href = '#order-output';
                 } else {
                     console.error("Error from PHP script:", parsedData.message);
