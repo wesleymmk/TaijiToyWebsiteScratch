@@ -1,3 +1,4 @@
+/*PS Added*/
 @keyframes fade-inout {
 
   0%{opacity: 0;}
@@ -10,12 +11,46 @@
     translate: 0 0;
   }
 }
+/*PS Added*/
+@keyframes expand {
 
-.animation {
+  from {
+    width: 50px;
+    height: 22px;
+  }
+
+  to {
+    width: 1800px;
+    height: 300px;
+  }
+}
+/*PS Added*/
+@keyframes rotate {
+
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+/*PS Added*/
+.animation,
+.animation2 {
   opacity: 0;
 }
-
+/*PS Added*/
+.animation3 {
+  animation: rotate 1s infinite;
+}
+/*PS Added*/
 .animation.visible {
   opacity: 1;
   animation: fade-inout 1s;
+}
+/*PS Added*/
+.animation2.visible {
+  opacity: 1;
+  animation: expand 1s;
 }

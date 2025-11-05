@@ -11,6 +11,13 @@
   cursor: pointer;
 }
 /*PS Added*/
+.LoadBox {
+  width: 100px;
+  width: 5.208vw;
+  height: 100px;
+  height: 5.208vw;
+}
+/*PS Added*/
 .Background {
   width: 100%;
   height: 571px;

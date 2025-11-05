@@ -1,4 +1,18 @@
 /*PS Added*/
+.loading {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+}
+/*PS Added*/
 .customtailoredtitlediv {
   display: flex;
   flex-direction: column;
@@ -29,4 +43,60 @@
   margin-top: 1.172vw;
   margin-bottom: 15px;
   margin-bottom: 1.172vw;
+}
+/*PS Added*/
+.inputouterdiv {
+  display: flex;
+  flex-direction: column;
+}
+/*PS Added*/
+.inputinnerdiv1,
+.inputinnerdiv2,
+.inputinnerdiv3 {
+  display: flex;
+  justify-content: center;
+}
+/*PS Added*/
+.inputinnerdiv2 {
+  margin-top: 20px;
+  margin-top: 1.042vw;
+}
+/*PS Added*/
+.inputinnerdiv3 {
+  padding-left: 300px;
+  padding-left: 10.417vw;
+  padding-right: 300px;
+  padding-right: 10.417vw;
+  margin-top: 10px;
+  margin-top: 0.521vw;
+}
+/*PS Added*/
+.textarea {
+  white-space: pre-wrap;
+  resize: none;
+  width: 1800px;
+  width: 93.75vw;
+  height: 300px;
+  height: 15.625vw;
+  font-size: 22px;
+  font-size: 1.146vw;
+  border-radius: 18px;
+  border-radius: 0.938vw;
+  border-width: .5px;
+  border-width: 0.026vw;
+  padding: 10px;
+  padding: 0.521vw;
+  font-family: 'Chinese Rocks Rg', sana-serif;
+}
+/*PS Area*/
+.textarea:focus {
+  border-color: black;
+  border-width: 3px;
+  border-width: 0.156vw;
+  box-shadow: 0 0 10px black;
+  box-shadow: 0 0 0.521vw black;
+}
+/*PS Added*/
+#innerdiv {
+  display: flex;
 }

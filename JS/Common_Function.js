@@ -83,7 +83,7 @@ AccountOption.addEventListener('click', (event) => {
                 window.location.href = '#account';
 
             } else {
-                // Login failed (e.g., Invalid email or password)
+                // Login failed
                 alert(`Login Failed: ${data.message}`);
                 showPopupModal();
             }
