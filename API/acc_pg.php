@@ -24,6 +24,8 @@ try {
     $response['message'] = "Successfully retrieved " . $order_data['total_orders'] . " orders.";
     $response['data'] = $order_data; // Send the full package
 
+    $response['debug_user_id'] = $customer_id;
+
 } catch (Exception $e) {
     // If any 'throw new Exception' was triggered
     $response['message'] = $e->getMessage();

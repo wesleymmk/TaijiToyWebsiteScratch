@@ -48,12 +48,64 @@ export function renderUserAccount() {
 const scrollableContent = document.createElement('div');
 scrollableContent.classList.add('scrollable-content');
 
-    // 2. Add some content so there is something to scroll!
-    for (let i = 1; i <= 20; i++) {
-        const p = document.createElement('p');
-        p.textContent = `Order number: ${i}...`;
-        scrollableContent.appendChild(p);
+scrollableContent.innerHTML = '<p>Loading your order history...</p>';
+
+ function testFetchOrderHistory() {
+    console.log("Attempting to fetch order history...");
+
+    ComUtils.apiCall('api/acc_pg.php', {})
+        .then(rawResponse => {
+            if (!rawResponse.ok) {
+                throw new Error(`Network error: ${rawResponse.statusText}`);
+            }
+            return rawResponse.json(); 
+        })
+        .then(parsedData => {
+            console.log("--- Response Received from Server ---");
+            console.log("Full raw data object:", parsedData);
+
+            scrollableContent.innerHTML = '';
+
+            if (parsedData.success) {
+                console.log("Status: SUCCESS");
+
+                if (parsedData.data.total_orders > 0 && parsedData.data.orders) {
+                    parsedData.data.orders.forEach(order => {
+                        // Create a container for each order
+                        const orderItem = document.createElement('div');
+                        orderItem.classList.add('order-history-item');
+
+                        const orderId = order.order_id || 'N/A';
+                        const trait1=order.trait_1|| 'N/A';
+                        const trait2=order.trait_2|| 'N/A';
+
+                        orderItem.innerHTML = `
+                            <div class="order-id"><strong>Order ID:</strong> ${orderId} <strong>traits:</strong> ${trait1}, ${trait2}</div>
+                            
+                        `;
+                        scrollableContent.appendChild(orderItem);
+                    });
+                }   else{
+                    scrollableContent.innerHTML = '<p>Oh no you do not have any orders yet! Create a new order by heading into the order-input tab!!.</p>';
+                    console.log("No orders found for this user.");
+                }
+
+            } else {
+                console.error("Status: FAILED");
+                console.error("Error Message:", parsedData.message);
+                scrollableContent.innerHTML = `<p>Error loading orders: ${parsedData.message}</p>`;
+            }
+
+        })
+        .catch(error => {
+            console.error("--- A CRITICAL ERROR OCCURRED ---");
+            console.error(error.message);
+            console.log("-------------------------------------");
+            scrollableContent.innerHTML = '<p>A network error occurred. Please try again later.</p>';
+        });
+
     }
+
 
     // 3. Create a button to trigger the scroll action
     const scrollButton = document.createElement('button');
@@ -73,6 +125,12 @@ scrollableContent.classList.add('scrollable-content');
         console.log('Scrolled!');
     });
 
+
+    const logoutButton=document.createElement('button');
+    logoutButton.textContent='Logout';
+    logoutButton.classList.add('LoginButton');
+
+    testFetchOrderHistory();
     
 
     /***************Navigation Bar***************/
@@ -106,7 +164,7 @@ scrollableContent.classList.add('scrollable-content');
     allAnimationedElements.forEach((element) => observer.observe(element));
 }
 
-// Function to test fetching the order history
+/* Function to test fetching the order history
 function testFetchOrderHistory() {
     console.log("Attempting to fetch order history...");
 
@@ -138,4 +196,5 @@ function testFetchOrderHistory() {
             console.error(error.message);
             console.log("-------------------------------------");
         });
-}
+
+    }*/
