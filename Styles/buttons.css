@@ -51,6 +51,7 @@
   padding-left: 16px;
   padding-right: 16px;
   border-radius: 2px;
+  width: 8.877vw;
   cursor: pointer;
   margin-right: 8px;
   margin-left: 8px;
@@ -79,6 +80,7 @@
   padding-left: 130px;
   padding-right: 130px;
   border-radius: 2px;
+  width: 19.778vw;
   cursor: pointer;
   margin-right: 8px;
   margin-left: 8px;
@@ -159,6 +161,8 @@
   padding-left: 220px;
   padding-right: 220px;
   border-radius: 2px;
+  width: 42.63vw;
+  border-radius: 1.172vw;
   cursor: pointer;
   font-family: 'Chinese Rocks Rg', sana-serif;
   margin-right: 8px;
