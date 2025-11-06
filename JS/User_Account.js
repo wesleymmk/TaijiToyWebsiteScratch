@@ -80,7 +80,7 @@ scrollableContent.innerHTML = '<p>Loading your order history...</p>';
                         const trait2=order.trait_2|| 'N/A';
 
                         orderItem.innerHTML = `
-                            <div class="order-id"><strong>Order ID:</strong> ${orderId} <strong>traits:</strong> ${trait1}, ${trait2}</div>
+                            <div class="order-id"><strong>Order ID:</strong> ${orderId} <strong>traits:</strong> ${trait1}, ${trait2}</div><hr>
                             
                         `;
                         scrollableContent.appendChild(orderItem);

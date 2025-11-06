@@ -161,15 +161,18 @@
 /*EQ added*/
 .scrollable-content {
   /* --- Core functionality --- */
-  height: 250px; /* Gives the window a fixed height */
-  width: 350px; /* Gives the window a fixed width */
-  width: 25.092vw;
+  height: 300px; /* Gives the window a fixed height */
+  width: 500px; /* Gives the window a fixed width */
+  width: 34.967vw;
   overflow-y: scroll; /* ALWAYS show a vertical scrollbar */
   /* Use 'auto' if you only want the scrollbar to appear when needed */
 
+  color:white;
+  font-family: 'Chinese Rocks Rg', sana-serif;
+  font-size: 23px;
   /* --- "Window" styling --- */
-  background-color: #f9f9f9; /* A light background for the window */
-  border: 1px solid #ccc;     /* A border to create the frame */
+  background-color: black; /* A light background for the window */
+  border: 1px solid black;     /* A border to create the frame */
   border-radius: 8px;          /* Rounds the corners for a modern look */
   padding: 15px;               /* Space between the border and the text */
   margin: 20px auto;           /* Adds space around the window and centers it */
