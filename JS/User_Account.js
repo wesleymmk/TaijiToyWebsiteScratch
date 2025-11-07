@@ -148,6 +148,49 @@ scrollableContent.innerHTML = '<p>Loading your order history...</p>';
     logoutButton.textContent='Logout';
     logoutButton.classList.add('LoginButton');
 
+    // **************************************************
+    // START: LOGOUT LISTENER ADDED
+    // **************************************************
+    logoutButton.addEventListener('click', (event) => {
+        event.preventDefault();
+
+        // 1. Call the server-side script to destroy the PHP session
+        ComUtils.apiCall('api/logout.php', {})
+            .then(response => {
+                if(response.status === 204 || response.headers.get('content-length') === '0') {
+                    return {}
+                }
+                return response.json();
+
+            })
+            .then(data => {
+                if (data && data.success) {
+                    console.log("Session successfully destroyed on server.");
+
+                    // 2. Cleanup Client-Side (Analytics tracker)
+                    // resetSessionClickCount is assumed to be imported via ComUtils
+                    ComUtils.resetSessionClickCount();
+
+                    // 3. Redirect to the main homepage/welcome screen
+                    AuthUtils.renderWelcomeView();
+                } else {
+                    console.error("Logout failed on server:", data.message);
+                    // Even if server failed, force redirect locally for UX
+                    AuthUtils.renderWelcomeView();
+                }
+            })
+            .catch(error => {
+                console.error("Network error during logout:", error);
+                // Force redirect locally
+                AuthUtils.renderWelcomeView();
+            });
+    });
+    // **************************************************
+    // END: LOGOUT LISTENER ADDED
+    // **************************************************
+
+
+
     testFetchOrderHistory();
     
 
