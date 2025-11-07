@@ -181,6 +181,24 @@
 }
 
 
+.order-id-button{
+  font-weight: normal;
+  text-align: left;
+  font-family: 'Chinese Rocks Rg', sana-serif;
+  font-size: 23px;
+  color: white;
+  background-color: black;
+  border: none;
+}
+
+.order-id-button:hover{
+  opacity: 0.8;
+}
+
+.order-id-button:active{
+  opacity: 0.5;
+}
+
 /*PS Added*/
 body{
   margin: 0;
