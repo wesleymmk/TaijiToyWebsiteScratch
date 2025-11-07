@@ -5,10 +5,23 @@ import * as Utils from './Authentication_Page.js';
 export const appContainer = document.getElementById('app');
 import * as AccUtils from './User_Account.js';
 
-export function renderGenerationOutputView(order_ID) {
+export function renderGenerationOutputView(order_ID_param) {
     
     ComUtils.clearAppContainer();
+
+    const order_ID_from_storage = localStorage.getItem('selectedOrderId');
     
+    // 2. Clear it so we don't load it again
+    if (order_ID_from_storage) {
+        localStorage.removeItem('selectedOrderId');
+    }
+
+    // 3. Decide which ID to use. The stored ID (from account page)
+    //    takes precedence over any parameter.
+    const order_ID = order_ID_from_storage || order_ID_param;
+
+
+
     const dataForPHP = {
         order_id: order_ID
     };

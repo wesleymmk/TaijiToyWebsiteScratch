@@ -81,8 +81,8 @@ scrollableContent.innerHTML = '<p>Loading your order history...</p>';
 
                         orderItem.innerHTML = `
                             <div class="order-id">
-                            <button class="button order-id-button" 
-                            <strong>Order ID:</strong> ${orderId} <strong>Traits:</strong> ${trait1}, ${trait2}
+                            <button class="button order-id-button" data-order-id="${orderId}">
+                            Order Number: ${orderId} Traits: ${trait1}, ${trait2}
                             </button></div><hr>                
                         `;
                         scrollableContent.appendChild(orderItem);
@@ -107,6 +107,22 @@ scrollableContent.innerHTML = '<p>Loading your order history...</p>';
         });
 
     }
+
+    scrollableContent.addEventListener('click', function(event) {
+
+        const clickedButton = event.target.closest('.order-id-button');
+
+        if(clickedButton){
+
+            const clickedOrderId = event.target.dataset.orderId;
+
+            console.log("Storing Order ID:", clickedOrderId);
+
+            localStorage.setItem('selectedOrderId',clickedOrderId);
+
+            window.location.href='#order-output';
+        }
+    });
 
 
     // 3. Create a button to trigger the scroll action

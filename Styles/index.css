@@ -164,7 +164,7 @@
   /* --- Core functionality --- */
   height: 300px; /* Gives the window a fixed height */
   width: 500px; /* Gives the window a fixed width */
-  width: 34.967vw;
+  width: 45vw;
   overflow-y: scroll; /* ALWAYS show a vertical scrollbar */
   /* Use 'auto' if you only want the scrollbar to appear when needed */
 
