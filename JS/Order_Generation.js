@@ -25,68 +25,20 @@ export function renderGenerationInputView() {
     navwrapper.appendChild(ComUtils.navmenu); // Grab button from Common_Function.js
     navwrapper.appendChild(ComUtils.accountmenu); // Grab button from Common_Function.js
     ComUtils.Home.classList.remove('home'); // Class removed
-    ComUtils.GenerateInputOption.classList.add('inputorder'); // Class added
-    ComUtils.GenerateOutputOption.classList.remove('outputorder'); // Class removed
+    ComUtils.CreateOption.classList.add('inputorder'); // Class added
     ComUtils.AccountOption.classList.remove('account'); // Class removed
     ComUtils.navmenu.appendChild(ComUtils.Home); // Grab button from Common_Function.js
     ComUtils.navmenu.appendChild(ComUtils.StoreOption); // Grab button from Common_Function.js
     ComUtils.navmenu.appendChild(ComUtils.AboutOption); // Grab button from Common_Function.js
     ComUtils.navmenu.appendChild(ComUtils.ContactOption); // Grab button from Common_Function.js
-    ComUtils.navmenu.appendChild(ComUtils.GenerateInputOption); // Grab button from Common_Function.js
-    ComUtils.navmenu.appendChild(ComUtils.GenerateOutputOption); // Grab button from Common_Function.js
-    ComUtils.accountmenu.appendChild(ComUtils.AccountOption); // Grab button from Common_Function.js
+    
     /***************Auto Scroll Option***************/
-    /**
- * Manually scrolls the viewport to a specific element with a custom duration.
- * @param {string} selector - The CSS selector (e.g., '#myId') of the element to scroll to.
- * @param {number} duration - The total time in milliseconds the scroll should take (e.g., 500).
- */
-    function manualScrollToElement(selector, duration = 500) {
-        const targetElement = document.querySelector(selector);
-
-        if (!targetElement) {
-            console.error(`Error: Element with selector "${selector}" not found.`);
-            return;
-        }
-
-        // Get the starting position and the target position
-        const startPosition = window.pageYOffset;
-        // Calculate the position of the target relative to the top of the document
-        const targetPosition = targetElement.getBoundingClientRect().top + startPosition;
-
-        // The distance to scroll
-        const distance = targetPosition - startPosition;
-
-        let startTime = null;
-
-        // The animation loop function
-        function animationStep(currentTime) {
-            if (startTime === null) startTime = currentTime;
-            const timeElapsed = currentTime - startTime;
-
-            // Calculate the percentage of time elapsed (0 to 1)
-            const progress = Math.min(timeElapsed / duration, 1);
-
-            // Easing function: This simple one creates a smooth start/stop
-            // You could replace this with a more complex function (e.g., easeInOutQuad)
-            const ease = progress < 0.5 ? 2 * progress * progress : 1 - Math.pow(-2 * progress + 2, 2) / 2;
-
-            // Calculate the new scroll position
-            window.scrollTo(0, startPosition + distance * ease);
-
-            // Continue the animation if not finished
-            if (timeElapsed < duration) {
-                window.requestAnimationFrame(animationStep);
-            }
-        }
-
-        // Start the animation loop
-        window.requestAnimationFrame(animationStep);
-    }
+    let keyword = '.inputinnerdiv1';
     const ScrollTimePause = setTimeout(() => {
-        manualScrollToElement('.inputinnerdiv1', 3000);
-    }, 1200);
+        ComUtils.manualScrollToElement(keyword, 3000);
+    }, 3000);
     window.addEventListener('scroll', function () {
+        keyword = 'null';
         clearTimeout(ScrollTimePause);
     });
     /***************Parent Div Containers***************/
@@ -228,6 +180,10 @@ SubmitGeneration.addEventListener('click', async () => {
     
         if (!data.success) {
             alert(`An error occurred: ${data.message}`);
+            LoadingText2.textContent = "Error, Reloading Webpage";
+            setTimeout(() => {
+                window.location.reload();
+            }, 1000);
         }
         
         const traitsArray = data.data.traits;

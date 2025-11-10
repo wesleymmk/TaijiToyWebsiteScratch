@@ -10,6 +10,7 @@ import * as Gen2Utils from './Order_Gen_Output.js';
 //PS Creation & EQ collaboration
 export function renderWelcomeView() {
     ComUtils.clearAppContainer(); // Clear the screen first
+    
     /***************Animation Function on Scroll***************/
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
@@ -27,16 +28,12 @@ export function renderWelcomeView() {
     navwrapper.appendChild(ComUtils.navmenu); // Grab button from Common_Function.js
     navwrapper.appendChild(ComUtils.accountmenu); // Grab button from Common_Function.js
     ComUtils.Home.classList.add('home'); // Class added
-    ComUtils.GenerateInputOption.classList.remove('inputorder'); // Class removed
-    ComUtils.GenerateOutputOption.classList.remove('outputorder'); // Class removed
+    ComUtils.CreateOption.classList.remove('inputorder'); // Class removed
     ComUtils.AccountOption.classList.remove('account'); // Class removed
     ComUtils.navmenu.appendChild(ComUtils.Home); // Grab button from Common_Function.js
     ComUtils.navmenu.appendChild(ComUtils.StoreOption); // Grab button from Common_Function.js
     ComUtils.navmenu.appendChild(ComUtils.AboutOption); // Grab button from Common_Function.js
     ComUtils.navmenu.appendChild(ComUtils.ContactOption); // Grab button from Common_Function.js
-    ComUtils.navmenu.appendChild(ComUtils.GenerateInputOption); // Grab button from Common_Function.js
-    ComUtils.navmenu.appendChild(ComUtils.GenerateOutputOption); // Grab button from Common_Function.js
-    ComUtils.accountmenu.appendChild(ComUtils.AccountOption); // Grab button from Common_Function.js
     /***************Parent Div Containers***************/
     // PS added Body This div will hold the title & other div elements
     const Body = document.createElement('div');

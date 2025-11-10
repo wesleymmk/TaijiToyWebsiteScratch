@@ -13,6 +13,54 @@ export function clearAppContainer()  // WM code // from online modified it so th
 }
 /* These are just the buttons for the header that each webapge will call to simplify each file and reduce
 repeating code*/
+/***************Auto Scroll Option***************/
+/**
+ * Manually scrolls the viewport to a specific element with a custom duration.
+ * @param {string} selector - The CSS selector (e.g., '#myId') of the element to scroll to.
+ * @param {number} duration - The total time in milliseconds the scroll should take (e.g., 500).
+ */
+export function manualScrollToElement(selector, duration = 500) {
+    const targetElement = document.querySelector(selector);
+
+    if (!targetElement) {
+        console.error(`Error: Element with selector "${selector}" not found.`);
+        return;
+    }
+
+    // Get the starting position and the target position
+    const startPosition = window.pageYOffset;
+    // Calculate the position of the target relative to the top of the document
+    const targetPosition = targetElement.getBoundingClientRect().top + startPosition;
+
+    // The distance to scroll
+    const distance = targetPosition - startPosition;
+
+    let startTime = null;
+
+    // The animation loop function
+    function animationStep(currentTime) {
+        if (startTime === null) startTime = currentTime;
+        const timeElapsed = currentTime - startTime;
+
+        // Calculate the percentage of time elapsed (0 to 1)
+        const progress = Math.min(timeElapsed / duration, 1);
+
+        // Easing function: This simple one creates a smooth start/stop
+        // You could replace this with a more complex function (e.g., easeInOutQuad)
+        const ease = progress < 0.5 ? 2 * progress * progress : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+
+        // Calculate the new scroll position
+        window.scrollTo(0, startPosition + distance * ease);
+
+        // Continue the animation if not finished
+        if (timeElapsed < duration) {
+            window.requestAnimationFrame(animationStep);
+        }
+    }
+
+    // Start the animation loop
+    window.requestAnimationFrame(animationStep);
+}
 /***************Parent Div Containers***************/
 // PS added FooterBody This will hold the footer
 export const FooterBody = document.createElement('div');
@@ -43,11 +91,13 @@ export const Home = document.createElement('p');
 Home.textContent = 'Home';
 Home.classList.add('textnavmenu', 'animation');
 Home.addEventListener('click', function () { window.location.href = '#welcome-page'; });
-// PS added the GenerateInputOption to direct to the input Generation page
-export const GenerateInputOption = document.createElement('p');
-GenerateInputOption.textContent = 'Input-Order';
-GenerateInputOption.classList.add('textnavmenu', 'animation');
-GenerateInputOption.addEventListener('click', function () { window.location.href = '#order-input'; });
+// PS added the LogInOption to direct to the input Generation page
+export const LogInOption = document.createElement('p');
+LogInOption.textContent = 'Log-In';
+LogInOption.classList.add('textnavmenu', 'animation.visible');
+LogInOption.addEventListener('click', (event) => {
+    showPopupModal();
+});
 // PS added the StoreOption to direct to the input Generation page
 export const StoreOption = document.createElement('p');
 StoreOption.textContent = 'Store';
@@ -63,15 +113,31 @@ export const ContactOption = document.createElement('p');
 ContactOption.textContent = 'Contact';
 ContactOption.classList.add('textnavmenu', 'animation');
 ContactOption.addEventListener('click', function () { window.location.href = "https://www.taijitoy.com/contact"; });
-// PS added TEMPORARY!!!! GenerateOutputOption to quickly navigate to output page
-export const GenerateOutputOption = document.createElement('p');
-GenerateOutputOption.textContent = 'Output-Order';
-GenerateOutputOption.classList.add('textnavmenu', 'animation');
-GenerateOutputOption.addEventListener('click', function () { window.location.href = '#order-output'; });
+// PS added CreateOption to direct to Create Order Page
+export const CreateOption = document.createElement('p');
+CreateOption.classList.add('textnavmenu', 'animation.visible');
+CreateOption.textContent = 'Create Order';
+CreateOption.addEventListener('click', function () {
+    apiCall('api/login_check.php')
+
+        .then(response => response.json())
+        .then(data => {
+            if (data.success && data.isLoggedIn) {
+
+                window.location.href = '#order-input';
+
+            } else {
+                // Login failed
+                alert(`Login Failed: ${data.message}`);
+                window.location.href = '#welcome-page';
+                window.location.reload();
+            }
+        })
+});
 // PS added AccountOption to direct to the account page
 export const AccountOption = document.createElement('p');
 AccountOption.textContent = 'Account';
-AccountOption.classList.add('textaccountmenu', 'animation');
+AccountOption.classList.add('textaccountmenu', 'animation.visible');
 AccountOption.addEventListener('click', (event) => {
 
     apiCall('api/login_check.php')
@@ -79,9 +145,9 @@ AccountOption.addEventListener('click', (event) => {
         .then(response => response.json())
         .then(data => {
             if (data.success && data.isLoggedIn) {
-
+                                
                 window.location.href = '#account';
-
+                
             } else {
                 // Login failed
                 alert(`Login Failed: ${data.message}`);
@@ -158,6 +224,23 @@ ShopNowButton.textContent = 'Shop Now';
 ShopNowButton.addEventListener('click', function () {
     window.location.href = "https://www.taijitoy.com/store";
 });
+/***************Login Check***************/
+document.addEventListener('DOMContentLoaded', () => {
+
+    apiCall('api/login_check.php')
+    
+        .then(response => response.json())
+        .then(data => {
+            if (data.success && data.isLoggedIn) {
+                accountmenu.appendChild(AccountOption);
+                accountmenu.appendChild(CreateOption);
+            } else {
+                // Login failed
+                accountmenu.appendChild(LogInOption);
+            }
+        })
+
+})
 
 /*Popup function done by Ernesto Q.*/
 //Main purpose is to open up a popup window for the login page. 
@@ -256,6 +339,7 @@ export function showPopupModal() {
                         // 2. Redirect to the logged-in view
                         // Since you import User_Account.js as AccUtils, you should call it here:
                         window.location.href = '#account';
+                        window.location.reload();
 
                     } else {
                         // Login failed (e.g., Invalid email or password)

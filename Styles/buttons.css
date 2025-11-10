@@ -12,12 +12,14 @@
   height: 3.698vw;
   width: 100%;
 }
+/*PS Added*/
 .button1:hover {
   background-color: black;
   color: white;
   border-color: white;
   transition: 0.35s;
 }
+/*PS Added*/
 .button1:active {
   transition: 0.10s;
   opacity: 0.65;

@@ -42,16 +42,13 @@ export function renderGenerationOutputView(order_ID_param) {
     navwrapper.appendChild(ComUtils.navmenu); // Grab button from Common_Function.js
     navwrapper.appendChild(ComUtils.accountmenu); // Grab button from Common_Function.js
     ComUtils.Home.classList.remove('home'); // Class removed
-    ComUtils.GenerateInputOption.classList.remove('inputorder'); // Class removed
-    ComUtils.GenerateOutputOption.classList.add('outputorder'); // Class added
+    ComUtils.CreateOption.classList.remove('inputorder'); // Class removed
     ComUtils.AccountOption.classList.remove('account'); // Class removed
     ComUtils.navmenu.appendChild(ComUtils.Home); // Grab button from Common_Function.js
     ComUtils.navmenu.appendChild(ComUtils.StoreOption); // Grab button from Common_Function.js
     ComUtils.navmenu.appendChild(ComUtils.AboutOption); // Grab button from Common_Function.js
     ComUtils.navmenu.appendChild(ComUtils.ContactOption); // Grab button from Common_Function.js
-    ComUtils.navmenu.appendChild(ComUtils.GenerateInputOption); // Grab button from Common_Function.js
-    ComUtils.navmenu.appendChild(ComUtils.GenerateOutputOption); // Grab button from Common_Function.js
-    ComUtils.accountmenu.appendChild(ComUtils.AccountOption); // Grab button from Common_Function.js
+    
 
     let heading = document.createElement('h1');
     heading.classList.add('header');

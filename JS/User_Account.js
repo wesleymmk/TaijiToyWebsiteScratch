@@ -24,16 +24,13 @@ export function renderUserAccount() {
     navwrapper.appendChild(ComUtils.navmenu); // Grab button from Common_Function.js
     navwrapper.appendChild(ComUtils.accountmenu); // Grab button from Common_Function.js
     ComUtils.Home.classList.remove('home'); // Class removed
-    ComUtils.GenerateInputOption.classList.remove('inputorder'); // Class removed
-    ComUtils.GenerateOutputOption.classList.remove('outputorder'); // Class removed
+    ComUtils.CreateOption.classList.remove('inputorder'); // Class removed
     ComUtils.AccountOption.classList.add('account'); // Class added
     ComUtils.navmenu.appendChild(ComUtils.Home); // Grab button from Common_Function.js
     ComUtils.navmenu.appendChild(ComUtils.StoreOption); // Grab button from Common_Function.js
     ComUtils.navmenu.appendChild(ComUtils.AboutOption); // Grab button from Common_Function.js
     ComUtils.navmenu.appendChild(ComUtils.ContactOption); // Grab button from Common_Function.js
-    ComUtils.navmenu.appendChild(ComUtils.GenerateInputOption); // Grab button from Common_Function.js
-    ComUtils.navmenu.appendChild(ComUtils.GenerateOutputOption); // Grab button from Common_Function.js
-    ComUtils.accountmenu.appendChild(ComUtils.AccountOption); // Grab button from Common_Function.js
+    
 
     let heading = document.createElement('h1');
     heading.classList.add('header');
@@ -172,17 +169,20 @@ scrollableContent.innerHTML = '<p>Loading your order history...</p>';
                     ComUtils.resetSessionClickCount();
 
                     // 3. Redirect to the main homepage/welcome screen
-                    AuthUtils.renderWelcomeView();
+                    window.location.href = '#welcome-page';
+                    window.location.reload();
                 } else {
                     console.error("Logout failed on server:", data.message);
                     // Even if server failed, force redirect locally for UX
-                    AuthUtils.renderWelcomeView();
+                    window.location.href = '#welcome-page';
+                    window.location.reload();
                 }
             })
             .catch(error => {
                 console.error("Network error during logout:", error);
                 // Force redirect locally
-                AuthUtils.renderWelcomeView();
+                window.location.href = '#welcome-page';
+                window.location.reload();
             });
     });
     // **************************************************
