@@ -669,3 +669,34 @@ export function apiCall(php_file, js_object) // WM code //
         */
 }
 
+// === ANALYTICS FUNCTIONS ===
+// Done by Nathan D
+// Initializes click tracking by setting up the global listener.
+export function initializeClickTracking() {
+    // We remove the local clickCount variable here and operate directly on sessionStorage
+
+    // Attach a global listener to increment the count on any click
+    document.addEventListener('click', (event) => {
+        // Retrieve the current count, increment it, and immediately save it back.
+        let currentCount = getSessionClickCount(); // Safely reads from storage
+        currentCount++;
+        sessionStorage.setItem('sessionClickCount', currentCount); // Safely writes to storage
+    });
+}
+
+// Retrieves the current click count
+export function getSessionClickCount() {
+    // This reliably reads the current value from storage, defaulting to 0 if not set.
+    return parseInt(sessionStorage.getItem('sessionClickCount')) || 0;
+}
+
+// Resets the counter (Called on Login/Logout/Order Submission)
+export function resetSessionClickCount() {
+    sessionStorage.removeItem('sessionClickCount');
+    // We must also set it to 0 immediately so that the next click doesn't result in NaN.
+    sessionStorage.setItem('sessionClickCount', 0);
+}
+
+// CRITICAL: Call the initialization function immediately to start tracking clicks
+initializeClickTracking();
+

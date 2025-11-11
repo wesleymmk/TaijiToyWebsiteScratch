@@ -1,6 +1,6 @@
 <?php
 // Endpoint to receive and store custom user behavior analytics (clicks, time)
-//Done by Nathan D.
+// Done by Nathan D.
 session_start();
 
 require_once 'config.php';

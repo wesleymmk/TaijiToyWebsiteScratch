@@ -5,6 +5,46 @@ import * as Utils from './Authentication_Page.js';
 import * as AccUtils from './User_Account.js';
 import * as OrderOut from './Order_Gen_Output.js';
 
+// === ANALYTICS VARIABLES ===
+// Done by Nathan D
+let orderStartTime = null; // Stores the time when the user enters the view
+
+// Function to handle sending analytics data after order save is successful
+const sendAnalyticsData = (order_id) => {
+    // 1. Calculate time taken
+    const timeEnd = performance.now();
+    const time_ms = Math.round(timeEnd - orderStartTime);
+
+    // 2. Get click count
+    const clicks_to_order = ComUtils.getSessionClickCount();
+
+    const analyticsPayload = {
+        order_id: order_id,
+        clicks_to_order: clicks_to_order,
+        time_ms: time_ms
+    };
+
+    ComUtils.apiCall('api/record_analytics.php', analyticsPayload)
+        .then(response => {
+            // Check if the response is valid JSON (handling empty/malformed responses)
+            if (response.status === 204 || response.headers.get('content-length') === '0') {
+                return { success: true, message: "No content response, assumed success." };
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.success) {
+                console.log("Analytics recorded successfully. Clicks:", clicks_to_order, "Time:", time_ms, "ms");
+            } else {
+                console.error("Failed to record analytics:", data.message);
+            }
+        })
+        .catch(error => {
+            console.error("Network or JSON error during analytics submission:", error);
+        });
+};
+// ===========================
+
 // PS creation
 export function renderGenerationInputView() {
     ComUtils.clearAppContainer(); // Clear the screen first
@@ -139,9 +179,6 @@ export function renderGenerationInputView() {
     SubmitGeneration.classList.add('button1', 'pagetextmediumb', 'animation');
     SubmitGeneration.type = "submit";
 
-    
-
-
       // ================= BACKEND INTEGRATION START =================
 // AG 
 // This section handles the connection between the frontend and the backend Node server.
@@ -208,6 +245,12 @@ SubmitGeneration.addEventListener('click', async () => {
                 if (parsedData.success) {
                     const saved_ID = parsedData.output_id;
                     console.log("Successfully saved order ID:", saved_ID);
+
+                    //ANALYTICS INTEGRATION
+                    sendAnalyticsData(saved_ID);
+                    ComUtils.resetSessionClickCount();
+                    // ===================
+
                     setTimeout(() => {
                         OrderOut.renderGenerationOutputView(saved_ID);
                     }, 2000);
