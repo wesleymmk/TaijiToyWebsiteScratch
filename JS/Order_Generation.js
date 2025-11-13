@@ -225,10 +225,10 @@ SubmitGeneration.addEventListener('click', async () => {
         const traitsArray = data.data.traits;
         const prompt = data.data.prompt;
         const dataForPHP = {
-        prompt: prompt,
-        traits: traitsArray
-        }
-    
+            prompt: prompt,
+            traits: traitsArray
+            }
+        const saved_ID;
 
         ComUtils.apiCall('api/save_traits.php', dataForPHP)
             .then(rawResponse => {
@@ -242,7 +242,7 @@ SubmitGeneration.addEventListener('click', async () => {
                 console.log("Final Parsed Response from PHP:", parsedData);
 
                 if (parsedData.success) {
-                    const saved_ID = parsedData.output_id;
+                    saved_ID = parsedData.output_id;
                     console.log("Successfully saved order ID:", saved_ID);
 
                     //ANALYTICS INTEGRATION
