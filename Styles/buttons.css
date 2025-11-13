@@ -141,15 +141,44 @@
   display: flex;
   justify-content: center; /* Optional: centers the buttons horizontally */
   gap: 20px;
-  height: 500px;
+  font-family: 'Chinese Rocks Rg', sana-serif;
+  height: 200px;
+  margin-top:25px;
+  margin-bottom: 10px;
+  margin-right:125px;
+  margin-left: 125px;
 }
+
+.generatedcontent-space-2{
+  display: flex;
+  justify-content: center; /* Optional: centers the buttons horizontally */
+  gap: 100px;
+  font-family: 'Chinese Rocks Rg', sana-serif;
+  height: 50px;
+  margin-top: 50px;
+}
+
+.generatedcontent-space-3{
+  display: flex;
+  justify-content: center; /* Optional: centers the buttons horizontally */
+  gap: 20px;
+  font-family: 'Chinese Rocks Rg', sana-serif;
+  height: 50px;
+  margin-top: 50px;
+  margin-right:125px;
+  margin-left: 125px;
+}
+
 
 /*Added in by EQ*/
 .button-container{
   display: flex;
   justify-content: center; /* Optional: centers the buttons horizontally */
-  gap: 20px;
+  gap: 50px;
+  margin-top: 100px;
 }
+
+
 
 /*Added in by EQ*/
 .RegenText{

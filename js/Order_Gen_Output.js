@@ -55,17 +55,17 @@ export function renderGenerationOutputView(order_ID_param) {
     heading.textContent = 'Generation Output Page';
 
     let generatedcontent_space = document.createElement('div');
-    generatedcontent_space.classList.add('generatedcontent-space');
+    generatedcontent_space.classList.add('generatedcontent-space-2');
     generatedcontent_space.textContent = 'Loading your generated toys...'; // Show a loading message
     
 
     let generatedcontent_space_2 = document.createElement('div');
-    generatedcontent_space_2.classList.add('generatedcontent-space');
+    generatedcontent_space_2.classList.add('generatedcontent-space-2');
     //generatedcontent_space_2.textContent = 'Loading your generated toys...'; // Show a loading message
     
 
     let generatedcontent_space_3 = document.createElement('div');
-    generatedcontent_space_3.classList.add('generatedcontent-space');
+    generatedcontent_space_3.classList.add('generatedcontent-space-3');
     //generatedcontent_space_2.textContent = 'Loading your generated toys...'; // Show a loading message
     
 
@@ -75,13 +75,21 @@ export function renderGenerationOutputView(order_ID_param) {
     
 
     let generatedcontent_space_5 = document.createElement('div');
-    generatedcontent_space_5.classList.add('generatedcontent-space');
+    generatedcontent_space_5.classList.add('generatedcontent-space-2');
     //generatedcontent_space_2.textContent = 'Loading your generated toys...'; // Show a loading message
     
     let generatedcontent_space_6 = document.createElement('div');
-    generatedcontent_space_6.classList.add('generatedcontent-space');
+    generatedcontent_space_6.classList.add('generatedcontent-space-2');
     //generatedcontent_space_2.textContent = 'Loading your generated toys...'; // Show a loading message
-    
+
+    let generatedcontent_space_7 = document.createElement('div');
+    generatedcontent_space_7.classList.add('generatedcontent-space-3');
+    //generatedcontent_space_2.textContent = 'Loading your generated toys...'; // Show a loading message
+
+
+    let generatedcontent_space_8 = document.createElement('div');
+    generatedcontent_space_8.classList.add('generatedcontent-space');
+    //generatedcontent_space_2.textContent = 'Loading your generated toys...'; // Show a loading message
 
 
     // --- API CALL AND DATA HANDLING ---
@@ -276,36 +284,36 @@ export function renderGenerationOutputView(order_ID_param) {
                 generatedcontent_space.appendChild(TraitText4);
                 generatedcontent_space.appendChild(TraitText5);
                 generatedcontent_space.appendChild(TraitText6);
-                generatedcontent_space_4.appendChild(TraitText7);
-                generatedcontent_space_4.appendChild(TraitText8);
-                generatedcontent_space_4.appendChild(TraitText9);
-                generatedcontent_space_4.appendChild(TraitText10);
-                generatedcontent_space_4.appendChild(TraitText11);
-                generatedcontent_space_4.appendChild(TraitText12);
+                generatedcontent_space_5.appendChild(TraitText7);
+                generatedcontent_space_5.appendChild(TraitText8);
+                generatedcontent_space_5.appendChild(TraitText9);
+                generatedcontent_space_5.appendChild(TraitText10);
+                generatedcontent_space_5.appendChild(TraitText11);
+                generatedcontent_space_5.appendChild(TraitText12);
                 generatedcontent_space_2.appendChild(ColorText1);
                 generatedcontent_space_2.appendChild(ColorText2);
                 generatedcontent_space_2.appendChild(ColorText3);
                 generatedcontent_space_2.appendChild(ColorText4);
                 generatedcontent_space_2.appendChild(ColorText5);
                 generatedcontent_space_2.appendChild(ColorText6);
-                generatedcontent_space_5.appendChild(ColorText7);
-                generatedcontent_space_5.appendChild(ColorText8);
-                generatedcontent_space_5.appendChild(ColorText9);
-                generatedcontent_space_5.appendChild(ColorText10);
-                generatedcontent_space_5.appendChild(ColorText11);
-                generatedcontent_space_5.appendChild(ColorText12);
+                generatedcontent_space_6.appendChild(ColorText7);
+                generatedcontent_space_6.appendChild(ColorText8);
+                generatedcontent_space_6.appendChild(ColorText9);
+                generatedcontent_space_6.appendChild(ColorText10);
+                generatedcontent_space_6.appendChild(ColorText11);
+                generatedcontent_space_6.appendChild(ColorText12);
                 generatedcontent_space_3.appendChild(ShortText1);
-                generatedcontent_space_3.appendChild(LongText1);
+                generatedcontent_space_4.appendChild(LongText1);
                 generatedcontent_space_3.appendChild(ShortText2);
-                generatedcontent_space_3.appendChild(LongText2);
+                generatedcontent_space_4.appendChild(LongText2);
                 generatedcontent_space_3.appendChild(ShortText3);
-                generatedcontent_space_3.appendChild(LongText3);
-                generatedcontent_space_6.appendChild(ShortText4);
-                generatedcontent_space_6.appendChild(LongText4);
-                generatedcontent_space_6.appendChild(ShortText5);
-                generatedcontent_space_6.appendChild(LongText5);
-                generatedcontent_space_6.appendChild(ShortText6);
-                generatedcontent_space_6.appendChild(LongText6);
+                generatedcontent_space_4.appendChild(LongText3);
+                generatedcontent_space_7.appendChild(ShortText4);
+                generatedcontent_space_8.appendChild(LongText4);
+                generatedcontent_space_7.appendChild(ShortText5);
+                generatedcontent_space_8.appendChild(LongText5);
+                generatedcontent_space_7.appendChild(ShortText6);
+                generatedcontent_space_8.appendChild(LongText6);
 
             } else {
                 // The PHP script returned a handled error (e.g., success: false)
@@ -342,6 +350,8 @@ export function renderGenerationOutputView(order_ID_param) {
     appContainer.appendChild(generatedcontent_space_4);
     appContainer.appendChild(generatedcontent_space_5);
     appContainer.appendChild(generatedcontent_space_6);
+    appContainer.appendChild(generatedcontent_space_7);
+    appContainer.appendChild(generatedcontent_space_8);
     appContainer.appendChild(buttonContainer);
     buttonContainer.appendChild(RegenAll);
     buttonContainer.appendChild(placeorder);
