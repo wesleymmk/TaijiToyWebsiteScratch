@@ -1,14 +1,24 @@
 <?php
+
+session_start();
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 header('Content-Type: application/json');
 header("Access-Control-Allow-Origin: *"); 
 
+require_once 'config.php';
+require_once 'common_function.php';
+
 // presetting response incase the script crashes
 $response = ['success' => false, 'message' => 'An unexpected error occurred.'];
+$conn = null;
+
 
 try {
+    // ensure user is logged in
+    $customer_id = get_user_ID();
+
     $request_data = json_decode(file_get_contents('php://input'), true);
     
     // getting the order id making sure its there
@@ -17,6 +27,16 @@ try {
     }
     
     $order_id = $request_data['order_id'];
+
+    // complete connection to SQL
+    mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+    $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+    $conn->set_charset("utf8mb4");
+    
+    // Check to ensure the order/images are connected to the right customer
+    if (!doesOutputBelongToUser($conn, $order_id, $customer_id)) {
+        throw new Exception("Access Denied: You do not have permission to view these images.");
+    }
 
     // Creating the Base URL path this will need to change when going live
     $base_image_url = "/TaijiToyWebsiteScratch/Generated_Images/Order_" . $order_id . "/";
@@ -36,6 +56,11 @@ try {
 } catch (Exception $e) {
     // setting the error message.
     $response['message'] = $e->getMessage();
+} finally {
+    // close the connection
+    if ($conn) {
+        $conn->close();
+    }
 }
 
 // Send the final JSON response
