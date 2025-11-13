@@ -16,13 +16,46 @@ function loadPage() {
     let content = '';
     switch (hash) {
         case 'order-output':
-            content = OutputOrder.renderGenerationOutputView();
+            ComUtils.apiCall('api/login_check.php')
+
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success && data.isLoggedIn) {
+                        content = OutputOrder.renderGenerationOutputView();
+                    } else {
+                        // Login failed
+                        alert('Please Login');
+                        window.location.href = '#welcome-page';
+                    }
+                })
             break;
         case 'order-input':
-            content = InputOrder.renderGenerationInputView();
+            ComUtils.apiCall('api/login_check.php')
+
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success && data.isLoggedIn) {
+                        content = InputOrder.renderGenerationInputView();
+                    } else {
+                        // Login failed
+                        alert('Please Login');
+                        window.location.href = '#welcome-page';
+                    }
+                })
             break;
         case 'account':
-            content = Account.renderUserAccount();
+            ComUtils.apiCall('api/login_check.php')
+
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success && data.isLoggedIn) {
+                        content = Account.renderUserAccount();
+                    } else {
+                        // Login failed
+                        alert('Please Login');
+                        window.location.href = '#welcome-page';
+                    }
+                })
             break;
         case 'welcome-page':
         default:

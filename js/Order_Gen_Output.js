@@ -36,13 +36,13 @@ export function renderGenerationOutputView(order_ID_param) {
     }, { threshold: 0.8 });
     //PS added navwrapper, This is the new implementation of the navbar. Removed html version.
     const navwrapper = document.createElement('div');
-    navwrapper.id = 'order-output'; // This is adding an id for the css class to specifically target this attribute
+    navwrapper.id = 'order-input'; // This is adding an id for the css class to specifically target this attribute
     navwrapper.classList.add('nav-wrapper'); // Class added
     navwrapper.appendChild(ComUtils.HomeLogo); // Grab button from Common_Function.js
     navwrapper.appendChild(ComUtils.navmenu); // Grab button from Common_Function.js
     navwrapper.appendChild(ComUtils.accountmenu); // Grab button from Common_Function.js
     ComUtils.Home.classList.remove('home'); // Class removed
-    ComUtils.CreateOption.classList.remove('inputorder'); // Class removed
+    ComUtils.CreateOption.classList.add('inputorder'); // Class removed
     ComUtils.AccountOption.classList.remove('account'); // Class removed
     ComUtils.navmenu.appendChild(ComUtils.Home); // Grab button from Common_Function.js
     ComUtils.navmenu.appendChild(ComUtils.StoreOption); // Grab button from Common_Function.js

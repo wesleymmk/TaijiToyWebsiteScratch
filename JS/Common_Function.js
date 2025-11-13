@@ -94,7 +94,7 @@ Home.addEventListener('click', function () { window.location.href = '#welcome-pa
 // PS added the LogInOption to direct to the input Generation page
 export const LogInOption = document.createElement('p');
 LogInOption.textContent = 'Log-In';
-LogInOption.classList.add('textnavmenu', 'animation.visible');
+LogInOption.classList.add('textnavmenu', 'altanimation');
 LogInOption.addEventListener('click', (event) => {
     showPopupModal();
 });
@@ -115,7 +115,7 @@ ContactOption.classList.add('textnavmenu', 'animation');
 ContactOption.addEventListener('click', function () { window.location.href = "https://www.taijitoy.com/contact"; });
 // PS added CreateOption to direct to Create Order Page
 export const CreateOption = document.createElement('p');
-CreateOption.classList.add('textnavmenu', 'animation.visible');
+CreateOption.classList.add('textnavmenu', 'altanimation');
 CreateOption.textContent = 'Create Order';
 CreateOption.addEventListener('click', function () {
     apiCall('api/login_check.php')
@@ -123,9 +123,7 @@ CreateOption.addEventListener('click', function () {
         .then(response => response.json())
         .then(data => {
             if (data.success && data.isLoggedIn) {
-
                 window.location.href = '#order-input';
-
             } else {
                 // Login failed
                 alert(`Login Failed: ${data.message}`);
@@ -137,7 +135,7 @@ CreateOption.addEventListener('click', function () {
 // PS added AccountOption to direct to the account page
 export const AccountOption = document.createElement('p');
 AccountOption.textContent = 'Account';
-AccountOption.classList.add('textaccountmenu', 'animation.visible');
+AccountOption.classList.add('textaccountmenu', 'altanimation');
 AccountOption.addEventListener('click', (event) => {
 
     apiCall('api/login_check.php')
@@ -155,6 +153,52 @@ AccountOption.addEventListener('click', (event) => {
             }
         })
 });
+// PS added LogOutOption to log out of account
+export const LogOutOption = document.createElement('p');
+LogOutOption.textContent = 'Logout';
+LogOutOption.classList.add('textaccountmenu', 'altanimation');
+// **************************************************
+// START: LOGOUT LISTENER ADDED
+// **************************************************
+LogOutOption.addEventListener('click', (event) => {
+    event.preventDefault();
+
+    // 1. Call the server-side script to destroy the PHP session
+    apiCall('api/logout.php', {})
+        .then(response => {
+            if (response.status === 204 || response.headers.get('content-length') === '0') {
+                return {}
+            }
+            return response.json();
+
+        })
+        .then(data => {
+            if (data && data.success) {
+                console.log("Session successfully destroyed on server.");
+
+                // 2. Cleanup Client-Side (Analytics tracker)
+                resetSessionClickCount();
+
+                // 3. Redirect to the main homepage/welcome screen
+                window.location.href = '#welcome-page';
+                window.location.reload();
+            } else {
+                console.error("Logout failed on server:", data.message);
+                // Even if server failed, force redirect locally for UX
+                window.location.href = '#welcome-page';
+                window.location.reload();
+            }
+        })
+        .catch(error => {
+            console.error("Network error during logout:", error);
+            // Force redirect locally
+            window.location.href = '#welcome-page';
+            window.location.reload();
+        });
+});
+// **************************************************
+// END: LOGOUT LISTENER ADDED
+// **************************************************
 //PS added Footer text for footer
 export const Footer = document.createElement('p');
 Footer.classList.add('pagetextsmallb', 'animation');
@@ -228,22 +272,21 @@ ShopNowButton.addEventListener('click', function () {
 document.addEventListener('DOMContentLoaded', () => {
 
     apiCall('api/login_check.php')
-    
+
         .then(response => response.json())
         .then(data => {
             if (data.success && data.isLoggedIn) {
                 accountmenu.appendChild(AccountOption);
                 accountmenu.appendChild(CreateOption);
+                accountmenu.appendChild(LogOutOption);
             } else {
                 // Login failed
                 accountmenu.appendChild(LogInOption);
             }
         })
-
-})
-
+});
 /*Popup function done by Ernesto Q.*/
-//Main purpose is to open up a popup window for the login page. 
+//Main purpose is to open up a popup window for the login page.
 export function showPopupModal() {
     let modal = document.getElementById('myPopupModal');
     if (!modal) {
@@ -252,7 +295,7 @@ export function showPopupModal() {
         modal.classList.add('modal');
 
         let modalContent = document.createElement('div');
-        modalContent.classList.add('modal-content');
+        modalContent.classList.add('modal-content', 'altanimation');
 
         let closeButton = document.createElement('span');
         closeButton.classList.add('close-button');
@@ -382,7 +425,7 @@ export function showCreateAccountPopup() {
     if (!modal) {
         modal = document.createElement('div');
         modal.id = 'myCreateAccountModal';
-        modal.classList.add('modal');
+        modal.classList.add('modal', 'altanimation');
 
         let modalContent = document.createElement('div');
         modalContent.classList.add('modal-content');
@@ -639,7 +682,6 @@ export function CAsuccess() {
     }
     modal.style.display = 'block';
 }
-
 // This function acts as an API call taking a JS object and a PHP endpoint
 export function apiCall(php_file, js_object) // WM code // 
 {

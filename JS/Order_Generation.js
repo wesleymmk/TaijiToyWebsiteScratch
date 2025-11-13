@@ -71,7 +71,6 @@ export function renderGenerationInputView() {
     ComUtils.navmenu.appendChild(ComUtils.StoreOption); // Grab button from Common_Function.js
     ComUtils.navmenu.appendChild(ComUtils.AboutOption); // Grab button from Common_Function.js
     ComUtils.navmenu.appendChild(ComUtils.ContactOption); // Grab button from Common_Function.js
-    
     /***************Auto Scroll Option***************/
     let keyword = '.inputinnerdiv1';
     const ScrollTimePause = setTimeout(() => {

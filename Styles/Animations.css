@@ -58,3 +58,7 @@
   opacity: 1;
   animation: expand 1s;
 }
+/*PS Added*/
+.altanimation {
+  animation: fade-inout 1s;
+}
