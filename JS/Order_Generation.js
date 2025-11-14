@@ -208,7 +208,8 @@ export function renderGenerationInputView() {
 SubmitGeneration.addEventListener('click', async () => {
     
     // Get user input
-    const coreValues = CustomerInput.value.trim();
+    
+    const coreValues = `Traits: ${CustomerInput1.value.trim()} ; Pastimes: ${CustomerInput2.value.trim()} ; Intests ${CustomerInput3.value.trim()}`;
     if (!coreValues) {
         alert('Please enter your values.');
         return;
