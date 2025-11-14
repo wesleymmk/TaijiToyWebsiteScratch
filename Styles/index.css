@@ -97,6 +97,16 @@
   width: 470px;
   width: 24.479vw;
 }
+/*PS Added*/
+.titlediv {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 30px;
+  margin-top: 2.344vw;
+  margin-bottom: 30px;
+  margin-bottom: 2.344vw;
+}
 /*Content within the popup window*/
 /*Modal and modal-content done by Ernesto Q.*/
 .modal{
@@ -129,6 +139,7 @@
   padding: 5px 8px; /* Some padding inside the container */
   border: 2px solid #ddd; /* A subtle border */
   width: 28.53vw;
+  border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* A soft shadow for depth */
   width: 350px;
   width: 24.277vw;
@@ -139,7 +150,7 @@
 
 
 /*EQ added*/
-.inputspcaing{
+.inputspacing{
   display: flex;
   justify-content: center; /* Optional: centers the buttons horizontally */
   gap: 20px;
@@ -149,11 +160,30 @@
 
 
 /*EQ Added*/
-.buttonspcaing{
+.buttonspacing,
+.buttonspacing2 {
   display: flex;
+  flex-direction: row;
   justify-content: center; /* Optional: centers the buttons horizontally */
-  gap: 20px;
-
+  align-items: center;
+  margin-bottom: 20px;
+}
+/*PS Added*/
+.buttonspacing2 {
+  flex-direction: column;
+  margin-bottom: 0px;
+}
+/*PS Added*/
+.buttonspacing3{
+  display: flex;
+  flex-direction: column;
+  align-items: self-end;
+  margin-top: 5px;
+  margin-top: 0.391vw;
+  margin-bottom: 10px;
+  margin-bottom: 0.781vw;
+  padding-right: 10px;
+  padding-right: 0.781vw;
 }
 
 

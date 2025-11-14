@@ -63,12 +63,12 @@ background-color: #008000;
 
 .GenerationOutputTitleDiv{
     display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-top: 50px;
-  margin-top: 3.906vw;
-  margin-bottom: 50px;
-  margin-bottom: 3.906vw;
-  width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    margin-top: 3.906vw;
+    margin-bottom: 50px;
+    margin-bottom: 3.906vw;
+    width: 100%;
 }
