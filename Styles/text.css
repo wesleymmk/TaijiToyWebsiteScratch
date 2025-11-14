@@ -160,7 +160,8 @@
   margin-bottom: 0px;
 }
 /*PS Added*/
-.textnavmenu {
+.textnavmenu,
+.textnavmenu2 {
   margin: 0;
   margin-left: 25px;
   margin-left: 1.953vw;
@@ -170,6 +171,13 @@
   cursor: pointer;
   font-size: 20px;
   font-size: 1.563vw;
+}
+/*PS Added*/
+.textnavmenu2 {
+  font-size: 15px;
+  font-size: 1.172vw;
+  margin-left: 0px;
+  text-decoration: underline;
 }
 /*PS Added*/
 .textaccountmenu {

@@ -50,10 +50,22 @@ export function renderGenerationOutputView(order_ID_param) {
     ComUtils.navmenu.appendChild(ComUtils.ContactOption); // Grab button from Common_Function.js
     
 
-    let heading = document.createElement('h1');
-    heading.classList.add('header');
-    heading.textContent = 'Generation Output Page';
+    // EQ and PS collab
+    //Added in the title and other developments.
+    const Body=document.createElement('div');
+    Body.classList.add('body');
 
+    //EQ and PS collab
+    //New header for the output page
+    const GenerationOutputTitleDiv=document.createElement('div');
+    GenerationOutputTitleDiv.classList.add('GenerationOutputTitleDiv')
+
+    //EQ and PS collab
+    //The text for the header
+    const GenerationOutputText=document.createElement('p');
+    GenerationOutputText.classList.add('pagetexttitle2w');
+    GenerationOutputText.textContent='The Results!!';
+    
     let generatedcontent_space = document.createElement('div');
     generatedcontent_space.classList.add('generatedcontent-space-2');
     generatedcontent_space.textContent = 'Loading your generated toys...'; // Show a loading message
@@ -215,6 +227,43 @@ export function renderGenerationOutputView(order_ID_param) {
 
                 const ColorText1 = document.createElement("p");
                 ColorText1.textContent = Color1;
+                
+                const test1=document.createElement("div");
+                test1.classList.add("test", Color1);
+
+                const test2=document.createElement("div");
+                test2.classList.add("test", Color2);
+
+                const test3=document.createElement("div");
+                test3.classList.add("test", Color3);
+
+                const test4=document.createElement("div");
+                test4.classList.add("test", Color4);
+
+                const test5=document.createElement("div");
+                test5.classList.add("test", Color5);
+
+                const test6=document.createElement("div");
+                test6.classList.add("test", Color6);
+
+                const test7=document.createElement("div");
+                test7.classList.add("test", Color7);
+
+                const test8=document.createElement("div");
+                test8.classList.add("test", Color8);
+
+                const test9=document.createElement("div");
+                test9.classList.add("test", Color9);
+
+                const test10=document.createElement("div");
+                test10.classList.add("test", Color10);
+
+                const test11=document.createElement("div");
+                test11.classList.add("test", Color11);
+
+                const test12=document.createElement("div");
+                test12.classList.add("test", Color12);
+
                 const ColorText2 = document.createElement("p");
                 ColorText2.textContent = Color2;
                 const ColorText3 = document.createElement("p");
@@ -290,18 +339,32 @@ export function renderGenerationOutputView(order_ID_param) {
                 generatedcontent_space_5.appendChild(TraitText10);
                 generatedcontent_space_5.appendChild(TraitText11);
                 generatedcontent_space_5.appendChild(TraitText12);
-                generatedcontent_space_2.appendChild(ColorText1);
-                generatedcontent_space_2.appendChild(ColorText2);
-                generatedcontent_space_2.appendChild(ColorText3);
-                generatedcontent_space_2.appendChild(ColorText4);
-                generatedcontent_space_2.appendChild(ColorText5);
-                generatedcontent_space_2.appendChild(ColorText6);
-                generatedcontent_space_6.appendChild(ColorText7);
-                generatedcontent_space_6.appendChild(ColorText8);
-                generatedcontent_space_6.appendChild(ColorText9);
-                generatedcontent_space_6.appendChild(ColorText10);
-                generatedcontent_space_6.appendChild(ColorText11);
-                generatedcontent_space_6.appendChild(ColorText12);
+                //generatedcontent_space_2.appendChild(ColorText1);
+
+                generatedcontent_space_2.appendChild(test1);
+                generatedcontent_space_2.appendChild(test2);
+                generatedcontent_space_2.appendChild(test3);
+                generatedcontent_space_2.appendChild(test4);
+                generatedcontent_space_2.appendChild(test5);
+                generatedcontent_space_2.appendChild(test6);
+                generatedcontent_space_6.appendChild(test7);
+                generatedcontent_space_6.appendChild(test8);
+                generatedcontent_space_6.appendChild(test9);
+                generatedcontent_space_6.appendChild(test10);
+                generatedcontent_space_6.appendChild(test11);
+                generatedcontent_space_6.appendChild(test12);
+
+               // generatedcontent_space_2.appendChild(ColorText2);
+               // generatedcontent_space_2.appendChild(ColorText3);
+                //generatedcontent_space_2.appendChild(ColorText4);
+                //generatedcontent_space_2.appendChild(ColorText5);
+               // generatedcontent_space_2.appendChild(ColorText6);
+                //generatedcontent_space_6.appendChild(ColorText7);
+               // generatedcontent_space_6.appendChild(ColorText8);
+               // generatedcontent_space_6.appendChild(ColorText9);
+                //generatedcontent_space_6.appendChild(ColorText10);
+               // generatedcontent_space_6.appendChild(ColorText11);
+               // generatedcontent_space_6.appendChild(ColorText12);
                 generatedcontent_space_3.appendChild(ShortText1);
                 generatedcontent_space_4.appendChild(LongText1);
                 generatedcontent_space_3.appendChild(ShortText2);
@@ -343,7 +406,10 @@ export function renderGenerationOutputView(order_ID_param) {
     /***************Navigation Bar***************/
     appContainer.appendChild(navwrapper);
     /***************Parent Div containers***************/
-    appContainer.appendChild(heading);
+    //appContainer.appendChild(heading);
+    appContainer.appendChild(Body);
+    Body.appendChild(GenerationOutputTitleDiv);
+    GenerationOutputTitleDiv.appendChild(GenerationOutputText);
     appContainer.appendChild(generatedcontent_space);
     appContainer.appendChild(generatedcontent_space_2);
     appContainer.appendChild(generatedcontent_space_3);
