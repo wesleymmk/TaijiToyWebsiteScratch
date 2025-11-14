@@ -39,7 +39,7 @@ try {
     }
 
     // Creating the Base URL path this will need to change when going live
-    $base_image_url = "/TaijiToyWebsiteScratch/Generated_Images/Order_" . $order_id . "/";
+    $base_image_url = "/TaijiToyWebsiteScratch/js/Generated_Images/Order_" . $order_id . "/";
 
     // Creatingthe vals of the individual images
     $image_paths = [];
