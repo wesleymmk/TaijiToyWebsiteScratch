@@ -1,0 +1,74 @@
+.test{
+    height: 40px;
+    width: 40px;
+    border:#000000;
+    border-style: solid;
+}
+
+.Clear{
+    background-color: white;
+}
+
+.white{
+    background-color: white;
+}
+
+.Black{
+    background-color: #000000;
+}
+
+.Green{
+background-color: #008000;
+}
+
+.Brown{
+    background-color: #8A5F3A;
+}
+
+.Blue{
+    background-color: #001f6e;
+}
+
+.Red{
+    background-color: #ef3340;
+}
+
+.Gray{
+    background-color: #323537;
+}
+
+.Gold{
+    background-color: #a79782;
+}
+
+.Yellow{
+    background-color: #fada02;
+}
+
+.Orange{
+    background-color: #f47c3c;
+}
+
+.Pink{
+    background-color: #f37D97;
+}
+
+.Purple{
+    background-color: #A073B4;
+}
+
+.Silver{
+    background-color: #a7a9ac;
+}
+
+.GenerationOutputTitleDiv{
+    display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+  margin-top: 3.906vw;
+  margin-bottom: 50px;
+  margin-bottom: 3.906vw;
+  width: 100%;
+}
