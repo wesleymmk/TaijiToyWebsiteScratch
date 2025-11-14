@@ -153,7 +153,7 @@
 .generatedcontent-space-2{
   display: flex;
   justify-content: center; /* Optional: centers the buttons horizontally */
-  gap: 100px;
+  gap: 175px;
   font-family: 'Chinese Rocks Rg', sana-serif;
   height: 50px;
   margin-top: 50px;
@@ -162,7 +162,7 @@
 .generatedcontent-space-3{
   display: flex;
   justify-content: center; /* Optional: centers the buttons horizontally */
-  gap: 20px;
+  gap: 35px;
   font-family: 'Chinese Rocks Rg', sana-serif;
   height: 50px;
   margin-top: 50px;
