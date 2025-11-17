@@ -46,6 +46,17 @@
     height: 200px;
     height: 15.625vw;
     background-color: #001f6e;
+    overflow: visible;
+}
+
+/* Style for generated images inside imagediv */
+.imagediv img {
+    max-width: 65%;
+    max-height: 90%;
+    object-fit: contain;
+    display: block;
+    border-radius: 8px;
+    z-index: 1;
 }
 /*PS Added*/
 .yinyangdiv {
@@ -55,6 +66,7 @@
     height: 6.406vw;
     width: 82px;
     width: 6.406vw;
+    z-index: 2;
 }
 /*PS Added*/
 .shortdesdiv {

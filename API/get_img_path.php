@@ -34,12 +34,13 @@ try {
     $conn->set_charset("utf8mb4");
     
     // Check to ensure the order/images are connected to the right customer
-    if (!doesOutputBelongToUser($conn, $order_id, $customer_id)) {
+    if (!output_customer_ID_match($conn, $order_id, $customer_id)) {
         throw new Exception("Access Denied: You do not have permission to view these images.");
     }
 
     // Creating the Base URL path this will need to change when going live
-    $base_image_url = "/TaijiToyWebsiteScratch/js/Generated_Images/Order_" . $order_id . "/";
+    // Note: images are saved under the `JS/Generated_Images` folder
+    $base_image_url = "/TaijiToyWebsiteScratch/JS/Generated_Images/Order_" . $order_id . "/";
 
     // Creatingthe vals of the individual images
     $image_paths = [];

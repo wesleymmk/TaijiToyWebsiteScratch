@@ -23,6 +23,9 @@ app.use(cors({ origin: 'http://localhost', credentials: true }));
 //  Initialize the Google AI client with your API key
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
+// Debug: Check API key is loaded
+console.log("API Key loaded:", process.env.GEMINI_API_KEY ? `${process.env.GEMINI_API_KEY.substring(0, 10)}... (length: ${process.env.GEMINI_API_KEY.length})` : "NOT FOUND");
+
 console.log("Backend is starting...");
 
 // Test route

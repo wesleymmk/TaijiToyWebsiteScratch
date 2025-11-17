@@ -284,7 +284,6 @@ export function renderGenerationOutputView(order_ID_param) {
 
                 // Clear the 'Loading...' message
                 generatedcontent_space.innerHTML = '';
-                
 
                 // --- DATA UNPACKING (Your Original Code) ---
                 const allToysArray = parsedData.data;
@@ -547,12 +546,117 @@ export function renderGenerationOutputView(order_ID_param) {
                 TraitsDiv6.appendChild(TraitText11);
                 TraitsDiv6.appendChild(TraitText12);
 
+                /***************Build Yin & Yang elements (synchronous)***************/
+                // Build Yin/Yang structures
+                YinYangDiv.appendChild(YinYangOuter2);
+                YinYangOuter2.appendChild(YinYangSide1half);
+                YinYangOuter2.appendChild(YinYangSide1outer);
+                YinYangOuter2.appendChild(YinYangSide2outer);
+                YinYangSide1outer.appendChild(YinYangSide1inner);
+                YinYangSide2outer.appendChild(YinYangSide2inner);
+
+                YinYangDiv2.appendChild(YinYangOuter22);
+                YinYangOuter22.appendChild(YinYangSide1half2);
+                YinYangOuter22.appendChild(YinYangSide1outer2);
+                YinYangOuter22.appendChild(YinYangSide2outer2);
+                YinYangSide1outer2.appendChild(YinYangSide1inner2);
+                YinYangSide2outer2.appendChild(YinYangSide2inner2);
+
+                YinYangDiv3.appendChild(YinYangOuter23);
+                YinYangOuter23.appendChild(YinYangSide1half3);
+                YinYangOuter23.appendChild(YinYangSide1outer3);
+                YinYangOuter23.appendChild(YinYangSide2outer3);
+                YinYangSide1outer3.appendChild(YinYangSide1inner3);
+                YinYangSide2outer3.appendChild(YinYangSide2inner3);
+
+                YinYangDiv4.appendChild(YinYangOuter24);
+                YinYangOuter24.appendChild(YinYangSide1half4);
+                YinYangOuter24.appendChild(YinYangSide1outer4);
+                YinYangOuter24.appendChild(YinYangSide2outer4);
+                YinYangSide1outer4.appendChild(YinYangSide1inner4);
+                YinYangSide2outer4.appendChild(YinYangSide2inner4);
+
+                YinYangDiv5.appendChild(YinYangOuter25);
+                YinYangOuter25.appendChild(YinYangSide1half5);
+                YinYangOuter25.appendChild(YinYangSide1outer5);
+                YinYangOuter25.appendChild(YinYangSide2outer5);
+                YinYangSide1outer5.appendChild(YinYangSide1inner5);
+                YinYangSide2outer5.appendChild(YinYangSide2inner5);
+
+                YinYangDiv6.appendChild(YinYangOuter26);
+                YinYangOuter26.appendChild(YinYangSide1half6);
+                YinYangOuter26.appendChild(YinYangSide1outer6);
+                YinYangOuter26.appendChild(YinYangSide2outer6);
+                YinYangSide1outer6.appendChild(YinYangSide1inner6);
+                YinYangSide2outer6.appendChild(YinYangSide2inner6);
+
+                // Put YinYang INSIDE ImageDiv (so absolute positioning works)
+                ImageDiv.appendChild(YinYangDiv);
+                ImageDiv2.appendChild(YinYangDiv2);
+                ImageDiv3.appendChild(YinYangDiv3);
+                ImageDiv4.appendChild(YinYangDiv4);
+                ImageDiv5.appendChild(YinYangDiv5);
+                ImageDiv6.appendChild(YinYangDiv6);
+
+                // Then append ImageDivs to OuterTraitDiv
                 OuterTraitDiv.appendChild(ImageDiv);
                 OuterTraitDiv2.appendChild(ImageDiv2);
                 OuterTraitDiv3.appendChild(ImageDiv3);
                 OuterTraitDiv4.appendChild(ImageDiv4);
                 OuterTraitDiv5.appendChild(ImageDiv5);
                 OuterTraitDiv6.appendChild(ImageDiv6);
+
+                // Fetch and display images for this order (async - images go into ImageDiv alongside YinYang)
+                ComUtils.apiCall('api/get_img_path.php', { order_id: order_ID })
+                    .then(imgResp => {
+                        if (!imgResp.ok) throw new Error('Failed to fetch image paths');
+                        return imgResp.json();
+           
+                 })
+                    .then(imgJson => {
+                        if (!(imgJson && imgJson.success && Array.isArray(imgJson.data))) {
+                            console.warn("Image fetch returned no data - keeping Yin/Yang placeholders:", imgJson);
+                            return;
+                        }
+
+                        const imagePaths = imgJson.data;
+                        console.log("Fetched image paths:", imagePaths);
+
+                        // Helper: create an img element from a path
+                        const createImageElement = (imagePath) => {
+                            if (imagePath && imagePath.trim() !== '') {
+                                const img = document.createElement('img');
+                                // Add cache-busting timestamp to force reload of regenerated images
+                                img.src = imagePath + '?t=' + Date.now();
+                                img.alt = 'Generated trait image';
+                                console.log("Creating img element with src:", imagePath);
+                                return img;
+                            }
+                            return null;
+                        };
+
+                        // Insert images into ImageDivs (replace Yin/Yang only if image exists)
+                        const imagesToDisplay = [
+                            { div: ImageDiv, path: imagePaths[0] },
+                            { div: ImageDiv2, path: imagePaths[1] },
+                            { div: ImageDiv3, path: imagePaths[2] },
+                            { div: ImageDiv4, path: imagePaths[3] },
+                            { div: ImageDiv5, path: imagePaths[4] },
+                            { div: ImageDiv6, path: imagePaths[5] }
+                        ];
+
+                        imagesToDisplay.forEach(item => {
+                            const imgElement = createImageElement(item.path);
+                            if (imgElement) {
+                                // Don't clear - just append the image alongside the Yin/Yang
+                                item.div.appendChild(imgElement);
+                            }
+                        });
+                    })
+                    .catch(imgErr => {
+                        console.warn("Failed to load images - keeping Yin/Yang placeholders:", imgErr);
+                    });
+
 
                 OuterTraitDiv.appendChild(ShortDesDiv);
                 OuterTraitDiv2.appendChild(ShortDesDiv2);
@@ -594,68 +698,6 @@ export function renderGenerationOutputView(order_ID_param) {
                 //generatedcontent_space_5.appendChild(TraitText10);
                 //generatedcontent_space_5.appendChild(TraitText11);
                 //generatedcontent_space_5.appendChild(TraitText12);
-
-                /***************Yin & Yang 1***************/
-                ImageDiv.appendChild(YinYangDiv);
-                YinYangDiv.appendChild(YinYangOuter2);
-                YinYangOuter2.appendChild(YinYangSide1half);
-                YinYangOuter2.appendChild(YinYangSide1outer);
-                YinYangOuter2.appendChild(YinYangSide2outer);
-                YinYangSide1outer.appendChild(YinYangSide1inner);
-                YinYangSide2outer.appendChild(YinYangSide2inner);
-                /***************Yin & Yang 2***************/
-                ImageDiv2.appendChild(YinYangDiv2);
-                YinYangDiv2.appendChild(YinYangOuter22);
-                YinYangOuter22.appendChild(YinYangSide1half2);
-                YinYangOuter22.appendChild(YinYangSide1outer2);
-                YinYangOuter22.appendChild(YinYangSide2outer2);
-                YinYangSide1outer2.appendChild(YinYangSide1inner2);
-                YinYangSide2outer2.appendChild(YinYangSide2inner2);
-                /***************Yin & Yang 3***************/
-                ImageDiv3.appendChild(YinYangDiv3);
-                YinYangDiv3.appendChild(YinYangOuter23);
-                YinYangOuter23.appendChild(YinYangSide1half3);
-                YinYangOuter23.appendChild(YinYangSide1outer3);
-                YinYangOuter23.appendChild(YinYangSide2outer3);
-                YinYangSide1outer3.appendChild(YinYangSide1inner3);
-                YinYangSide2outer3.appendChild(YinYangSide2inner3);
-                /***************Yin & Yang 4***************/
-                ImageDiv4.appendChild(YinYangDiv4);
-                YinYangDiv4.appendChild(YinYangOuter24);
-                YinYangOuter24.appendChild(YinYangSide1half4);
-                YinYangOuter24.appendChild(YinYangSide1outer4);
-                YinYangOuter24.appendChild(YinYangSide2outer4);
-                YinYangSide1outer4.appendChild(YinYangSide1inner4);
-                YinYangSide2outer4.appendChild(YinYangSide2inner4);
-                /***************Yin & Yang 5***************/
-                ImageDiv5.appendChild(YinYangDiv5);
-                YinYangDiv5.appendChild(YinYangOuter25);
-                YinYangOuter25.appendChild(YinYangSide1half5);
-                YinYangOuter25.appendChild(YinYangSide1outer5);
-                YinYangOuter25.appendChild(YinYangSide2outer5);
-                YinYangSide1outer5.appendChild(YinYangSide1inner5);
-                YinYangSide2outer5.appendChild(YinYangSide2inner5);
-                /***************Yin & Yang 6***************/
-                ImageDiv6.appendChild(YinYangDiv6);
-                YinYangDiv6.appendChild(YinYangOuter26);
-                YinYangOuter26.appendChild(YinYangSide1half6);
-                YinYangOuter26.appendChild(YinYangSide1outer6);
-                YinYangOuter26.appendChild(YinYangSide2outer6);
-                YinYangSide1outer6.appendChild(YinYangSide1inner6);
-                YinYangSide2outer6.appendChild(YinYangSide2inner6);
-                
-                //generatedcontent_space_3.appendChild(ShortText1);
-                //generatedcontent_space_4.appendChild(LongText1);
-                //generatedcontent_space_3.appendChild(ShortText2);
-                //generatedcontent_space_4.appendChild(LongText2);
-                //generatedcontent_space_3.appendChild(ShortText3);
-                //generatedcontent_space_4.appendChild(LongText3);
-                //generatedcontent_space_7.appendChild(ShortText4);
-                //generatedcontent_space_8.appendChild(LongText4);
-                //generatedcontent_space_7.appendChild(ShortText5);
-                //generatedcontent_space_8.appendChild(LongText5);
-                //generatedcontent_space_7.appendChild(ShortText6);
-                //generatedcontent_space_8.appendChild(LongText6);
 
             } else {
                 // The PHP script returned a handled error (e.g., success: false)
