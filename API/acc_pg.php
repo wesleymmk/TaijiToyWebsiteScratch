@@ -16,10 +16,10 @@ try {
     $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
     $conn->set_charset("utf8mb4");
 
-    // 3. Call the new function to get the packaged order summaries
+    // Call the function to get the packaged order summaries
     $order_data = getCustomerOrderSummaries($conn, $customer_id);
 
-    // 4. Prepare the successful response
+    // Prepare the successful response
     $response['success'] = true;
     $response['message'] = "Successfully retrieved " . $order_data['total_orders'] . " orders.";
     $response['data'] = $order_data; // Send the full package

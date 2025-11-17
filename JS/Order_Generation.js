@@ -119,6 +119,18 @@ export function renderGenerationInputView() {
     // PS added InputInnerDiv3 to hold the button
     const InputInnerDiv3 = document.createElement('div');
     InputInnerDiv3.classList.add('inputinnerdiv3');
+    // PS added InputInnerDiv4 to hold the button
+    const InputInnerDiv4 = document.createElement('div');
+    InputInnerDiv4.classList.add('inputinnerdiv3');
+    // PS added InputInnerDiv5 to hold the button
+    const InputInnerDiv5 = document.createElement('div');
+    InputInnerDiv5.classList.add('inputinnerdiv3');
+    // PS added InputInnerDiv6 to hold the button
+    const InputInnerDiv6 = document.createElement('div');
+    InputInnerDiv6.classList.add('inputinnerdiv3');
+    // PS added InputInnerDiv7 to hold the button
+    const InputInnerDiv7 = document.createElement('div');
+    InputInnerDiv7.classList.add('inputinnerdiv3');
     /***************Text to be Inserted into Div containers***************/
     // PS added CustomTailoredText for the title text
     const CustomTailoredText = document.createElement('p');
@@ -132,6 +144,14 @@ export function renderGenerationInputView() {
     const InspiriationalText = document.createElement('p');
     InspiriationalText.classList.add('pagetextmediumb', 'animation');
     InspiriationalText.textContent = 'Take a moment to pause: What inner quality are you most grateful to possess, and how does it make your life richer?';
+    // PS added InspiriationalText2 to be above text entry box
+    const InspiriationalText2 = document.createElement('p');
+    InspiriationalText2.classList.add('pagetextmediumb', 'animation');
+    InspiriationalText2.textContent = 'What are your pastimes that enrcihes your life?';
+    // PS added InspiriationalText3 to be above text entry box
+    const InspiriationalText3 = document.createElement('p');
+    InspiriationalText3.classList.add('pagetextmediumb', 'animation');
+    InspiriationalText3.textContent = 'What are your interest that soothes your mind?';
     // PS added LoadingText to display to the customer that the order is being generated
     const LoadingText = document.createElement('p');
     LoadingText.classList.add('pagetextmediumw');
@@ -140,10 +160,6 @@ export function renderGenerationInputView() {
     const LoadingText2 = document.createElement('p');
     LoadingText2.classList.add('pagetextsmallw');
     LoadingText2.textContent = 'Sending Details to Gemini';
-
-    let GiftOption = document.createElement('input');
-    GiftOption.type = 'checkbox';
-    GiftOption.name = 'giftOption';
     /***************Images to be Inserted into Div containers***************/
     // PS added background image
     const Background = document.createElement('img');
@@ -162,16 +178,22 @@ export function renderGenerationInputView() {
     LoadingLogo.classList.add('LoadBox', 'animation3');
     LoadingLogo.src = 'Brand_Logos/Taijitoylogolight.png';
     LoadingLogo.alt = 'LOADING...';
-
-    let CheckboxLabel = document.createElement('label');
-    CheckboxLabel.htmlFor = 'GiftOption';
-    CheckboxLabel.textContent = 'Is This a Gift?';
-
-    let CustomerInput = document.createElement('textarea');
-    //CustomerInput.type = 'text';
-    CustomerInput.placeholder = 'Enter your Values';
-    CustomerInput.classList.add('textarea', 'animation2');
-    CustomerInput.required = true;
+    /***************Input elements to be Inserted into Div containers***************/
+    // PS added CustomerInput1 for users to enter one of their traits
+    const CustomerInput1 = document.createElement('textarea');
+    CustomerInput1.placeholder = 'Enter your Values';
+    CustomerInput1.classList.add('textarea', 'animation2');
+    CustomerInput1.required = true;
+    // PS added CustomerInput2 for users to enter one of their traits
+    const CustomerInput2 = document.createElement('textarea');
+    CustomerInput2.placeholder = 'Enter your Pastimes';
+    CustomerInput2.classList.add('textarea', 'animation2');
+    CustomerInput2.required = true;
+    // PS added CustomerInput3 for users to enter one of their traits
+    const CustomerInput3 = document.createElement('textarea');
+    CustomerInput3.placeholder = 'Enter your Interests';
+    CustomerInput3.classList.add('textarea', 'animation2');
+    CustomerInput3.required = true;
 
     let SubmitGeneration = document.createElement("button");
     SubmitGeneration.textContent = 'Submit';
@@ -186,7 +208,8 @@ export function renderGenerationInputView() {
 SubmitGeneration.addEventListener('click', async () => {
     
     // Get user input
-    const coreValues = CustomerInput.value.trim();
+    
+    const coreValues = `Traits: ${CustomerInput1.value.trim()} ; Pastimes: ${CustomerInput2.value.trim()} ; Intests ${CustomerInput3.value.trim()}`;
     if (!coreValues) {
         alert('Please enter your values.');
         return;
@@ -218,7 +241,9 @@ SubmitGeneration.addEventListener('click', async () => {
             alert(`An error occurred: ${data.message}`);
             LoadingText2.textContent = "Error, Reloading Webpage";
             setTimeout(() => {
-                window.location.reload();
+                SubmitGeneration.disabled = false;
+                SubmitGeneration.textContent = 'Submit';
+                appContainer.removeChild(Loading);
             }, 1000);
         }
         
@@ -325,6 +350,10 @@ SubmitGeneration.addEventListener('click', async () => {
     InputOuterDiv.appendChild(InputInnerDiv1);
     InputOuterDiv.appendChild(InputInnerDiv2);
     InputOuterDiv.appendChild(InputInnerDiv3);
+    InputOuterDiv.appendChild(InputInnerDiv4);
+    InputOuterDiv.appendChild(InputInnerDiv5);
+    InputOuterDiv.appendChild(InputInnerDiv6);
+    InputOuterDiv.appendChild(InputInnerDiv7);
     ComUtils.Footerdiv.appendChild(ComUtils.Footerinnerdiv);
     ComUtils.Footerdiv.appendChild(ComUtils.Footerinnerdiv2);
     ComUtils.Footerdiv.appendChild(ComUtils.Footerinnerdiv3);
@@ -332,6 +361,8 @@ SubmitGeneration.addEventListener('click', async () => {
     CustomTailoredDiv1.appendChild(CustomTailoredText);
     CustomTailoredDiv3.appendChild(TailoredText);
     InputInnerDiv1.appendChild(InspiriationalText);
+    InputInnerDiv3.appendChild(InspiriationalText2);
+    InputInnerDiv5.appendChild(InspiriationalText3);
     ComUtils.Footerinnerdiv2.appendChild(ComUtils.Footer);
     /***************Images to be used by page***************/
     Body2.appendChild(Background);
@@ -346,8 +377,10 @@ SubmitGeneration.addEventListener('click', async () => {
     ComUtils.Footerinnerdiv3.appendChild(ComUtils.Brand);
     ComUtils.Footerinnerdiv3.appendChild(ComUtils.Texan);
     /***************Input Elements to be used by page***************/
-        InputInnerDiv2.appendChild(CustomerInput);
-    InputInnerDiv3.appendChild(SubmitGeneration);
+    InputInnerDiv2.appendChild(CustomerInput1);
+    InputInnerDiv4.appendChild(CustomerInput2);
+    InputInnerDiv6.appendChild(CustomerInput3);
+    InputInnerDiv7.appendChild(SubmitGeneration);
     /***************Observer Code Searching for Animations***************/
     const allAnimationedElements = document.querySelectorAll('.animation');
     allAnimationedElements.forEach((element) => observer.observe(element));

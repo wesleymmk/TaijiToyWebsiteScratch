@@ -85,7 +85,7 @@ scrollableContent.innerHTML = '<p>Loading your order history...</p>';
                         scrollableContent.appendChild(orderItem);
                     });
                 }   else{
-                    scrollableContent.innerHTML = '<p>Oh no you do not have any orders yet! Create a new order by heading into the order-input tab!!.</p>';
+                    scrollableContent.innerHTML = '<p>Oh no you do not have any orders yet! Create a new order by heading into the Create Order tab!!</p>';
                     console.log("No orders found for this user.");
                 }
 

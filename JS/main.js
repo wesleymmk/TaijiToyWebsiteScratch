@@ -24,8 +24,8 @@ function loadPage() {
                         content = OutputOrder.renderGenerationOutputView();
                     } else {
                         // Login failed
-                        alert('Please Login');
                         window.location.href = '#welcome-page';
+                        alert('Please Login');
                     }
                 })
             break;
@@ -38,8 +38,8 @@ function loadPage() {
                         content = InputOrder.renderGenerationInputView();
                     } else {
                         // Login failed
-                        alert('Please Login');
                         window.location.href = '#welcome-page';
+                        alert('Please Login');
                     }
                 })
             break;
@@ -52,8 +52,8 @@ function loadPage() {
                         content = Account.renderUserAccount();
                     } else {
                         // Login failed
-                        alert('Please Login');
                         window.location.href = '#welcome-page';
+                        alert('Please Login');
                     }
                 })
             break;
