@@ -314,19 +314,7 @@ SubmitGeneration.addEventListener('click', async () => {
                 console.error("An error occurred during the saving process:", error);
                 alert("An error occurred. Check the console for more details.");
             });
-            
-        //console.log("The new order ID is:", orderId);
-    //}    catch    {
-
-    /*}    finally    {
-
-    }*/
-}
-// add catch/ finally statements
-
-
-);
-
+});
 // ================= BACKEND INTEGRATION END =================
     // These commands just call all the elements to the screen
     /***************Navigation Bar***************/

@@ -525,53 +525,6 @@ export function renderGenerationOutputView(order_ID_param) {
                 OuterTraitDiv5.appendChild(TraitsDiv5);
                 OuterTraitDiv6.appendChild(TraitsDiv6);
 
-<<<<<<< HEAD
-                generatedcontent_space.appendChild(TraitText1);
-                generatedcontent_space.appendChild(TraitText2);
-                generatedcontent_space.appendChild(TraitText3);
-                generatedcontent_space.appendChild(TraitText4);
-                generatedcontent_space.appendChild(TraitText5);
-                generatedcontent_space.appendChild(TraitText6);
-                generatedcontent_space_4.appendChild(TraitText7);
-                generatedcontent_space_4.appendChild(TraitText8);
-                generatedcontent_space_4.appendChild(TraitText9);
-                generatedcontent_space_4.appendChild(TraitText10);
-                generatedcontent_space_4.appendChild(TraitText11);
-                generatedcontent_space_4.appendChild(TraitText12);
-                generatedcontent_space_2.appendChild(ColorText1);
-                generatedcontent_space_2.appendChild(ColorText2);
-                generatedcontent_space_2.appendChild(ColorText3);
-                generatedcontent_space_2.appendChild(ColorText4);
-                generatedcontent_space_2.appendChild(ColorText5);
-                generatedcontent_space_2.appendChild(ColorText6);
-                generatedcontent_space_5.appendChild(ColorText7);
-                generatedcontent_space_5.appendChild(ColorText8);
-                generatedcontent_space_5.appendChild(ColorText9);
-                generatedcontent_space_5.appendChild(ColorText10);
-                generatedcontent_space_5.appendChild(ColorText11);
-                generatedcontent_space_5.appendChild(ColorText12);
-                generatedcontent_space_3.appendChild(ShortText1);
-                generatedcontent_space_3.appendChild(LongText1);
-                generatedcontent_space_3.appendChild(ShortText2);
-                generatedcontent_space_3.appendChild(LongText2);
-                generatedcontent_space_3.appendChild(ShortText3);
-                generatedcontent_space_3.appendChild(LongText3);
-                generatedcontent_space_6.appendChild(ShortText4);
-                generatedcontent_space_6.appendChild(LongText4);
-                generatedcontent_space_6.appendChild(ShortText5);
-                generatedcontent_space_6.appendChild(LongText5);
-                generatedcontent_space_6.appendChild(ShortText6);
-                generatedcontent_space_6.appendChild(LongText6);
-
-                // Store traits globally so button handler can access them
-                window.currentTraits = allToysArray;
-                window.currentOrderID = order_ID;
-                // Store coreValues in localStorage for regeneration - from PHP response
-                if (parsedData.coreValues) {
-                    localStorage.setItem('coreValues', parsedData.coreValues);
-                    console.log("Stored coreValues:", parsedData.coreValues);
-                }
-=======
                 TraitsDiv.appendChild(TraitText1);
                 TraitsDiv.appendChild(TraitText2);
                 TraitsDiv2.appendChild(TraitText3);
@@ -694,7 +647,6 @@ export function renderGenerationOutputView(order_ID_param) {
                 //generatedcontent_space_8.appendChild(LongText5);
                 //generatedcontent_space_7.appendChild(ShortText6);
                 //generatedcontent_space_8.appendChild(LongText6);
->>>>>>> a169bd3c26f7cc6d3ea68b10694a8f90eed15612
 
             } else {
                 // The PHP script returned a handled error (e.g., success: false)
@@ -773,22 +725,12 @@ export function renderGenerationOutputView(order_ID_param) {
     /***************Navigation Bar***************/
     appContainer.appendChild(navwrapper);
     /***************Parent Div containers***************/
-<<<<<<< HEAD
-    appContainer.appendChild(heading);
-    appContainer.appendChild(generatedcontent_space);
-    appContainer.appendChild(generatedcontent_space_2);
-    appContainer.appendChild(generatedcontent_space_3);
-    appContainer.appendChild(generatedcontent_space_4);
-    appContainer.appendChild(generatedcontent_space_5);
-    appContainer.appendChild(generatedcontent_space_6);
-=======
     //appContainer.appendChild(heading);
     appContainer.appendChild(Body);
     appContainer.appendChild(Body2);
     Body.appendChild(GenerationOutputTitleDiv);
     GenerationOutputTitleDiv.appendChild(GenerationOutputText);
     Body2.appendChild(generatedcontent_space_1)
->>>>>>> a169bd3c26f7cc6d3ea68b10694a8f90eed15612
     appContainer.appendChild(buttonContainer);
     buttonContainer.appendChild(RegenAll);
     buttonContainer.appendChild(placeorder);
