@@ -36,36 +36,39 @@ export function renderGenerationOutputView(order_ID_param) {
     }, { threshold: 0.8 });
     //PS added navwrapper, This is the new implementation of the navbar. Removed html version.
     const navwrapper = document.createElement('div');
-    navwrapper.id = 'order-input'; // This is adding an id for the css class to specifically target this attribute
+    navwrapper.id = 'order-output'; // This is adding an id for the css class to specifically target this attribute
     navwrapper.classList.add('nav-wrapper'); // Class added
     navwrapper.appendChild(ComUtils.HomeLogo); // Grab button from Common_Function.js
     navwrapper.appendChild(ComUtils.navmenu); // Grab button from Common_Function.js
     navwrapper.appendChild(ComUtils.accountmenu); // Grab button from Common_Function.js
     ComUtils.Home.classList.remove('home'); // Class removed
-    ComUtils.CreateOption.classList.add('inputorder'); // Class removed
+    ComUtils.GenerateInputOption.classList.remove('inputorder'); // Class removed
+    ComUtils.GenerateOutputOption.classList.add('outputorder'); // Class added
     ComUtils.AccountOption.classList.remove('account'); // Class removed
     ComUtils.navmenu.appendChild(ComUtils.Home); // Grab button from Common_Function.js
     ComUtils.navmenu.appendChild(ComUtils.StoreOption); // Grab button from Common_Function.js
     ComUtils.navmenu.appendChild(ComUtils.AboutOption); // Grab button from Common_Function.js
     ComUtils.navmenu.appendChild(ComUtils.ContactOption); // Grab button from Common_Function.js
-    
+    ComUtils.navmenu.appendChild(ComUtils.GenerateInputOption); // Grab button from Common_Function.js
+    ComUtils.navmenu.appendChild(ComUtils.GenerateOutputOption); // Grab button from Common_Function.js
+    ComUtils.accountmenu.appendChild(ComUtils.AccountOption); // Grab button from Common_Function.js
 
     let heading = document.createElement('h1');
     heading.classList.add('header');
     heading.textContent = 'Generation Output Page';
 
     let generatedcontent_space = document.createElement('div');
-    generatedcontent_space.classList.add('generatedcontent-space-2');
+    generatedcontent_space.classList.add('generatedcontent-space');
     generatedcontent_space.textContent = 'Loading your generated toys...'; // Show a loading message
     
 
     let generatedcontent_space_2 = document.createElement('div');
-    generatedcontent_space_2.classList.add('generatedcontent-space-2');
+    generatedcontent_space_2.classList.add('generatedcontent-space');
     //generatedcontent_space_2.textContent = 'Loading your generated toys...'; // Show a loading message
     
 
     let generatedcontent_space_3 = document.createElement('div');
-    generatedcontent_space_3.classList.add('generatedcontent-space-3');
+    generatedcontent_space_3.classList.add('generatedcontent-space');
     //generatedcontent_space_2.textContent = 'Loading your generated toys...'; // Show a loading message
     
 
@@ -75,21 +78,13 @@ export function renderGenerationOutputView(order_ID_param) {
     
 
     let generatedcontent_space_5 = document.createElement('div');
-    generatedcontent_space_5.classList.add('generatedcontent-space-2');
+    generatedcontent_space_5.classList.add('generatedcontent-space');
     //generatedcontent_space_2.textContent = 'Loading your generated toys...'; // Show a loading message
     
     let generatedcontent_space_6 = document.createElement('div');
-    generatedcontent_space_6.classList.add('generatedcontent-space-2');
+    generatedcontent_space_6.classList.add('generatedcontent-space');
     //generatedcontent_space_2.textContent = 'Loading your generated toys...'; // Show a loading message
-
-    let generatedcontent_space_7 = document.createElement('div');
-    generatedcontent_space_7.classList.add('generatedcontent-space-3');
-    //generatedcontent_space_2.textContent = 'Loading your generated toys...'; // Show a loading message
-
-
-    let generatedcontent_space_8 = document.createElement('div');
-    generatedcontent_space_8.classList.add('generatedcontent-space');
-    //generatedcontent_space_2.textContent = 'Loading your generated toys...'; // Show a loading message
+    
 
 
     // --- API CALL AND DATA HANDLING ---
@@ -284,36 +279,45 @@ export function renderGenerationOutputView(order_ID_param) {
                 generatedcontent_space.appendChild(TraitText4);
                 generatedcontent_space.appendChild(TraitText5);
                 generatedcontent_space.appendChild(TraitText6);
-                generatedcontent_space_5.appendChild(TraitText7);
-                generatedcontent_space_5.appendChild(TraitText8);
-                generatedcontent_space_5.appendChild(TraitText9);
-                generatedcontent_space_5.appendChild(TraitText10);
-                generatedcontent_space_5.appendChild(TraitText11);
-                generatedcontent_space_5.appendChild(TraitText12);
+                generatedcontent_space_4.appendChild(TraitText7);
+                generatedcontent_space_4.appendChild(TraitText8);
+                generatedcontent_space_4.appendChild(TraitText9);
+                generatedcontent_space_4.appendChild(TraitText10);
+                generatedcontent_space_4.appendChild(TraitText11);
+                generatedcontent_space_4.appendChild(TraitText12);
                 generatedcontent_space_2.appendChild(ColorText1);
                 generatedcontent_space_2.appendChild(ColorText2);
                 generatedcontent_space_2.appendChild(ColorText3);
                 generatedcontent_space_2.appendChild(ColorText4);
                 generatedcontent_space_2.appendChild(ColorText5);
                 generatedcontent_space_2.appendChild(ColorText6);
-                generatedcontent_space_6.appendChild(ColorText7);
-                generatedcontent_space_6.appendChild(ColorText8);
-                generatedcontent_space_6.appendChild(ColorText9);
-                generatedcontent_space_6.appendChild(ColorText10);
-                generatedcontent_space_6.appendChild(ColorText11);
-                generatedcontent_space_6.appendChild(ColorText12);
+                generatedcontent_space_5.appendChild(ColorText7);
+                generatedcontent_space_5.appendChild(ColorText8);
+                generatedcontent_space_5.appendChild(ColorText9);
+                generatedcontent_space_5.appendChild(ColorText10);
+                generatedcontent_space_5.appendChild(ColorText11);
+                generatedcontent_space_5.appendChild(ColorText12);
                 generatedcontent_space_3.appendChild(ShortText1);
-                generatedcontent_space_4.appendChild(LongText1);
+                generatedcontent_space_3.appendChild(LongText1);
                 generatedcontent_space_3.appendChild(ShortText2);
-                generatedcontent_space_4.appendChild(LongText2);
+                generatedcontent_space_3.appendChild(LongText2);
                 generatedcontent_space_3.appendChild(ShortText3);
-                generatedcontent_space_4.appendChild(LongText3);
-                generatedcontent_space_7.appendChild(ShortText4);
-                generatedcontent_space_8.appendChild(LongText4);
-                generatedcontent_space_7.appendChild(ShortText5);
-                generatedcontent_space_8.appendChild(LongText5);
-                generatedcontent_space_7.appendChild(ShortText6);
-                generatedcontent_space_8.appendChild(LongText6);
+                generatedcontent_space_3.appendChild(LongText3);
+                generatedcontent_space_6.appendChild(ShortText4);
+                generatedcontent_space_6.appendChild(LongText4);
+                generatedcontent_space_6.appendChild(ShortText5);
+                generatedcontent_space_6.appendChild(LongText5);
+                generatedcontent_space_6.appendChild(ShortText6);
+                generatedcontent_space_6.appendChild(LongText6);
+
+                // Store traits globally so button handler can access them
+                window.currentTraits = allToysArray;
+                window.currentOrderID = order_ID;
+                // Store coreValues in localStorage for regeneration - from PHP response
+                if (parsedData.coreValues) {
+                    localStorage.setItem('coreValues', parsedData.coreValues);
+                    console.log("Stored coreValues:", parsedData.coreValues);
+                }
 
             } else {
                 // The PHP script returned a handled error (e.g., success: false)
@@ -336,10 +340,59 @@ export function renderGenerationOutputView(order_ID_param) {
     RegenAll.textContent = 'Regenerate All';
     RegenAll.classList.add('RegenText');
 
+    // Attach click handler for "Regenerate All" — uses Node backend to regenerate images
+    RegenAll.addEventListener('click', async () => {
+        RegenAll.disabled = true;
+        const originalText = RegenAll.textContent;
+        RegenAll.textContent = 'Regenerating...';
+
+        try {
+            const payload = {
+                coreValues: localStorage.getItem('coreValues') || '',
+                traits: window.currentTraits,
+                orderID: window.currentOrderID,
+                regenerate: true  // Flag to tell backend to generate NEW traits from Gemini
+            };
+
+                        const resp = await fetch('http://localhost:3000/generate', {
+                            method: 'POST',
+                            credentials: 'include',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+
+            const json = await resp.json();
+            if (json && json.success) {
+                // regeneration succeeded on server — store order ID and re-render output view
+                try { localStorage.setItem('selectedOrderId', window.currentOrderID); } catch (e) { console.warn('localStorage set failed:', e); }
+                alert('Regeneration complete. Showing updated results.');
+                // Re-render the output view in-place without a full reload
+                try {
+                    renderGenerationOutputView(window.currentOrderID);
+                } catch (e) {
+                    // Fallback: if render fails, navigate to the output hash and reload
+                    console.warn('In-place render failed, falling back to reload:', e);
+                    window.location.hash = '#order-output';
+                    window.location.reload();
+                }
+            } else {
+                alert('Regeneration failed: ' + (json.message || resp.statusText));
+            }
+        } catch (err) {
+            console.error('Regeneration error:', err);
+            alert('Regeneration failed: ' + (err.message || err));
+        } finally {
+            RegenAll.disabled = false;
+            RegenAll.textContent = originalText;
+        }
+    });
+
     let placeorder = document.createElement("button");
     placeorder.textContent = 'Place an order';
     placeorder.classList.add('RegenText')
 
+
+   
     /***************Navigation Bar***************/
     appContainer.appendChild(navwrapper);
     /***************Parent Div containers***************/
@@ -350,8 +403,6 @@ export function renderGenerationOutputView(order_ID_param) {
     appContainer.appendChild(generatedcontent_space_4);
     appContainer.appendChild(generatedcontent_space_5);
     appContainer.appendChild(generatedcontent_space_6);
-    appContainer.appendChild(generatedcontent_space_7);
-    appContainer.appendChild(generatedcontent_space_8);
     appContainer.appendChild(buttonContainer);
     buttonContainer.appendChild(RegenAll);
     buttonContainer.appendChild(placeorder);

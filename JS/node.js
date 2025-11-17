@@ -17,7 +17,8 @@ const { GoogleGenerativeAI } = require("@google/generative-ai");
 // Express Setup
 const app = express();
 app.use(express.json()); // allows the app to read JSON request bodies
-app.use(cors());         // enables CORS so the frontend can talk to this backend
+// Enable CORS with credentials so browser cookies (PHP session) can be forwarded to Node
+app.use(cors({ origin: 'http://localhost', credentials: true }));
 
 //  Initialize the Google AI client with your API key
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
@@ -74,41 +75,92 @@ My Core Values: ${coreValues}
 }
 
 
+/**
+ * Helper: generateImageForPrompt
+ * Returns: base64-encoded image data (string) for the given text prompt.
+ *
+ * Uses the Gemini image model `gemini-2.5-flash-image` via the
+ * `@google/generative-ai` client. Ensure `GEMINI_API_KEY` is set in env.
+ */
+async function generateImageForPrompt(promptText) {
+  // Direct Gemini image generation using `gemini-2.5-flash-image`.
+  // This helper always uses the Gemini image model and returns a base64 string or null.
+  try {
+    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-image" });
+    const result = await model.generateContent([promptText]);
+    const parts = result.response?.candidates?.[0]?.content?.parts;
+    const base64 = parts?.find(p => p.inlineData)?.inlineData?.data || null;
+    if (!base64) {
+      console.warn('Gemini image call returned no inlineData. Inspect response:', JSON.stringify(result).substring(0,1000));
+      return null;
+    }
+    return base64;
+  } catch (err) {
+    throw new Error('Gemini image generation failed: ' + (err && err.message ? err.message : String(err)));
+  }
+}
+
+
 app.post('/generate', async (req, res) => {
   try {
     // Get user-provided core values from frontend
     const coreValues = req.body.coreValues;
 
-    if (!coreValues) {
-      return res.status(400).json({ success: false, message: "Missing coreValues" });
+    // === 1. Determine traits: either provided by caller (regeneration) or generate via Gemini ===
+    let traitsArray;
+    if (req.body.traits && Array.isArray(req.body.traits) && req.body.traits.length > 0 && req.body.regenerate) {
+      // Regeneration mode: generate BRAND NEW traits from Gemini, don't reuse old ones
+      if (!coreValues) {
+        return res.status(400).json({ success: false, message: "Missing coreValues for trait regeneration" });
+      }
+      console.log("Regeneration mode: Generating NEW traits from Gemini with core values:", coreValues);
+      const rawResponse = await generateTraits(coreValues);
+      console.log("Raw Gemini response:", rawResponse);
+      const match = rawResponse.match(/\[[\s\S]*\]/);
+      if (!match) {
+        console.error("Failed to extract JSON from response. Response preview:", rawResponse.substring(0, 500));
+        throw new Error("No valid JSON array found in Gemini response");
+      }
+      const jsonString = match[0];
+      console.log("Cleaned JSON string ready to parse:", jsonString.substring(0, 200) + "...");
+      traitsArray = JSON.parse(jsonString);
+      console.log("Parsed NEW traits:", traitsArray);
+    } else if (req.body.traits && Array.isArray(req.body.traits) && req.body.traits.length > 0) {
+      // Old regeneration mode: reuse existing traits, just regenerate images
+      traitsArray = req.body.traits;
+      console.log("Using traits provided in request (image-only regeneration). Count:", traitsArray.length);
+    } else {
+      // === generate via Gemini as before ===
+      if (!coreValues) {
+        return res.status(400).json({ success: false, message: "Missing coreValues for trait generation" });
+      }
+      console.log("Received core values:", coreValues);
+      const rawResponse = await generateTraits(coreValues);
+      console.log("Raw Gemini response:", rawResponse);
+
+      // The response comes as text — extract the JSON portion (between [ and ])
+      const match = rawResponse.match(/\[[\s\S]*\]/);
+      if (!match) {
+        console.error("Failed to extract JSON from response. Response preview:", rawResponse.substring(0, 500));
+        throw new Error("No valid JSON array found in Gemini response. Response: " + rawResponse.substring(0, 200));
+      }
+
+      const jsonString = match[0];
+      console.log("Cleaned JSON string ready to parse:", jsonString.substring(0, 200) + "...");
+
+      // Convert text into an actual JavaScript object (array of trait objects)
+      traitsArray = JSON.parse(jsonString);
+      console.log("Parsed traits:", traitsArray);
     }
-
-    console.log("Received core values:", coreValues);
-
-    // === 1. Get the personality traits from Gemini ===
-    const rawResponse = await generateTraits(coreValues);
-    console.log("Raw Gemini response:", rawResponse);
-
-    // The response comes as text — extract the JSON portion (between [ and ])
-    const match = rawResponse.match(/\[[\s\S]*\]/); 
-    if (!match) {
-      throw new Error("No valid JSON array found in Gemini response");
-    }
-
-    const jsonString = match[0];
-    console.log("Cleaned JSON string ready to parse:", jsonString.substring(0, 200) + "...");
-
-    // Convert text into an actual JavaScript object (array of trait objects)
-    const traitsArray = JSON.parse(jsonString);
-    console.log("Parsed traits:", traitsArray);
 
    // ===============================================
    // === AI IMAGE GENERATION LOGIC START (Gemini API) ===
    // ===============================================
+   // NOTE: Only generate images if orderID is provided (regeneration mode)
+   // For first generation, images will be generated AFTER saving to DB
 
     const generatedImages = [];
-
-    /* 
+       /* 
     // ------------------------
     //  SINGLE IMAGE VERSION for quick testing (COMMENTED OUT)
     // ------------------------
@@ -146,75 +198,76 @@ app.post('/generate', async (req, res) => {
     // ------------------------
     // NEW MULTI-IMAGE VERSION (6 images total)
     // ------------------------
-    console.log("→ Generating images for all 6 traits...");
+   
+    // Only generate and save images if we have an orderID (meaning this is a regeneration, not first generation)
+    if (req.body.orderID) {
+      console.log("→ Generating images for all 6 traits with orderID:", req.body.orderID);
 
-    const fs = require("fs");
-    const path = require("path");
-// functions to create folders for picture storage
-// Create base image folder
-    const baseDir = path.join(__dirname, "Generated_Images");
-    if (!fs.existsSync(baseDir)) fs.mkdirSync(baseDir, { recursive: true });
+      const fs = require("fs");
+      const path = require("path");
+      // functions to create folders for picture storage
+      // Create base image folder
+      const baseDir = path.join(__dirname, "Generated_Images");
+      if (!fs.existsSync(baseDir)) fs.mkdirSync(baseDir, { recursive: true });
 
-//  Create per-order subfolder
-    const orderID = req.body.orderID || "temp"; // add this line to get order ID from frontend (or fallback)
-    const orderDir = path.join(baseDir, `Order_${orderID}`);
-    if (!fs.existsSync(orderDir)) fs.mkdirSync(orderDir, { recursive: true });
+      // Create per-order subfolder with the provided orderID
+      const orderID = req.body.orderID;
+      const orderDir = path.join(baseDir, `Order_${orderID}`);
+      if (!fs.existsSync(orderDir)) fs.mkdirSync(orderDir, { recursive: true });
 
-  
-    // Load the Gemini image generation model
-    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-image" });
+      // Image generation helper
+      // The helper uses the Gemini image model (`gemini-2.5-flash-image`) to
+      // generate base64-encoded images for each trait prompt.
 
-    // Loop through all 6 traits 
-    for (let i = 0; i < Math.min(6, traitsArray.length); i++) {
-      const trait = traitsArray[i];
-      const imagePrompt = `Create a minimalist artistic animal representing the concept of ${trait.attribute_1}, colored primarily in ${trait.color_1} with accents of ${trait.color_2}. Digital art style.`;
+      // Loop through all 6 traits 
+      for (let i = 0; i < Math.min(6, traitsArray.length); i++) {
+        const trait = traitsArray[i];
+        const imagePrompt = `Create a minimalist artistic animal representing the concept of ${trait.attribute_1}, colored primarily in ${trait.color_1} with accents of ${trait.color_2}. Digital art style.`;
 
-      try {
-        console.log(`→ Generating image ${i + 1}/6 for "${trait.attribute_1}"...`);
-        const result = await model.generateContent([imagePrompt]);
-        const parts = result.response.candidates?.[0]?.content?.parts;
-        const base64Image = parts?.find(p => p.inlineData)?.inlineData?.data;
+        try {
+          console.log(`→ Generating image ${i + 1}/6 for "${trait.attribute_1}"...`);
+          // Use the shared helper to produce a base64 image for the prompt.
+          const base64Image = await generateImageForPrompt(imagePrompt);
 
-        if (base64Image) {
-          // Save each image to the Generated_Images folder
-          const fileName = `Trait_${i + 1}.jpg`;
-          const filePath = path.join(orderDir, fileName);
-          fs.writeFileSync(filePath, Buffer.from(base64Image, "base64"));
+          if (base64Image) {
+            // Save each image to the Generated_Images folder
+            const fileName = `Trait_${i + 1}.jpg`;
+            const filePath = path.join(orderDir, fileName);
+            fs.writeFileSync(filePath, Buffer.from(base64Image, "base64"));
 
-          const imagePath = `Generated_Images/Order_${orderID}/${fileName}`;
-          generatedImages.push({ prompt: imagePrompt, base64: base64Image, image_path: imagePath });
-          console.log(` Image ${i + 1} saved: ${imagePath}`);
+            const imagePath = `Generated_Images/Order_${orderID}/${fileName}`;
+            generatedImages.push({ prompt: imagePrompt, base64: base64Image, image_path: imagePath });
+            console.log(` Image ${i + 1} saved: ${imagePath}`);
 
-          // Attach image_path to the corresponding trait
-          traitsArray[i].image_path = imagePath;
-        } else {
-          console.error(` No image returned for trait ${i + 1}`);
+            // Attach image_path to the corresponding trait
+            traitsArray[i].image_path = imagePath;
+          } else {
+            console.error(` No image returned for trait ${i + 1}`);
+          }
+        } catch (err) {
+          console.error(` Failed to generate image for trait ${i + 1}:`, err.message);
         }
-      } catch (err) {
-        console.error(` Failed to generate image for trait ${i + 1}:`, err.message);
       }
+    } else {
+      console.log("→ First generation mode: Skipping image generation (will be done after DB save)");
     }
 
-    // ------------------------
-    // END NEW MULTI-IMAGE VERSION
-    // ------------------------
-
-   // ===============================================
-   // === AI IMAGE GENERATION LOGIC END ===
-   // ===============================================
+    // ===============================================
+    // === AI IMAGE GENERATION LOGIC END ===
+    // ===============================================
 
 
-   // Merge the traits with their associated images
-   const traitsWithImages = traitsArray.map((trait, index) => ({
-     ...trait,
-     base64Image: generatedImages[index] ? generatedImages[index].base64 : null,
-     image_path: generatedImages[index] ? generatedImages[index].image_path : null
-   }));
+    // Merge the traits with their associated images (if any were generated)
+    const traitsWithImages = traitsArray.map((trait, index) => ({
+      ...trait,
+      base64Image: generatedImages[index] ? generatedImages[index].base64 : null,
+      image_path: generatedImages[index] ? generatedImages[index].image_path : null
+    }));
 
-   // Send JSON response back to frontend containing both text and image results
+    // Send JSON response back to frontend containing both text and image results
     res.json({
       success: true,
-      message: "AI traits and images generated successfully.",
+      message: "AI traits generated successfully.",
       data: {
         prompt: coreValues,
         traits: traitsWithImages 
@@ -228,8 +281,95 @@ app.post('/generate', async (req, res) => {
   }
 });
 
+// -------------------- REGENERATE IMAGES ENDPOINT --------------------
+// New endpoint to regenerate images with proper orderID after database save
+app.post('/regenerate-images', async (req, res) => {
+  try {
+    const { traits, orderID } = req.body;
+    console.log('[/regenerate-images] Received request. full body:', JSON.stringify(req.body));
+    console.log('[/regenerate-images] Headers cookie:', req.headers.cookie || '(none)');
 
-// start server
+    // --- Verify order belongs to current logged-in user via PHP endpoint ---
+    try {
+      const phpResp = await axios.post(
+        'http://localhost/TaijiToyWebsiteScratch/API/display_traits.php',
+        { order_id: orderID },
+        { headers: { 'Content-Type': 'application/json', Cookie: req.headers.cookie || '' } }
+      );
+
+      if (!phpResp || !phpResp.data || !phpResp.data.success) {
+        console.error('[/regenerate-images] PHP verification failed or returned no success:', phpResp && phpResp.data);
+        return res.status(400).json({ success: false, message: 'Order verification failed. Aborting image regeneration.' });
+      }
+      console.log('[/regenerate-images] PHP verification success for order:', orderID);
+    } catch (phpErr) {
+      console.error('[/regenerate-images] Error calling PHP verify endpoint:', phpErr.message);
+      return res.status(500).json({ success: false, message: 'Server error verifying order ownership.' });
+    }
+
+    if (!traits || !Array.isArray(traits) || traits.length === 0) {
+      return res.status(400).json({ success: false, message: "Missing traits" });
+    }
+
+    if (!orderID) {
+      return res.status(400).json({ success: false, message: "Missing orderID" });
+    }
+
+    const fs = require("fs");
+    const path = require("path");
+    const generatedImages = [];
+
+    // Create base image folder
+    const baseDir = path.join(__dirname, "Generated_Images");
+    if (!fs.existsSync(baseDir)) fs.mkdirSync(baseDir, { recursive: true });
+
+    // Create per-order subfolder with proper orderID
+    const orderDir = path.join(baseDir, `Order_${orderID}`);
+    if (!fs.existsSync(orderDir)) fs.mkdirSync(orderDir, { recursive: true });
+
+    // Use the shared helper to produce base64 images for each prompt.
+
+    // Loop through all traits to regenerate images
+    for (let i = 0; i < Math.min(6, traits.length); i++) {
+      const trait = traits[i];
+      const imagePrompt = `Create a minimalist artistic animal representing the concept of ${trait.attribute_1}, colored primarily in ${trait.color_1} with accents of ${trait.color_2}. Digital art style.`;
+
+      try {
+        console.log(`→ Regenerating image ${i + 1}/6 for "${trait.attribute_1}"...`);
+        const base64Image = await generateImageForPrompt(imagePrompt);
+
+        if (base64Image) {
+          // Save each image to the Generated_Images folder with correct orderID
+          const fileName = `Trait_${i + 1}.jpg`;
+          const filePath = path.join(orderDir, fileName);
+          fs.writeFileSync(filePath, Buffer.from(base64Image, "base64"));
+
+          const imagePath = `Generated_Images/Order_${orderID}/${fileName}`;
+          generatedImages.push(imagePath);
+          console.log(` Image ${i + 1} saved: ${imagePath}`);
+        } else {
+          console.error(` No image returned for trait ${i + 1}`);
+        }
+      } catch (err) {
+        console.error(` Failed to regenerate image for trait ${i + 1}:`, err.message);
+      }
+    }
+
+    res.json({
+      success: true,
+      message: "Images regenerated successfully.",
+      data: {
+        imagePaths: generatedImages
+      }
+    });
+
+  } catch (error) {
+    console.error("Error in /regenerate-images route:", error.message);
+    res.status(500).json({ success: false, message: error.message });
+  }
+});
+
+// -------------------- START SERVER --------------------
 const PORT = 3000;
 // Listen on all network interfaces (0.0.0.0) for local + LAN access
 app.listen(PORT, '0.0.0.0', () => {

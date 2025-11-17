@@ -245,6 +245,35 @@ SubmitGeneration.addEventListener('click', async () => {
                     const saved_ID = parsedData.output_id;
                     console.log("Successfully saved order ID:", saved_ID);
 
+                    // Make sure the selectedOrderId is stored so other parts of the app
+                    // (and any subsequent reload) refer to the correct order.
+                    try { localStorage.setItem('selectedOrderId', String(saved_ID)); } catch (e) { console.warn('localStorage.setItem failed:', e); }
+
+                    // Now regenerate images with the correct orderID
+                    return fetch('http://localhost:3000/regenerate-images', {
+                        method: 'POST',
+                        credentials: 'include',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            traits: traitsArray,
+                            orderID: Number(saved_ID)
+                        })
+                    })
+                    .then(imgRes => imgRes.json())
+                    .then(imgData => {
+                        console.log("Images regenerated:", imgData);
+                        if (!imgData.success) {
+                            console.warn("Image regeneration warning:", imgData.message);
+                        }
+                        return saved_ID; // Return the ID for next step
+                    });
+                } else {
+                    console.error("Error from PHP script:", parsedData.message);
+                    alert(`Error from PHP: ${parsedData.message}`);
+                }
+            })
+            .then(saved_ID => {
+                if (saved_ID) {
                     //ANALYTICS INTEGRATION
                     sendAnalyticsData(saved_ID);
                     ComUtils.resetSessionClickCount();
@@ -253,11 +282,6 @@ SubmitGeneration.addEventListener('click', async () => {
                     setTimeout(() => {
                         OrderOut.renderGenerationOutputView(saved_ID);
                     }, 2000);
-                    
-                    //window.location.href = '#order-output';
-                } else {
-                    console.error("Error from PHP script:", parsedData.message);
-                    alert(`Error from PHP: ${parsedData.message}`);
                 }
             })
             .catch(error => {
@@ -322,7 +346,7 @@ SubmitGeneration.addEventListener('click', async () => {
     ComUtils.Footerinnerdiv3.appendChild(ComUtils.Brand);
     ComUtils.Footerinnerdiv3.appendChild(ComUtils.Texan);
     /***************Input Elements to be used by page***************/
-    InputInnerDiv2.appendChild(CustomerInput);
+        InputInnerDiv2.appendChild(CustomerInput);
     InputInnerDiv3.appendChild(SubmitGeneration);
     /***************Observer Code Searching for Animations***************/
     const allAnimationedElements = document.querySelectorAll('.animation');

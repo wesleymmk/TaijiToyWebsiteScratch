@@ -34,12 +34,31 @@ try
 
     $conn->set_charset("utf8mb4");
 
+    // Get the traits
     $php_traits = gather_output($conn, $customer_id, $order_id);
+    
+    // Get the coreValues (customer_prompt_response) from outputs table
+    $sql = "SELECT customer_prompt_response FROM outputs WHERE order_id = ? AND customer_id = ?";
+    $stmt = $conn->prepare($sql);
+    if ($stmt === false) {
+        throw new Exception("Failed to prepare statement for fetching core values");
+    }
+    $stmt->bind_param("ii", $order_id, $customer_id);
+    if (!$stmt->execute()) {
+        throw new Exception("Failed to execute statement for fetching core values");
+    }
+    $result = $stmt->get_result();
+    $core_values = "";
+    if ($row = $result->fetch_assoc()) {
+        $core_values = $row['customer_prompt_response'];
+    }
+    $stmt->close();
 
 
     $response['success'] = true;
     $response['message'] = "Successfully retrieved details for order ID " . $order_id;
     $response['data'] = $php_traits;
+    $response['coreValues'] = $core_values;
 }
 catch (Exception $e) {
     $response['message'] = $e->getMessage();
