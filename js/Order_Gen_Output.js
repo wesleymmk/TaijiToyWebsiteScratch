@@ -20,6 +20,12 @@ export function renderGenerationOutputView(order_ID_param) {
     //    takes precedence over any parameter.
     const order_ID = order_ID_from_storage || order_ID_param;
 
+    // Make the current order ID available globally so action handlers
+    // (like the Regenerate button) can use it reliably.
+    if (order_ID !== undefined && order_ID !== null) {
+        try { window.currentOrderID = Number(order_ID); } catch (e) { window.currentOrderID = order_ID; }
+    }
+
 
 
     const dataForPHP = {
@@ -282,6 +288,9 @@ export function renderGenerationOutputView(order_ID_param) {
 
                 // --- DATA UNPACKING (Your Original Code) ---
                 const allToysArray = parsedData.data;
+                // Expose the current traits and core values globally so the regenerate handler can reuse them
+                try { window.currentTraits = allToysArray; } catch (e) { console.warn('Unable to set window.currentTraits', e); }
+                try { window.currentCoreValues = parsedData.coreValues || ''; } catch (e) { console.warn('Unable to set window.currentCoreValues', e); }
                 const toy1 = allToysArray[0];
                 const toy2 = allToysArray[1];
                 const toy3 = allToysArray[2];
@@ -677,35 +686,58 @@ export function renderGenerationOutputView(order_ID_param) {
 
         try {
             const payload = {
-                coreValues: localStorage.getItem('coreValues') || '',
+                coreValues: window.currentCoreValues || localStorage.getItem('coreValues') || '',
                 traits: window.currentTraits,
                 orderID: window.currentOrderID,
                 regenerate: true  // Flag to tell backend to generate NEW traits from Gemini
             };
-
-                        const resp = await fetch('http://localhost:3000/generate', {
-                            method: 'POST',
-                            credentials: 'include',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify(payload)
-                        });
+            const resp = await fetch('http://localhost:3000/generate', {
+                method: 'POST',
+                credentials: 'include',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
 
             const json = await resp.json();
-            if (json && json.success) {
-                // regeneration succeeded on server — store order ID and re-render output view
-                try { localStorage.setItem('selectedOrderId', window.currentOrderID); } catch (e) { console.warn('localStorage set failed:', e); }
-                alert('Regeneration complete. Showing updated results.');
-                // Re-render the output view in-place without a full reload
-                try {
-                    renderGenerationOutputView(window.currentOrderID);
-                } catch (e) {
-                    // Fallback: if render fails, navigate to the output hash and reload
-                    console.warn('In-place render failed, falling back to reload:', e);
-                    window.location.hash = '#order-output';
-                    window.location.reload();
-                }
-            } else {
-                alert('Regeneration failed: ' + (json.message || resp.statusText));
+            if (!(json && json.success)) {
+                throw new Error(json.message || resp.statusText || 'Regeneration failed on server');
+            }
+
+            // json.data.traits contains the newly generated traits and json.data.prompt the coreValues
+            const newTraits = json.data?.traits;
+            const newPrompt = json.data?.prompt || payload.coreValues || '';
+
+            if (!Array.isArray(newTraits) || newTraits.length === 0) {
+                throw new Error('Regeneration returned no traits');
+            }
+
+            // Save regenerated traits back to PHP for the existing order (update path)
+            const saveResp = await ComUtils.apiCall('api/save_traits.php', {
+                prompt: newPrompt,
+                traits: newTraits,
+                output_id: window.currentOrderID
+            });
+
+            if (!saveResp.ok) {
+                const txt = await saveResp.text();
+                throw new Error('Failed to save regenerated traits: ' + saveResp.status + ' ' + txt);
+            }
+
+            const saveJson = await saveResp.json();
+            if (!(saveJson && saveJson.success)) {
+                throw new Error('Failed to save regenerated traits: ' + (saveJson.message || 'unknown'));
+            }
+
+            try { localStorage.setItem('selectedOrderId', window.currentOrderID); } catch (e) { console.warn('localStorage set failed:', e); }
+            alert('Regeneration complete. Showing updated results.');
+
+            // Re-render the output view in-place to show updated traits
+            try {
+                renderGenerationOutputView(window.currentOrderID);
+            } catch (e) {
+                console.warn('In-place render failed, falling back to reload:', e);
+                window.location.hash = '#order-output';
+                window.location.reload();
             }
         } catch (err) {
             console.error('Regeneration error:', err);
