@@ -228,7 +228,7 @@ export function renderGenerationOutputView(order_ID_param) {
     //The text for the header
     const GenerationOutputText=document.createElement('p');
     GenerationOutputText.classList.add('pagetexttitle2w');
-    GenerationOutputText.textContent = 'The Results!!';
+    GenerationOutputText.textContent = 'Your custom collection!!';
     
     let generatedcontent_space = document.createElement('div');
     generatedcontent_space.classList.add('generatedcontent-space');

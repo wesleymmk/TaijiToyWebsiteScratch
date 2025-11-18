@@ -25,6 +25,35 @@
   opacity: 0.65;
 }
 
+.button2 {
+  background-color: white;
+  border-radius: 15px;
+  border-radius: 1.172vw;
+  border-width: 5px;
+  align-items: center;
+  border-width: 0.391vw;
+  border-color: black;
+  border: solid;
+  cursor: pointer;
+  min-height: 60px;
+  height: 4.688vw;
+  width: 45%;
+  margin-right: 2.5%;
+  margin-left: 2.5%;
+}
+/*PS Added*/
+.button2:hover {
+  background-color: black;
+  color: white;
+  border-color: white;
+  transition: 0.35s;
+}
+/*PS Added*/
+.button2:active {
+  transition: 0.10s;
+  opacity: 0.65;
+}
+
 /*PS Added*/
 .LoginButton{
   background-color: rgb(0, 0, 0);
