@@ -27,9 +27,9 @@
 }
 /*PS Added*/
 .marketimage {
-  width: 277px;
+  min-width: 185.6px;
   width: 14.5vw;
-  height: 277px;
+  min-height: 185.6px;
   height: 14.5vw;
 }
 /*PS Added*/

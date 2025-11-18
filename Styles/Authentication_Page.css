@@ -81,20 +81,15 @@
   display: flex;
   flex-direction: column;
   text-align: center;
-  height: 325px;
-  height: 16.927vw;
-  width: 675px;
+  min-width: 350px;
   width: 35.156vw;
-  margin-top: 50px;
-  margin-top: 2.604vw;
-  justify-content: space-between;
 }
 /*PS Added*/
 .marketingdiv2 {
   display: flex;
   flex-direction: column;
   height: 325px;
-  width: 350px;
+  min-width: 232.96px;
   width: 18.2vw;
   margin-top: 50px;
   margin-top: 2.604vw;
@@ -103,23 +98,21 @@
 /*PS Added*/
 .marketinner {
   display: flex;
-  height: 277px;
-  height: 14.5vw;
-  width: 675px;
-  width: 35vw;
   justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
 }
 /*PS Added*/
 .marketingrevealdiv1,
 .marketingrevealdiv3 {
   display: flex;
-  width: 240px;
-  width: 12.5vw;
+  min-width: 240px;
+  width: 18.75vw;
   margin-top: 50px;
   margin-top: 2.604vw;
   margin-bottom: 50px;
   margin-bottom: 2.604vw;
-  line-height: 200%;
+  line-height: calc(10px + 2vw);
   text-align: right;
 }
 /*PS Added*/
@@ -130,15 +123,9 @@
 .marketingrevealdiv2 {
   display: flex;
   flex-direction: column;
-  height: 325px;
-  height: 16.927vw;
-  width: 580px;
-  width: 30.208vw;
-  margin-top: 90px;
-  margin-top: 4.688vw;
-  margin-bottom: 90px;
-  margin-bottom: 4.688vw;
-  line-height: 350%;
+  min-width: 385px;
+  width: 30.078vw;
+  line-height: calc(16px + 3vw);
   text-align: center;
 }
 /*PS Added*/
