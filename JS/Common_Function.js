@@ -19,6 +19,7 @@ repeating code*/
  * @param {string} selector - The CSS selector (e.g., '#myId') of the element to scroll to.
  * @param {number} duration - The total time in milliseconds the scroll should take (e.g., 500).
  */
+
 export function manualScrollToElement(selector, duration = 500) {
     const targetElement = document.querySelector(selector);
 
@@ -383,11 +384,15 @@ export function showPopupModal() {
                     if (data.success) {
                         // 1. Close the modal
                         document.getElementById('myPopupModal').style.display = "none";
+                        // 2. Analytics tracker
+                        resetSessionClickCount();
 
-                        // 2. Redirect to the logged-in view
+                        // 3. Redirect to the logged-in view
                         // Since you import User_Account.js as AccUtils, you should call it here:
+                        
                         window.location.href = '#account';
                         window.location.reload();
+                        
 
                     } else {
                         // Login failed (e.g., Invalid email or password)
@@ -752,6 +757,25 @@ export function resetSessionClickCount() {
     sessionStorage.removeItem('sessionClickCount');
     // We must also set it to 0 immediately so that the next click doesn't result in NaN.
     sessionStorage.setItem('sessionClickCount', 0);
+}
+
+// ==== ACTIVE SESSION TRACKING ====
+export function startActivityTracking() {
+    const updateActivity = () => {
+        apiCall('api/track_activity.php', {})
+            .then(response => {
+                if (response.ok) {
+                    console.log("Activity tracked successfully.");
+                } else {
+                    console.error("Failed to track activity:", response.status);
+                }
+            })
+            .catch(error => {
+                console.error("Network error during activity tracking:", error);
+            });
+    };
+    updateActivity();
+    setInterval(updateActivity, 60000);
 }
 
 // CRITICAL: Call the initialization function immediately to start tracking clicks
