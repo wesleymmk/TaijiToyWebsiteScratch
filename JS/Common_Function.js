@@ -132,16 +132,6 @@ CreateOption.addEventListener('click', function () {
             }
         })
 });
-// PS added GenerateInputOption to direct to the input Generation page
-export const GenerateInputOption = document.createElement('p');
-GenerateInputOption.textContent = 'Generate Input';
-GenerateInputOption.classList.add('textnavmenu', 'animation');
-GenerateInputOption.addEventListener('click', function () { window.location.href = '#order-input'; });
-// PS added GenerateOutputOption to direct to the output Generation page
-export const GenerateOutputOption = document.createElement('p');
-GenerateOutputOption.textContent = 'Generate Output';
-GenerateOutputOption.classList.add('textnavmenu', 'animation');
-GenerateOutputOption.addEventListener('click', function () { window.location.href = '#order-output'; });
 // PS added AccountOption to direct to the account page
 export const AccountOption = document.createElement('p');
 AccountOption.textContent = 'Account';

@@ -69,7 +69,7 @@
 .pagetexttitle2w {
   font-family: 'Chinese Rocks Rg', sana-serif;
   font-size: 100px;
-  font-size: 5.208vw;
+  font-size: calc(30px + 5.25vw);
   font-weight: 900;
   cursor: default;
   margin: 0;
@@ -116,8 +116,9 @@
 }
 .pagetextlargeb {
   font-family: 'Chinese Rocks Rg', sana-serif;
-  font-size: 47px;
-  font-size: 2.448vw;
+  /*font-size: 47px;
+  font-size: 2.448vw;*/
+  font-size: calc(12px + 2.5vw);
   font-weight: 400;
   cursor: default;
   margin: 0;
@@ -126,8 +127,9 @@
 /*PS Added*/
 .pagetextmediumb {
   font-family: 'Chinese Rocks Rg', sana-serif;
-  font-size: 37px;
-  font-size: 1.927vw;
+  /*font-size: 37px;
+  font-size: 1.927vw;*/
+  font-size: calc(14px + 1.2vw);
   font-weight: 400;
   cursor: default;
   margin: 0;
@@ -136,8 +138,9 @@
 /*PS Added*/
 .pagetextsmallb1 {
   font-family: 'Chinese Rocks Rg', sana-serif;
-  font-size: 22px;
-  font-size: 1.146vw;
+  /*font-size: 22px;
+  font-size: 1.146vw;*/
+  font-size: calc(8px + .5vw);
   font-weight: 400;
   cursor: default;
   margin: 0;
@@ -146,8 +149,9 @@
 /*PS Added*/
 .pagetextsmallb {
   font-family: 'Chinese Rocks Rg', sana-serif;
-  font-size: 20px;
-  font-size: 1.042vw;
+  /*font-size: 20px;
+  font-size: 1.042vw;*/
+  font-size: calc(12px + .5vw);
   font-weight: 400;
   cursor: default;
   margin: 0;

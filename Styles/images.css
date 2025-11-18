@@ -50,27 +50,25 @@
 }
 /*PS Added*/
 .socialmediaicon {
-  width: 27px;
+  min-width: 27px;
   width: 1.406vw;
-  height: 27px;
+  min-height: 27px;
   height: 1.406vw;
-  margin-right: 15px;
-  margin-right: 0.781vw;
   object-fit: contain;
   object-position: center;
   cursor: pointer;
 }
 /*PS Added*/
 .brand {
-  width: 230px;
-  width: 11.979vw;
+  min-width: 230px;
+  width: 17.969vw;
   object-fit: contain;
   object-position: center;
 }
 /*PS Added*/
 .texan {
-  width: 72px;
-  width: 3.75vw;
+  min-width: 72px;
+  width: 5.625vw;
   object-fit: contain;
   object-position: center;
 }

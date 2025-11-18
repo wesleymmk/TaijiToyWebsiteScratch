@@ -82,10 +82,10 @@
 .footerinnerdiv {
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  width: 350px;
+  justify-content: space-around;
+  min-width: 350px;
   width: 18.229vw;
-  height: 90px;
+  min-height: 90px;
   height: 4.688vw;
 }
 /*PS Added*/
@@ -94,8 +94,8 @@
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  width: 470px;
-  width: 24.479vw;
+  min-width: 470px;
+  width: 36.719vw;
 }
 /*PS Added*/
 .titlediv {
