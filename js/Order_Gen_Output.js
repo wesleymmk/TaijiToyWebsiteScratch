@@ -733,7 +733,7 @@ export function renderGenerationOutputView(order_ID_param) {
                 orderID: window.currentOrderID,
                 regenerate: true  // Flag to tell backend to generate NEW traits from Gemini
             };
-            const resp = await fetch('http://localhost:3000/generate', {
+            const resp = await fetch('http://34.66.54.25:3000/generate', {
                 method: 'POST',
                 credentials: 'include',
                 headers: { 'Content-Type': 'application/json' },

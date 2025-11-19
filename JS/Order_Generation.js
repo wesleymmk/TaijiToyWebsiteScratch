@@ -225,7 +225,7 @@ SubmitGeneration.addEventListener('click', async () => {
     
     //try {
         //  Send input to Node.js backend which will call Gemini
-        const response = await fetch('http://localhost:3000/generate', {
+        const response = await fetch('http://34.66.54.25:3000/generate', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ coreValues })
@@ -275,7 +275,7 @@ SubmitGeneration.addEventListener('click', async () => {
                     try { localStorage.setItem('selectedOrderId', String(saved_ID)); } catch (e) { console.warn('localStorage.setItem failed:', e); }
 
                     // Now regenerate images with the correct orderID
-                    return fetch('http://localhost:3000/regenerate-images', {
+                    return fetch('http://34.66.54.25:3000/regenerate-images', {
                         method: 'POST',
                         credentials: 'include',
                         headers: { 'Content-Type': 'application/json' },
