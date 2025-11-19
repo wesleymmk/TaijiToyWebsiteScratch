@@ -506,7 +506,8 @@ export function showCreateAccountPopup() {
 
         registerForm.addEventListener('submit', (event) => {
             event.preventDefault();
-
+            
+            console.log('Create account button clicked');
             const email = emailAccount.value;
             const password = passwordInput.value;
             const receives_emails = emailCheckbox.checked; // this returns a true or false value if the checkbox is checked
