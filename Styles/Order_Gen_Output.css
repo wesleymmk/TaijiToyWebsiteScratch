@@ -1,7 +1,8 @@
 /*PS Added*/
 .bodyspecific {
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: flex-start;
+    align-items: flex-start;
     width: 100%;
     margin-top: 50px;
     margin-top: 3.906vw;
@@ -20,13 +21,14 @@
     justify-content: center;
     align-items: center;
     margin-left: 64px;
-    margin-left: 5vw;
+    margin-left: calc(72px + .25vw);
     margin-right: 24px;
     margin-right: 1.875vw;
     width: 320px;
+    min-width: 250px;
     width: 25vw;
     margin-bottom: 12px;
-    margin-bottom: 0.938vw;
+    margin-bottom: calc(12px + 1vw);
     border-style: solid;
 }
 /*PS Added*/
@@ -43,29 +45,26 @@
     align-items: center;
     border-style: solid;
     width: 100%;
-    height: 200px;
-    height: 15.625vw;
+    min-height: 250px;
     background-color: #001f6e;
     overflow: visible;
 }
 
 /* Style for generated images inside imagediv */
 .imagediv img {
-    max-width: 65%;
-    max-height: 90%;
+    max-width: 100%;
+    max-height: 100%;
     object-fit: contain;
     display: block;
     border-radius: 8px;
-    z-index: 1;
+    
 }
 /*PS Added*/
 .yinyangdiv {
     position: absolute;
-    left: -13%;
+    left: calc(-36px - 1vw);
     height: 82px;
-    height: 6.406vw;
     width: 82px;
-    width: 6.406vw;
     z-index: 2;
 }
 /*PS Added*/
@@ -99,9 +98,7 @@
     align-items: center;
     border-radius: 100%;
     height: 76px;
-    height: 5.938vw;
     width: 76px;
-    width: 5.938vw;
 }
 .yinyangside1half,
 .yinyangside2outer,
@@ -109,7 +106,6 @@
     position: absolute;
     background-color: white;
     border-radius: 38px 0% 0% 38px;
-    border-radius: 2.969vw 0 0 2.969vw;
     left: 0%;
     height: 100%;
     width: 50%;
@@ -124,9 +120,7 @@
     border-style: none;
     border-radius: 100%;
     height: 38px;
-    height: 2.969vw;
     width: 38px;
-    width: 2.969vw;
 }
 .yinyangside2outer {
     top: 50%;
@@ -138,9 +132,7 @@
     border-style: none;
     border-radius: 100%;
     height: 11px;
-    height: 0.859vw;
     width: 11px;
-    width: 0.859vw;
     left: auto;
 }
 .Clear{

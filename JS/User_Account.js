@@ -34,14 +34,16 @@ export function renderUserAccount() {
 
     let heading = document.createElement('h1');
     heading.classList.add('header');
-    heading.textContent = 'User Account';
+    
+    const userEmail=localStorage.getItem('userEmail');
+
+    
+    heading.textContent='User Account'
 
     
 
 
     /*Done by EQ*/
-    /*Currently not done*/
-
 const scrollableContent = document.createElement('div');
 scrollableContent.classList.add('scrollable-content');
 
@@ -79,7 +81,8 @@ scrollableContent.innerHTML = '<p>Loading your order history...</p>';
                         orderItem.innerHTML = `
                             <div class="order-id">
                             <button class="button order-id-button" data-order-id="${orderId}">
-                            Order Number: ${orderId} Traits: ${trait1}, ${trait2}
+                            Order Number: ${orderId}<div>
+                            <div>Traits: ${trait1}, ${trait2}
                             </button></div><hr>                
                         `;
                         scrollableContent.appendChild(orderItem);
@@ -125,7 +128,7 @@ scrollableContent.innerHTML = '<p>Loading your order history...</p>';
     // 3. Create a button to trigger the scroll action
     const scrollButton = document.createElement('button');
     scrollButton.textContent = 'Scroll to Bottom';
-    scrollButton.classList.add('LoginButton');
+    scrollButton.classList.add('button2', 'pagetextlargeb');
 
     // 4. Define the function to scroll the element
     function scrollToBottom() {
@@ -143,7 +146,7 @@ scrollableContent.innerHTML = '<p>Loading your order history...</p>';
 
     const logoutButton=document.createElement('button');
     logoutButton.textContent='Logout';
-    logoutButton.classList.add('LoginButton');
+    logoutButton.classList.add('button2', 'pagetextlargeb');
 
     // **************************************************
     // START: LOGOUT LISTENER ADDED

@@ -6,11 +6,11 @@ export const appContainer = document.getElementById('app');
 import * as AccUtils from './User_Account.js';
 
 export function renderGenerationOutputView(order_ID_param) {
-    
+
     ComUtils.clearAppContainer();
 
     const order_ID_from_storage = localStorage.getItem('selectedOrderId');
-    
+
     // 2. Clear it so we don't load it again
     if (order_ID_from_storage) {
         localStorage.removeItem('selectedOrderId');
@@ -48,20 +48,16 @@ export function renderGenerationOutputView(order_ID_param) {
     navwrapper.appendChild(ComUtils.navmenu); // Grab button from Common_Function.js
     navwrapper.appendChild(ComUtils.accountmenu); // Grab button from Common_Function.js
     ComUtils.Home.classList.remove('home'); // Class removed
-    ComUtils.GenerateInputOption.classList.remove('inputorder'); // Class removed
-    ComUtils.GenerateOutputOption.classList.add('outputorder'); // Class added
+    ComUtils.CreateOption.classList.remove('inputorder'); // Class removed
     ComUtils.AccountOption.classList.remove('account'); // Class removed
     ComUtils.navmenu.appendChild(ComUtils.Home); // Grab button from Common_Function.js
     ComUtils.navmenu.appendChild(ComUtils.StoreOption); // Grab button from Common_Function.js
     ComUtils.navmenu.appendChild(ComUtils.AboutOption); // Grab button from Common_Function.js
     ComUtils.navmenu.appendChild(ComUtils.ContactOption); // Grab button from Common_Function.js
-    ComUtils.navmenu.appendChild(ComUtils.GenerateInputOption); // Grab button from Common_Function.js
-    ComUtils.navmenu.appendChild(ComUtils.GenerateOutputOption); // Grab button from Common_Function.js
-    ComUtils.accountmenu.appendChild(ComUtils.AccountOption); // Grab button from Common_Function.js
 
     // EQ and PS collab
     //Added in the title and other developments.
-    const Body=document.createElement('div');
+    const Body = document.createElement('div');
     Body.classList.add('body');
     const Body2 = document.createElement('div');
     Body2.classList.add('body3', 'bodyspecific2');
@@ -146,7 +142,7 @@ export function renderGenerationOutputView(order_ID_param) {
     YinYangDiv6.classList.add('yinyangdiv');
     //EQ and PS collab
     //New header for the output page
-    const GenerationOutputTitleDiv=document.createElement('div');
+    const GenerationOutputTitleDiv = document.createElement('div');
     GenerationOutputTitleDiv.classList.add('GenerationOutputTitleDiv')
     /***************Yin & Yang Divs***************/
     // PS & EQ Collab YinYang1
@@ -230,10 +226,10 @@ export function renderGenerationOutputView(order_ID_param) {
     YinYangSide2inner6.classList.add('yinyangside2inner');
     //EQ and PS collab
     //The text for the header
-    const GenerationOutputText=document.createElement('p');
+    const GenerationOutputText = document.createElement('p');
     GenerationOutputText.classList.add('pagetexttitle2w');
-    GenerationOutputText.textContent = 'The Results!!';
-    
+    GenerationOutputText.textContent = 'Your custom collection!!';
+
     let generatedcontent_space = document.createElement('div');
     generatedcontent_space.classList.add('generatedcontent-space');
     generatedcontent_space.textContent = 'Loading your generated toys...'; // Show a loading message
@@ -244,26 +240,26 @@ export function renderGenerationOutputView(order_ID_param) {
     let generatedcontent_space_2 = document.createElement('div');
     generatedcontent_space_2.classList.add('generatedcontent-space');
     //generatedcontent_space_2.textContent = 'Loading your generated toys...'; // Show a loading message
-    
+
 
     let generatedcontent_space_3 = document.createElement('div');
     generatedcontent_space_3.classList.add('generatedcontent-space');
     //generatedcontent_space_2.textContent = 'Loading your generated toys...'; // Show a loading message
-    
+
 
     let generatedcontent_space_4 = document.createElement('div');
     generatedcontent_space_4.classList.add('generatedcontent-space');
     //generatedcontent_space_2.textContent = 'Loading your generated toys...'; // Show a loading message
-    
+
 
     let generatedcontent_space_5 = document.createElement('div');
     generatedcontent_space_5.classList.add('generatedcontent-space');
     //generatedcontent_space_2.textContent = 'Loading your generated toys...'; // Show a loading message
-    
+
     let generatedcontent_space_6 = document.createElement('div');
     generatedcontent_space_6.classList.add('generatedcontent-space');
     //generatedcontent_space_2.textContent = 'Loading your generated toys...'; // Show a loading message
-    
+
 
 
     // --- API CALL AND DATA HANDLING ---
@@ -336,7 +332,7 @@ export function renderGenerationOutputView(order_ID_param) {
                 const Trait10 = output_attribute_10;
                 const Trait11 = output_attribute_11;
                 const Trait12 = output_attribute_12;
-                
+
 
                 const Color1 = output_color_1;
                 const Color2 = output_color_2;
@@ -611,8 +607,8 @@ export function renderGenerationOutputView(order_ID_param) {
                     .then(imgResp => {
                         if (!imgResp.ok) throw new Error('Failed to fetch image paths');
                         return imgResp.json();
-           
-                 })
+
+                    })
                     .then(imgJson => {
                         if (!(imgJson && imgJson.success && Array.isArray(imgJson.data))) {
                             console.warn("Image fetch returned no data - keeping Yin/Yang placeholders:", imgJson);
@@ -720,7 +716,7 @@ export function renderGenerationOutputView(order_ID_param) {
     RegenAll.textContent = 'Regenerate All';
     RegenAll.classList.add('button1', 'pagetextlargeb');
 
-    // Attach click handler for "Regenerate All" â€” uses Node backend to regenerate images
+    // Attach click handler for "Regenerate All" — uses Node backend to regenerate images
     RegenAll.addEventListener('click', async () => {
         RegenAll.disabled = true;
         const originalText = RegenAll.textContent;
@@ -795,7 +791,7 @@ export function renderGenerationOutputView(order_ID_param) {
     placeorder.classList.add('button1', 'pagetextlargeb')
 
 
-   
+
     /***************Navigation Bar***************/
     appContainer.appendChild(navwrapper);
     /***************Parent Div containers***************/

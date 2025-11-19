@@ -43,7 +43,7 @@ export function renderWelcomeView() {
     Body2.classList.add('body');
     // PS added Body3 this will hold some marketing pictures & button
     const Body3 = document.createElement('div');
-    Body3.classList.add('body3');
+    Body3.classList.add('body3', 'specialgap1');
     // PS added Body4 This will hold a transitional background
     const Body4 = document.createElement('div');
     Body4.classList.add('body');

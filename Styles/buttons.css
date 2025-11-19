@@ -8,8 +8,8 @@
   border-color: black;
   border: solid;
   cursor: pointer;
-  height: 71px;
-  height: 3.698vw;
+  min-height: 60px;
+  height: 4.688vw;
   width: 100%;
 }
 /*PS Added*/
@@ -21,6 +21,35 @@
 }
 /*PS Added*/
 .button1:active {
+  transition: 0.10s;
+  opacity: 0.65;
+}
+
+.button2 {
+  background-color: white;
+  border-radius: 15px;
+  border-radius: 1.172vw;
+  border-width: 5px;
+  align-items: center;
+  border-width: 0.391vw;
+  border-color: black;
+  border: solid;
+  cursor: pointer;
+  min-height: 60px;
+  height: 4.688vw;
+  width: 45%;
+  margin-right: 2.5%;
+  margin-left: 2.5%;
+}
+/*PS Added*/
+.button2:hover {
+  background-color: black;
+  color: white;
+  border-color: white;
+  transition: 0.35s;
+}
+/*PS Added*/
+.button2:active {
   transition: 0.10s;
   opacity: 0.65;
 }
@@ -174,7 +203,7 @@
   justify-content: center; /* Optional: centers the buttons horizontally */
   gap: 50px;
   margin-top: 25px;
-  margin-top: 1.953vw;
+  margin-bottom: 25px;
 }
 
 

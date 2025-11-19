@@ -48,6 +48,12 @@ const sendAnalyticsData = (order_id) => {
 // PS creation
 export function renderGenerationInputView() {
     ComUtils.clearAppContainer(); // Clear the screen first
+
+    // === ANALYTICS INTEGRATION: START TIMER & RESET CLICKS (NEW LINE) ===
+    ComUtils.resetSessionClickCount(); // <-- NEW LINE: Ensure the counter is zeroed on view load
+    orderStartTime = performance.now();
+    // ==========================================
+
     /***************Loading Function on Scroll***************/
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {

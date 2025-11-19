@@ -68,6 +68,35 @@ if ($result->num_rows === 1) {
         $_SESSION['user_id'] = $user['customer_id'];
         $_SESSION['user_email'] = $user['email'];
 
+        // === ACTIVE SESSION TRACKING: UPSERT INITIAL LOGIN DETAILS ===
+
+        $user_id = $user['customer_id'];
+        $user_email = $user['email'];
+
+        // SQL: Insert new row or update existing row with current login_time and last_activity
+        $track_sql = "INSERT INTO active_sessions (user_id, user_email, login_time, last_activity)
+                      VALUES (?, ?, NOW(), NOW())
+                      ON DUPLICATE KEY UPDATE 
+                          user_email = VALUES(user_email),
+                          login_time = NOW(),
+                          last_activity = NOW()";
+
+        $track_stmt = $conn->prepare($track_sql);
+
+        if ($track_stmt === false) {
+            error_log("Active Session SQL Prepare Error: " . $conn->error);
+            // Log the error but proceed with login success as it's not critical
+        } else {
+            // Bind parameters: ss (string user_id, string user_email)
+            $track_stmt->bind_param("ss", $user_id, $user_email);
+            if (!$track_stmt->execute()) {
+                error_log("Active Session Insert/Update Error: " . $track_stmt->error);
+            }
+            $track_stmt->close();
+        }
+
+        // --- END ACTIVE TRACKING ---
+
         // Send a success response back to the frontend
         echo json_encode([
             'success' => true,
