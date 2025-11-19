@@ -586,9 +586,52 @@ export function ForgotPassPopup() {
         registerForm.id = 'register-form-popup';
               
         const LinkRequest = document.createElement("button");
-        LinkRequest.textContent = 'Send Reset Link';
+        LinkRequest.textContent = 'Send Reset Code';
         LinkRequest.classList.add('LoginButton-3', 'pagetextmediumb');
         LinkRequest.type = "submit";
+
+        // Password Reseting logic created by WAM
+
+        LinkRequest.addEventListener('click', async (event) => {
+            event.preventDefault(); // Stop the form from submitting/reloading the page
+
+            // Get the email from your input field
+            const emailInput = document.getElementById('your-email-input-id'); // Replace with your actual ID
+            const email = emailInput.value;
+
+            if (!email) {
+                alert("Please enter your email address.");
+                return;
+            }
+
+            // Disable button to prevent double-clicks
+            LinkRequest.disabled = true;
+            LinkRequest.textContent = "Sending...";
+
+            try {
+                // Call PHP script
+                const response = await ComUtils.apiCall('api/password_reset_email.php', { email: email });
+
+                //Handle the response
+                const data = await response.json(); // Or just use 'response' if apiCall parses it
+
+                if (data.success) {
+                    alert(data.message); // "Reset code sent..."
+                    // Move to the next step (e.g., show the "Enter Code" input)
+                    showEnterCodeView();
+                } else {
+                    alert("Error: " + data.message);
+                }
+
+            } catch (error) {
+                console.error("Reset request failed:", error);
+                alert("An error occurred. Please try again.");
+            } finally {
+                // Re-enable button
+                LinkRequest.disabled = false;
+                LinkRequest.textContent = 'Send Reset Code';
+            }
+        });
         
         const Back2Login = document.createElement("p");
         Back2Login.textContent = 'Back to Login';
