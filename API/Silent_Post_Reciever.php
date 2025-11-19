@@ -17,7 +17,7 @@ $payment_message = $_POST['RESPMSG'];
 $transaction_id = $_POST['PNREF']; // PayPal's transaction ID
 
 // get the internal order ID back from the 'USER1' field.
-$order_id = $_POST['USER1'];cd 
+$order_id = $_POST['USER1'];
 
 // simple log for debugging 
 $log_message = "PayPal Webhook Received:\n" .
