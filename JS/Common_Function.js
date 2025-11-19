@@ -127,7 +127,7 @@ CreateOption.addEventListener('click', function () {
                 window.location.href = '#order-input';
             } else {
                 // Login failed
-                alert(`Login Failed: ${data.message}`);
+                //alert(`Login Failed: ${data.message}`);
                 window.location.href = '#welcome-page';
                 window.location.reload();
             }
