@@ -505,8 +505,10 @@ export function showCreateAccountPopup() {
         });
 
         registerForm.addEventListener('submit', (event) => {
+            console.log("Form submit event fired!");
             event.preventDefault();
-            
+            console.log("Default prevented.");
+
             console.log('Create account button clicked');
             const email = emailAccount.value;
             const password = passwordInput.value;
