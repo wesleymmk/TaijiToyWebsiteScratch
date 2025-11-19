@@ -716,7 +716,7 @@ export function renderGenerationOutputView(order_ID_param) {
     RegenAll.textContent = 'Regenerate All';
     RegenAll.classList.add('button1', 'pagetextlargeb');
 
-    // Attach click handler for "Regenerate All" — uses Node backend to regenerate images
+    // Attach click handler for "Regenerate All" ï¿½ uses Node backend to regenerate images
     RegenAll.addEventListener('click', async () => {
         RegenAll.disabled = true;
         const originalText = RegenAll.textContent;
@@ -729,7 +729,7 @@ export function renderGenerationOutputView(order_ID_param) {
                 orderID: window.currentOrderID,
                 regenerate: true  // Flag to tell backend to generate NEW traits from Gemini
             };
-            const resp = await fetch('http://34.66.54.25:3000/generate', {
+            const resp = await fetch('http://34.69.23.109:3000/generate', {
                 method: 'POST',
                 credentials: 'include',
                 headers: { 'Content-Type': 'application/json' },
