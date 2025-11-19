@@ -34,16 +34,16 @@
 }
 /*PS Added*/
 .marketimage1 {
-  width: 871px;
+  min-width: 300px;
   width: 45.365vw;
   object-fit: contain;
   object-position: center;
 }
 /*PS Added*/
 .marketimage2 {
-  height: 235.6px;
+  min-height: 157.069px;
   height: 12.271vw;
-  width: 157.3px;
+  min-width: 104.87px;
   width: 8.193vw;
   object-fit: contain;
   object-position: center;
