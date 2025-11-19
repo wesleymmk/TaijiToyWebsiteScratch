@@ -40,7 +40,7 @@ try {
 
     // Creating the Base URL path this will need to change when going live
     // Note: images are saved under the `JS/Generated_Images` folder
-    $base_image_url = "/TaijiToyWebsiteScratch/JS/Generated_Images/Order_" . $order_id . "/";
+    $base_image_url = "/JS/Generated_Images/Order_" . $order_id . "/";
 
     // Creatingthe vals of the individual images
     $image_paths = [];

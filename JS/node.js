@@ -18,13 +18,13 @@ const { GoogleGenerativeAI } = require("@google/generative-ai");
 const app = express();
 app.use(express.json()); // allows the app to read JSON request bodies
 // Enable CORS with credentials so browser cookies (PHP session) can be forwarded to Node
-app.use(cors({ origin: 'http://localhost', credentials: true }));
+app.use(cors({ origin: true, credentials: true }));
 
 //  Initialize the Google AI client with your API key
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
-// Debug: Check API key is loaded
-console.log("API Key loaded:", process.env.GEMINI_API_KEY ? `${process.env.GEMINI_API_KEY.substring(0, 10)}... (length: ${process.env.GEMINI_API_KEY.length})` : "NOT FOUND");
+
+
 
 console.log("Backend is starting...");
 
@@ -238,7 +238,7 @@ app.post('/generate', async (req, res) => {
             const filePath = path.join(orderDir, fileName);
             fs.writeFileSync(filePath, Buffer.from(base64Image, "base64"));
 
-            const imagePath = `Generated_Images/Order_${orderID}/${fileName}`;
+            const imagePath = `JS/Generated_Images/Order_${orderID}/${fileName}`;
             generatedImages.push({ prompt: imagePrompt, base64: base64Image, image_path: imagePath });
             console.log(` Image ${i + 1} saved: ${imagePath}`);
 
@@ -295,7 +295,7 @@ app.post('/regenerate-images', async (req, res) => {
     // --- Verify order belongs to current logged-in user via PHP endpoint ---
     try {
       const phpResp = await axios.post(
-        'http://localhost/TaijiToyWebsiteScratch/API/display_traits.php',
+        'http://localhost/api/display_traits.php',
         { order_id: orderID },
         { headers: { 'Content-Type': 'application/json', Cookie: req.headers.cookie || '' } }
       );
@@ -347,7 +347,7 @@ app.post('/regenerate-images', async (req, res) => {
           const filePath = path.join(orderDir, fileName);
           fs.writeFileSync(filePath, Buffer.from(base64Image, "base64"));
 
-          const imagePath = `Generated_Images/Order_${orderID}/${fileName}`;
+          const imagePath = `JS/Generated_Images/Order_${orderID}/${fileName}`;
           generatedImages.push(imagePath);
           console.log(` Image ${i + 1} saved: ${imagePath}`);
         } else {

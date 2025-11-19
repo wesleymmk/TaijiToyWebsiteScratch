@@ -18,8 +18,9 @@
 .title {
   font-family: 'Chinese Rocks Rg', sana-serif;
   margin: 0;
-  font-size: 150px;
-  font-size: 11.719vw;
+  /*font-size: 150px;
+  font-size: 11.719vw;*/
+  font-size: calc(48px + 8vw);
   font-weight: 900;
   cursor: default;
   color: white;
@@ -27,8 +28,9 @@
 /*PS Added*/
 .pagetexttitle {
   font-family: 'Chinese Rocks Rg', sana-serif;
-  font-size: 27px;
-  font-size: 1.406vw;
+  /*font-size: 27px;
+  font-size: 1.406vw;*/
+  font-size: calc(12px + 1vw);
   font-weight: 900;
   cursor: default;
   margin-top: 45px;
@@ -38,8 +40,9 @@
 /*PS Added*/
 .pagetexttitleb {
   font-family: 'Chinese Rocks Rg', sana-serif;
-  font-size: 150px;
-  font-size: 7.813vw;
+  /*font-size: 150px;
+  font-size: 7.813vw;*/
+  font-size: calc(12px + 7.5vw);
   font-weight: 900;
   cursor: default;
   margin: 0;
@@ -78,8 +81,9 @@
 /*PS Added*/
 .pagetextlargew {
   font-family: 'Chinese Rocks Rg', sana-serif;
-  font-size: 47px;
-  font-size: 2.448vw;
+  /*font-size: 47px;
+  font-size: 2.448vw;*/
+  font-size: calc(12px + 2.2vw);
   font-weight: 400;
   cursor: default;
   margin: 0;
@@ -88,8 +92,9 @@
 /*PS Added*/
 .pagetextmediumw {
   font-family: 'Chinese Rocks Rg', sana-serif;
-  font-size: 37px;
-  font-size: 1.927vw;
+  /*font-size: 37px;
+  font-size: 1.927vw;*/
+  font-size: calc(16px + 1vw);
   font-weight: 400;
   cursor: default;
   margin: 0;
@@ -129,7 +134,7 @@
   font-family: 'Chinese Rocks Rg', sana-serif;
   /*font-size: 37px;
   font-size: 1.927vw;*/
-  font-size: calc(14px + 1.2vw);
+  font-size: calc(16px + 1vw);
   font-weight: 400;
   cursor: default;
   margin: 0;
@@ -140,7 +145,7 @@
   font-family: 'Chinese Rocks Rg', sana-serif;
   /*font-size: 22px;
   font-size: 1.146vw;*/
-  font-size: calc(8px + .5vw);
+  font-size: calc(14px + .5vw);
   font-weight: 400;
   cursor: default;
   margin: 0;
@@ -159,8 +164,9 @@
 }
 /*PS Added*/
 .trademarktitle {
-  margin-top: 77px;
-  margin-top: 4.01vw;
+  /*margin-top: 77px;
+  margin-top: 6.016vw;*/
+  margin-top: calc(64px + 1vw);
   margin-bottom: 0px;
 }
 /*PS Added*/
