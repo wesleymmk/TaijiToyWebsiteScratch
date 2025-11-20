@@ -93,7 +93,15 @@ export function manualScrollToElement(selector, duration = 500) {
     // Start the animation loop
     window.requestAnimationFrame(animationStep);
 }
+const check = document.querySelectorAll('.show');
+const check2 = document.querySelectorAll('.show1');
 /***************Parent Div Containers***************/
+export const ExitMenu = document.createElement('div');
+ExitMenu.classList.add('exitmenu');
+ExitMenu.addEventListener('click', () => {
+    menu.classList.toggle('show');
+    ExitMenu.classList.toggle('show1');
+});
 // PS added FooterBody This will hold the footer
 export const FooterBody = document.createElement('div');
 FooterBody.classList.add('body2');
@@ -124,7 +132,20 @@ Footerinnerdiv3.classList.add('footerinnerdiv3');
 export const HamburgerDiv = document.createElement('div');
 HamburgerDiv.classList.add('hamburgerdiv');
 HamburgerDiv.addEventListener('click', () => {
+    if ((check == '.show') && (check2 == '.show1')) {
         menu.classList.toggle('show');
+        ExitMenu.classList.toggle('show1');
+    }
+    else if ((check == '.show') && (check2 != '.show1')) {
+        menu.classList.toggle('show');
+    }
+    else if ((check != '.show') && (check2 == '.show1')) {
+        ExitMenu.classList.toggle('show');
+    }
+    else {
+        menu.classList.toggle('show');
+        ExitMenu.classList.toggle('show1');
+    }
 });
 /***************Text to be Inserted into Div containers***************/
 // PS added the Home field tro navigate to the homepage

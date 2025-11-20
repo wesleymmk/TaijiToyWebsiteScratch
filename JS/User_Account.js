@@ -16,16 +16,29 @@ export function renderUserAccount() {
             }
         });
     }, { threshold: 0.8 });
+    const check = document.querySelectorAll('.show');
+    addEventListener('DOMContentLoaded', () => {
+        if (check == '.show') {
+            ComUtils.menu.classList.toggle('show');
+        }
+    });
+    ComUtils.menu.classList.remove('show');
+    ComUtils.ExitMenu.classList.remove('show1');
     //PS added navwrapper, This is the new implementation of the navbar. Removed html version.
     const navwrapper = document.createElement('div');
     navwrapper.id = 'account'; // This is adding an id for the css class to specifically target this attribute
     navwrapper.classList.add('nav-wrapper'); // Class added
     navwrapper.appendChild(ComUtils.HomeLogo); // Grab button from Common_Function.js
-    navwrapper.appendChild(ComUtils.navmenu); // Grab button from Common_Function.js
-    navwrapper.appendChild(ComUtils.accountmenu); // Grab button from Common_Function.js
+    navwrapper.appendChild(ComUtils.menu); // Grab button from Common_Function.js
+    ComUtils.menu.appendChild(ComUtils.navmenu); // Grab button from Common_Function.js
+    ComUtils.menu.appendChild(ComUtils.accountmenu); // Grab button from Common_Function.js
+    navwrapper.appendChild(ComUtils.HamburgerDiv); // Grab button from Common_Function.js
     ComUtils.Home.classList.remove('home'); // Class removed
     ComUtils.CreateOption.classList.remove('inputorder'); // Class removed
     ComUtils.AccountOption.classList.add('account'); // Class added
+    ComUtils.HamburgerDiv.appendChild(ComUtils.Hamburgerline1); // Lines for Hamburger Menu
+    ComUtils.HamburgerDiv.appendChild(ComUtils.Hamburgerline2); // Lines for Hamburger Menu
+    ComUtils.HamburgerDiv.appendChild(ComUtils.Hamburgerline3); // Lines for Hamburger Menu
     ComUtils.navmenu.appendChild(ComUtils.Home); // Grab button from Common_Function.js
     ComUtils.navmenu.appendChild(ComUtils.StoreOption); // Grab button from Common_Function.js
     ComUtils.navmenu.appendChild(ComUtils.AboutOption); // Grab button from Common_Function.js
@@ -200,6 +213,7 @@ scrollableContent.innerHTML = '<p>Loading your order history...</p>';
     /***************Navigation Bar***************/
     appContainer.appendChild(navwrapper);
     /***************Parent Div containers***************/
+    appContainer.appendChild(ComUtils.ExitMenu);
     appContainer.appendChild(heading);
     // 6. Append the new elements to the page
     appContainer.appendChild(scrollableContent);

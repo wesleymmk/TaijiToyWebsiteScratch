@@ -18,6 +18,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
   margin-top: 50px;
   margin-top: 3.906vw;
   margin-bottom: 50px;
@@ -31,11 +32,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
+  flex-wrap: wrap;
 }
 /*PS Added*/
 .customtailoreddiv2 {
   width: 100%;
   justify-content: space-evenly;
+  gap: 10px;
 }
 /*PS Addded*/
 .customtailoreddiv3 {
@@ -55,6 +59,9 @@
 .inputinnerdiv3 {
   display: flex;
   justify-content: center;
+  text-align: center;
+  min-width: 350px;
+  width: 100%;
 }
 /*PS Added*/
 .inputinnerdiv2 {
@@ -63,10 +70,6 @@
 }
 /*PS Added*/
 .inputinnerdiv3 {
-  padding-left: 300px;
-  padding-left: 10.417vw;
-  padding-right: 300px;
-  padding-right: 10.417vw;
   margin-top: 10px;
   margin-top: 0.521vw;
 }
@@ -78,8 +81,9 @@
   width: 93.75vw;
   height: 100px;
   height: 7.813vw;
-  font-size: 22px;
-  font-size: 1.146vw;
+  /*font-size: 22px;
+  font-size: 1.146vw;*/
+  font-size: calc(12px + 1vw);
   border-radius: 18px;
   border-radius: 0.938vw;
   border-width: .5px;

@@ -40,21 +40,33 @@ export function renderGenerationOutputView(order_ID_param) {
             }
         });
     }, { threshold: 0.8 });
+    const check = document.querySelectorAll('.show');
+    addEventListener('DOMContentLoaded', () => {
+        if (check == '.show') {
+            ComUtils.menu.classList.toggle('show');
+        }
+    });
+    ComUtils.menu.classList.remove('show')
+    ComUtils.ExitMenu.classList.remove('show1');
     //PS added navwrapper, This is the new implementation of the navbar. Removed html version.
     const navwrapper = document.createElement('div');
     navwrapper.id = 'order-output'; // This is adding an id for the css class to specifically target this attribute
     navwrapper.classList.add('nav-wrapper'); // Class added
     navwrapper.appendChild(ComUtils.HomeLogo); // Grab button from Common_Function.js
-    navwrapper.appendChild(ComUtils.navmenu); // Grab button from Common_Function.js
-    navwrapper.appendChild(ComUtils.accountmenu); // Grab button from Common_Function.js
+    navwrapper.appendChild(ComUtils.menu); // Grab button from Common_Function.js
+    ComUtils.menu.appendChild(ComUtils.navmenu); // Grab button from Common_Function.js
+    ComUtils.menu.appendChild(ComUtils.accountmenu); // Grab button from Common_Function.js
+    navwrapper.appendChild(ComUtils.HamburgerDiv); // Grab button from Common_Function.js
     ComUtils.Home.classList.remove('home'); // Class removed
     ComUtils.CreateOption.classList.remove('inputorder'); // Class removed
     ComUtils.AccountOption.classList.remove('account'); // Class removed
+    ComUtils.HamburgerDiv.appendChild(ComUtils.Hamburgerline1); // Lines for Hamburger Menu
+    ComUtils.HamburgerDiv.appendChild(ComUtils.Hamburgerline2); // Lines for Hamburger Menu
+    ComUtils.HamburgerDiv.appendChild(ComUtils.Hamburgerline3); // Lines for Hamburger Menu
     ComUtils.navmenu.appendChild(ComUtils.Home); // Grab button from Common_Function.js
     ComUtils.navmenu.appendChild(ComUtils.StoreOption); // Grab button from Common_Function.js
     ComUtils.navmenu.appendChild(ComUtils.AboutOption); // Grab button from Common_Function.js
     ComUtils.navmenu.appendChild(ComUtils.ContactOption); // Grab button from Common_Function.js
-
     // EQ and PS collab
     //Added in the title and other developments.
     const Body = document.createElement('div');
@@ -716,7 +728,7 @@ export function renderGenerationOutputView(order_ID_param) {
     RegenAll.textContent = 'Regenerate All';
     RegenAll.classList.add('button1', 'pagetextlargeb');
 
-    // Attach click handler for "Regenerate All" — uses Node backend to regenerate images
+    // Attach click handler for "Regenerate All" ï¿½ uses Node backend to regenerate images
     RegenAll.addEventListener('click', async () => {
         RegenAll.disabled = true;
         const originalText = RegenAll.textContent;
@@ -729,7 +741,7 @@ export function renderGenerationOutputView(order_ID_param) {
                 orderID: window.currentOrderID,
                 regenerate: true  // Flag to tell backend to generate NEW traits from Gemini
             };
-            const resp = await fetch('http://34.66.54.25:3000/generate', {
+            const resp = await fetch('http://34.69.23.109:3000/generate', {
                 method: 'POST',
                 credentials: 'include',
                 headers: { 'Content-Type': 'application/json' },
@@ -796,6 +808,7 @@ export function renderGenerationOutputView(order_ID_param) {
     appContainer.appendChild(navwrapper);
     /***************Parent Div containers***************/
     //appContainer.appendChild(heading);
+    appContainer.appendChild(ComUtils.ExitMenu);
     appContainer.appendChild(Body);
     appContainer.appendChild(Body2);
     Body.appendChild(GenerationOutputTitleDiv);
