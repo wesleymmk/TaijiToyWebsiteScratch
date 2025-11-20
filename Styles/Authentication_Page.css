@@ -1,6 +1,5 @@
 /*PS Added*/
 .titlesection {
-  background-color: black;
   display: grid;
   grid-template-columns: auto 105px auto 105px auto;
   grid-template-columns: auto 5.469vw auto 5.469vw auto;
@@ -10,25 +9,21 @@
 .titlesection-a {
   grid-column: 3;
   grid-row: 1;
-  background-color: black;
   text-align: center;
 }
 /*PS Added*/
 .titlesection-b {
   grid-column: 3;
   grid-row: 2;
-  background-color: black;
 }
 /*PS Added*/
 .titlesection-c {
   grid-column: 4;
   grid-row: 1 / span 2;
-  background-color: black;
   text-align: right;
 }
 /*PS Added*/
 .marketing {
-  background-color: black;
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr 1fr 2fr;
   grid-template-rows: auto;
@@ -44,27 +39,22 @@
   margin-top: 2.604vw;
   margin-left: 25px;
   margin-left: 1.302vw;
-  background-color: black;
 }
 /*PS Added*/
 .marketing-b {
   grid-column: 2;
-  background-color: black;
 }
 /*PS Added*/
 .marketing-c {
   grid-column: 3;
-  background-color: black;
 }
 /*PS Added*/
 .marketing-d {
   grid-column: 4;
-  background-color: black;
 }
 /*PS Added*/
 .marketing-e {
   grid-column: 5;
-  background-color: black;
 }
 /*PS Added*/
 .marketing-f {
@@ -73,7 +63,6 @@
   margin-top: 2.604vw;
   margin-right: 25px;
   margin-right: 1.302vw;
-  background-color: black;
 }
 /*PS Added*/
 .marketingdiv3,
@@ -123,7 +112,7 @@
 .marketingrevealdiv2 {
   display: flex;
   flex-direction: column;
-  min-width: 385px;
+  min-width: 325px;
   width: 30.078vw;
   line-height: calc(16px + 3vw);
   text-align: center;

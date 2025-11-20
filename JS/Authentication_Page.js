@@ -25,11 +25,16 @@ export function renderWelcomeView() {
     navwrapper.id = 'home'; // This is adding an id for the css class to specifically target this attribute
     navwrapper.classList.add('nav-wrapper'); // Class added
     navwrapper.appendChild(ComUtils.HomeLogo); // Grab button from Common_Function.js
-    navwrapper.appendChild(ComUtils.navmenu); // Grab button from Common_Function.js
-    navwrapper.appendChild(ComUtils.accountmenu); // Grab button from Common_Function.js
+    navwrapper.appendChild(ComUtils.menu); // Grab button from Common_Function.js
+    ComUtils.menu.appendChild(ComUtils.navmenu); // Grab button from Common_Function.js
+    ComUtils.menu.appendChild(ComUtils.accountmenu); // Grab button from Common_Function.js
+    navwrapper.appendChild(ComUtils.HamburgerDiv); // Grab button from Common_Function.js
     ComUtils.Home.classList.add('home'); // Class added
     ComUtils.CreateOption.classList.remove('inputorder'); // Class removed
     ComUtils.AccountOption.classList.remove('account'); // Class removed
+    ComUtils.HamburgerDiv.appendChild(ComUtils.Hamburgerline1);
+    ComUtils.HamburgerDiv.appendChild(ComUtils.Hamburgerline2);
+    ComUtils.HamburgerDiv.appendChild(ComUtils.Hamburgerline3);
     ComUtils.navmenu.appendChild(ComUtils.Home); // Grab button from Common_Function.js
     ComUtils.navmenu.appendChild(ComUtils.StoreOption); // Grab button from Common_Function.js
     ComUtils.navmenu.appendChild(ComUtils.AboutOption); // Grab button from Common_Function.js

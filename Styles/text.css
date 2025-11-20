@@ -51,8 +51,9 @@
 /*PS Added*/
 .pagetexttitlew {
   font-family: 'Chinese Rocks Rg', sana-serif;
-  font-size: 150px;
-  font-size: 7.813vw;
+  /*font-size: 150px;
+  font-size: 7.813vw;*/
+  font-size: calc(12px + 7.5vw);
   font-weight: 900;
   cursor: default;
   margin: 0;
@@ -62,7 +63,7 @@
 .pagetexttitle2b {
   font-family: 'Chinese Rocks Rg', sana-serif;
   font-size: 100px;
-  font-size: 5.208vw;
+  font-size: calc(30px + 5.25vw);
   font-weight: 900;
   cursor: default;
   margin: 0;
@@ -102,8 +103,9 @@
 }
 .pagetextsmallw1 {
   font-family: 'Chinese Rocks Rg', sana-serif;
-  font-size: 22px;
-  font-size: 1.146vw;
+  /*font-size: 22px;
+  font-size: 1.146vw;*/
+  font-size: calc(14px + .5vw);
   font-weight: 400;
   cursor: default;
   margin: 0;
@@ -112,8 +114,9 @@
 /*PS Added*/
 .pagetextsmallw {
   font-family: 'Chinese Rocks Rg', sana-serif;
-  font-size: 20px;
-  font-size: 1.042vw;
+  /*font-size: 20px;
+  font-size: 1.042vw;*/
+  font-size: calc(12px + .5vw);
   font-weight: 400;
   cursor: default;
   margin: 0;
@@ -171,7 +174,8 @@
 }
 /*PS Added*/
 .textnavmenu,
-.textnavmenu2 {
+.textnavmenu2,
+.textnavmenu3 {
   margin: 0;
   margin-left: 25px;
   margin-left: 1.953vw;
@@ -179,15 +183,19 @@
   color: white;
   font-weight: 80;
   cursor: pointer;
-  font-size: 20px;
-  font-size: 1.563vw;
+  /*font-size: 20px;
+  font-size: 1.563vw;*/
+  font-size: calc(30px - .4vw);
 }
 /*PS Added*/
 .textnavmenu2 {
-  font-size: 15px;
-  font-size: 1.172vw;
-  margin-left: 0px;
   text-decoration: underline;
+}
+/*PS Added*/
+.textnavmenu3 {
+  font-size: calc(12px + .5vw);
+  text-decoration: underline;
+  margin: 0;
 }
 /*PS Added*/
 .textaccountmenu {
@@ -198,6 +206,7 @@
   color: white;
   font-weight: 80;
   cursor: pointer;
-  font-size: 20px;
-  font-size: 1.563vw;
+  /*font-size: 20px;
+  font-size: 1.563vw;*/
+  font-size: calc(30px - .4vw);
 }

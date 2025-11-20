@@ -102,6 +102,9 @@ FooterBody.classList.add('body2');
 export const Footerdiv = document.createElement('div');
 Footerdiv.classList.add('footerdiv');
 /***************Innermost Div containers holding text or images***************/
+// PS added menu to hold both option divs
+export const menu = document.createElement('div');
+menu.classList.add('menu');
 // PS added navmenu to hold the navigation options
 export const navmenu = document.createElement('div');
 navmenu.classList.add('nav-menu');
@@ -117,6 +120,12 @@ Footerinnerdiv2.classList.add('footerinnerdiv2');
 // PS added Footerinnerdiv3 for footer
 export const Footerinnerdiv3 = document.createElement('div');
 Footerinnerdiv3.classList.add('footerinnerdiv3');
+// PS added HamburgerDiv to hold the hamburger menu icon
+export const HamburgerDiv = document.createElement('div');
+HamburgerDiv.classList.add('hamburgerdiv');
+HamburgerDiv.addEventListener('click', () => {
+        menu.classList.toggle('show');
+});
 /***************Text to be Inserted into Div containers***************/
 // PS added the Home field tro navigate to the homepage
 export const Home = document.createElement('p');
@@ -189,6 +198,15 @@ AccountOption.addEventListener('click', (event) => {
 export const LogOutOption = document.createElement('p');
 LogOutOption.textContent = 'Logout';
 LogOutOption.classList.add('textaccountmenu', 'altanimation');
+// PS added Hamburgerline1 to be the a line of the hamburger menu
+export const Hamburgerline1 = document.createElement('div');
+Hamburgerline1.classList.add('hamburgerline');
+// PS added Hamburgerline2 to be the a line of the hamburger menu
+export const Hamburgerline2 = document.createElement('div');
+Hamburgerline2.classList.add('hamburgerline');
+// PS added Hamburgerline3 to be the a line of the hamburger menu
+export const Hamburgerline3 = document.createElement('div');
+Hamburgerline3.classList.add('hamburgerline');
 // **************************************************
 // START: LOGOUT LISTENER ADDED
 // **************************************************
@@ -354,7 +372,7 @@ export function showPopupModal() {
 
         const ForgotPass = document.createElement("p");
         ForgotPass.textContent = 'Forgot Password?';
-        ForgotPass.classList.add('textnavmenu2');
+        ForgotPass.classList.add('textnavmenu3');
 
         const popupHeading = document.createElement('P');
         popupHeading.classList.add('pagetextlargew');
@@ -501,7 +519,7 @@ export function showCreateAccountPopup() {
 
         const Back2Login = document.createElement("p");
         Back2Login.textContent = 'Already have an account? Log in!';
-        Back2Login.classList.add('textnavmenu2');
+        Back2Login.classList.add('textnavmenu3');
 
         const emailAccount = document.createElement('input');
         emailAccount.type = 'email';
@@ -674,7 +692,7 @@ export function ForgotPassPopup() {
         
         const Back2Login = document.createElement("p");
         Back2Login.textContent = 'Back to Login';
-        Back2Login.classList.add('textnavmenu2');
+        Back2Login.classList.add('textnavmenu3');
 
         const popupHeading = document.createElement('p');
         popupHeading.textContent = 'Reset Password';

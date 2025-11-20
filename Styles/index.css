@@ -96,7 +96,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  min-width: 470px;
+  min-width: 350px;
   width: 36.719vw;
 }
 /*PS Added*/
@@ -187,7 +187,13 @@
   padding-right: 10px;
   padding-right: 0.781vw;
 }
-
+/*PS Added*/
+.hamburgerline {
+  height: 7px;
+  width: 100%;
+  border-radius: 5px;
+  background-color: white;
+}
 
 
 /*Scroolable windown in the user accounts page*/
