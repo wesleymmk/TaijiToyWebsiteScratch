@@ -642,55 +642,7 @@ export function ForgotPassPopup() {
         LinkRequest.textContent = 'Send Reset Code';
         LinkRequest.classList.add('LoginButton-3', 'pagetextmediumb');
         LinkRequest.type = "submit";
-
-        LinkRequest.addEventListener('click', ()=>{
-            modal.style.display = "none";
-            resetnumbers();
-        });
-
-        // Password Reseting logic created by WAM
-
-        LinkRequest.addEventListener('click', async (event) => {
-            event.preventDefault(); // Stop the form from submitting/reloading the page
-
-            // Get the email from your input field
-            const emailInput = document.getElementById('your-email-input-id'); // Replace with your actual ID
-            const email = emailInput.value;
-
-            if (!email) {
-                alert("Please enter your email address.");
-                return;
-            }
-
-            // Disable button to prevent double-clicks
-            LinkRequest.disabled = true;
-            LinkRequest.textContent = "Sending...";
-
-            try {
-                // Call PHP script
-                const response = await apiCall('api/password_reset_email.php', { email: email });
-
-                //Handle the response
-                const data = await response.json(); // Or just use 'response' if apiCall parses it
-
-                if (data.success) {
-                    alert(data.message); // "Reset code sent..."
-                    // Move to the next step (e.g., show the "Enter Code" input)
-                    showEnterCodeView();
-                } else {
-                    alert("Error: " + data.message);
-                }
-
-            } catch (error) {
-                console.error("Reset request failed:", error);
-                alert("An error occurred. Please try again.");
-            } finally {
-                // Re-enable button
-                LinkRequest.disabled = false;
-                LinkRequest.textContent = 'Send Reset Code';
-            }
-        });
-        
+           
         const Back2Login = document.createElement("p");
         Back2Login.textContent = 'Back to Login';
         Back2Login.classList.add('textnavmenu3');
@@ -717,6 +669,47 @@ export function ForgotPassPopup() {
             showPopupModal();      // Then open the login popup
         });
 
+        // Password Reseting logic created by WAM
+
+        LinkRequest.addEventListener('click', async (event) => {
+            event.preventDefault(); // Stop the form from submitting/reloading the page
+
+            // Get the email from your input field
+            const email = emailAccount.value;
+
+            if (!email) {
+                alert("Please enter your email address.");
+                return;
+            }
+
+            // Disable button to prevent double-clicks
+            LinkRequest.disabled = true;
+            LinkRequest.textContent = "Sending...";
+            
+            try {
+                // Call PHP script
+                const response = await apiCall('api/password_reset_email.php', { email: email });
+
+                //Handle the response
+                const data = await response.json(); // Or just use 'response' if apiCall parses it
+
+                if (data.success) {
+                    alert(data.message); // "Reset code sent..."
+                    modal.style.display = "none";
+                    resetnumbers();
+                } else {
+                    alert("Error: " + data.message);
+                }
+
+            } catch (error) {
+                console.error("Reset request failed:", error);
+                alert("An error occurred. Please try again.");
+            } finally {
+                // Re-enable button
+                LinkRequest.disabled = false;
+                LinkRequest.textContent = 'Send Reset Code';
+            }
+        });
         /* registerForm.addEventListener('submit', (event) => {
              event.preventDefault();
              const email = emailAccount.value;
@@ -829,18 +822,14 @@ export function resetnumbers(){
         submitbutton.classList.add('LoginButton-3', 'pagetextmediumb');
         submitbutton.type = "submit";
 
-        submitbutton.addEventListener('click', ()=>{
-            modal.style.display = "none";
-            resetPassword();
-        });
 
         //This whole part most likely needs to be changed once we do the API functions for it.
         //Only making sure that the add event listener works.
         const codeinput = document.createElement('input');
-        codeinput.type = 'Email'; //Most likely needs to be changed.
+        codeinput.type = ''; //Most likely needs to be changed.
         codeinput.placeholder = 'Enter the code';
         codeinput.classList.add('inputbar');
-        //codeinput.required = true;
+        codeinput.required = true;
 
         const popupHeading = document.createElement('p');
         popupHeading.textContent = 'Code should be valid for x amount of time.';
@@ -852,6 +841,13 @@ export function resetnumbers(){
         closeButton.onclick = () => {
             modal.style.display = "none";
         }
+
+        submitbutton.addEventListener('click', () => {
+
+            modal.style.display = "none";
+
+            resetPassword();
+        });
 
         appContainer.appendChild(modal);
         modal.appendChild(modalContent);

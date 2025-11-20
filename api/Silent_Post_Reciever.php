@@ -52,12 +52,12 @@ if ($payment_status == 0) {
         $mail->isSMTP();
         $mail->Host       = 'smtp.gmail.com'; // using Gmail's SMTP server
         $mail->SMTPAuth   = true;
-        $mail->Username   = 'your-email@gmail.com'; // Your sponsor's "from" email
-        $mail->Password   = 'your-gmail-app-password'; // The 16-digit app password
+        $mail->Username   = 'noreply@taijitoy.com'; // Your sponsor's "from" email
+        $mail->Password   = getenv('GMAIL_APP_PASSWORD'); // The 16-digit app password
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
         $mail->Port       = 465;
 
-        $mail->setFrom('your-email@gmail.com', 'Taiji Toy Factory');
+        $mail->setFrom('noreply@taijitoy.com', 'noreply@taijitoy.com');
         $mail->addAddress('your-sponsor-email@example.com', 'Site Owner'); // The site owner's email
         $mail->Subject = 'New Order Placed! (Order #' . $order_id . ')';
         $mail->Body    = "<h1>You have a new order!</h1>

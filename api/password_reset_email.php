@@ -4,7 +4,7 @@
 
 // --- LOAD DEPENDENCIES ---
 require_once 'config.php';
-require_once 'common_functions.php';
+require_once 'common_function.php';
 
 // Adjust path to PHPMailer as needed
 use PHPMailer\PHPMailer\PHPMailer;
