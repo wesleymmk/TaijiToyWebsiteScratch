@@ -11,6 +11,37 @@ export function clearAppContainer()  // WM code // from online modified it so th
 {
     appContainer.innerHTML = '';
 }
+
+// This function acts as an API call taking a JS object and a PHP endpoint
+export function apiCall(php_file, js_object) // WM code // 
+{
+    return fetch(php_file, // Returns the result of fetch
+        {
+            method: 'POST',
+            headers: {
+                // tells the PHP script that the incoming data is JS
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(js_object) // this parses the data from a JS Object to a JSON string that can be read by php
+        })
+    /*
+        .then(response =>
+        {
+            if (!response.ok) // Checks response
+            {
+                throw new Error(`No network response from ${php_file}`); // displays error that states where the problem is occuring
+            }
+            return response.json(); // returns response whenever 
+        })
+        .catch(error =>
+        {
+            console.error(`Fetch Error at ${php_file}:`, error);
+            return { success: false, message: 'Could not connect to the server.' };
+        });
+        */
+}
+
+
 /* These are just the buttons for the header that each webapge will call to simplify each file and reduce
 repeating code*/
 /***************Auto Scroll Option***************/
@@ -62,7 +93,15 @@ export function manualScrollToElement(selector, duration = 500) {
     // Start the animation loop
     window.requestAnimationFrame(animationStep);
 }
+const check = document.querySelectorAll('.show');
+const check2 = document.querySelectorAll('.show1');
 /***************Parent Div Containers***************/
+export const ExitMenu = document.createElement('div');
+ExitMenu.classList.add('exitmenu');
+ExitMenu.addEventListener('click', () => {
+    menu.classList.toggle('show');
+    ExitMenu.classList.toggle('show1');
+});
 // PS added FooterBody This will hold the footer
 export const FooterBody = document.createElement('div');
 FooterBody.classList.add('body2');
@@ -71,6 +110,9 @@ FooterBody.classList.add('body2');
 export const Footerdiv = document.createElement('div');
 Footerdiv.classList.add('footerdiv');
 /***************Innermost Div containers holding text or images***************/
+// PS added menu to hold both option divs
+export const menu = document.createElement('div');
+menu.classList.add('menu');
 // PS added navmenu to hold the navigation options
 export const navmenu = document.createElement('div');
 navmenu.classList.add('nav-menu');
@@ -86,6 +128,25 @@ Footerinnerdiv2.classList.add('footerinnerdiv2');
 // PS added Footerinnerdiv3 for footer
 export const Footerinnerdiv3 = document.createElement('div');
 Footerinnerdiv3.classList.add('footerinnerdiv3');
+// PS added HamburgerDiv to hold the hamburger menu icon
+export const HamburgerDiv = document.createElement('div');
+HamburgerDiv.classList.add('hamburgerdiv');
+HamburgerDiv.addEventListener('click', () => {
+    if ((check == '.show') && (check2 == '.show1')) {
+        menu.classList.toggle('show');
+        ExitMenu.classList.toggle('show1');
+    }
+    else if ((check == '.show') && (check2 != '.show1')) {
+        menu.classList.toggle('show');
+    }
+    else if ((check != '.show') && (check2 == '.show1')) {
+        ExitMenu.classList.toggle('show');
+    }
+    else {
+        menu.classList.toggle('show');
+        ExitMenu.classList.toggle('show1');
+    }
+});
 /***************Text to be Inserted into Div containers***************/
 // PS added the Home field tro navigate to the homepage
 export const Home = document.createElement('p');
@@ -127,7 +188,7 @@ CreateOption.addEventListener('click', function () {
                 window.location.href = '#order-input';
             } else {
                 // Login failed
-                alert(`Login Failed: ${data.message}`);
+                //alert(`Login Failed: ${data.message}`);
                 window.location.href = '#welcome-page';
                 window.location.reload();
             }
@@ -158,6 +219,15 @@ AccountOption.addEventListener('click', (event) => {
 export const LogOutOption = document.createElement('p');
 LogOutOption.textContent = 'Logout';
 LogOutOption.classList.add('textaccountmenu', 'altanimation');
+// PS added Hamburgerline1 to be the a line of the hamburger menu
+export const Hamburgerline1 = document.createElement('div');
+Hamburgerline1.classList.add('hamburgerline');
+// PS added Hamburgerline2 to be the a line of the hamburger menu
+export const Hamburgerline2 = document.createElement('div');
+Hamburgerline2.classList.add('hamburgerline');
+// PS added Hamburgerline3 to be the a line of the hamburger menu
+export const Hamburgerline3 = document.createElement('div');
+Hamburgerline3.classList.add('hamburgerline');
 // **************************************************
 // START: LOGOUT LISTENER ADDED
 // **************************************************
@@ -323,7 +393,7 @@ export function showPopupModal() {
 
         const ForgotPass = document.createElement("p");
         ForgotPass.textContent = 'Forgot Password?';
-        ForgotPass.classList.add('textnavmenu2');
+        ForgotPass.classList.add('textnavmenu3');
 
         const popupHeading = document.createElement('P');
         popupHeading.classList.add('pagetextlargew');
@@ -470,7 +540,7 @@ export function showCreateAccountPopup() {
 
         const Back2Login = document.createElement("p");
         Back2Login.textContent = 'Already have an account? Log in!';
-        Back2Login.classList.add('textnavmenu2');
+        Back2Login.classList.add('textnavmenu3');
 
         const emailAccount = document.createElement('input');
         emailAccount.type = 'email';
@@ -505,8 +575,11 @@ export function showCreateAccountPopup() {
         });
 
         registerForm.addEventListener('submit', (event) => {
+            console.log("Form submit event fired!");
             event.preventDefault();
+            console.log("Default prevented.");
 
+            console.log('Create account button clicked');
             const email = emailAccount.value;
             const password = passwordInput.value;
             const receives_emails = emailCheckbox.checked; // this returns a true or false value if the checkbox is checked
@@ -537,7 +610,7 @@ export function showCreateAccountPopup() {
         modalContent.appendChild(closeButton);
         modalContent.appendChild(TitleDiv);
         modalContent.appendChild(registerForm);
-        modalContent.appendChild(buttonspacing_2)
+        //modalContent.appendChild(buttonspacing_2);
         TitleDiv.appendChild(popupHeading);
         registerForm.appendChild(inputspacing);
         inputspacing.appendChild(emailAccount);
@@ -546,6 +619,7 @@ export function showCreateAccountPopup() {
         registerForm.appendChild(buttonspacing);
         buttonspacing.appendChild(emailCheckbox);
         buttonspacing.appendChild(CheckboxLabel);
+        registerForm.appendChild(buttonspacing_2);
         buttonspacing_2.appendChild(CreateAccountButton);
         buttonspacing_2.appendChild(Back2Login);
     }
@@ -586,13 +660,61 @@ export function ForgotPassPopup() {
         registerForm.id = 'register-form-popup';
               
         const LinkRequest = document.createElement("button");
-        LinkRequest.textContent = 'Send Reset Link';
+        LinkRequest.textContent = 'Send Reset Code';
         LinkRequest.classList.add('LoginButton-3', 'pagetextmediumb');
         LinkRequest.type = "submit";
+
+        LinkRequest.addEventListener('click', ()=>{
+            modal.style.display = "none";
+            resetnumbers();
+        });
+
+        // Password Reseting logic created by WAM
+
+        LinkRequest.addEventListener('click', async (event) => {
+            event.preventDefault(); // Stop the form from submitting/reloading the page
+
+            // Get the email from your input field
+            const emailInput = document.getElementById('your-email-input-id'); // Replace with your actual ID
+            const email = emailInput.value;
+
+            if (!email) {
+                alert("Please enter your email address.");
+                return;
+            }
+
+            // Disable button to prevent double-clicks
+            LinkRequest.disabled = true;
+            LinkRequest.textContent = "Sending...";
+
+            try {
+                // Call PHP script
+                const response = await apiCall('api/password_reset_email.php', { email: email });
+
+                //Handle the response
+                const data = await response.json(); // Or just use 'response' if apiCall parses it
+
+                if (data.success) {
+                    alert(data.message); // "Reset code sent..."
+                    // Move to the next step (e.g., show the "Enter Code" input)
+                    showEnterCodeView();
+                } else {
+                    alert("Error: " + data.message);
+                }
+
+            } catch (error) {
+                console.error("Reset request failed:", error);
+                alert("An error occurred. Please try again.");
+            } finally {
+                // Re-enable button
+                LinkRequest.disabled = false;
+                LinkRequest.textContent = 'Send Reset Code';
+            }
+        });
         
         const Back2Login = document.createElement("p");
         Back2Login.textContent = 'Back to Login';
-        Back2Login.classList.add('textnavmenu2');
+        Back2Login.classList.add('textnavmenu3');
 
         const popupHeading = document.createElement('p');
         popupHeading.textContent = 'Reset Password';
@@ -702,33 +824,134 @@ export function CAsuccess() {
     }
     modal.style.display = 'block';
 }
-// This function acts as an API call taking a JS object and a PHP endpoint
-export function apiCall(php_file, js_object) // WM code // 
-{
-    return fetch(php_file, // Returns the result of fetch
-        {
-            method: 'POST',
-            headers: {
-                // tells the PHP script that the incoming data is JS
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(js_object) // this parses the data from a JS Object to a JSON string that can be read by php
-        })
-    /*
-        .then(response =>
-        {
-            if (!response.ok) // Checks response
-            {
-                throw new Error(`No network response from ${php_file}`); // displays error that states where the problem is occuring
-            }
-            return response.json(); // returns response whenever 
-        })
-        .catch(error =>
-        {
-            console.error(`Fetch Error at ${php_file}:`, error);
-            return { success: false, message: 'Could not connect to the server.' };
+
+//Done by EQ
+export function resetnumbers(){
+    let modal=document.getElementById('ResetNumbersModal');
+    if(!modal){
+        modal=document.createElement('div');
+        modal.id='ResetNumbersModal';
+        modal.classList.add('modal');
+
+        const modalContent = document.createElement('div');
+        modalContent.classList.add('modal-content', 'altanimation');
+
+        const inputspacing=document.createElement('div');
+        inputspacing.classList.add('inputspacing')
+
+        const TitleDiv = document.createElement('div');
+        TitleDiv.classList.add('titlediv');
+
+        const buttonspacing = document.createElement('div');
+        buttonspacing.classList.add('buttonspacing');
+
+        const submitbutton = document.createElement("button");
+        submitbutton.textContent = 'Submit';
+        submitbutton.classList.add('LoginButton-3', 'pagetextmediumb');
+        submitbutton.type = "submit";
+
+        submitbutton.addEventListener('click', ()=>{
+            modal.style.display = "none";
+            resetPassword();
         });
-        */
+
+        //This whole part most likely needs to be changed once we do the API functions for it.
+        //Only making sure that the add event listener works.
+        const codeinput = document.createElement('input');
+        codeinput.type = 'Email'; //Most likely needs to be changed.
+        codeinput.placeholder = 'Enter the code';
+        codeinput.classList.add('inputbar');
+        //codeinput.required = true;
+
+        const popupHeading = document.createElement('p');
+        popupHeading.textContent = 'Code should be valid for x amount of time.';
+        popupHeading.classList.add('pagetextlargew');
+
+        const closeButton = document.createElement('span');
+        closeButton.classList.add('close-button');
+        closeButton.innerHTML = '&times;'; // The 'x' character
+        closeButton.onclick = () => {
+            modal.style.display = "none";
+        }
+
+        appContainer.appendChild(modal);
+        modal.appendChild(modalContent);
+        modalContent.appendChild(closeButton);
+        modalContent.appendChild(TitleDiv);
+        modalContent.appendChild(inputspacing);
+        modalContent.appendChild(buttonspacing);
+        TitleDiv.appendChild(popupHeading);
+        inputspacing.appendChild(codeinput);
+        buttonspacing.appendChild(submitbutton);
+    }
+    modal.style.display = "block";
+}
+
+//Done by EQ
+export function resetPassword(){
+    let modal=document.getElementById('ResetPasswordModal');
+    if(!modal){
+        modal=document.createElement('div');
+        modal.id='ResetPasswordModal';
+        modal.classList.add('modal');
+
+        const modalContent = document.createElement('div');
+        modalContent.classList.add('modal-content', 'altanimation');
+
+        const inputspacing=document.createElement('div');
+        inputspacing.classList.add('inputspacing')
+
+        const TitleDiv = document.createElement('div');
+        TitleDiv.classList.add('titlediv');
+
+        const inputspacing_2=document.createElement('div');
+        inputspacing_2.classList.add('inputspacing')
+
+        const buttonspacing = document.createElement('div');
+        buttonspacing.classList.add('buttonspacing');
+
+        const popupHeading = document.createElement('p');
+        popupHeading.textContent = 'Insert a new password.';
+        popupHeading.classList.add('pagetextlargew');
+
+        const submitbutton = document.createElement('button');
+        submitbutton.textContent = 'Submit';
+        submitbutton.classList.add('LoginButton-3', 'pagetextmediumb');
+        submitbutton.type = "submit";
+
+        const passwordInput_1=document.createElement('input');
+        passwordInput_1.type = 'password';
+        passwordInput_1.placeholder = 'Enter New password';
+        passwordInput_1.classList.add('inputbar');
+        passwordInput_1.required = true;  
+
+        const passwordInput_2=document.createElement("input")
+        passwordInput_2.type = 'password';
+        passwordInput_2.placeholder = 'Reenter new password';
+        passwordInput_2.classList.add('inputbar');
+        passwordInput_2.required = true;
+
+        const closeButton = document.createElement('span');
+        closeButton.classList.add('close-button');
+        closeButton.innerHTML = '&times;'; // The 'x' character
+        closeButton.onclick = () => {
+            modal.style.display = "none";
+        }
+
+        appContainer.appendChild(modal);
+        modal.appendChild(modalContent);
+        modalContent.appendChild(closeButton);
+        modalContent.appendChild(TitleDiv);
+        modalContent.appendChild(inputspacing);
+        modalContent.appendChild(inputspacing_2);
+        modalContent.appendChild(buttonspacing);
+        TitleDiv.appendChild(popupHeading);
+        inputspacing.appendChild(passwordInput_1);
+        inputspacing_2.appendChild(passwordInput_2);
+        buttonspacing.appendChild(submitbutton);
+
+    }
+    modal.style.display = "block";
 }
 
 // === ANALYTICS FUNCTIONS ===

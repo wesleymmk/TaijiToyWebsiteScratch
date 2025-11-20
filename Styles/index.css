@@ -96,7 +96,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  min-width: 470px;
+  min-width: 350px;
   width: 36.719vw;
 }
 /*PS Added*/
@@ -187,7 +187,32 @@
   padding-right: 10px;
   padding-right: 0.781vw;
 }
+/*PS Added*/
+.hamburgerline {
+  height: 7px;
+  width: 100%;
+  border-radius: 5px;
+  background-color: white;
+}
+/*PS Added*/
+.exitmenu {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 0;
+  display: none;
+}
 
+.exitmenu.show1 {
+  display: flex;
+}
 
 
 /*Scroolable windown in the user accounts page*/
