@@ -292,24 +292,6 @@ app.post('/regenerate-images', async (req, res) => {
     console.log('[/regenerate-images] Received request. full body:', JSON.stringify(req.body));
     console.log('[/regenerate-images] Headers cookie:', req.headers.cookie || '(none)');
 
-    // --- Verify order belongs to current logged-in user via PHP endpoint ---
-    try {
-      const phpResp = await axios.post(
-        'http://localhost/api/display_traits.php',
-        { order_id: orderID },
-        { headers: { 'Content-Type': 'application/json', Cookie: req.headers.cookie || '' } }
-      );
-
-      if (!phpResp || !phpResp.data || !phpResp.data.success) {
-        console.error('[/regenerate-images] PHP verification failed or returned no success:', phpResp && phpResp.data);
-        return res.status(400).json({ success: false, message: 'Order verification failed. Aborting image regeneration.' });
-      }
-      console.log('[/regenerate-images] PHP verification success for order:', orderID);
-    } catch (phpErr) {
-      console.error('[/regenerate-images] Error calling PHP verify endpoint:', phpErr.message);
-      return res.status(500).json({ success: false, message: 'Server error verifying order ownership.' });
-    }
-
     if (!traits || !Array.isArray(traits) || traits.length === 0) {
       return res.status(400).json({ success: false, message: "Missing traits" });
     }
