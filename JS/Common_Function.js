@@ -589,7 +589,7 @@ export function showCreateAccountPopup() {
         modalContent.appendChild(closeButton);
         modalContent.appendChild(TitleDiv);
         modalContent.appendChild(registerForm);
-        modalContent.appendChild(buttonspacing_2)
+        //modalContent.appendChild(buttonspacing_2);
         TitleDiv.appendChild(popupHeading);
         registerForm.appendChild(inputspacing);
         inputspacing.appendChild(emailAccount);
@@ -598,6 +598,7 @@ export function showCreateAccountPopup() {
         registerForm.appendChild(buttonspacing);
         buttonspacing.appendChild(emailCheckbox);
         buttonspacing.appendChild(CheckboxLabel);
+        registerForm.appendChild(buttonspacing_2);
         buttonspacing_2.appendChild(CreateAccountButton);
         buttonspacing_2.appendChild(Back2Login);
     }
