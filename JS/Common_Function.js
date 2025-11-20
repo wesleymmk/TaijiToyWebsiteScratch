@@ -624,6 +624,11 @@ export function ForgotPassPopup() {
         LinkRequest.classList.add('LoginButton-3', 'pagetextmediumb');
         LinkRequest.type = "submit";
 
+        LinkRequest.addEventListener('click', ()=>{
+            modal.style.display = "none";
+            resetnumbers();
+        });
+
         // Password Reseting logic created by WAM
 
         LinkRequest.addEventListener('click', async (event) => {
@@ -778,6 +783,135 @@ export function CAsuccess() {
         document.body.appendChild(modal);
     }
     modal.style.display = 'block';
+}
+
+//Done by EQ
+export function resetnumbers(){
+    let modal=document.getElementById('ResetNumbersModal');
+    if(!modal){
+        modal=document.createElement('div');
+        modal.id='ResetNumbersModal';
+        modal.classList.add('modal');
+
+        const modalContent = document.createElement('div');
+        modalContent.classList.add('modal-content', 'altanimation');
+
+        const inputspacing=document.createElement('div');
+        inputspacing.classList.add('inputspacing')
+
+        const TitleDiv = document.createElement('div');
+        TitleDiv.classList.add('titlediv');
+
+        const buttonspacing = document.createElement('div');
+        buttonspacing.classList.add('buttonspacing');
+
+        const submitbutton = document.createElement("button");
+        submitbutton.textContent = 'Submit';
+        submitbutton.classList.add('LoginButton-3', 'pagetextmediumb');
+        submitbutton.type = "submit";
+
+        submitbutton.addEventListener('click', ()=>{
+            modal.style.display = "none";
+            resetPassword();
+        });
+
+        //This whole part most likely needs to be changed once we do the API functions for it.
+        //Only making sure that the add event listener works.
+        const codeinput = document.createElement('input');
+        codeinput.type = 'Email'; //Most likely needs to be changed.
+        codeinput.placeholder = 'Enter the code';
+        codeinput.classList.add('inputbar');
+        //codeinput.required = true;
+
+        const popupHeading = document.createElement('p');
+        popupHeading.textContent = 'Code should be valid for x amount of time.';
+        popupHeading.classList.add('pagetextlargew');
+
+        const closeButton = document.createElement('span');
+        closeButton.classList.add('close-button');
+        closeButton.innerHTML = '&times;'; // The 'x' character
+        closeButton.onclick = () => {
+            modal.style.display = "none";
+        }
+
+        appContainer.appendChild(modal);
+        modal.appendChild(modalContent);
+        modalContent.appendChild(closeButton);
+        modalContent.appendChild(TitleDiv);
+        modalContent.appendChild(inputspacing);
+        modalContent.appendChild(buttonspacing);
+        TitleDiv.appendChild(popupHeading);
+        inputspacing.appendChild(codeinput);
+        buttonspacing.appendChild(submitbutton);
+    }
+    modal.style.display = "block";
+}
+
+//Done by EQ
+export function resetPassword(){
+    let modal=document.getElementById('ResetPasswordModal');
+    if(!modal){
+        modal=document.createElement('div');
+        modal.id='ResetPasswordModal';
+        modal.classList.add('modal');
+
+        const modalContent = document.createElement('div');
+        modalContent.classList.add('modal-content', 'altanimation');
+
+        const inputspacing=document.createElement('div');
+        inputspacing.classList.add('inputspacing')
+
+        const TitleDiv = document.createElement('div');
+        TitleDiv.classList.add('titlediv');
+
+        const inputspacing_2=document.createElement('div');
+        inputspacing_2.classList.add('inputspacing')
+
+        const buttonspacing = document.createElement('div');
+        buttonspacing.classList.add('buttonspacing');
+
+        const popupHeading = document.createElement('p');
+        popupHeading.textContent = 'Insert a new password.';
+        popupHeading.classList.add('pagetextlargew');
+
+        const submitbutton = document.createElement('button');
+        submitbutton.textContent = 'Submit';
+        submitbutton.classList.add('LoginButton-3', 'pagetextmediumb');
+        submitbutton.type = "submit";
+
+        const passwordInput_1=document.createElement('input');
+        passwordInput_1.type = 'password';
+        passwordInput_1.placeholder = 'Enter New password';
+        passwordInput_1.classList.add('inputbar');
+        passwordInput_1.required = true;  
+
+        const passwordInput_2=document.createElement("input")
+        passwordInput_2.type = 'password';
+        passwordInput_2.placeholder = 'Reenter new password';
+        passwordInput_2.classList.add('inputbar');
+        passwordInput_2.required = true;
+
+        const closeButton = document.createElement('span');
+        closeButton.classList.add('close-button');
+        closeButton.innerHTML = '&times;'; // The 'x' character
+        closeButton.onclick = () => {
+            modal.style.display = "none";
+        }
+
+        appContainer.appendChild(modal);
+        modal.appendChild(modalContent);
+        modalContent.appendChild(closeButton);
+        modalContent.appendChild(TitleDiv);
+        modalContent.appendChild(inputspacing);
+        modalContent.appendChild(inputspacing_2);
+        modalContent.appendChild(buttonspacing);
+        TitleDiv.appendChild(popupHeading);
+        inputspacing.appendChild(passwordInput_1);
+        inputspacing_2.appendChild(passwordInput_2);
+        buttonspacing.appendChild(submitbutton);
+
+    }
+    modal.style.display = "block";
 }
 
 // === ANALYTICS FUNCTIONS ===
