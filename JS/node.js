@@ -227,7 +227,7 @@ app.post('/generate', async (req, res) => {
       // Loop through all 6 traits 
       for (let i = 0; i < Math.min(6, traitsArray.length); i++) {
         const trait = traitsArray[i];
-        const imagePrompt = `High-quality detailed illustration of an animal representing ${trait.attribute_1}. Use ${trait.color_1} as primary color with ${trait.color_2} accents. Clean digital art, plain background. IMPORTANT: Use a different animal species for each image - vary between mammals, birds, reptiles, fish, insects, etc. No text.`;
+        const imagePrompt = `Minimalist simple illustration of an animal representing ${trait.attribute_1}. Use ${trait.color_1} as primary color with ${trait.color_2} accents. Chinese art style, clean lines, plain background. IMPORTANT: Use a different animal species for each image - vary between mammals, birds, reptiles, fish, insects, etc. No text.`;
 
         try {
           console.log(`→ Generating image ${i + 1}/6 for "${trait.attribute_1}"...`);
@@ -319,7 +319,7 @@ app.post('/regenerate-images', async (req, res) => {
     // Loop through all traits to regenerate images
     for (let i = 0; i < Math.min(6, traits.length); i++) {
       const trait = traits[i];
-      const imagePrompt = `High-quality detailed illustration of an animal representing ${trait.attribute_1}. Use ${trait.color_1} as primary color with ${trait.color_2} accents. Clean digital art, plain background. IMPORTANT: Use a different animal species for each image - vary between mammals, birds, reptiles, fish, insects, etc. No text.`;
+      const imagePrompt = `Minimalist simple illustration of an animal representing ${trait.attribute_1}. Use ${trait.color_1} as primary color with ${trait.color_2} accents. Chinese art style, clean lines, plain background. IMPORTANT: Use a different animal species for each image - vary between mammals, birds, reptiles, fish, insects, etc. No text.`;
 
       try {
         console.log(`→ Regenerating image ${i + 1}/6 for "${trait.attribute_1}"...`);
