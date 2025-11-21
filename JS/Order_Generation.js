@@ -83,6 +83,8 @@ export function renderGenerationInputView() {
     ComUtils.Home.classList.remove('home'); // Class removed
     ComUtils.CreateOption.classList.add('inputorder'); // Class added
     ComUtils.AccountOption.classList.remove('account'); // Class removed
+    ComUtils.ContactOption.classList.remove('contact-us'); // Class removed
+    ComUtils.AboutOption.classList.remove('about'); // Class removed
     ComUtils.HamburgerDiv.appendChild(ComUtils.Hamburgerline1); // Lines for Hamburger Menu
     ComUtils.HamburgerDiv.appendChild(ComUtils.Hamburgerline2); // Lines for Hamburger Menu
     ComUtils.HamburgerDiv.appendChild(ComUtils.Hamburgerline3); // Lines for Hamburger Menu

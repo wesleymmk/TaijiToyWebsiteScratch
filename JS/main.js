@@ -7,6 +7,8 @@ import * as Account from './User_Account.js';
 import * as InputOrder from './Order_Generation.js';
 import * as OutputOrder from './Order_Gen_Output.js';
 import * as ComUtils from './Common_Function.js';
+import * as Contact from './Contact.js';
+import * as About from './About.js';
 
 const contentContainer = document.getElementById('content');
 
@@ -15,6 +17,16 @@ function loadPage() {
 
     let content = '';
     switch (hash) {
+        case 'about':
+
+            content = About.About();
+
+            break;
+        case 'contact-us':
+
+            content = Contact.Contact();
+
+            break;
         case 'order-output':
             ComUtils.apiCall('api/login_check.php')
 
