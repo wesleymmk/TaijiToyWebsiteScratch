@@ -56,7 +56,7 @@ My Core Values: ${coreValues}
 `;
 
   try {
-    // Call the Gemini API using axios — here we’re using the “text generation” model (gemini-2.0-flash)
+    // Call the Gemini API using axios — here we're using the "text generation" model (gemini-2.0-flash)
     // It returns a conversational, structured JSON output describing six pairs of traits.
     const response = await axios.post(
       `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${process.env.GEMINI_API_KEY}`,

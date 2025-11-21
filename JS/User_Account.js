@@ -93,13 +93,20 @@ scrollableContent.innerHTML = '<p>Loading your order history...</p>';
                         const trait1=order.trait_1|| 'N/A';
                         const trait2=order.trait_2|| 'N/A';
 
-                        orderItem.innerHTML = `
+                            // Create button element programmatically to ensure data attribute is set correctly
+                        const orderButton = document.createElement('button');
+                        orderButton.classList.add('button', 'order-id-button');
+                        orderButton.setAttribute('data-order-id', orderId);
+                        orderButton.innerHTML = `
                             <div class="order-id">
-                            <button class="button order-id-button" data-order-id="${orderId}">
-                            Order Number: ${orderId}<div>
-                            <div>Traits: ${trait1}, ${trait2}
-                            </button></div><hr>                
+                            Order Number: ${orderId}
+                            </div>
+                            <div>Traits: ${trait1}, ${trait2}</div>
                         `;
+                        
+                        orderItem.appendChild(orderButton);
+                        const hr = document.createElement('hr');
+                        orderItem.appendChild(hr);
                         scrollableContent.appendChild(orderItem);
                     });
                 }   else{
@@ -129,12 +136,22 @@ scrollableContent.innerHTML = '<p>Loading your order history...</p>';
 
         if(clickedButton){
 
-            const clickedOrderId = event.target.dataset.orderId;
+            // Get the order ID from the button's data attribute
+            const clickedOrderId = clickedButton.getAttribute('data-order-id');
 
-            console.log("Storing Order ID:", clickedOrderId);
+            console.log("Order button clicked. Order ID:", clickedOrderId);
 
-            localStorage.setItem('selectedOrderId',clickedOrderId);
+            // Validate that we have a valid order ID
+            if (!clickedOrderId || clickedOrderId === 'N/A' || clickedOrderId === 'null' || clickedOrderId === 'undefined') {
+                console.error("Invalid order ID:", clickedOrderId);
+                alert("Sorry, this order cannot be displayed. Invalid order ID.");
+                return;
+            }
 
+            console.log("Storing Order ID in localStorage:", clickedOrderId);
+            localStorage.setItem('selectedOrderId', clickedOrderId);
+
+            console.log("Navigating to order output page...");
             window.location.href='#order-output';
         }
     });
