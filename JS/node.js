@@ -227,7 +227,7 @@ app.post('/generate', async (req, res) => {
       // Loop through all 6 traits 
       for (let i = 0; i < Math.min(6, traitsArray.length); i++) {
         const trait = traitsArray[i];
-        const imagePrompt = `Create a minimalist artistic animal split in half: the left half colored ${trait.color_1} representing ${trait.attribute_1}, and the right half colored ${trait.color_2} representing ${trait.attribute_2}. The two halves should blend seamlessly at the center. Digital art style, simple background. IMPORTANT: Use a different animal species for each image - vary between mammals, birds, reptiles, fish, insects, etc. Avoid repeating the same species.`;
+        const imagePrompt = `High-quality detailed illustration of an animal split in half: left side ${trait.color_1}, right side ${trait.color_2}. Smooth blend at center. Clean digital art, plain background. IMPORTANT: Use a different animal species for each image - vary between mammals, birds, reptiles, fish, insects, etc. No text.`;
 
         try {
           console.log(`→ Generating image ${i + 1}/6 for "${trait.attribute_1}"...`);
@@ -319,7 +319,7 @@ app.post('/regenerate-images', async (req, res) => {
     // Loop through all traits to regenerate images
     for (let i = 0; i < Math.min(6, traits.length); i++) {
       const trait = traits[i];
-      const imagePrompt = `Create a minimalist artistic animal split in half: the left half colored ${trait.color_1} representing ${trait.attribute_1}, and the right half colored ${trait.color_2} representing ${trait.attribute_2}. The two halves should blend seamlessly at the center. Digital art style, simple background. IMPORTANT: Use a different animal species for each image - vary between mammals, birds, reptiles, fish, insects, etc. Avoid repeating the same species.`;
+      const imagePrompt = `High-quality detailed illustration of an animal split in half: left side ${trait.color_1}, right side ${trait.color_2}. Smooth blend at center. Clean digital art, plain background. IMPORTANT: Use a different animal species for each image - vary between mammals, birds, reptiles, fish, insects, etc. No text.`;
 
       try {
         console.log(`→ Regenerating image ${i + 1}/6 for "${trait.attribute_1}"...`);
