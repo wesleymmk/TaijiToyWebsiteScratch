@@ -56,7 +56,7 @@ try {
     $stmt_update->execute();
     $stmt_update->close();
 
-    // Delete Used Code
+    // Delete Used CodeA
     // Invalidate the code so it can't be used again.
     $sql_delete = "DELETE FROM password_resets WHERE email = ?";
     $stmt_delete = $conn->prepare($sql_delete);

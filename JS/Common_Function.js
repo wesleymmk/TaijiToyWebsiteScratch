@@ -717,7 +717,7 @@ export function ForgotPassPopup() {
                 if (data.success) {
                     alert(data.message); // "Reset code sent..."
                     modal.style.display = "none";
-                    resetnumbers();
+                    resetnumbers(email);
                 } else {
                     alert("Error: " + data.message);
                 }
@@ -731,24 +731,7 @@ export function ForgotPassPopup() {
                 LinkRequest.textContent = 'Send Reset Code';
             }
         });
-        /* registerForm.addEventListener('submit', (event) => {
-             event.preventDefault();
-             const email = emailAccount.value;
-             const password = passwordInput.value;
- 
-             fetch('api/register.php', {
-                 method: 'POST',
-                 headers: { 'Content-Type': 'application/json' },
-                 body: JSON.stringify({ email: email, password: password })
-             })
-             .then(response => response.json())
-             .then(data => {
-                 modal.style.display = "none"; 
-                 renderStatusView(data.success, data.message, email);
-             });
-         });*/ //Function is commented out as this was copied and pasted from other exisitng code.
 
-        // Append everything together
         appContainer.appendChild(modal);
         modal.appendChild(modalContent);
         modalContent.appendChild(closeButton);
@@ -819,7 +802,7 @@ export function CAsuccess() {
 }
 
 //Done by EQ
-export function resetnumbers(){
+export function resetnumbers(email){
     let modal=document.getElementById('ResetNumbersModal');
     if(!modal){
         modal=document.createElement('div');
@@ -864,10 +847,40 @@ export function resetnumbers(){
         }
 
         submitbutton.addEventListener('click', () => {
+            const code = codeinput.value.trim();
 
-            modal.style.display = "none";
+            if (!code) {
+                alert("Please enter the code.");
+                return;
+            }
 
-            resetPassword();
+            // API Call to verify_reset_code.php
+            fetch('api/verify_reset_code.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: email,
+                    code: code
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Success: Destroy the old modal
+                        modal.remove();
+
+                        // Render the reset password modal (passing the email)
+                        resetPassword(email, code);
+                    } else {
+                        alert(data.message || "Invalid or expired code.");
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert("An error occurred. Please try again.");
+                });
         });
 
         appContainer.appendChild(modal);
@@ -884,7 +897,7 @@ export function resetnumbers(){
 }
 
 //Done by EQ
-export function resetPassword(){
+export function resetPassword(email, code){
     let modal=document.getElementById('ResetPasswordModal');
     if(!modal){
         modal=document.createElement('div');
@@ -933,6 +946,57 @@ export function resetPassword(){
         closeButton.onclick = () => {
             modal.style.display = "none";
         }
+
+        submitbutton.addEventListener('click', () => {
+            const pass1 = passwordInput_1.value;
+            const pass2 = passwordInput_2.value;
+
+            // 1. Client-side validation
+            if (!pass1 || !pass2) {
+                alert("Please fill out both password fields.");
+                return;
+            }
+
+            if (pass1 !== pass2) {
+                alert("Passwords do not match.");
+                return;
+            }
+
+            if (pass1.length < 6) {
+                alert("Password must be at least 6 characters.");
+                return;
+            }
+
+            // Send data to reset_pass.php
+            // pass email, code (for security reverification), and the new password
+            fetch('reset_pass.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: email,
+                    code: code,
+                    new_password: pass1
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Success!
+                        alert(data.message); // "Your password has been successfully reset..."
+                        modal.remove(); // Clean up the modal
+
+                        // Optional: Open the Login modal here if you have one
+                    } else {
+                        alert(data.message || "Failed to reset password.");
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert("An error occurred while resetting the password.");
+                });
+        });
 
         appContainer.appendChild(modal);
         modal.appendChild(modalContent);
