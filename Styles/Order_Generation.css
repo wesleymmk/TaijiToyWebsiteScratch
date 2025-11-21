@@ -79,7 +79,7 @@
   resize: none;
   width: 1800px;
   width: 93.75vw;
-  height: 100px;
+  min-height: 100px;
   height: 7.813vw;
   /*font-size: 22px;
   font-size: 1.146vw;*/
@@ -103,4 +103,8 @@
 /*PS Added*/
 #innerdiv {
   display: flex;
+}
+/*PS Added*/
+.specialbutton {
+  width: 95%;
 }

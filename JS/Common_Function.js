@@ -490,7 +490,7 @@ export function showPopupModal() {
         // Add the new modal to the main app container
         appContainer.appendChild(modal);
     }
-    modal.style.display = "block";
+    modal.style.display = "flex";
 
     // Add an event listener to close the modal if the user clicks outside of it
     window.onclick = function (event) {
@@ -624,7 +624,7 @@ export function showCreateAccountPopup() {
         buttonspacing_2.appendChild(Back2Login);
     }
 
-    modal.style.display = "block";
+    modal.style.display = "flex";
 
     window.onclick = function (event) {
         if (event.target == modal) {
@@ -746,7 +746,7 @@ export function ForgotPassPopup() {
         buttonspacing_2.appendChild(Back2Login);
 }
 
-    modal.style.display = "block";
+    modal.style.display = "flex";
 
     window.onclick = function (event) {
         if (event.target == modal) {
@@ -893,7 +893,7 @@ export function resetnumbers(email){
         inputspacing.appendChild(codeinput);
         buttonspacing.appendChild(submitbutton);
     }
-    modal.style.display = "block";
+    modal.style.display = "flex";
 }
 
 //Done by EQ
@@ -1011,7 +1011,7 @@ export function resetPassword(email, code){
         buttonspacing.appendChild(submitbutton);
 
     }
-    modal.style.display = "block";
+    modal.style.display = "flex";
 }
 
 // === ANALYTICS FUNCTIONS ===

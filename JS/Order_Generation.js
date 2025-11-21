@@ -216,7 +216,7 @@ export function renderGenerationInputView() {
 
     let SubmitGeneration = document.createElement("button");
     SubmitGeneration.textContent = 'Submit';
-    SubmitGeneration.classList.add('button1', 'pagetextmediumb', 'animation');
+    SubmitGeneration.classList.add('button1', 'specialbutton', 'pagetextmediumb', 'animation');
     SubmitGeneration.type = "submit";
 
       // ================= BACKEND INTEGRATION START =================

@@ -42,6 +42,23 @@
 }
 /*PS Added*/
 @media screen and (max-width: 1005px) {
+  .exitmenu {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: -100%;
+    bottom: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 0;
+    transition: all ease-in-out 0.5s;
+  }
+  .exitmenu.show1 {
+    top: 0;
+  }
   .hamburgerdiv {
     display: flex;
   }
@@ -59,10 +76,10 @@
     align-items: center;
     width: 55%;
     padding: 0;
+    transition: all ease-in-out 0.5s;
   }
   .menu.show {
     top: 0;
-    animation: fade-inout 1s;
   }
   .nav-menu {
     flex-direction: column;
