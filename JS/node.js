@@ -41,7 +41,7 @@ async function generateTraits(coreValues) {
   // This is the text instruction given to Gemini to produce personality traits,
   // each with two contrasting attributes and assigned colors.
   const prompt = `
-Identify at least six key pairs of attributes that compare and contrast the duality of these two themes along with contrasting colors matched to these pairs. Make the tone conversational as if you were having a conversation with an old, dear friend. Provide a short and long description of each pairing and how it relates to the two themes through duality. Use these colors only: Clear Black White Red Blue Green Yellow Grey Brown Purple Pink Orange Gold Silver.
+Identify at least six key pairs of attributes that compare and contrast the duality of these two themes along with contrasting colors matched to these pairs. Write in a warm, conversational tone directly addressing the person exploring these themes. Provide a short and long description of each pairing and how it relates to the two themes through duality. Focus on the universal meanings of these themes without making assumptions about the person's past or creating fictional backstories. Use these colors only: Clear Black White Red Blue Green Yellow Grey Brown Purple Pink Orange Gold Silver.
 Return the response as a single JSON array of objects.
 Each object in the array should have the following structure:
 {
@@ -225,7 +225,7 @@ app.post('/generate', async (req, res) => {
       // Loop through all 6 traits 
       for (let i = 0; i < Math.min(6, traitsArray.length); i++) {
         const trait = traitsArray[i];
-        const imagePrompt = `Create a unique, minimalist artistic illustration of an animal that represents the concept of "${trait.attribute_1}" contrasting with "${trait.attribute_2}". Use ${trait.color_1} as the primary color and ${trait.color_2} as the accent color. Each animal should be distinctly different in species, pose, and artistic interpretation. Clean, modern digital art style with smooth gradients and simple composition on a plain background. Make this animal visually distinct from other similar concepts.`;
+        const imagePrompt = `Create a unique, minimalist artistic illustration of ONE SINGLE animal that represents both the concept of "${trait.attribute_1}" and "${trait.attribute_2}" combined into a single creature. Do NOT create two separate animals. Use ${trait.color_1} as the primary color and ${trait.color_2} as the accent color. The single animal should embody the duality of both traits. Each animal should be distinctly different in species, pose, and artistic interpretation. Clean, modern digital art style with smooth gradients and simple composition on a plain background. Only one animal per image.`;
 
         try {
           console.log(`→ Generating image ${i + 1}/6 for "${trait.attribute_1}"...`);
@@ -317,7 +317,7 @@ app.post('/regenerate-images', async (req, res) => {
     // Loop through all traits to regenerate images
     for (let i = 0; i < Math.min(6, traits.length); i++) {
       const trait = traits[i];
-      const imagePrompt = `Create a unique, minimalist artistic illustration of an animal that represents the concept of "${trait.attribute_1}" contrasting with "${trait.attribute_2}". Use ${trait.color_1} as the primary color and ${trait.color_2} as the accent color. Each animal should be distinctly different in species, pose, and artistic interpretation. Clean, modern digital art style with smooth gradients and simple composition on a plain background. Make this animal visually distinct from other similar concepts.`;
+      const imagePrompt = `Create a unique, minimalist artistic illustration of ONE SINGLE animal that represents both the concept of "${trait.attribute_1}" and "${trait.attribute_2}" combined into a single creature. Do NOT create two separate animals. Use ${trait.color_1} as the primary color and ${trait.color_2} as the accent color. The single animal should embody the duality of both traits. Each animal should be distinctly different in species, pose, and artistic interpretation. Clean, modern digital art style with smooth gradients and simple composition on a plain background. Only one animal per image.`;
 
       try {
         console.log(`→ Regenerating image ${i + 1}/6 for "${trait.attribute_1}"...`);
