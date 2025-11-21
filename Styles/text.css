@@ -15,6 +15,14 @@
   text-decoration: underline;
 }
 /*PS Added*/
+#contact-us .contact{
+  text-decoration: underline;
+}
+/*PS Added*/
+#about .about{
+  text-decoration: underline;
+}
+/*PS Added*/
 .title {
   font-family: 'Chinese Rocks Rg', sana-serif;
   margin: 0;

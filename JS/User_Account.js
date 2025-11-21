@@ -36,6 +36,8 @@ export function renderUserAccount() {
     ComUtils.Home.classList.remove('home'); // Class removed
     ComUtils.CreateOption.classList.remove('inputorder'); // Class removed
     ComUtils.AccountOption.classList.add('account'); // Class added
+    ComUtils.ContactOption.classList.remove('contact-us'); // Class removed
+    ComUtils.AboutOption.classList.remove('about'); // Class removed
     ComUtils.HamburgerDiv.appendChild(ComUtils.Hamburgerline1); // Lines for Hamburger Menu
     ComUtils.HamburgerDiv.appendChild(ComUtils.Hamburgerline2); // Lines for Hamburger Menu
     ComUtils.HamburgerDiv.appendChild(ComUtils.Hamburgerline3); // Lines for Hamburger Menu

@@ -2,6 +2,7 @@
 // Its primary purpose is to reduce the code base's size and increase organization.
 // It does this through having 'common functions' such as the clear HTML code function.
 export const appContainer = document.getElementById('app');
+import * as Contact from './Contact.js';
 import * as AuthUtils from './Authentication_Page.js';
 import * as GenUtils from './Order_Generation.js';
 import * as AccUtils from './User_Account.js';
@@ -164,17 +165,17 @@ LogInOption.addEventListener('click', (event) => {
 export const StoreOption = document.createElement('p');
 StoreOption.textContent = 'Store';
 StoreOption.classList.add('textnavmenu', 'animation');
-StoreOption.addEventListener('click', function () { window.location.href = "https://www.taijitoy.com/store"; });
+StoreOption.addEventListener('click', function () { window.location.href = "https://www.etsy.com/shop/TaijiToy"; });
 // PS added the AboutOption to direct to the input Generation page
 export const AboutOption = document.createElement('p');
 AboutOption.textContent = 'About';
 AboutOption.classList.add('textnavmenu', 'animation');
-AboutOption.addEventListener('click', function () { window.location.href = "https://www.taijitoy.com/about"; });
+AboutOption.addEventListener('click', function () { window.location.href = "#about"; });
 // PS added the ContactOption to direct to the input Generation page
 export const ContactOption = document.createElement('p');
 ContactOption.textContent = 'Contact';
 ContactOption.classList.add('textnavmenu', 'animation');
-ContactOption.addEventListener('click', function () { window.location.href = "https://www.taijitoy.com/contact"; });
+ContactOption.addEventListener('click', function () { window.location.href = "#contact-us"; });
 // PS added CreateOption to direct to Create Order Page
 export const CreateOption = document.createElement('p');
 CreateOption.classList.add('textnavmenu', 'altanimation');

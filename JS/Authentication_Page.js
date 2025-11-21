@@ -2,6 +2,7 @@
 added renderWelcomeView() to add basic functionailty*/
 /* Eddited by Ernesto*/
 export const appContainer = document.getElementById('app');
+import * as Contact from './Contact.js';
 import * as ComUtils from './Common_Function.js';
 import * as GenUtils from './Order_Generation.js';
 import * as AccUtils from './User_Account.js';
@@ -11,7 +12,6 @@ import * as Gen2Utils from './Order_Gen_Output.js';
 export function renderWelcomeView() {
     ComUtils.clearAppContainer(); // Clear the screen first
     
-    /***************Animation Function on Scroll***************/
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
             if (entry.isIntersecting) {
@@ -40,6 +40,8 @@ export function renderWelcomeView() {
     ComUtils.Home.classList.add('home'); // Class added
     ComUtils.CreateOption.classList.remove('inputorder'); // Class removed
     ComUtils.AccountOption.classList.remove('account'); // Class removed
+    ComUtils.AccountOption.classList.remove('account'); // Class removed
+    ComUtils.ContactOption.classList.remove('contact-us'); // Class removed
     ComUtils.HamburgerDiv.appendChild(ComUtils.Hamburgerline1); // Lines for Hamburger Menu
     ComUtils.HamburgerDiv.appendChild(ComUtils.Hamburgerline2); // Lines for Hamburger Menu
     ComUtils.HamburgerDiv.appendChild(ComUtils.Hamburgerline3); // Lines for Hamburger Menu
