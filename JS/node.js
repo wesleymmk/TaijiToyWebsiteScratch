@@ -225,7 +225,7 @@ app.post('/generate', async (req, res) => {
       // Loop through all 6 traits 
       for (let i = 0; i < Math.min(6, traitsArray.length); i++) {
         const trait = traitsArray[i];
-        const imagePrompt = `Create a unique, minimalist artistic illustration of ONE SINGLE animal that represents both the concept of "${trait.attribute_1}" and "${trait.attribute_2}" combined into a single creature. Do NOT create two separate animals. Use ${trait.color_1} as the primary color and ${trait.color_2} as the accent color. The single animal should embody the duality of both traits. Each animal should be distinctly different in species, pose, and artistic interpretation. Clean, modern digital art style with smooth gradients and simple composition on a plain background. Only one animal per image.`;
+        const imagePrompt = `Create a unique, minimalist artistic illustration of ONE SINGLE animal that represents the duality between "${trait.attribute_1}" and "${trait.attribute_2}" from these core themes: "${coreValues}". Use ${trait.color_1} as the primary color and ${trait.color_2} as the accent color. The single animal should embody both contrasting qualities. Each animal should be distinctly different in species, pose, and artistic interpretation. Clean, modern digital art style with smooth gradients and simple composition on a plain background. Only one animal per image.`;
 
         try {
           console.log(`→ Generating image ${i + 1}/6 for "${trait.attribute_1}"...`);
@@ -317,7 +317,9 @@ app.post('/regenerate-images', async (req, res) => {
     // Loop through all traits to regenerate images
     for (let i = 0; i < Math.min(6, traits.length); i++) {
       const trait = traits[i];
-      const imagePrompt = `Create a unique, minimalist artistic illustration of ONE SINGLE animal that represents both the concept of "${trait.attribute_1}" and "${trait.attribute_2}" combined into a single creature. Do NOT create two separate animals. Use ${trait.color_1} as the primary color and ${trait.color_2} as the accent color. The single animal should embody the duality of both traits. Each animal should be distinctly different in species, pose, and artistic interpretation. Clean, modern digital art style with smooth gradients and simple composition on a plain background. Only one animal per image.`;
+      // Get core values from request body for image context
+      const coreValuesForImage = req.body.coreValues || '';
+      const imagePrompt = `Create a unique, minimalist artistic illustration of ONE SINGLE animal that represents the duality between "${trait.attribute_1}" and "${trait.attribute_2}" from these core themes: "${coreValuesForImage}". Use ${trait.color_1} as the primary color and ${trait.color_2} as the accent color. The single animal should embody both contrasting qualities. Each animal should be distinctly different in species, pose, and artistic interpretation. Clean, modern digital art style with smooth gradients and simple composition on a plain background.`;
 
       try {
         console.log(`→ Regenerating image ${i + 1}/6 for "${trait.attribute_1}"...`);
