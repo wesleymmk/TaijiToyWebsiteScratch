@@ -41,7 +41,7 @@ async function generateTraits(coreValues) {
   // This is the text instruction given to Gemini to produce personality traits,
   // each with two contrasting attributes and assigned colors.
   const prompt = `
-Identify at least six key pairs of attributes that compare and contrast the duality of these two themes in my life along with contrasting colors matched to these pairs. Make the tone conversational as if I were having a conversation with an old, dear friend. Provide a short and long description of each pairing and how it relates to the two themes through duality. Use these colors only: Clear Black White Red Blue Green Yellow Grey Brown Purple Pink Orange Gold Silver.
+Identify at least six key pairs of attributes that compare and contrast the duality of these two themes along with contrasting colors matched to these pairs. Make the tone conversational as if you were having a conversation with an old, dear friend. Provide a short and long description of each pairing and how it relates to the two themes through duality. Use these colors only: Clear Black White Red Blue Green Yellow Grey Brown Purple Pink Orange Gold Silver.
 Return the response as a single JSON array of objects.
 Each object in the array should have the following structure:
 {
@@ -52,7 +52,7 @@ Each object in the array should have the following structure:
   "short_description": "string",
   "long_description": "string"
 }
-My Core Values: ${coreValues}
+The Core Values: ${coreValues}
 `;
 
   try {
@@ -225,7 +225,7 @@ app.post('/generate', async (req, res) => {
       // Loop through all 6 traits 
       for (let i = 0; i < Math.min(6, traitsArray.length); i++) {
         const trait = traitsArray[i];
-        const imagePrompt = `Create a minimalist artistic animal representing the concept of ${trait.attribute_1}, colored primarily in ${trait.color_1} with accents of ${trait.color_2}. Digital art style.`;
+        const imagePrompt = `Create a unique, minimalist artistic illustration of an animal that represents the concept of "${trait.attribute_1}" contrasting with "${trait.attribute_2}". Use ${trait.color_1} as the primary color and ${trait.color_2} as the accent color. Each animal should be distinctly different in species, pose, and artistic interpretation. Clean, modern digital art style with smooth gradients and simple composition on a plain background. Make this animal visually distinct from other similar concepts.`;
 
         try {
           console.log(`→ Generating image ${i + 1}/6 for "${trait.attribute_1}"...`);
@@ -317,7 +317,7 @@ app.post('/regenerate-images', async (req, res) => {
     // Loop through all traits to regenerate images
     for (let i = 0; i < Math.min(6, traits.length); i++) {
       const trait = traits[i];
-      const imagePrompt = `Create a minimalist artistic animal representing the concept of ${trait.attribute_1}, colored primarily in ${trait.color_1} with accents of ${trait.color_2}. Digital art style.`;
+      const imagePrompt = `Create a unique, minimalist artistic illustration of an animal that represents the concept of "${trait.attribute_1}" contrasting with "${trait.attribute_2}". Use ${trait.color_1} as the primary color and ${trait.color_2} as the accent color. Each animal should be distinctly different in species, pose, and artistic interpretation. Clean, modern digital art style with smooth gradients and simple composition on a plain background. Make this animal visually distinct from other similar concepts.`;
 
       try {
         console.log(`→ Regenerating image ${i + 1}/6 for "${trait.attribute_1}"...`);
