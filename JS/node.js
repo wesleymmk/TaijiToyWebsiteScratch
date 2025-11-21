@@ -41,7 +41,10 @@ async function generateTraits(coreValues) {
   // This is the text instruction given to Gemini to produce personality traits,
   // each with two contrasting attributes and assigned colors.
   const prompt = `
-Identify at least six key pairs of attributes that compare and contrast the duality of these two themes along with contrasting colors matched to these pairs. Write in a warm, conversational tone directly addressing the person exploring these themes. Provide a short and long description of each pairing and how it relates to the two themes through duality. Focus on the universal meanings of these themes without making assumptions about the person's past or creating fictional backstories. Use these colors only: Clear Black White Red Blue Green Yellow Grey Brown Purple Pink Orange Gold Silver.
+Identify at least six key pairs of attributes that compare and contrast the duality of these two themes: "${coreValues}". Write in a warm, conversational tone directly addressing the person exploring these themes. Provide a short and long description of each pairing and how it relates specifically to the themes "${coreValues}" through duality. Focus on the universal meanings of these themes without making assumptions about the person's past or creating fictional backstories. Use these colors only: Clear Black White Red Blue Green Yellow Grey Brown Purple Pink Orange Gold Silver.
+
+IMPORTANT: Do not use special characters like apostrophes, quotes, em dashes, or smart quotes in your descriptions. Use only plain text with simple punctuation (periods, commas, hyphens).
+
 Return the response as a single JSON array of objects.
 Each object in the array should have the following structure:
 {
@@ -52,7 +55,6 @@ Each object in the array should have the following structure:
   "short_description": "string",
   "long_description": "string"
 }
-The Core Values: ${coreValues}
 `;
 
   try {
