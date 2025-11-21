@@ -969,7 +969,7 @@ export function resetPassword(email, code){
 
             // Send data to reset_pass.php
             // pass email, code (for security reverification), and the new password
-            fetch('reset_pass.php', {
+            fetch('api/reset_pass.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

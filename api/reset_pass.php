@@ -3,7 +3,7 @@
 // It verifies the code one last time and then updates the user's password.
 
 require_once 'config.php';
-require_once 'common_functions.php';
+require_once 'common_function.php';
 
 header('Content-Type: application/json');
 header("Access-Control-Allow-Origin: *");
