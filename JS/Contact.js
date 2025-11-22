@@ -24,7 +24,7 @@ export function Contact() {
                 return;
             }
         });
-    }, { threshold: 0.8 });
+    }, { threshold: 0.5 });
     const check = document.querySelectorAll('.show');
     addEventListener('DOMContentLoaded', () => {
         if (check == '.show') {

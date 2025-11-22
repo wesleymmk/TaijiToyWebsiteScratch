@@ -9,6 +9,9 @@ export function renderGenerationOutputView(order_ID_param) {
 
     ComUtils.clearAppContainer();
 
+    /***************Auto Scroll Option***************/
+    window.addEventListener('DOMContentLoaded', ComUtils.topFunction());
+
     const order_ID_from_storage = localStorage.getItem('selectedOrderId');
 
     // 2. Clear it so we don't load it again
@@ -39,19 +42,13 @@ export function renderGenerationOutputView(order_ID_param) {
                 return;
             }
         });
-    }, { threshold: 0.8 });
+    }, { threshold: 0.5 });
     const check = document.querySelectorAll('.show');
     addEventListener('DOMContentLoaded', () => {
         if (check == '.show') {
             ComUtils.menu.classList.toggle('show');
         }
     });
-
-    
-    let keyword = '.nav-wrapper';
-    const ScrollTimePause = setTimeout(() => {
-        ComUtils.manualScrollToElement(keyword, 500);
-    }, 500);
 
     ComUtils.menu.classList.remove('show')
     ComUtils.ExitMenu.classList.remove('show1');
