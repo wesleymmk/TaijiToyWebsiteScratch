@@ -167,11 +167,11 @@ export function renderGenerationInputView() {
     // PS added InspiriationalText2 to be above text entry box
     const InspiriationalText2 = document.createElement('p');
     InspiriationalText2.classList.add('pagetextmediumb', 'animation');
-    InspiriationalText2.textContent = 'What are your pastimes that enrcihes your life?';
+    InspiriationalText2.textContent = 'What are your pastimes that enrich your life?';
     // PS added InspiriationalText3 to be above text entry box
     const InspiriationalText3 = document.createElement('p');
     InspiriationalText3.classList.add('pagetextmediumb', 'animation');
-    InspiriationalText3.textContent = 'What are your interest that soothes your mind?';
+    InspiriationalText3.textContent = 'What are your interests that soothe your mind?';
     // PS added LoadingText to display to the customer that the order is being generated
     const LoadingText = document.createElement('p');
     LoadingText.classList.add('pagetextmediumw');
