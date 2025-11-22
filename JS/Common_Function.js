@@ -596,9 +596,31 @@ export function showCreateAccountPopup() {
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        AccUtils.renderUserAccount();
-                        window.location.href = '#account';
-                        CAsuccess();
+                        apiCall('api/login.php', registrar_Data)
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.success) {
+                                    // 1. Close the modal
+                                    document.getElementById('myPopupModal').style.display = "none";
+                                    // 2. Analytics tracker
+                                    resetSessionClickCount();
+
+                                    // 3. Redirect to the logged-in view
+                                    // Since you import User_Account.js as AccUtils, you should call it here:
+
+                                    window.location.href = '#account';
+                                    window.location.reload();
+                                    CAsuccess();
+
+                                } else {
+                                    // Login failed (e.g., Invalid email or password)
+                                    alert(`Login Failed: ${data.message}`);
+                                }
+                            })
+                        /*window.location.href = '#account';
+                        window.location.reload();
+                        //AccUtils.renderUserAccount();
+                        CAsuccess();*/
                     } else {
                         alert(`Registration Failed: ${data.message}`);
                     }
@@ -765,25 +787,30 @@ export function CAsuccess() {
         modal.id = 'CASuccessModal';
         modal.classList.add('modal');
 
-        let modalContent = document.createElement('div');
+        const modalContent = document.createElement('div');
         modalContent.classList.add('modal-content');
 
-        let closeButton = document.createElement('span');
+        const closeButton = document.createElement('span');
         closeButton.classList.add('close-button');
         closeButton.innerHTML = '&times;'; // The 'x' character
         closeButton.onclick = () => {
             modal.style.display = "none";
         };
 
-        let popupHeading = document.createElement('h2');
+        const buttonspacing = document.createElement('div');
+        buttonspacing.classList.add('buttonspacing');
+
+        const popupHeading = document.createElement('h2');
         popupHeading.textContent = 'Account Created Successfully!';
 
-        let ToInputgen = document.createElement("button");
+        const ToInputgen = document.createElement("button");
         ToInputgen.textContent = 'Generate your first order!';
-        ToInputgen.classList.add('LoginButton-2'); // Corrected syntax
+        ToInputgen.classList.add('LoginButton-3', 'pagetextmediumb'); // Corrected syntax
 
         ToInputgen.addEventListener('click', () => {
+
             window.location.href = '#order-input';
+            window.location.reload();
             modal.style.display = "none";
 
         });
@@ -791,7 +818,8 @@ export function CAsuccess() {
         // Assemble the modal content
         modalContent.appendChild(closeButton);
         modalContent.appendChild(popupHeading);
-        modalContent.appendChild(ToInputgen);
+        modalContent.appendChild(buttonspacing);
+        buttonspacing.appendChild(ToInputgen);
 
         // Add the content to the modal
         modal.appendChild(modalContent);
@@ -799,7 +827,7 @@ export function CAsuccess() {
         // IMPORTANT: Add the newly created modal to the document body
         document.body.appendChild(modal);
     }
-    modal.style.display = 'block';
+    modal.style.display = 'flex';
 }
 
 //Done by EQ
