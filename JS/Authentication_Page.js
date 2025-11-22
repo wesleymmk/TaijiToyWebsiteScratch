@@ -42,6 +42,7 @@ export function renderWelcomeView() {
     ComUtils.AccountOption.classList.remove('account'); // Class removed
     ComUtils.AccountOption.classList.remove('account'); // Class removed
     ComUtils.ContactOption.classList.remove('contact-us'); // Class removed
+    ComUtils.AboutOption.classList.remove('about'); // Class removed
     ComUtils.HamburgerDiv.appendChild(ComUtils.Hamburgerline1); // Lines for Hamburger Menu
     ComUtils.HamburgerDiv.appendChild(ComUtils.Hamburgerline2); // Lines for Hamburger Menu
     ComUtils.HamburgerDiv.appendChild(ComUtils.Hamburgerline3); // Lines for Hamburger Menu
@@ -405,6 +406,20 @@ export function renderWelcomeView() {
     const Closerphoto10 = document.createElement('img');
     Closerphoto10.classList.add('marketimage2', 'animation');
     Closerphoto10.src = 'Marketing_Images/DSC00151.jpg';
+    /***************API Calls***************/
+    document.addEventListener('DOMContentLoaded', () => {
+
+        ComUtils.apiCall('api/login_check.php')
+
+            .then(response => response.json())
+            .then(data => {
+                if (data.success && !data.isLoggedIn) {
+                    ComUtils.Advertisment();
+                }
+            })
+    });
+
+
     // These commands just call all the elements to the screen
     /***************Navigation Bar***************/
     appContainer.appendChild(navwrapper);

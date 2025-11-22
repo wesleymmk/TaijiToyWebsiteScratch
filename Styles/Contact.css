@@ -1,0 +1,59 @@
+/*PS Added*/
+.contacttitle,
+.inputsdivtitle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: calc(250px + 24vw);
+  margin-top: 25px;
+}
+/*PS Added*/
+.contacttitleinner {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  text-align: justify;
+}
+/*PS Added*/
+.inputsdivtitle {
+  align-items: flex-start;
+  margin-top: 25px;
+}
+/*PS Added*/
+.inputinnerdiv,
+.inputinnerdiv2 {
+  display: flex;
+  text-align: left;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+/*PS Added*/
+.inputinnerdiv2 {
+  width: 100%;
+}
+/*PS Added*/
+.nametextarea,
+.emailtextarea,
+.messagetextarea {
+  white-space: pre-wrap;
+  resize: none;
+  height: calc(10px + 1.25vw);
+  /*font-size: 22px;
+  font-size: 1.146vw;*/
+  font-size: calc(12px + 1vw);
+  border-radius: 18px;
+  border-radius: 0.938vw;
+  border-width: .5px;
+  border-width: 0.026vw;
+  padding: 10px;
+  padding: 0.521vw;
+  font-family: 'Chinese Rocks Rg', sana-serif;
+}
+.emailtextarea {
+  width: 100%;
+}
+.messagetextarea {
+  width: 100%;
+  height: calc(100px + 1.5vw);x
+}

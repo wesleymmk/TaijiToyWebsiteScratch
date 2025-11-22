@@ -54,7 +54,6 @@ export function renderGenerationInputView() {
     orderStartTime = performance.now();
     // ==========================================
 
-    /***************Loading Function on Scroll***************/
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
             if (entry.isIntersecting) {

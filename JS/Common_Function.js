@@ -1015,6 +1015,78 @@ export function resetPassword(email, code){
     modal.style.display = "flex";
 }
 
+// PS added by Sponsor's request
+export function Advertisment() {
+    let modal = document.getElementById('Advertisment');
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'Advertisment';
+        modal.classList.add('modal');
+
+        const modalContent = document.createElement('div');
+        modalContent.classList.add('modal-content', 'altanimation');
+
+        const TitleDiv = document.createElement('div');
+        TitleDiv.classList.add('titlediv2');
+
+        const DescDiv = document.createElement('div');
+        DescDiv.classList.add('descdiv');
+
+        const PicDiv = document.createElement('div');
+        PicDiv.classList.add('picdiv');
+
+        const ButtonDiv = document.createElement('div');
+        ButtonDiv.classList.add('buttondiv');
+
+        const Createbutton = document.createElement('button');
+        Createbutton.textContent = 'Create Now';
+        Createbutton.classList.add('LoginButton-3', 'pagetextmediumb');
+        Createbutton.type = "submit";
+
+        const closeButton = document.createElement('span');
+        closeButton.classList.add('close-button');
+        closeButton.innerHTML = '&times;'; // The 'x' character
+        closeButton.onclick = () => {
+            modal.style.display = "none";
+        }
+
+        const popupHeading = document.createElement('p');
+        popupHeading.textContent = 'Custom Tailored Collections';
+        popupHeading.classList.add('pagetextlargew');
+
+        const Marketingphoto1 = document.createElement('img');
+        Marketingphoto1.classList.add('marketimage1');
+        Marketingphoto1.src = 'Marketing_Images/possibilites+banner.jpg';
+
+        const popupDesc = document.createElement('p');
+        popupDesc.textContent = '- \u221E Infinite Possibilities \u221E :\n- \
+Present 2+ themes: receive a kit\nuniquely tailored to your \
+core values.\nYour pastimes/interest. Your Aspirations';
+        popupDesc.classList.add('pagetextsmallw');
+
+        appContainer.appendChild(modal);
+        modal.appendChild(modalContent);
+        modalContent.appendChild(closeButton);
+        modalContent.appendChild(TitleDiv);
+        modalContent.appendChild(DescDiv);
+        modalContent.appendChild(PicDiv);
+        modalContent.appendChild(ButtonDiv);
+        TitleDiv.appendChild(popupHeading);
+        DescDiv.appendChild(popupDesc);
+        PicDiv.appendChild(Marketingphoto1);
+        ButtonDiv.appendChild(Createbutton);
+        
+
+    }
+    modal.style.display = "flex";
+
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+}
+
 // === ANALYTICS FUNCTIONS ===
 // Done by Nathan D
 // Initializes click tracking by setting up the global listener.

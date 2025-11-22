@@ -100,7 +100,11 @@
   width: 36.719vw;
 }
 /*PS Added*/
-.titlediv {
+.titlediv, 
+.titlediv2,
+.descdiv,
+.picdiv,
+.buttondiv {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -108,6 +112,24 @@
   margin-top: 2.344vw;
   margin-bottom: 30px;
   margin-bottom: 2.344vw;
+}
+/*PS Added*/
+.titlediv2 {
+  margin-top: 0;
+}
+/*PS Added*/
+.descdiv {
+  white-space: pre-wrap;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+/*PS Added*/
+.picdiv {
+  margin: 0;
+}
+/*PS Added*/
+.buttondiv {
+  margin-bottom: 0;
 }
 /*Content within the popup window*/
 /*Modal and modal-content done by Ernesto Q.*/

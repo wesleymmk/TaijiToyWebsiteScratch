@@ -46,6 +46,13 @@ export function renderGenerationOutputView(order_ID_param) {
             ComUtils.menu.classList.toggle('show');
         }
     });
+
+    
+    let keyword = '.nav-wrapper';
+    const ScrollTimePause = setTimeout(() => {
+        ComUtils.manualScrollToElement(keyword, 500);
+    }, 500);
+
     ComUtils.menu.classList.remove('show')
     ComUtils.ExitMenu.classList.remove('show1');
     //PS added navwrapper, This is the new implementation of the navbar. Removed html version.
