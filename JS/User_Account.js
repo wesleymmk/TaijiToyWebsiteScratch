@@ -7,6 +7,8 @@ import * as ComUtils from './Common_Function.js';
 
 export function renderUserAccount() {
     ComUtils.clearAppContainer();
+    /***************Auto Scroll Option***************/
+    window.addEventListener('DOMContentLoaded', ComUtils.topFunction());
     /***************Animation Function on Scroll***************/
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {

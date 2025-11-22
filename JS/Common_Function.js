@@ -45,6 +45,10 @@ export function apiCall(php_file, js_object) // WM code //
 
 /* These are just the buttons for the header that each webapge will call to simplify each file and reduce
 repeating code*/
+export function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+}
 /***************Auto Scroll Option***************/
 /**
  * Manually scrolls the viewport to a specific element with a custom duration.
@@ -338,7 +342,49 @@ export const ShopNowButton = document.createElement('button');
 ShopNowButton.classList.add('button1', 'pagetextmediumb', 'animation');
 ShopNowButton.textContent = 'Shop Now';
 ShopNowButton.addEventListener('click', function () {
-    window.location.href = "https://www.taijitoy.com/store";
+    window.open("https://www.etsy.com/shop/TaijiToy");
+});
+// PS added ShopNowButton2 to direct to Official TaijiToy shopping page
+export const ShopNowButton2 = document.createElement('button');
+ShopNowButton2.classList.add('button1', 'pagetextmediumb', 'animation');
+ShopNowButton2.textContent = 'Shop Now';
+ShopNowButton2.addEventListener('click', function () {
+    window.open("https://www.etsy.com/shop/TaijiToy?section_id=52764817");
+});
+// PS added ShopNowButton3 to direct to Official TaijiToy shopping page
+export const ShopNowButton3 = document.createElement('button');
+ShopNowButton3.classList.add('button2', 'pagetextmediumw', 'animation');
+ShopNowButton3.textContent = 'Shop Now';
+ShopNowButton3.addEventListener('click', function () {
+    window.open("https://www.etsy.com/shop/TaijiToy?section_id=51723792");
+});
+// PS added ShopNowButton4 to direct to Official TaijiToy shopping page
+export const ShopNowButton4 = document.createElement('button');
+ShopNowButton4.classList.add('button1', 'pagetextmediumb', 'animation');
+ShopNowButton4.textContent = 'Shop Now';
+ShopNowButton4.addEventListener('click', function () {
+    
+    apiCall('api/login_check.php')
+
+        .then(response => response.json())
+        .then(data => {
+            if (data.success && data.isLoggedIn) {
+
+                window.location.href = "#order-input";
+
+            } else {
+                
+                showPopupModal();
+
+            }
+        })
+});
+// PS added ShopNowButton5 to direct to Official TaijiToy shopping page
+export const ShopNowButton5 = document.createElement('button');
+ShopNowButton5.classList.add('button2', 'pagetextmediumw', 'animation');
+ShopNowButton5.textContent = 'Shop Now';
+ShopNowButton5.addEventListener('click', function () {
+    window.open("https://www.etsy.com/shop/TaijiToy?section_id=52404711");
 });
 /***************Login Check***************/
 document.addEventListener('DOMContentLoaded', () => {

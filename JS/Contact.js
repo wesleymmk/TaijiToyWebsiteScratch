@@ -14,9 +14,9 @@ export function clearAppContainer()  // WM code // from online modified it so th
 }
 
 export function Contact() {
-
     ComUtils.clearAppContainer(); // Clear the screen first
-
+    /***************Auto Scroll Option***************/
+    window.addEventListener('DOMContentLoaded', ComUtils.topFunction());
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
             if (entry.isIntersecting) {
@@ -74,28 +74,118 @@ export function Contact() {
     DescInnerdiv.classList.add('contacttitleinner');
     // PS added InputInnerdiv1 this div will hold all the div elements for Contacting
     const InputInnerdiv1 = document.createElement('div');
-    InputInnerdiv1.classList.add('inputinnerdiv');
+    InputInnerdiv1.classList.add('inputinnerdivc');
     // PS added InputInnerdiv2 this div will hold all the div elements for Contacting
     const InputInnerdiv2 = document.createElement('div');
-    InputInnerdiv2.classList.add('inputinnerdiv2');
+    InputInnerdiv2.classList.add('inputinnerdivc2');
     // PS added InputInnerdiv3 this div will hold all the div elements for Contacting
     const InputInnerdiv3 = document.createElement('div');
-    InputInnerdiv3.classList.add('inputinnerdiv');
+    InputInnerdiv3.classList.add('inputinnerdivc');
     // PS added InputInnerdiv4 this div will hold all the div elements for Contacting
     const InputInnerdiv4 = document.createElement('div');
-    InputInnerdiv4.classList.add('inputinnerdiv2');
+    InputInnerdiv4.classList.add('inputinnerdivc2');
     // PS added InputInnerdiv5 this div will hold all the div elements for Contacting
     const InputInnerdiv5 = document.createElement('div');
-    InputInnerdiv5.classList.add('inputinnerdiv');
+    InputInnerdiv5.classList.add('inputinnerdivc');
     // PS added InputInnerdiv6 this div will hold all the div elements for Contacting
     const InputInnerdiv6 = document.createElement('div');
-    InputInnerdiv6.classList.add('inputinnerdiv3');
+    InputInnerdiv6.classList.add('inputinnerdivc3');
     // PS added InputInnerdiv7 this div will hold all the div elements for Contacting
     const InputInnerdiv7 = document.createElement('div');
-    InputInnerdiv7.classList.add('inputinnerdiv');
+    InputInnerdiv7.classList.add('inputinnerdivc');
     // PS added InputInnerdiv8 this div will hold all the div elements for Contacting
     const InputInnerdiv8 = document.createElement('div');
-    InputInnerdiv8.classList.add('inputinnerdiv2');
+    InputInnerdiv8.classList.add('inputinnerdivc2');
+    // PS added InputInnerdiv9 this div will hold all the div elements for Contacting
+    const InputInnerdiv9 = document.createElement('div');
+    InputInnerdiv9.classList.add('inputinnerdivc2');
+    // PS added InquirySelect this div will hold all the selection elements
+    const InquirySelect = document.createElement('div')
+    InquirySelect.classList.add('dropdown');
+    /***************Text to be Inserted into Div containers***************/
+    // PS added Title
+    const Title = document.createElement("p");
+    Title.classList.add('title2', 'animation');
+    Title.textContent = 'TaijiToy';
+    // PS added Name
+    const Name = document.createElement("p");
+    Name.classList.add('pagetextlargeb', 'animation');
+    Name.textContent = 'Name';
+    // PS added Email
+    const Email = document.createElement("p");
+    Email.classList.add('pagetextlargeb', 'animation');
+    Email.textContent = 'Email';
+    // PS added Inquiry
+    const Inquiry = document.createElement("p");
+    Inquiry.classList.add('pagetextlargeb', 'animation');
+    Inquiry.textContent = 'Inquiry Type:';
+    // PS added Message
+    const Message = document.createElement("p");
+    Message.classList.add('pagetextlargeb', 'animation');
+    Message.textContent = 'Message';
+    // PS added Required1
+    const Required1 = document.createElement("p");
+    Required1.classList.add('pagetextmediumb', 'animation', 'textspecial');
+    Required1.textContent = '(Required)';
+    // PS added Required2
+    const Required2 = document.createElement("p");
+    Required2.classList.add('pagetextmediumb', 'animation', 'textspecial');
+    Required2.textContent = '(Required)';
+    // PS added Required3
+    const Required3 = document.createElement("p");
+    Required3.classList.add('pagetextmediumb', 'animation', 'textspecial');
+    Required3.textContent = '(Required)';
+    // PS added Required4
+    const Required4 = document.createElement("p");
+    Required4.classList.add('pagetextmediumb', 'animation', 'textspecial');
+    Required4.textContent = '(Required)';
+    // PS added Desc
+    const Desc = document.createElement("p");
+    Desc.classList.add('pagetextmediumb', 'animation');
+    Desc.textContent = "Whether you have a question, want to\
+speak with us directly, or are looking to leave some feedback, \
+don't hesitate to use the contact form here. We will respond \
+as soon as possible.";
+    // PS added GeneralInquirySelection
+    const GeneralInquirySelection = document.createElement("p");
+    GeneralInquirySelection.classList.add('droptext2');
+    GeneralInquirySelection.textContent = "General Inquiry";
+    // PS added ProvideFeedbackSelection
+    const ProvideFeedback = document.createElement("p");
+    ProvideFeedback.classList.add('droptext2');
+    ProvideFeedback.textContent = "Provide Feedback";
+    // PS added ReportIssueSelection
+    const ReportIssueSelection = document.createElement("p");
+    ReportIssueSelection.classList.add('droptext2');
+    ReportIssueSelection.textContent = "Report an Issue";
+    // PS added SuggestionSelection
+    const SuggestionSelection = document.createElement("p");
+    SuggestionSelection.classList.add('droptext2');
+    SuggestionSelection.textContent = "Suggest a New Collection";
+    /***************Inputs fields into Div containers***************/
+    // PS added NameTextArea for users to enter their first name
+    const NameTextArea = document.createElement('input');
+    NameTextArea.placeholder = 'First Name';
+    NameTextArea.classList.add('nametextarea', 'animation');
+    NameTextArea.required = true;
+    // PS added NameTextArea2 for users to enter contact info
+    const NameTextArea2 = document.createElement('input');
+    NameTextArea2.placeholder = 'Last Name';
+    NameTextArea2.classList.add('nametextarea', 'animation');
+    NameTextArea2.required = true;
+    // PS added EmailTextArea for users to enter contact info
+    const EmailTextArea = document.createElement('input');
+    EmailTextArea.placeholder = 'user@domain.com';
+    EmailTextArea.classList.add('emailtextarea', 'animation');
+    EmailTextArea.required = true;
+    // PS added InquiryButton for users to enter contact info
+    const InquiryButton = document.createElement('button');
+    InquiryButton.id = 'none';
+    InquiryButton.textContent = 'Select An Option';
+    InquiryButton.classList.add('buttondrop', 'animation', 'droptext');
+    InquiryButton.addEventListener('click', () => {
+        InquirySelect.classList.toggle('show');
+    });
     // PS added Selectordiv1 this div will hold all the div elements for Inquiry
     const Selectordiv1 = document.createElement('button');
     Selectordiv1.classList.add('selector');
@@ -136,92 +226,10 @@ export function Contact() {
         InquiryButton.classList.remove('droptext');
         InquirySelect.classList.toggle('show');
     }
-    /***************Text to be Inserted into Div containers***************/
-    // PS added Title
-    const Title = document.createElement("p");
-    Title.classList.add('title2', 'animation');
-    Title.textContent = 'TaijiToy';
-    // PS added Name
-    const Name = document.createElement("p");
-    Name.classList.add('pagetextlargeb', 'animation');
-    Name.textContent = 'Name';
-    // PS added Email
-    const Email = document.createElement("p");
-    Email.classList.add('pagetextlargeb', 'animation');
-    Email.textContent = 'Email';
-    // PS added Inquiry
-    const Inquiry = document.createElement("p");
-    Inquiry.classList.add('pagetextlargeb', 'animation');
-    Inquiry.textContent = 'Inquiry Type:';
-    // PS added Message
-    const Message = document.createElement("p");
-    Message.classList.add('pagetextlargeb', 'animation');
-    Message.textContent = 'Message';
-    // PS added Required1
-    const Required1 = document.createElement("p");
-    Required1.classList.add('pagetextlargeb', 'animation');
-    Required1.textContent = '(Required)';
-    // PS added Required2
-    const Required2 = document.createElement("p");
-    Required2.classList.add('pagetextlargeb', 'animation');
-    Required2.textContent = '(Required)';
-    // PS added Required3
-    const Required3 = document.createElement("p");
-    Required3.classList.add('pagetextlargeb', 'animation');
-    Required3.textContent = '(Required)';
-    // PS added Required4
-    const Required4 = document.createElement("p");
-    Required4.classList.add('pagetextlargeb', 'animation');
-    Required4.textContent = '(Required)';
-    // PS added Desc
-    const Desc = document.createElement("p");
-    Desc.classList.add('pagetextmediumb', 'animation');
-    Desc.textContent = "Whether you have a question, want to\
-speak with us directly, or are looking to leave some feedback, \
-don't hesitate to use the contact form here. We will respond \
-as soon as possible.";
-    // PS added GeneralInquirySelection
-    const GeneralInquirySelection = document.createElement("p");
-    GeneralInquirySelection.classList.add('droptext2');
-    GeneralInquirySelection.textContent = "General Inquiry";
-    // PS added ProvideFeedbackSelection
-    const ProvideFeedback = document.createElement("p");
-    ProvideFeedback.classList.add('droptext2');
-    ProvideFeedback.textContent = "Provide Feedback";
-    // PS added ReportIssueSelection
-    const ReportIssueSelection = document.createElement("p");
-    ReportIssueSelection.classList.add('droptext2');
-    ReportIssueSelection.textContent = "Report an Issue";
-    // PS added SuggestionSelection
-    const SuggestionSelection = document.createElement("p");
-    SuggestionSelection.classList.add('droptext2');
-    SuggestionSelection.textContent = "Suggest a New Collection";
-    /***************Inputs fields into Div containers***************/
-    // PS added NameTextArea for users to enter their first name
-    const NameTextArea = document.createElement('textarea');
-    NameTextArea.placeholder = 'First Name';
-    NameTextArea.classList.add('nametextarea', 'animation');
-    NameTextArea.required = true;
-    // PS added NameTextArea2 for users to enter contact info
-    const NameTextArea2 = document.createElement('textarea');
-    NameTextArea2.placeholder = 'Last Name';
-    NameTextArea2.classList.add('nametextarea', 'animation');
-    NameTextArea2.required = true;
-    // PS added EmailTextArea for users to enter contact info
-    const EmailTextArea = document.createElement('textarea');
-    EmailTextArea.placeholder = 'user@domain.com';
-    EmailTextArea.classList.add('emailtextarea', 'animation');
-    EmailTextArea.required = true;
-    // PS added InquiryButton for users to enter contact info
-    const InquiryButton = document.createElement('button');
-    InquiryButton.id = 'none';
-    InquiryButton.textContent = 'Select An Option';
-    InquiryButton.classList.add('buttondrop', 'animation', 'droptext');
-    InquiryButton.addEventListener('click', () => {
-        InquirySelect.classList.toggle('show');
-    });
-    const InquirySelect = document.createElement('div')
-    InquirySelect.classList.add('dropdown');
+    // PS added SubmitButton to allow for the users to submit information
+    const SubmitButton = document.createElement('button');
+    SubmitButton.textContent = 'Submit';
+    SubmitButton.classList.add('button1', 'pagetextlargeb');
     // PS added MessageTextArea for users to enter contact info
     const MessageTextArea = document.createElement('textarea');
     MessageTextArea.placeholder = 'Please Type Your Message';
@@ -248,6 +256,7 @@ as soon as possible.";
     Inputsdiv.appendChild(InputInnerdiv6);
     Inputsdiv.appendChild(InputInnerdiv7);
     Inputsdiv.appendChild(InputInnerdiv8);
+    Inputsdiv.appendChild(InputInnerdiv9);
     ComUtils.Footerdiv.appendChild(ComUtils.Footerinnerdiv);
     ComUtils.Footerdiv.appendChild(ComUtils.Footerinnerdiv2);
     ComUtils.Footerdiv.appendChild(ComUtils.Footerinnerdiv3);
@@ -278,8 +287,8 @@ as soon as possible.";
     Selectordiv2.appendChild(ProvideFeedback);
     Selectordiv3.appendChild(ReportIssueSelection);
     Selectordiv4.appendChild(SuggestionSelection);
+    InputInnerdiv9.appendChild(SubmitButton);
     /***************Images to be used by page***************/
-    
     ComUtils.Footerinnerdiv.appendChild(ComUtils.Socialmediaicon1);
     ComUtils.Footerinnerdiv.appendChild(ComUtils.Socialmediaicon2);
     ComUtils.Footerinnerdiv.appendChild(ComUtils.Socialmediaicon3);

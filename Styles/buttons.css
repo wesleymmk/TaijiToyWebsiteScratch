@@ -1,11 +1,11 @@
 /*PS Added*/
-.button1 {
-  background-color: white;
-  border-radius: 15px;
-  border-radius: 1.172vw;
+.button1,
+.button2 {
+  background-color: #fff;
+  border-radius: calc(8px + 1vw);
   border-width: 5px;
   border-width: 0.391vw;
-  border-color: black;
+  border-color: #000;
   border: solid;
   cursor: pointer;
   min-height: 60px;
@@ -13,45 +13,29 @@
   width: 100%;
 }
 /*PS Added*/
-.button1:hover {
-  background-color: black;
-  color: white;
-  border-color: white;
+.button1:hover,
+.button2:hover {
+  background-color: #000;
+  color: #fff;
+  border-color: #fff;
   transition: 0.35s;
 }
 /*PS Added*/
-.button1:active {
+.button1:active,
+.button2:active {
   transition: 0.10s;
   opacity: 0.65;
 }
 /*PS Added*/
 .button2 {
-  background-color: white;
-  border-radius: 15px;
-  border-radius: 1.172vw;
-  border-width: 5px;
-  align-items: center;
-  border-width: 0.391vw;
-  border-color: black;
-  border: solid;
-  cursor: pointer;
-  min-height: 60px;
-  height: 4.688vw;
-  width: 45%;
-  margin-right: 2.5%;
-  margin-left: 2.5%;
+  background-color: #000;
+  border-color: #fff;
 }
 /*PS Added*/
 .button2:hover {
-  background-color: black;
-  color: white;
-  border-color: white;
-  transition: 0.35s;
-}
-/*PS Added*/
-.button2:active {
-  transition: 0.10s;
-  opacity: 0.65;
+  background-color: #fff;
+  color: #000;
+  border-color: #000;
 }
 /*PS Added*/
 .LoginButton{

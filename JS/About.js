@@ -17,6 +17,9 @@ export function About() {
 
     ComUtils.clearAppContainer(); // Clear the screen first
 
+    /***************Auto Scroll Option***************/
+    window.addEventListener('DOMContentLoaded', ComUtils.topFunction());
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
             if (entry.isIntersecting) {
