@@ -596,31 +596,9 @@ export function showCreateAccountPopup() {
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        apiCall('api/login.php', registrar_Data)
-                            .then(response => response.json())
-                            .then(data => {
-                                if (data.success) {
-                                    // 1. Close the modal
-                                    document.getElementById('myPopupModal').style.display = "none";
-                                    // 2. Analytics tracker
-                                    resetSessionClickCount();
-
-                                    // 3. Redirect to the logged-in view
-                                    // Since you import User_Account.js as AccUtils, you should call it here:
-
-                                    window.location.href = '#account';
-                                    window.location.reload();
-                                    CAsuccess();
-
-                                } else {
-                                    // Login failed (e.g., Invalid email or password)
-                                    alert(`Login Failed: ${data.message}`);
-                                }
-                            })
-                        /*window.location.href = '#account';
-                        window.location.reload();
-                        //AccUtils.renderUserAccount();
-                        CAsuccess();*/
+                        AccUtils.renderUserAccount();
+                        window.location.href = '#account';
+                        CAsuccess();
                     } else {
                         alert(`Registration Failed: ${data.message}`);
                     }
