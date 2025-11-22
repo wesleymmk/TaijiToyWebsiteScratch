@@ -1042,6 +1042,22 @@ export function Advertisment() {
         Createbutton.textContent = 'Create Now';
         Createbutton.classList.add('LoginButton-3', 'pagetextmediumb');
         Createbutton.type = "submit";
+        Createbutton.addEventListener('click', (event) => {
+
+            apiCall('api/login_check.php')
+
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success && data.isLoggedIn) {
+
+                        window.location.href = '#order-input';
+
+                    } else {
+                        // Login failed
+                        showPopupModal();
+                    }
+                })
+        });
 
         const closeButton = document.createElement('span');
         closeButton.classList.add('close-button');
