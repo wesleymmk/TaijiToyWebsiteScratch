@@ -135,6 +135,7 @@
   margin: 0;
   color: white;
 }
+/*PS Added*/
 .pagetextlargeb {
   font-family: 'Chinese Rocks Rg', sana-serif;
   /*font-size: 47px;
@@ -222,4 +223,17 @@
   /*font-size: 20px;
   font-size: 1.563vw;*/
   font-size: calc(30px - .4vw);
+}
+/*PS Added*/
+.droptext,
+.droptext2 {
+  font-family: 'Chinese Rocks Rg', sana-serif;
+  font-size: calc(14px + .5vw);
+  color: rgba(0, 0, 0, 0.5);
+}
+/*PS Added*/
+.droptext2 {
+  font-size: calc(16px + 1vw);
+  color: #000;
+  margin: 0;
 }

@@ -786,9 +786,7 @@ export function CAsuccess() {
         ToInputgen.classList.add('LoginButton-3', 'pagetextmediumb'); // Corrected syntax
 
         ToInputgen.addEventListener('click', () => {
-
             window.location.href = '#order-input';
-            window.location.reload();
             modal.style.display = "none";
 
         });
