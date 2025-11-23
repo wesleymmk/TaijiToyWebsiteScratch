@@ -64,6 +64,10 @@
   vertical-align: top;
   display: inline-block;
 }
+/*PS Added*/
+.buttongapout {
+  width: calc(350px + 20vw);
+}
 /*EQ added*/
 .LoginButton-2{
   background-color: white;
@@ -194,7 +198,8 @@
 .button-container{
   display: flex;
   justify-content: center; /* Optional: centers the buttons horizontally */
-  gap: 50px;
+  flex-wrap: wrap;
+  gap: 25px;
   margin-top: 25px;
   margin-bottom: 25px;
 }

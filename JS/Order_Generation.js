@@ -205,18 +205,36 @@ export function renderGenerationInputView() {
     CustomerInput1.placeholder = 'Enter your Values';
     CustomerInput1.classList.add('textarea', 'animation2');
     CustomerInput1.required = true;
+    CustomerInput1.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter' && !event.shiftKey) {
+            event.preventDefault(); // Prevent the default behavior (new line in textarea)
+            CustomerInput2.focus(); // Submit the form
+        }
+    });
     // PS added CustomerInput2 for users to enter one of their traits
     const CustomerInput2 = document.createElement('textarea');
     CustomerInput2.placeholder = 'Enter your Pastimes';
     CustomerInput2.classList.add('textarea', 'animation2');
     CustomerInput2.required = true;
+    CustomerInput2.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter' && !event.shiftKey) {
+            event.preventDefault(); // Prevent the default behavior (new line in textarea)
+            CustomerInput3.focus(); // Submit the form
+        }
+    });
     // PS added CustomerInput3 for users to enter one of their traits
     const CustomerInput3 = document.createElement('textarea');
     CustomerInput3.placeholder = 'Enter your Interests';
     CustomerInput3.classList.add('textarea', 'animation2');
     CustomerInput3.required = true;
+    CustomerInput3.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter' && !event.shiftKey) {
+            event.preventDefault(); // Prevent the default behavior (new line in textarea)
+            SubmitGeneration.click(); // Submit the form
+        }
+    });
 
-    let SubmitGeneration = document.createElement("button");
+    const SubmitGeneration = document.createElement("button");
     SubmitGeneration.textContent = 'Submit';
     SubmitGeneration.classList.add('button1', 'specialbutton', 'pagetextmediumb', 'animation');
     SubmitGeneration.type = "submit";
@@ -251,9 +269,22 @@ SubmitGeneration.addEventListener('click', async () => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ coreValues })
         });
-        
-        LoadingText2.textContent = "Your Results are Ready";
 
+        LoadingText2.textContent = "Response Received";
+        setTimeout(() => {
+            LoadingText2.textContent = "Prepping your order";
+            setTimeout(() => {
+                LoadingText2.textContent = "Almost Ready";
+                setTimeout(() => {
+                    LoadingText2.textContent = "Enjoy your order!";
+                    setTimeout(() => {
+                        LoadingText2.textContent = "Taking Longer Than Usual";
+                    }, 20000);
+                }, 15000);
+            }, 10000);
+        }, 10000);
+        
+        
         // Parse the response from backend
         const data = await response.json();
         console.log("Backend returned:", data);

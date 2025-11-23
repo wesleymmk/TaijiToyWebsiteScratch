@@ -102,6 +102,12 @@ export function Contact() {
     // PS added InquirySelect this div will hold all the selection elements
     const InquirySelect = document.createElement('div')
     InquirySelect.classList.add('dropdown');
+    // PS added ExitCheck this div will exit the Inquiry selector when clicked outside the options
+    const ExitCheck = document.createElement('div');
+    ExitCheck.classList.add('exitcheck');
+    ExitCheck.onclick = () => {
+        InquirySelect.classList.toggle('show');
+    };
     /***************Text to be Inserted into Div containers***************/
     // PS added Title
     const Title = document.createElement("p");
@@ -168,23 +174,42 @@ as soon as possible.";
     NameTextArea.placeholder = 'First Name';
     NameTextArea.classList.add('nametextarea', 'animation');
     NameTextArea.required = true;
+    NameTextArea.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter') {
+            event.preventDefault(); // Prevent the default behavior (new line in textarea)
+            NameTextArea2.focus(); // Submit the form
+        }
+    });
     // PS added NameTextArea2 for users to enter contact info
     const NameTextArea2 = document.createElement('input');
     NameTextArea2.placeholder = 'Last Name';
     NameTextArea2.classList.add('nametextarea', 'animation');
     NameTextArea2.required = true;
+    NameTextArea2.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter') {
+            event.preventDefault(); // Prevent the default behavior (new line in textarea)
+            EmailTextArea.focus(); // Submit the form
+        }
+    });
     // PS added EmailTextArea for users to enter contact info
     const EmailTextArea = document.createElement('input');
     EmailTextArea.placeholder = 'user@domain.com';
     EmailTextArea.classList.add('emailtextarea', 'animation');
     EmailTextArea.required = true;
+    EmailTextArea.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter') {
+            event.preventDefault(); // Prevent the default behavior (new line in textarea)
+            InquiryButton.click(); // Submit the form
+            Selectordiv1.focus();
+        }
+    });
     // PS added InquiryButton for users to enter contact info
     const InquiryButton = document.createElement('button');
     InquiryButton.id = 'none';
     InquiryButton.textContent = 'Select An Option';
     InquiryButton.classList.add('buttondrop', 'animation', 'droptext');
     InquiryButton.addEventListener('click', () => {
-        InquirySelect.classList.toggle('show');
+        InquirySelect.classList.toggle('show');  
     });
     // PS added Selectordiv1 this div will hold all the div elements for Inquiry
     const Selectordiv1 = document.createElement('button');
@@ -195,6 +220,7 @@ as soon as possible.";
         InquiryButton.classList.add('pagetextmediumb');
         InquiryButton.classList.remove('droptext');
         InquirySelect.classList.toggle('show');
+        MessageTextArea.focus();
     }
     // PS added Selectordiv2 this div will hold all the div elements for Inquiry
     const Selectordiv2 = document.createElement('button');
@@ -205,6 +231,7 @@ as soon as possible.";
         InquiryButton.classList.add('pagetextmediumb');
         InquiryButton.classList.remove('droptext');
         InquirySelect.classList.toggle('show');
+        MessageTextArea.focus();
     }
     // PS added Selectordiv3 this div will hold all the div elements for Inquiry
     const Selectordiv3 = document.createElement('button');
@@ -215,6 +242,7 @@ as soon as possible.";
         InquiryButton.classList.add('pagetextmediumb');
         InquiryButton.classList.remove('droptext');
         InquirySelect.classList.toggle('show');
+        MessageTextArea.focus();
     }
     // PS added Selectordiv4 this div will hold all the div elements for Inquiry
     const Selectordiv4 = document.createElement('button');
@@ -225,6 +253,7 @@ as soon as possible.";
         InquiryButton.classList.add('pagetextmediumb');
         InquiryButton.classList.remove('droptext');
         InquirySelect.classList.toggle('show');
+        MessageTextArea.focus();
     }
     // PS added SubmitButton to allow for the users to submit information
     const SubmitButton = document.createElement('button');
@@ -235,6 +264,12 @@ as soon as possible.";
     MessageTextArea.placeholder = 'Please Type Your Message';
     MessageTextArea.classList.add('messagetextarea', 'animation');
     MessageTextArea.required = true;
+    MessageTextArea.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter' && !event.shiftKey) {
+            event.preventDefault(); // Prevent the default behavior (new line in textarea)
+            SubmitButton.click(); // Submit the form
+        }
+    });
     /***************Navigation Bar***************/
     appContainer.appendChild(navwrapper);
     /***************Parent Div containers***************/
@@ -278,6 +313,7 @@ as soon as possible.";
     InputInnerdiv4.appendChild(EmailTextArea);
     InputInnerdiv6.appendChild(InquiryButton);
     InputInnerdiv6.appendChild(InquirySelect);
+    InquirySelect.appendChild(ExitCheck);
     InputInnerdiv8.appendChild(MessageTextArea);
     InquirySelect.appendChild(Selectordiv1);
     InquirySelect.appendChild(Selectordiv2);

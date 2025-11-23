@@ -417,6 +417,11 @@ export function renderWelcomeView() {
                 if (data.success && !data.isLoggedIn) {
                     ComUtils.Advertisment();
                 }
+                else {
+                    setTimeout(() => {
+                        ComUtils.Advertisment();
+                    }, 25000);
+                }
             })
     });
 

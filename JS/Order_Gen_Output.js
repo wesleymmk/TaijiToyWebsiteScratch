@@ -164,11 +164,13 @@ export function renderGenerationOutputView(order_ID_param) {
     GenerationOutputTitleDiv.classList.add('GenerationOutputTitleDiv')
     /***************Yin & Yang Divs***************/
     // PS & EQ Collab YinYang1
-    const YinYangOuter2 = document.createElement('div');
-    YinYangOuter2.classList.add('yinyangouter2');
     /***************Yin & Yang 1***************/
+    const YinYangOuter = document.createElement('div');
+    YinYangOuter.classList.add('yinyangouter');
     const YinYangSide1half = document.createElement('div');
     YinYangSide1half.classList.add('yinyangside1half');
+    const YinYangSide2half = document.createElement('div');
+    YinYangSide2half.classList.add('yinyangside2half');
     const YinYangSide1outer = document.createElement('div');
     YinYangSide1outer.classList.add('yinyangside1outer');
     const YinYangSide1inner = document.createElement('div');
@@ -178,10 +180,12 @@ export function renderGenerationOutputView(order_ID_param) {
     const YinYangSide2inner = document.createElement('div');
     YinYangSide2inner.classList.add('yinyangside2inner');
     /***************Yin & Yang 2***************/
-    const YinYangOuter22 = document.createElement('div');
-    YinYangOuter22.classList.add('yinyangouter2');
+    const YinYangOuter2 = document.createElement('div');
+    YinYangOuter2.classList.add('yinyangouter');
     const YinYangSide1half2 = document.createElement('div');
     YinYangSide1half2.classList.add('yinyangside1half');
+    const YinYangSide2half2 = document.createElement('div');
+    YinYangSide2half2.classList.add('yinyangside2half');
     const YinYangSide1outer2 = document.createElement('div');
     YinYangSide1outer2.classList.add('yinyangside1outer');
     const YinYangSide1inner2 = document.createElement('div');
@@ -191,10 +195,12 @@ export function renderGenerationOutputView(order_ID_param) {
     const YinYangSide2inner2 = document.createElement('div');
     YinYangSide2inner2.classList.add('yinyangside2inner');
     /***************Yin & Yang 3***************/
-    const YinYangOuter23 = document.createElement('div');
-    YinYangOuter23.classList.add('yinyangouter2');
+    const YinYangOuter3 = document.createElement('div');
+    YinYangOuter3.classList.add('yinyangouter');
     const YinYangSide1half3 = document.createElement('div');
     YinYangSide1half3.classList.add('yinyangside1half');
+    const YinYangSide2half3 = document.createElement('div');
+    YinYangSide2half3.classList.add('yinyangside2half');
     const YinYangSide1outer3 = document.createElement('div');
     YinYangSide1outer3.classList.add('yinyangside1outer');
     const YinYangSide1inner3 = document.createElement('div');
@@ -204,10 +210,12 @@ export function renderGenerationOutputView(order_ID_param) {
     const YinYangSide2inner3 = document.createElement('div');
     YinYangSide2inner3.classList.add('yinyangside2inner');
     /***************Yin & Yang 4***************/
-    const YinYangOuter24 = document.createElement('div');
-    YinYangOuter24.classList.add('yinyangouter2');
+    const YinYangOuter4 = document.createElement('div');
+    YinYangOuter4.classList.add('yinyangouter');
     const YinYangSide1half4 = document.createElement('div');
     YinYangSide1half4.classList.add('yinyangside1half');
+    const YinYangSide2half4 = document.createElement('div');
+    YinYangSide2half4.classList.add('yinyangside2half');
     const YinYangSide1outer4 = document.createElement('div');
     YinYangSide1outer4.classList.add('yinyangside1outer');
     const YinYangSide1inner4 = document.createElement('div');
@@ -217,10 +225,12 @@ export function renderGenerationOutputView(order_ID_param) {
     const YinYangSide2inner4 = document.createElement('div');
     YinYangSide2inner4.classList.add('yinyangside2inner');
     /***************Yin & Yang 5***************/
-    const YinYangOuter25 = document.createElement('div');
-    YinYangOuter25.classList.add('yinyangouter2');
+    const YinYangOuter5 = document.createElement('div');
+    YinYangOuter5.classList.add('yinyangouter');
     const YinYangSide1half5 = document.createElement('div');
     YinYangSide1half5.classList.add('yinyangside1half');
+    const YinYangSide2half5 = document.createElement('div');
+    YinYangSide2half5.classList.add('yinyangside2half');
     const YinYangSide1outer5 = document.createElement('div');
     YinYangSide1outer5.classList.add('yinyangside1outer');
     const YinYangSide1inner5 = document.createElement('div');
@@ -230,10 +240,12 @@ export function renderGenerationOutputView(order_ID_param) {
     const YinYangSide2inner5 = document.createElement('div');
     YinYangSide2inner5.classList.add('yinyangside2inner');
     /***************Yin & Yang 6***************/
-    const YinYangOuter26 = document.createElement('div');
-    YinYangOuter26.classList.add('yinyangouter2');
+    const YinYangOuter6 = document.createElement('div');
+    YinYangOuter6.classList.add('yinyangouter');
     const YinYangSide1half6 = document.createElement('div');
     YinYangSide1half6.classList.add('yinyangside1half');
+    const YinYangSide2half6 = document.createElement('div');
+    YinYangSide2half6.classList.add('yinyangside2half');
     const YinYangSide1outer6 = document.createElement('div');
     YinYangSide1outer6.classList.add('yinyangside1outer');
     const YinYangSide1inner6 = document.createElement('div');
@@ -242,6 +254,24 @@ export function renderGenerationOutputView(order_ID_param) {
     YinYangSide2outer6.classList.add('yinyangside2outer');
     const YinYangSide2inner6 = document.createElement('div');
     YinYangSide2inner6.classList.add('yinyangside2inner');
+
+    // PS added Loading This div will be used as a loading screen as generation occurs
+    const Loading = document.createElement('div');
+    Loading.classList.add('loading');
+    // PS added LoadingText to display to the customer that the order is being generated
+    const LoadingText = document.createElement('p');
+    LoadingText.classList.add('pagetextmediumw');
+    LoadingText.textContent = 'Generating Your Order';
+    // PS added LoadingText2 to display to the customer that the order is being generated
+    const LoadingText2 = document.createElement('p');
+    LoadingText2.classList.add('pagetextsmallw');
+    LoadingText2.textContent = 'Sending Details to Gemini';
+    // PS added LoadingLogo to notify users of loading
+    const LoadingLogo = document.createElement('img');
+    LoadingLogo.classList.add('LoadBox', 'animation3');
+    LoadingLogo.src = 'Brand_Logos/Taijitoylogolight.png';
+    LoadingLogo.alt = 'LOADING...';
+
     //EQ and PS collab
     //The text for the header
     const GenerationOutputText = document.createElement('p');
@@ -254,31 +284,6 @@ export function renderGenerationOutputView(order_ID_param) {
 
     const generatedcontent_space_1 = document.createElement('div');
     generatedcontent_space_1.classList.add('body3', 'bodyspecific');
-
-    let generatedcontent_space_2 = document.createElement('div');
-    generatedcontent_space_2.classList.add('generatedcontent-space');
-    //generatedcontent_space_2.textContent = 'Loading your generated toys...'; // Show a loading message
-
-
-    let generatedcontent_space_3 = document.createElement('div');
-    generatedcontent_space_3.classList.add('generatedcontent-space');
-    //generatedcontent_space_2.textContent = 'Loading your generated toys...'; // Show a loading message
-
-
-    let generatedcontent_space_4 = document.createElement('div');
-    generatedcontent_space_4.classList.add('generatedcontent-space');
-    //generatedcontent_space_2.textContent = 'Loading your generated toys...'; // Show a loading message
-
-
-    let generatedcontent_space_5 = document.createElement('div');
-    generatedcontent_space_5.classList.add('generatedcontent-space');
-    //generatedcontent_space_2.textContent = 'Loading your generated toys...'; // Show a loading message
-
-    let generatedcontent_space_6 = document.createElement('div');
-    generatedcontent_space_6.classList.add('generatedcontent-space');
-    //generatedcontent_space_2.textContent = 'Loading your generated toys...'; // Show a loading message
-
-
 
     // --- API CALL AND DATA HANDLING ---
     ComUtils.apiCall('api/display_traits.php', dataForPHP)
@@ -418,42 +423,42 @@ export function renderGenerationOutputView(order_ID_param) {
                 const ColorText1 = document.createElement("p");
                 ColorText1.textContent = Color1;
                 /***************Yin & Yang 1***************/
-                YinYangOuter2.classList.add(Color1);
+                YinYangSide2half.classList.add(Color1);
                 YinYangSide1outer.classList.add(Color1);
                 YinYangSide2inner.classList.add(Color1);
                 YinYangSide1half.classList.add(Color2);
                 YinYangSide2outer.classList.add(Color2);
                 YinYangSide1inner.classList.add(Color2);
                 /***************Yin & Yang 2***************/
-                YinYangOuter22.classList.add(Color3);
+                YinYangSide2half2.classList.add(Color3);
                 YinYangSide1outer2.classList.add(Color3);
                 YinYangSide2inner2.classList.add(Color3);
                 YinYangSide1half2.classList.add(Color4);
                 YinYangSide2outer2.classList.add(Color4);
                 YinYangSide1inner2.classList.add(Color4);
                 /***************Yin & Yang 3***************/
-                YinYangOuter23.classList.add(Color5);
+                YinYangSide2half3.classList.add(Color5);
                 YinYangSide1outer3.classList.add(Color5);
                 YinYangSide2inner3.classList.add(Color5);
                 YinYangSide1half3.classList.add(Color6);
                 YinYangSide2outer3.classList.add(Color6);
                 YinYangSide1inner3.classList.add(Color6);
                 /***************Yin & Yang 4***************/
-                YinYangOuter24.classList.add(Color7);
+                YinYangSide2half4.classList.add(Color7);
                 YinYangSide1outer4.classList.add(Color7);
                 YinYangSide2inner4.classList.add(Color7);
                 YinYangSide1half4.classList.add(Color8);
                 YinYangSide2outer4.classList.add(Color8);
                 YinYangSide1inner4.classList.add(Color8);
                 /***************Yin & Yang 5***************/
-                YinYangOuter25.classList.add(Color9);
+                YinYangSide2half5.classList.add(Color9);
                 YinYangSide1outer5.classList.add(Color9);
                 YinYangSide2inner5.classList.add(Color9);
                 YinYangSide1half5.classList.add(Color10);
                 YinYangSide2outer5.classList.add(Color10);
                 YinYangSide1inner5.classList.add(Color10);
                 /***************Yin & Yang 6***************/
-                YinYangOuter26.classList.add(Color11);
+                YinYangSide2half6.classList.add(Color11);
                 YinYangSide1outer6.classList.add(Color11);
                 YinYangSide2inner6.classList.add(Color11);
                 YinYangSide1half6.classList.add(Color12);
@@ -562,45 +567,51 @@ export function renderGenerationOutputView(order_ID_param) {
 
                 /***************Build Yin & Yang elements (synchronous)***************/
                 // Build Yin/Yang structures
-                YinYangDiv.appendChild(YinYangOuter2);
-                YinYangOuter2.appendChild(YinYangSide1half);
-                YinYangOuter2.appendChild(YinYangSide1outer);
-                YinYangOuter2.appendChild(YinYangSide2outer);
+                YinYangDiv.appendChild(YinYangOuter);
+                YinYangOuter.appendChild(YinYangSide1half);
+                YinYangOuter.appendChild(YinYangSide2half);
+                YinYangOuter.appendChild(YinYangSide1outer);
+                YinYangOuter.appendChild(YinYangSide2outer);
                 YinYangSide1outer.appendChild(YinYangSide1inner);
                 YinYangSide2outer.appendChild(YinYangSide2inner);
 
-                YinYangDiv2.appendChild(YinYangOuter22);
-                YinYangOuter22.appendChild(YinYangSide1half2);
-                YinYangOuter22.appendChild(YinYangSide1outer2);
-                YinYangOuter22.appendChild(YinYangSide2outer2);
+                YinYangDiv2.appendChild(YinYangOuter2);
+                YinYangOuter2.appendChild(YinYangSide1half2);
+                YinYangOuter2.appendChild(YinYangSide2half2);
+                YinYangOuter2.appendChild(YinYangSide1outer2);
+                YinYangOuter2.appendChild(YinYangSide2outer2);
                 YinYangSide1outer2.appendChild(YinYangSide1inner2);
                 YinYangSide2outer2.appendChild(YinYangSide2inner2);
 
-                YinYangDiv3.appendChild(YinYangOuter23);
-                YinYangOuter23.appendChild(YinYangSide1half3);
-                YinYangOuter23.appendChild(YinYangSide1outer3);
-                YinYangOuter23.appendChild(YinYangSide2outer3);
+                YinYangDiv3.appendChild(YinYangOuter3);
+                YinYangOuter3.appendChild(YinYangSide1half3);
+                YinYangOuter3.appendChild(YinYangSide2half3);
+                YinYangOuter3.appendChild(YinYangSide1outer3);
+                YinYangOuter3.appendChild(YinYangSide2outer3);
                 YinYangSide1outer3.appendChild(YinYangSide1inner3);
                 YinYangSide2outer3.appendChild(YinYangSide2inner3);
 
-                YinYangDiv4.appendChild(YinYangOuter24);
-                YinYangOuter24.appendChild(YinYangSide1half4);
-                YinYangOuter24.appendChild(YinYangSide1outer4);
-                YinYangOuter24.appendChild(YinYangSide2outer4);
+                YinYangDiv4.appendChild(YinYangOuter4);
+                YinYangOuter4.appendChild(YinYangSide1half4);
+                YinYangOuter4.appendChild(YinYangSide2half4);
+                YinYangOuter4.appendChild(YinYangSide1outer4);
+                YinYangOuter4.appendChild(YinYangSide2outer4);
                 YinYangSide1outer4.appendChild(YinYangSide1inner4);
                 YinYangSide2outer4.appendChild(YinYangSide2inner4);
 
-                YinYangDiv5.appendChild(YinYangOuter25);
-                YinYangOuter25.appendChild(YinYangSide1half5);
-                YinYangOuter25.appendChild(YinYangSide1outer5);
-                YinYangOuter25.appendChild(YinYangSide2outer5);
+                YinYangDiv5.appendChild(YinYangOuter5);
+                YinYangOuter5.appendChild(YinYangSide1half5);
+                YinYangOuter5.appendChild(YinYangSide2half5);
+                YinYangOuter5.appendChild(YinYangSide1outer5);
+                YinYangOuter5.appendChild(YinYangSide2outer5);
                 YinYangSide1outer5.appendChild(YinYangSide1inner5);
                 YinYangSide2outer5.appendChild(YinYangSide2inner5);
 
-                YinYangDiv6.appendChild(YinYangOuter26);
-                YinYangOuter26.appendChild(YinYangSide1half6);
-                YinYangOuter26.appendChild(YinYangSide1outer6);
-                YinYangOuter26.appendChild(YinYangSide2outer6);
+                YinYangDiv6.appendChild(YinYangOuter6);
+                YinYangOuter6.appendChild(YinYangSide1half6);
+                YinYangOuter6.appendChild(YinYangSide2half6);
+                YinYangOuter6.appendChild(YinYangSide1outer6);
+                YinYangOuter6.appendChild(YinYangSide2outer6);
                 YinYangSide1outer6.appendChild(YinYangSide1inner6);
                 YinYangSide2outer6.appendChild(YinYangSide2inner6);
 
@@ -700,19 +711,6 @@ export function renderGenerationOutputView(order_ID_param) {
                 LongDesDiv5.appendChild(LongText5);
                 LongDesDiv6.appendChild(LongText6);
 
-                //generatedcontent_space.appendChild(TraitText1);
-                //generatedcontent_space.appendChild(TraitText2);
-                //generatedcontent_space.appendChild(TraitText3);
-                //generatedcontent_space.appendChild(TraitText4);
-                //generatedcontent_space.appendChild(TraitText5);
-                //generatedcontent_space.appendChild(TraitText6);
-                //generatedcontent_space_5.appendChild(TraitText7);
-                //generatedcontent_space_5.appendChild(TraitText8);
-                //generatedcontent_space_5.appendChild(TraitText9);
-                //generatedcontent_space_5.appendChild(TraitText10);
-                //generatedcontent_space_5.appendChild(TraitText11);
-                //generatedcontent_space_5.appendChild(TraitText12);
-
             } else {
                 // The PHP script returned a handled error (e.g., success: false)
                 throw new Error(parsedData.message || "Invalid data structure from server.");
@@ -732,13 +730,17 @@ export function renderGenerationOutputView(order_ID_param) {
 
     let RegenAll = document.createElement("button");
     RegenAll.textContent = 'Regenerate All';
-    RegenAll.classList.add('button1', 'pagetextlargeb');
+    RegenAll.classList.add('button1', 'pagetextlargeb', 'buttongapout');
 
     // Attach click handler for "Regenerate All" � uses Node backend to regenerate images
     RegenAll.addEventListener('click', async () => {
         RegenAll.disabled = true;
         const originalText = RegenAll.textContent;
         RegenAll.textContent = 'Regenerating...';
+        appContainer.appendChild(Loading);
+        Loading.appendChild(LoadingLogo);
+        Loading.appendChild(LoadingText);
+        Loading.appendChild(LoadingText2);
 
         try {
             const payload = {
@@ -801,12 +803,13 @@ export function renderGenerationOutputView(order_ID_param) {
         } finally {
             RegenAll.disabled = false;
             RegenAll.textContent = originalText;
+            appContainer.removeChild(Loading);
         }
     });
 
     let placeorder = document.createElement("button");
     placeorder.textContent = 'Place an order';
-    placeorder.classList.add('button1', 'pagetextlargeb')
+    placeorder.classList.add('button1', 'pagetextlargeb', 'buttongapout')
 
 
 
