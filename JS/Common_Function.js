@@ -1100,6 +1100,7 @@ export function Advertisment() {
                 .then(data => {
                     if (data.success && data.isLoggedIn) {
 
+                        modal.style.display = "none";
                         window.location.href = '#order-input';
 
                     } else {

@@ -144,3 +144,8 @@
 .textspecial {
   align-content: end;
 }
+@media screen and (max-width: 1005px) {
+  .nametextarea {
+    width: 100%;
+  }
+}
