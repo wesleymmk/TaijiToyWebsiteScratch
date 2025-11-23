@@ -1,4 +1,4 @@
-// JavaScript source code
+﻿// JavaScript source code
 export const appContainer = document.getElementById('app');
 import * as ComUtils from './Common_Function.js';
 import * as Utils from './Authentication_Page.js';
@@ -164,15 +164,15 @@ export function renderGenerationInputView() {
     // PS added InspiriationalText to be above text entry box
     const InspiriationalText = document.createElement('p');
     InspiriationalText.classList.add('pagetextmediumb', 'animation');
-    InspiriationalText.textContent = 'Take a moment to pause: What inner quality are you most grateful to possess, and how does it make your life richer?';
+    InspiriationalText.textContent = 'What are your core values?';
     // PS added InspiriationalText2 to be above text entry box
     const InspiriationalText2 = document.createElement('p');
     InspiriationalText2.classList.add('pagetextmediumb', 'animation');
-    InspiriationalText2.textContent = 'What are your pastimes that enrich your life?';
+    InspiriationalText2.textContent = 'What pastimes or hobbies do you enjoy?';
     // PS added InspiriationalText3 to be above text entry box
     const InspiriationalText3 = document.createElement('p');
     InspiriationalText3.classList.add('pagetextmediumb', 'animation');
-    InspiriationalText3.textContent = 'What are your interests that soothe your mind?';
+    InspiriationalText3.textContent = 'To what do you aspire?';
     // PS added LoadingText to display to the customer that the order is being generated
     const LoadingText = document.createElement('p');
     LoadingText.classList.add('pagetextmediumw');
