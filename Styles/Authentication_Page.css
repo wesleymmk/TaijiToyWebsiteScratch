@@ -291,3 +291,15 @@
   gap: calc(12px + 2vw);
   justify-content: center;
 }
+/*PS Added*/
+@media screen and (max-width: 1005px) {
+  .marketingrevealdiv1 {
+    text-align: center;
+  }
+  .marketingrevealdiv3 {
+    text-align: center;
+  }
+  .closerinnerdiv2 {
+    justify-content: center;
+  }
+}

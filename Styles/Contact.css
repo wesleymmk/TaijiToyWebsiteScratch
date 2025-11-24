@@ -1,0 +1,151 @@
+/*PS Added*/
+.contacttitle,
+.inputsdivtitle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: calc(225px + 24vw);
+  margin-top: 25px;
+  gap: 5px;
+}
+/*PS Added*/
+.contacttitleinner {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  text-align: justify;
+}
+/*PS Added*/
+.inputsdivtitle {
+  align-items: flex-start;
+  margin-top: 25px;
+}
+/*PS Added*/
+.inputinnerdivc,
+.inputinnerdivc2,
+.inputinnerdivc3 {
+  display: flex;
+  text-align: left;
+  flex-wrap: wrap;
+  min-width: calc(225px + 24vw);
+  width: 100%;
+  gap: 20px;
+}
+/*PS Added*/
+.inputinnerdivc2 {
+  width: 100%;
+  justify-content: space-between;
+}
+/*PS Added*/
+.inputinnerdivc3 {
+  position: relative;
+  flex-direction: column;
+}
+/*PS Added*/
+.nametextarea,
+.emailtextarea,
+.messagetextarea {
+  white-space: pre-wrap;
+  resize: none;
+  height: calc(16px + 1.25vw);
+  /*font-size: 22px;
+  font-size: 1.146vw;*/
+  font-size: calc(9.3px + 1vw);
+  border-radius: calc(8px + 1vw);
+  border-width: .5px;
+  border-width: 0.026vw;
+  padding: 10px;
+  font-family: 'Chinese Rocks Rg', sana-serif;
+}
+/*PS Added*/
+.emailtextarea {
+  width: 100%;
+}
+/*PS Added*/
+.messagetextarea {
+  width: 100%;
+  height: calc(100px + 1.5vw);
+}
+/*PS Added*/
+.buttondrop {
+  background-color: white;
+  border-radius: calc(8px + 1vw);
+  border-color: black;
+  border: 1px solid;
+  cursor: pointer;
+  min-height: 40px;
+  height: calc(24px + 2vw);
+  width: 100%;
+}
+/*PS Added*/
+.buttondrop:hover {
+  opacity: 0.2;
+  transition: 0.4s;
+}
+/*PS Added*/
+.dropdown {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  border-radius: calc(8px + 1vw);
+  border: 1px solid;
+  border-color: #777;
+  width: 100%;
+  top: -200%;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  background-color: #fff;
+  transition: all ease-in-out 0.2s;
+  opacity: 0;
+  z-index: -1;
+}
+/*PS Added*/
+.dropdown.show {
+  top: 100%;
+  opacity: 1;
+  z-index: 2;
+}
+/*PS Added*/
+.exitcheck {
+  position: fixed;
+  opacity: 0;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+}
+/*PS Added*/
+.selector {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border: none;
+  border-radius: calc(8px + 1vw);
+  background-color: #fff;
+  height: calc(24px + 2vw);
+  width: 99%;
+}
+/*PS Added*/
+.selector:hover {
+  background-color: #ccc;
+}
+/*PS Added*/
+.special {
+  display: flex;
+  gap: calc(8px + 2vw);
+  justify-content: center;
+}
+/*PS Added*/
+.textspecial {
+  align-content: end;
+}
+@media screen and (max-width: 1005px) {
+  .nametextarea {
+    width: 100%;
+  }
+}

@@ -29,6 +29,7 @@
   min-height: 60px;
   height: 4.688vw;
   background-color: black;
+  box-shadow: 0 1px 15px .5px #000;
   z-index: 1;
 }
 /*PS Added*/

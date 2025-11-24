@@ -36,6 +36,7 @@
     display: flex;
     justify-content: space-evenly;
     width: 100%;
+    gap: 10px;
 }
 /*PS Added*/
 .imagediv {
@@ -54,7 +55,6 @@
     max-height: 100%;
     object-fit: contain;
     display: block;
-    border-radius: 8px;    
 }
 /*PS Added*/
 .yinyangdiv {
@@ -85,34 +85,47 @@
     text-align: justify;
     width: 100%;
 }
-.yinyangouter2,
-.yinyangside1outer,
-.yinyangside2inner {
+.yinyangouter {
     position: relative;
     display: flex;
     flex-direction: column;
-    background-color: black;
     justify-content: space-between;
     border-style: solid;
     align-items: center;
+    background-color: rgba(0, 0, 0, 0);
     border-radius: 100%;
     height: 76px;
     width: 76px;
 }
+/*PS Added*/
 .yinyangside1half,
 .yinyangside2outer,
 .yinyangside1inner {
     position: absolute;
-    background-color: white;
+    background-color: #fff;
     border-radius: 38px 0% 0% 38px;
     left: 0%;
     height: 100%;
     width: 50%;
 }
 /*PS Added*/
+.yinyangside2half,
+.yinyangside1outer,
+.yinyangside2inner {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 0% 38px 38px 0%;
+    left: auto;
+    height: 100%;
+    width: 50%;
+}
+/*PS Added*/
+.yinyangside2half {
+    left: 50%;
+}
+/*PS Added*/
 .yinyangside1outer,
 .yinyangside2outer {
-    position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -121,13 +134,16 @@
     height: 38px;
     width: 38px;
 }
+/*PS Added*/
 .yinyangside2outer {
     top: 50%;
     left: auto;
 }
+/*PS Added*/
 .yinyangside1inner,
 .yinyangside2inner {
     position: absolute;
+    flex-direction: column;
     border-style: none;
     border-radius: 100%;
     height: 11px;

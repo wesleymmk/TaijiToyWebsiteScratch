@@ -11,7 +11,8 @@ import * as Gen2Utils from './Order_Gen_Output.js';
 //PS Creation & EQ collaboration
 export function renderWelcomeView() {
     ComUtils.clearAppContainer(); // Clear the screen first
-    
+    /***************Auto Scroll Option***************/
+    window.addEventListener('DOMContentLoaded', ComUtils.topFunction());
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
             if (entry.isIntersecting) {
@@ -19,7 +20,7 @@ export function renderWelcomeView() {
                 return;
             }
         });
-    }, { threshold: 0.8 });
+    }, { threshold: 0.5 });
     const check = document.querySelectorAll('.show');
     addEventListener('DOMContentLoaded', () => {
         if (check == '.show') {
@@ -42,6 +43,7 @@ export function renderWelcomeView() {
     ComUtils.AccountOption.classList.remove('account'); // Class removed
     ComUtils.AccountOption.classList.remove('account'); // Class removed
     ComUtils.ContactOption.classList.remove('contact-us'); // Class removed
+    ComUtils.AboutOption.classList.remove('about'); // Class removed
     ComUtils.HamburgerDiv.appendChild(ComUtils.Hamburgerline1); // Lines for Hamburger Menu
     ComUtils.HamburgerDiv.appendChild(ComUtils.Hamburgerline2); // Lines for Hamburger Menu
     ComUtils.HamburgerDiv.appendChild(ComUtils.Hamburgerline3); // Lines for Hamburger Menu
@@ -405,6 +407,25 @@ export function renderWelcomeView() {
     const Closerphoto10 = document.createElement('img');
     Closerphoto10.classList.add('marketimage2', 'animation');
     Closerphoto10.src = 'Marketing_Images/DSC00151.jpg';
+    /***************API Calls***************/
+    document.addEventListener('DOMContentLoaded', () => {
+
+        ComUtils.apiCall('api/login_check.php')
+
+            .then(response => response.json())
+            .then(data => {
+                if (data.success && !data.isLoggedIn) {
+                    ComUtils.Advertisment();
+                }
+                else {
+                    setTimeout(() => {
+                        ComUtils.Advertisment();
+                    }, 25000);
+                }
+            })
+    });
+
+
     // These commands just call all the elements to the screen
     /***************Navigation Bar***************/
     appContainer.appendChild(navwrapper);
@@ -455,6 +476,7 @@ export function renderWelcomeView() {
     SOLOSdiv.appendChild(SOLOSinnerdiv);
     SOLOSinnerdiv.appendChild(SOLOSinnerdiv1);
     SOLOSinnerdiv.appendChild(SOLOSinnerdiv2);
+    SOLOSinnerdiv.appendChild(ComUtils.ShopNowButton2);
     Tailoreddiv.appendChild(Tailoredinnerdiv);
     Tailoredinnerdiv.appendChild(Tailoredinnerdiv2);
     Closerdiv.appendChild(Closerinnerdiv);
@@ -491,6 +513,7 @@ export function renderWelcomeView() {
     SOLOSinnerdiv1.appendChild(SOLOS);
     Tailoredinnerdiv2.appendChild(Tailored);
     Tailoredinnerdiv.appendChild(Tailored2);
+    Tailoredinnerdiv.appendChild(ComUtils.ShopNowButton4);
     Closerinnerdiv.appendChild(Closer);
     ComUtils.Footerinnerdiv2.appendChild(ComUtils.Footer);
     /***************Images to be used by page***************/
@@ -506,11 +529,13 @@ export function renderWelcomeView() {
     Curatedinnerdiv.appendChild(Curated);
     Curatedinnerdiv.appendChild(Curatedinnerdiv2);
     Curatedinnerdiv2.appendChild(Curated2);
+    Curatedinnerdiv2.appendChild(ComUtils.ShopNowButton3);
     Tailoreddiv.appendChild(Marketingphoto3);
     Itemsdiv.appendChild(Marketingphoto4);
     Itemsdiv.appendChild(Itemsinnerdiv);
     Itemsinnerdiv.appendChild(Items);
     Itemsinnerdiv.appendChild(Itemsinnerdiv2);
+    Itemsinnerdiv.appendChild(ComUtils.ShopNowButton5);
     Itemsinnerdiv2.appendChild(Items2);
     Closercolumndiv1.appendChild(Closerphoto1);
     Closercolumndiv1.appendChild(Closerphoto2);

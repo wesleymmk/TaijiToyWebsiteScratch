@@ -1,4 +1,4 @@
-// JavaScript source code
+﻿// JavaScript source code
 export const appContainer = document.getElementById('app');
 import * as ComUtils from './Common_Function.js';
 import * as Utils from './Authentication_Page.js';
@@ -54,7 +54,6 @@ export function renderGenerationInputView() {
     orderStartTime = performance.now();
     // ==========================================
 
-    /***************Loading Function on Scroll***************/
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
             if (entry.isIntersecting) {
@@ -62,7 +61,7 @@ export function renderGenerationInputView() {
                 return;
             }
         });
-    }, { threshold: 0.8 });
+    }, { threshold: 0.5 });
     const check = document.querySelectorAll('.show');
     addEventListener('DOMContentLoaded', () => {
         if (check == '.show') {
@@ -93,6 +92,7 @@ export function renderGenerationInputView() {
     ComUtils.navmenu.appendChild(ComUtils.AboutOption); // Grab button from Common_Function.js
     ComUtils.navmenu.appendChild(ComUtils.ContactOption); // Grab button from Common_Function.js
     /***************Auto Scroll Option***************/
+    window.addEventListener('DOMContentLoaded', ComUtils.topFunction());
     let keyword = '.inputinnerdiv1';
     const ScrollTimePause = setTimeout(() => {
         ComUtils.manualScrollToElement(keyword, 3000);
@@ -164,15 +164,15 @@ export function renderGenerationInputView() {
     // PS added InspiriationalText to be above text entry box
     const InspiriationalText = document.createElement('p');
     InspiriationalText.classList.add('pagetextmediumb', 'animation');
-    InspiriationalText.textContent = 'Take a moment to pause: What inner quality are you most grateful to possess, and how does it make your life richer?';
+    InspiriationalText.textContent = 'What are your core values?';
     // PS added InspiriationalText2 to be above text entry box
     const InspiriationalText2 = document.createElement('p');
     InspiriationalText2.classList.add('pagetextmediumb', 'animation');
-    InspiriationalText2.textContent = 'What are your pastimes that enrich your life?';
+    InspiriationalText2.textContent = 'What pastimes or hobbies do you enjoy?';
     // PS added InspiriationalText3 to be above text entry box
     const InspiriationalText3 = document.createElement('p');
     InspiriationalText3.classList.add('pagetextmediumb', 'animation');
-    InspiriationalText3.textContent = 'What are your interests that soothe your mind?';
+    InspiriationalText3.textContent = 'To what do you aspire?';
     // PS added LoadingText to display to the customer that the order is being generated
     const LoadingText = document.createElement('p');
     LoadingText.classList.add('pagetextmediumw');
@@ -205,18 +205,36 @@ export function renderGenerationInputView() {
     CustomerInput1.placeholder = 'Enter your Values';
     CustomerInput1.classList.add('textarea', 'animation2');
     CustomerInput1.required = true;
+    CustomerInput1.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter' && !event.shiftKey) {
+            event.preventDefault(); // Prevent the default behavior (new line in textarea)
+            CustomerInput2.focus(); // Submit the form
+        }
+    });
     // PS added CustomerInput2 for users to enter one of their traits
     const CustomerInput2 = document.createElement('textarea');
     CustomerInput2.placeholder = 'Enter your Pastimes';
     CustomerInput2.classList.add('textarea', 'animation2');
     CustomerInput2.required = true;
+    CustomerInput2.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter' && !event.shiftKey) {
+            event.preventDefault(); // Prevent the default behavior (new line in textarea)
+            CustomerInput3.focus(); // Submit the form
+        }
+    });
     // PS added CustomerInput3 for users to enter one of their traits
     const CustomerInput3 = document.createElement('textarea');
     CustomerInput3.placeholder = 'Enter your Interests';
     CustomerInput3.classList.add('textarea', 'animation2');
     CustomerInput3.required = true;
+    CustomerInput3.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter' && !event.shiftKey) {
+            event.preventDefault(); // Prevent the default behavior (new line in textarea)
+            SubmitGeneration.click(); // Submit the form
+        }
+    });
 
-    let SubmitGeneration = document.createElement("button");
+    const SubmitGeneration = document.createElement("button");
     SubmitGeneration.textContent = 'Submit';
     SubmitGeneration.classList.add('button1', 'specialbutton', 'pagetextmediumb', 'animation');
     SubmitGeneration.type = "submit";
@@ -251,9 +269,22 @@ SubmitGeneration.addEventListener('click', async () => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ coreValues })
         });
-        
-        LoadingText2.textContent = "Your Results are Ready";
 
+        LoadingText2.textContent = "Response Received";
+        setTimeout(() => {
+            LoadingText2.textContent = "Prepping your order";
+            setTimeout(() => {
+                LoadingText2.textContent = "Almost Ready";
+                setTimeout(() => {
+                    LoadingText2.textContent = "Enjoy your order!";
+                    setTimeout(() => {
+                        LoadingText2.textContent = "Taking Longer Than Usual";
+                    }, 20000);
+                }, 15000);
+            }, 10000);
+        }, 10000);
+        
+        
         // Parse the response from backend
         const data = await response.json();
         console.log("Backend returned:", data);

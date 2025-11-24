@@ -45,6 +45,10 @@ export function apiCall(php_file, js_object) // WM code //
 
 /* These are just the buttons for the header that each webapge will call to simplify each file and reduce
 repeating code*/
+export function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+}
 /***************Auto Scroll Option***************/
 /**
  * Manually scrolls the viewport to a specific element with a custom duration.
@@ -338,7 +342,49 @@ export const ShopNowButton = document.createElement('button');
 ShopNowButton.classList.add('button1', 'pagetextmediumb', 'animation');
 ShopNowButton.textContent = 'Shop Now';
 ShopNowButton.addEventListener('click', function () {
-    window.location.href = "https://www.taijitoy.com/store";
+    window.open("https://www.etsy.com/shop/TaijiToy");
+});
+// PS added ShopNowButton2 to direct to Official TaijiToy shopping page
+export const ShopNowButton2 = document.createElement('button');
+ShopNowButton2.classList.add('button1', 'pagetextmediumb', 'animation');
+ShopNowButton2.textContent = 'Shop Now';
+ShopNowButton2.addEventListener('click', function () {
+    window.open("https://www.etsy.com/shop/TaijiToy?section_id=52764817");
+});
+// PS added ShopNowButton3 to direct to Official TaijiToy shopping page
+export const ShopNowButton3 = document.createElement('button');
+ShopNowButton3.classList.add('button2', 'pagetextmediumw', 'animation');
+ShopNowButton3.textContent = 'Shop Now';
+ShopNowButton3.addEventListener('click', function () {
+    window.open("https://www.etsy.com/shop/TaijiToy?section_id=51723792");
+});
+// PS added ShopNowButton4 to direct to Official TaijiToy shopping page
+export const ShopNowButton4 = document.createElement('button');
+ShopNowButton4.classList.add('button1', 'pagetextmediumb', 'animation');
+ShopNowButton4.textContent = 'Shop Now';
+ShopNowButton4.addEventListener('click', function () {
+    
+    apiCall('api/login_check.php')
+
+        .then(response => response.json())
+        .then(data => {
+            if (data.success && data.isLoggedIn) {
+
+                window.location.href = "#order-input";
+
+            } else {
+                
+                showPopupModal();
+
+            }
+        })
+});
+// PS added ShopNowButton5 to direct to Official TaijiToy shopping page
+export const ShopNowButton5 = document.createElement('button');
+ShopNowButton5.classList.add('button2', 'pagetextmediumw', 'animation');
+ShopNowButton5.textContent = 'Shop Now';
+ShopNowButton5.addEventListener('click', function () {
+    window.open("https://www.etsy.com/shop/TaijiToy?section_id=52404711");
 });
 /***************Login Check***************/
 document.addEventListener('DOMContentLoaded', () => {
@@ -765,22 +811,25 @@ export function CAsuccess() {
         modal.id = 'CASuccessModal';
         modal.classList.add('modal');
 
-        let modalContent = document.createElement('div');
+        const modalContent = document.createElement('div');
         modalContent.classList.add('modal-content');
 
-        let closeButton = document.createElement('span');
+        const closeButton = document.createElement('span');
         closeButton.classList.add('close-button');
         closeButton.innerHTML = '&times;'; // The 'x' character
         closeButton.onclick = () => {
             modal.style.display = "none";
         };
 
-        let popupHeading = document.createElement('h2');
+        const buttonspacing = document.createElement('div');
+        buttonspacing.classList.add('buttonspacing');
+
+        const popupHeading = document.createElement('h2');
         popupHeading.textContent = 'Account Created Successfully!';
 
-        let ToInputgen = document.createElement("button");
+        const ToInputgen = document.createElement("button");
         ToInputgen.textContent = 'Generate your first order!';
-        ToInputgen.classList.add('LoginButton-2'); // Corrected syntax
+        ToInputgen.classList.add('LoginButton-3', 'pagetextmediumb'); // Corrected syntax
 
         ToInputgen.addEventListener('click', () => {
             window.location.href = '#order-input';
@@ -791,7 +840,8 @@ export function CAsuccess() {
         // Assemble the modal content
         modalContent.appendChild(closeButton);
         modalContent.appendChild(popupHeading);
-        modalContent.appendChild(ToInputgen);
+        modalContent.appendChild(buttonspacing);
+        buttonspacing.appendChild(ToInputgen);
 
         // Add the content to the modal
         modal.appendChild(modalContent);
@@ -799,7 +849,7 @@ export function CAsuccess() {
         // IMPORTANT: Add the newly created modal to the document body
         document.body.appendChild(modal);
     }
-    modal.style.display = 'block';
+    modal.style.display = 'flex';
 }
 
 //Done by EQ
@@ -1013,6 +1063,95 @@ export function resetPassword(email, code){
 
     }
     modal.style.display = "flex";
+}
+
+// PS added by Sponsor's request
+export function Advertisment() {
+    let modal = document.getElementById('Advertisment');
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'Advertisment';
+        modal.classList.add('modal');
+
+        const modalContent = document.createElement('div');
+        modalContent.classList.add('modal-content', 'altanimation');
+
+        const TitleDiv = document.createElement('div');
+        TitleDiv.classList.add('titlediv2');
+
+        const DescDiv = document.createElement('div');
+        DescDiv.classList.add('descdiv');
+
+        const PicDiv = document.createElement('div');
+        PicDiv.classList.add('picdiv');
+
+        const ButtonDiv = document.createElement('div');
+        ButtonDiv.classList.add('buttondiv');
+
+        const Createbutton = document.createElement('button');
+        Createbutton.textContent = 'Create Now';
+        Createbutton.classList.add('LoginButton-3', 'pagetextmediumb');
+        Createbutton.type = "submit";
+        Createbutton.addEventListener('click', (event) => {
+
+            apiCall('api/login_check.php')
+
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success && data.isLoggedIn) {
+
+                        modal.style.display = "none";
+                        window.location.href = '#order-input';
+
+                    } else {
+                        // Login failed
+                        showPopupModal();
+                    }
+                })
+        });
+
+        const closeButton = document.createElement('span');
+        closeButton.classList.add('close-button');
+        closeButton.innerHTML = '&times;'; // The 'x' character
+        closeButton.onclick = () => {
+            modal.style.display = "none";
+        }
+
+        const popupHeading = document.createElement('p');
+        popupHeading.textContent = 'Custom Tailored Collections';
+        popupHeading.classList.add('pagetextlargew');
+
+        const Marketingphoto1 = document.createElement('img');
+        Marketingphoto1.classList.add('marketimage1');
+        Marketingphoto1.src = 'Marketing_Images/possibilites+banner.jpg';
+
+        const popupDesc = document.createElement('p');
+        popupDesc.textContent = '- \u221E Infinite Possibilities \u221E :\n- \
+Present 2+ themes: receive a kit\nuniquely tailored to your \
+core values.\nYour pastimes/interest. Your Aspirations';
+        popupDesc.classList.add('pagetextsmallw');
+
+        appContainer.appendChild(modal);
+        modal.appendChild(modalContent);
+        modalContent.appendChild(closeButton);
+        modalContent.appendChild(TitleDiv);
+        modalContent.appendChild(DescDiv);
+        modalContent.appendChild(PicDiv);
+        modalContent.appendChild(ButtonDiv);
+        TitleDiv.appendChild(popupHeading);
+        DescDiv.appendChild(popupDesc);
+        PicDiv.appendChild(Marketingphoto1);
+        ButtonDiv.appendChild(Createbutton);
+        
+
+    }
+    modal.style.display = "flex";
+
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
 }
 
 // === ANALYTICS FUNCTIONS ===

@@ -52,6 +52,8 @@
 .inputouterdiv {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 /*PS Added*/
 .inputinnerdiv1,
@@ -61,7 +63,7 @@
   justify-content: center;
   text-align: center;
   min-width: 350px;
-  width: 100%;
+  width: 95%;
 }
 /*PS Added*/
 .inputinnerdiv2 {

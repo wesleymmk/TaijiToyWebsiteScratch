@@ -7,6 +7,8 @@ import * as ComUtils from './Common_Function.js';
 
 export function renderUserAccount() {
     ComUtils.clearAppContainer();
+    /***************Auto Scroll Option***************/
+    window.addEventListener('DOMContentLoaded', ComUtils.topFunction());
     /***************Animation Function on Scroll***************/
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
@@ -15,7 +17,7 @@ export function renderUserAccount() {
                 return;
             }
         });
-    }, { threshold: 0.8 });
+    }, { threshold: 0.5 });
     const check = document.querySelectorAll('.show');
     addEventListener('DOMContentLoaded', () => {
         if (check == '.show') {
@@ -160,7 +162,7 @@ scrollableContent.innerHTML = '<p>Loading your order history...</p>';
     // 3. Create a button to trigger the scroll action
     const scrollButton = document.createElement('button');
     scrollButton.textContent = 'Scroll to Bottom';
-    scrollButton.classList.add('button2', 'pagetextlargeb');
+    scrollButton.classList.add('button3', 'pagetextlargeb');
 
     // 4. Define the function to scroll the element
     function scrollToBottom() {
@@ -178,7 +180,7 @@ scrollableContent.innerHTML = '<p>Loading your order history...</p>';
 
     const logoutButton=document.createElement('button');
     logoutButton.textContent='Logout';
-    logoutButton.classList.add('button2', 'pagetextlargeb');
+    logoutButton.classList.add('button3', 'pagetextlargeb');
 
     // **************************************************
     // START: LOGOUT LISTENER ADDED

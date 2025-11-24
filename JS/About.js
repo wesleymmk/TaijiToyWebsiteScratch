@@ -17,6 +17,9 @@ export function About() {
 
     ComUtils.clearAppContainer(); // Clear the screen first
 
+    /***************Auto Scroll Option***************/
+    window.addEventListener('DOMContentLoaded', ComUtils.topFunction());
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
             if (entry.isIntersecting) {
@@ -24,7 +27,7 @@ export function About() {
                 return;
             }
         });
-    }, { threshold: 0.8 });
+    }, { threshold: 0.5 });
     const check = document.querySelectorAll('.show');
     addEventListener('DOMContentLoaded', () => {
         if (check == '.show') {
