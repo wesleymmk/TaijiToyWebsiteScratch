@@ -82,7 +82,7 @@ export function About() {
     AboutText4.textContent='TaijiToy explores the ideas of duality and the \ncontrasting forces that exist within every person, \nplace, and thing in the world. Steve’s ever-expanding \nTaiji-Verse seeks to explore life’s mysteries while \ncaptivating and growing alongside Taiji-Fans \nworldwide.'
 
     const toyimg=document.createElement('img');
-    toyimg.classList.add('toyimg');
+    toyimg.classList.add('toyimg', 'animation');
     toyimg.src='Marketing_Images/TT+product+Image+001.jpg';
 
     /***************Navigation Bar***************/
