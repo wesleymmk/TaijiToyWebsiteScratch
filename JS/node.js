@@ -28,9 +28,7 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 
 console.log("Backend is starting...");
-console.log("Working directory:", process.cwd());
-console.log("GEMINI_API_KEY loaded:", !!process.env.GEMINI_API_KEY);
-console.log("API Key first 10 chars:", process.env.GEMINI_API_KEY?.substring(0, 10));
+
 
 // Test route
 app.get('/', (req, res) => {
