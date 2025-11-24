@@ -4,7 +4,8 @@
 // generates traits using Gemini API, then sends the traits to PHP to store in MySQL.
 
 //Dependencies
-require('dotenv').config(); 
+const path = require('path');
+require('dotenv').config({ path: path.join(__dirname, '.env') }); 
 
 
 const express = require('express'); 
@@ -27,6 +28,9 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 
 console.log("Backend is starting...");
+console.log("Working directory:", process.cwd());
+console.log("GEMINI_API_KEY loaded:", !!process.env.GEMINI_API_KEY);
+console.log("API Key first 10 chars:", process.env.GEMINI_API_KEY?.substring(0, 10));
 
 // Test route
 app.get('/', (req, res) => {
@@ -233,10 +237,14 @@ app.post('/generate', async (req, res) => {
       // The helper uses the Gemini image model (`gemini-2.5-flash-image`) to
       // generate base64-encoded images for each trait prompt.
 
+      // Track used animals to prevent duplicates
+      const usedAnimals = [];
+      
       // Loop through all 6 traits 
       for (let i = 0; i < Math.min(6, traitsArray.length); i++) {
         const trait = traitsArray[i];
-        const imagePrompt = `Minimalist simple illustration of an animal representing ${trait.attribute_1}. Use ${trait.color_1} as primary color with ${trait.color_2} accents. Chinese art style, clean lines, plain background. IMPORTANT: Use a different animal species for each image - vary between mammals, birds, reptiles, fish, insects, etc. No text.`;
+        const excludeList = usedAnimals.length > 0 ? ` DO NOT use these animals already used: ${usedAnimals.join(', ')}.` : '';
+        const imagePrompt = `Minimalist simple illustration of an animal representing ${trait.attribute_1}. Use ${trait.color_1} as primary color with ${trait.color_2} accents. Chinese art style, clean lines, plain background. IMPORTANT: Use a different animal species for each image - vary between mammals, birds, reptiles, fish, insects, etc.${excludeList} No text.`;
 
         try {
           console.log(`→ Generating image ${i + 1}/6 for "${trait.attribute_1}"...`);
@@ -252,6 +260,12 @@ app.post('/generate', async (req, res) => {
             const imagePath = `JS/Generated_Images/Order_${orderID}/${fileName}`;
             generatedImages.push({ prompt: imagePrompt, base64: base64Image, image_path: imagePath });
             console.log(` Image ${i + 1} saved: ${imagePath}`);
+
+            // Extract animal type from prompt for tracking (simple heuristic)
+            const animalMatch = imagePrompt.match(/illustration of an? ([\w\s]+) representing/);
+            if (animalMatch && animalMatch[1]) {
+              usedAnimals.push(animalMatch[1].trim());
+            }
 
             // Attach image_path to the corresponding trait
             traitsArray[i].image_path = imagePath;
@@ -326,9 +340,11 @@ app.post('/regenerate-images', async (req, res) => {
     // Use the shared helper to produce base64 images for each prompt.
 
     // Loop through all traits to regenerate images
+    const usedAnimals = [];
     for (let i = 0; i < Math.min(6, traits.length); i++) {
       const trait = traits[i];
-      const imagePrompt = `Minimalist simple illustration of an animal representing ${trait.attribute_1}. Use ${trait.color_1} as primary color with ${trait.color_2} accents. Chinese art style, clean lines, plain background. IMPORTANT: Use a different animal species for each image - vary between mammals, birds, reptiles, fish, insects, etc. No text.`;
+      const excludeList = usedAnimals.length > 0 ? ` DO NOT use these animals already used: ${usedAnimals.join(', ')}.` : '';
+      const imagePrompt = `Minimalist simple illustration of an animal representing ${trait.attribute_1}. Use ${trait.color_1} as primary color with ${trait.color_2} accents. Chinese art style, clean lines, plain background. IMPORTANT: Use a different animal species for each image - vary between mammals, birds, reptiles, fish, insects, etc.${excludeList} No text.`;
 
       try {
         console.log(`→ Regenerating image ${i + 1}/6 for "${trait.attribute_1}"...`);
@@ -343,6 +359,9 @@ app.post('/regenerate-images', async (req, res) => {
           const imagePath = `JS/Generated_Images/Order_${orderID}/${fileName}`;
           generatedImages.push(imagePath);
           console.log(` Image ${i + 1} saved: ${imagePath}`);
+          
+          // Track this animal to prevent duplicates
+          usedAnimals.push(trait.attribute_1);
         } else {
           console.error(` No image returned for trait ${i + 1}`);
         }
