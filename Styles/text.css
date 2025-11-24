@@ -248,3 +248,39 @@
   color: #000;
   margin: 0;
 }
+
+.Section{
+  flex-direction: row;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap:15rem;
+}
+
+.bodyabout{
+  background-color: white;
+  width:455px;
+  margin-top: 150px;
+  flex-direction: column;
+  display: flex;
+}
+
+.abouttext{
+  font-family: 'Chinese Rocks Rg', sana-serif;
+  font-size: 48px;
+  flex-direction: column;
+
+}
+
+.abouttext2{
+  font-family: 'Chinese Rocks Rg', sana-serif;
+  font-size: 22px;
+  white-space: pre-wrap;
+  flex-direction: column;
+  display: flex;
+}
+
+.toyimg{
+  width:400px;
+  height:400px;
+}

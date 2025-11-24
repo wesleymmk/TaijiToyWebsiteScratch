@@ -59,22 +59,46 @@ export function About() {
     ComUtils.navmenu.appendChild(ComUtils.ContactOption); // Grab button from Common_Function.js
     /***************Parent Div Containers***************/
     // PS added Body This div will hold the title & other div elements
-    const Body = document.createElement('div');
-    Body.classList.add('body');
+    const Body = document.createElement('section');
+    Body.classList.add('Section');
     /***************Inner Structure Div Containers***************/
-    
+    const bodytext=document.createElement('div');
+    bodytext.classList.add('bodyabout');
 
+    const AboutText=document.createElement('p');
+    AboutText.classList.add('abouttext','animation');
+    AboutText.textContent='The Mind Behind Taijitoy';
 
+    const AboutText2=document.createElement('p');
+    AboutText2.classList.add('abouttext2','animation');
+    AboutText2.textContent='Steve Brown \nInventor, Visionary, and Owner of TaijiToy';
 
+    const AboutText3=document.createElement('p');
+    AboutText3.classList.add('abouttext2','animation')
+    AboutText3.textContent='Steve Brown is the creator of TaijiToy, the first \nthree-dimensional representation of the centuries-\nold Yin and Yang symbol. Over three decades ago, \nSteve sketched his first vision for TaijiToy in the \nmargins of this college notebook. Breaking the two\n-dimensional form, he revealed whale, penguin, fish, \nand teardrop characters hiding in the contrasting \nhemispheres. Today, his idea has come to life in a \ncollection of trading toys that can be mixed, \nmatched, and joined together with 14 colors, \nyielding over 91 unique combinations.'
+
+    const AboutText4=document.createElement('p');
+    AboutText4.classList.add('abouttext2','animation')
+    AboutText4.textContent='TaijiToy explores the ideas of duality and the \ncontrasting forces that exist within every person, \nplace, and thing in the world. Steve’s ever-expanding \nTaiji-Verse seeks to explore life’s mysteries while \ncaptivating and growing alongside Taiji-Fans \nworldwide.'
+
+    const toyimg=document.createElement('img');
+    toyimg.classList.add('toyimg');
+    toyimg.src='Marketing_Images/TT+product+Image+001.jpg';
 
     /***************Navigation Bar***************/
     appContainer.appendChild(navwrapper);
     /***************Parent Div containers***************/
     appContainer.appendChild(ComUtils.ExitMenu);
     appContainer.appendChild(Body);
+    Body.appendChild(toyimg);
+    Body.appendChild(bodytext);
+    bodytext.appendChild(AboutText);
+    bodytext.appendChild(AboutText2);
+    bodytext.appendChild(AboutText3);
+    bodytext.appendChild(AboutText4);
     appContainer.appendChild(ComUtils.FooterBody);
     /***************Inner structured Div Containers***************/
-    
+
     ComUtils.FooterBody.appendChild(ComUtils.Footerdiv);
     /***************Inner Div containers to hold content***************/
 
