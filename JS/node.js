@@ -58,6 +58,11 @@ Each object in the array should have the following structure:
 `;
 
   try {
+    console.log("=== DEBUG: Calling Gemini API ===");
+    console.log("Core Values Input:", coreValues);
+    console.log("Prompt (first 200 chars):", prompt.substring(0, 200));
+    console.log("API Key exists:", !!process.env.GEMINI_API_KEY);
+    
     // Call the Gemini API using axios — here we're using the "text generation" model (gemini-2.0-flash)
     // It returns a conversational, structured JSON output describing six pairs of traits.
     const response = await axios.post(
@@ -68,13 +73,17 @@ Each object in the array should have the following structure:
       { headers: { 'Content-Type': 'application/json' } }
     );
 
-    // Extract the raw text content from Gemini’s response
+    console.log("=== DEBUG: Gemini API Success ===");
+    // Extract the raw text content from Gemini's response
     const geminiResponseText = response.data.candidates[0].content.parts[0].text;
     return geminiResponseText;
 
   } catch (error) {
     // Log and throw if Gemini fails
-    console.error("Gemini API error:", error.message);
+    console.error("=== DEBUG: Gemini API Error ===");
+    console.error("Error message:", error.message);
+    console.error("Error status:", error.response?.status);
+    console.error("Error data:", JSON.stringify(error.response?.data, null, 2));
     throw new Error("Failed to call Gemini API");
   }
 }
