@@ -887,7 +887,7 @@ export function resetnumbers(email){
         codeinput.required = true;
 
         const popupHeading = document.createElement('p');
-        popupHeading.textContent = 'Code should be valid for x amount of time.';
+        popupHeading.textContent = 'Code should be valid for 15 minutes.';
         popupHeading.classList.add('pagetextlargew');
 
         const closeButton = document.createElement('span');
