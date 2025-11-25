@@ -177,10 +177,11 @@ Return only the JSON array:`;
     console.log(`  → Using fallback animals:`, selectedAnimals);
   }
   
-  // Step 2: Generate images using the selected animals
+  // Step 2: Generate images using the selected animals (in parallel for speed)
   const generatedImages = [];
-  for (let i = 0; i < Math.min(6, traits.length); i++) {
-    const trait = traits[i];
+  
+  // Create all 6 image generation promises
+  const imagePromises = traits.slice(0, 6).map(async (trait, i) => {
     const animalName = selectedAnimals[i] || "animal";
     
     const imagePrompt = `Generate a minimalist illustration of a ${animalName} in Chinese art style with clean lines and plain background. The ${animalName} represents "${trait.attribute_1}". Use ${trait.color_1} as primary color with ${trait.color_2} accents. No text in the image.`;
@@ -197,20 +198,32 @@ Return only the JSON array:`;
         fs.writeFileSync(filePath, Buffer.from(base64Image, "base64"));
 
         const imagePath = `JS/Generated_Images/Order_${orderID}/${fileName}`;
-        generatedImages.push({ 
+        console.log(`    ✓ Image ${i + 1} saved: ${imagePath}`);
+        
+        return { 
           prompt: imagePrompt, 
           base64: base64Image, 
           image_path: imagePath,
-          animal: animalName  // Store internally but don't expose to customer
-        });
-        console.log(`    ✓ Image ${i + 1} saved: ${imagePath}`);
+          animal: animalName,
+          index: i
+        };
       } else {
         console.error(`     No image returned for trait ${i + 1}`);
+        return null;
       }
     } catch (err) {
       console.error(`     Failed to generate image ${i + 1}:`, err.message);
+      return null;
     }
-  }
+  });
+  
+  // Wait for all 6 images to complete (in parallel)
+  const results = await Promise.all(imagePromises);
+  
+  // Filter out null results and sort by index to maintain order
+  results.forEach(result => {
+    if (result) generatedImages.push(result);
+  });
   
   console.log(` Generated ${generatedImages.length}/6 images successfully`);
   return generatedImages;
