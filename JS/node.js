@@ -132,24 +132,62 @@ async function generateAllImages(traits, orderID) {
   const fs = require("fs");
   const path = require("path");
   const { orderDir } = createImageDirectories(orderID);
-  const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-image" });
+  const textModel = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+  const imageModel = genAI.getGenerativeModel({ model: "gemini-2.5-flash-image" });
   
-  console.log(`→ Generating 6 images individually to guarantee all 6...`);
+  console.log(`→ Generating 6 unique animals and their images...`);
+  
+  // Step 1: Ask Gemini text model to choose 6 unique animals
+  const animalSelectionPrompt = `Choose exactly 6 DIFFERENT animal species that represent these 6 concepts:
+1. ${traits[0].attribute_1}
+2. ${traits[1].attribute_1}
+3. ${traits[2].attribute_1}
+4. ${traits[3].attribute_1}
+5. ${traits[4].attribute_1}
+6. ${traits[5].attribute_1}
+
+CRITICAL REQUIREMENTS:
+- Each animal must be a completely DIFFERENT species
+- Vary between mammals, birds, reptiles, fish, insects, and other categories
+- Choose animals that symbolically represent each concept
+- Return ONLY a JSON array with 6 animal names, nothing else
+
+Example format: ["lion", "crane", "dolphin", "butterfly", "snake", "elephant"]
+
+Return only the JSON array:`;
+
+  let selectedAnimals = [];
+  try {
+    console.log(`  → Asking Gemini to select 6 unique animals...`);
+    const animalResponse = await textModel.generateContent([animalSelectionPrompt]);
+    const animalText = animalResponse.response.candidates[0].content.parts[0].text;
+    
+    // Parse the animal list
+    const match = animalText.match(/\[[\s\S]*?\]/);
+    if (match) {
+      selectedAnimals = JSON.parse(match[0]);
+      console.log(`  ✓ Selected animals:`, selectedAnimals);
+    } else {
+      throw new Error("Failed to parse animal list");
+    }
+  } catch (err) {
+    console.error(`  ✗ Failed to select animals:`, err.message);
+    // Fallback to default animals if selection fails
+    selectedAnimals = ["lion", "crane", "koi fish", "butterfly", "tiger", "phoenix"];
+    console.log(`  → Using fallback animals:`, selectedAnimals);
+  }
+  
+  // Step 2: Generate images using the selected animals
   const generatedImages = [];
-  const usedAnimals = [];
-  
-  // Generate each image separately to ensure we get all 6
   for (let i = 0; i < Math.min(6, traits.length); i++) {
     const trait = traits[i];
-    const excludeList = usedAnimals.length > 0 
-      ? ` DO NOT use these animals already used: ${usedAnimals.join(', ')}.` 
-      : '';
+    const animalName = selectedAnimals[i] || "animal";
     
-    const imagePrompt = `Generate a minimalist animal illustration in Chinese art style with clean lines and plain background. The animal should represent "${trait.attribute_1}". Use ${trait.color_1} as primary color with ${trait.color_2} accents. Choose a unique animal species (mammal, bird, reptile, fish, or insect).${excludeList} No text in the image. Generate exactly 1 image.`;
+    const imagePrompt = `Generate a minimalist illustration of a ${animalName} in Chinese art style with clean lines and plain background. The ${animalName} represents "${trait.attribute_1}". Use ${trait.color_1} as primary color with ${trait.color_2} accents. No text in the image.`;
     
     try {
-      console.log(`  → Generating image ${i + 1}/6 for "${trait.attribute_1}"...`);
-      const result = await model.generateContent([imagePrompt]);
+      console.log(`  → Generating image ${i + 1}/6: ${animalName} for "${trait.attribute_1}"...`);
+      const result = await imageModel.generateContent([imagePrompt]);
       const parts = result.response?.candidates?.[0]?.content?.parts;
       const base64Image = parts?.find(p => p.inlineData)?.inlineData?.data;
       
@@ -159,11 +197,13 @@ async function generateAllImages(traits, orderID) {
         fs.writeFileSync(filePath, Buffer.from(base64Image, "base64"));
 
         const imagePath = `JS/Generated_Images/Order_${orderID}/${fileName}`;
-        generatedImages.push({ prompt: imagePrompt, base64: base64Image, image_path: imagePath });
+        generatedImages.push({ 
+          prompt: imagePrompt, 
+          base64: base64Image, 
+          image_path: imagePath,
+          animal: animalName  // Store internally but don't expose to customer
+        });
         console.log(`    ✓ Image ${i + 1} saved: ${imagePath}`);
-        
-        // Track animal to avoid duplicates
-        usedAnimals.push(trait.attribute_1);
       } else {
         console.error(`     No image returned for trait ${i + 1}`);
       }
