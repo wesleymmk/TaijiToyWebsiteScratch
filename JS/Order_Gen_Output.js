@@ -77,6 +77,7 @@ export function renderGenerationOutputView(order_ID_param) {
     //Added in the title and other developments.
     const Body = document.createElement('div');
     Body.classList.add('body');
+    Body.id = 'noprint';
     const Body2 = document.createElement('div');
     Body2.classList.add('body3', 'bodyspecific2');
 
@@ -284,6 +285,7 @@ export function renderGenerationOutputView(order_ID_param) {
 
     const generatedcontent_space_1 = document.createElement('div');
     generatedcontent_space_1.classList.add('body3', 'bodyspecific');
+    generatedcontent_space_1.id = 'print'
 
     // --- API CALL AND DATA HANDLING ---
     ComUtils.apiCall('api/display_traits.php', dataForPHP)
@@ -385,40 +387,40 @@ export function renderGenerationOutputView(order_ID_param) {
 
                 const TraitText1 = document.createElement("p");
                 TraitText1.textContent = Trait1;
-                TraitText1.classList.add('pagetextmediumb1');
+                TraitText1.classList.add('pagetextmediumb1n');
                 const TraitText2 = document.createElement("p");
                 TraitText2.textContent = Trait2;
-                TraitText2.classList.add('pagetextmediumb1');
+                TraitText2.classList.add('pagetextmediumb1n');
                 const TraitText3 = document.createElement("p");
                 TraitText3.textContent = Trait3;
-                TraitText3.classList.add('pagetextmediumb1');
+                TraitText3.classList.add('pagetextmediumb1n');
                 const TraitText4 = document.createElement("p");
                 TraitText4.textContent = Trait4;
-                TraitText4.classList.add('pagetextmediumb1');
+                TraitText4.classList.add('pagetextmediumb1n');
                 const TraitText5 = document.createElement("p");
                 TraitText5.textContent = Trait5;
-                TraitText5.classList.add('pagetextmediumb1');
+                TraitText5.classList.add('pagetextmediumb1n');
                 const TraitText6 = document.createElement("p");
                 TraitText6.textContent = Trait6;
-                TraitText6.classList.add('pagetextmediumb1');
+                TraitText6.classList.add('pagetextmediumb1n');
                 const TraitText7 = document.createElement("p");
                 TraitText7.textContent = Trait7;
-                TraitText7.classList.add('pagetextmediumb1');
+                TraitText7.classList.add('pagetextmediumb1n');
                 const TraitText8 = document.createElement("p");
                 TraitText8.textContent = Trait8;
-                TraitText8.classList.add('pagetextmediumb1');
+                TraitText8.classList.add('pagetextmediumb1n');
                 const TraitText9 = document.createElement("p");
                 TraitText9.textContent = Trait9;
-                TraitText9.classList.add('pagetextmediumb1');
+                TraitText9.classList.add('pagetextmediumb1n');
                 const TraitText10 = document.createElement("p");
                 TraitText10.textContent = Trait10;
-                TraitText10.classList.add('pagetextmediumb1');
+                TraitText10.classList.add('pagetextmediumb1n');
                 const TraitText11 = document.createElement("p");
                 TraitText11.textContent = Trait11;
-                TraitText11.classList.add('pagetextmediumb1');
+                TraitText11.classList.add('pagetextmediumb1n');
                 const TraitText12 = document.createElement("p");
                 TraitText12.textContent = Trait12;
-                TraitText12.classList.add('pagetextmediumb1');
+                TraitText12.classList.add('pagetextmediumb1n');
 
                 const ColorText1 = document.createElement("p");
                 ColorText1.textContent = Color1;
@@ -491,51 +493,51 @@ export function renderGenerationOutputView(order_ID_param) {
 
                 const ShortText1 = document.createElement("p");
                 ShortText1.textContent = output_desc_short_toy1;
-                ShortText1.classList.add('pagetextsmallb1');
+                ShortText1.classList.add('pagetextsmallb1n');
 
                 const LongText1 = document.createElement("p");
                 LongText1.textContent = output_desc_long_toy1;
-                LongText1.classList.add('pagetextsmallb1');
+                LongText1.classList.add('pagetextsmallb1n');
 
                 const ShortText2 = document.createElement("p");
                 ShortText2.textContent = output_desc_short_toy2;
-                ShortText2.classList.add('pagetextsmallb1');
+                ShortText2.classList.add('pagetextsmallb1n');
 
                 const LongText2 = document.createElement("p");
                 LongText2.textContent = output_desc_long_toy2;
-                LongText2.classList.add('pagetextsmallb1');
+                LongText2.classList.add('pagetextsmallb1n');
 
                 const ShortText3 = document.createElement("p");
                 ShortText3.textContent = output_desc_short_toy3;
-                ShortText3.classList.add('pagetextsmallb1');
+                ShortText3.classList.add('pagetextsmallb1n');
 
                 const LongText3 = document.createElement("p");
                 LongText3.textContent = output_desc_long_toy3;
-                LongText3.classList.add('pagetextsmallb1');
+                LongText3.classList.add('pagetextsmallb1n');
 
                 const ShortText4 = document.createElement("p");
                 ShortText4.textContent = output_desc_short_toy4;
-                ShortText4.classList.add('pagetextsmallb1');
+                ShortText4.classList.add('pagetextsmallb1n');
 
                 const LongText4 = document.createElement("p");
                 LongText4.textContent = output_desc_long_toy4;
-                LongText4.classList.add('pagetextsmallb1');
+                LongText4.classList.add('pagetextsmallb1n');
 
                 const ShortText5 = document.createElement("p");
                 ShortText5.textContent = output_desc_short_toy5;
-                ShortText5.classList.add('pagetextsmallb1');
+                ShortText5.classList.add('pagetextsmallb1n');
 
                 const LongText5 = document.createElement("p");
                 LongText5.textContent = output_desc_long_toy5;
-                LongText5.classList.add('pagetextsmallb1');
+                LongText5.classList.add('pagetextsmallb1n');
 
                 const ShortText6 = document.createElement("p");
                 ShortText6.textContent = output_desc_short_toy6;
-                ShortText6.classList.add('pagetextsmallb1');
+                ShortText6.classList.add('pagetextsmallb1n');
 
                 const LongText6 = document.createElement("p");
                 LongText6.textContent = output_desc_long_toy6;
-                LongText6.classList.add('pagetextsmallb1');
+                LongText6.classList.add('pagetextsmallb1n');
 
 
                 generatedcontent_space_1.appendChild(OuterTraitDiv);
@@ -727,6 +729,7 @@ export function renderGenerationOutputView(order_ID_param) {
     // This part can stay outside because it doesn't depend on the server response.
     let buttonContainer = document.createElement('div');
     buttonContainer.classList.add('button-container');
+    buttonContainer.id = 'noprint';
 
     let RegenAll = document.createElement("button");
     RegenAll.textContent = 'Regenerate All';

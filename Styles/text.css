@@ -147,7 +147,8 @@
   color: black;
 }
 /*PS Added*/
-.pagetextmediumb {
+.pagetextmediumb,
+.pagetextmediumbn {
   font-family: 'Chinese Rocks Rg', sana-serif;
   /*font-size: 37px;
   font-size: 1.927vw;*/
@@ -158,7 +159,12 @@
   color: black;
 }
 /*PS Added*/
-.pagetextmediumb1 {
+.pagetextmediumbn {
+  font-family: sans-serif;
+}
+/*PS Added*/
+.pagetextmediumb1,
+.pagetextmediumb1n {
   font-family: 'Chinese Rocks Rg', sana-serif;
   /*font-size: 37px;
   font-size: 1.927vw;*/
@@ -169,7 +175,14 @@
   color: black;
 }
 /*PS Added*/
-.pagetextsmallb1 {
+.pagetextmediumb1n {
+  padding: 5px;
+  font-size: calc(10px + 1vw);
+  font-family: Work Sans;
+}
+/*PS Added*/
+.pagetextsmallb1,
+.pagetextsmallb1n {
   font-family: 'Chinese Rocks Rg', sana-serif;
   /*font-size: 22px;
   font-size: 1.146vw;*/
@@ -178,6 +191,12 @@
   cursor: default;
   margin: 0;
   color: black;
+}
+/*PS Added*/
+.pagetextsmallb1n {
+  padding: 5px;
+  font-size: calc(10px + .5vw);
+  font-family: Work Sans;
 }
 /*PS Added*/
 .pagetextsmallb {

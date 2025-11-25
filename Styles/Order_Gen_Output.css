@@ -1,7 +1,7 @@
 /*PS Added*/
 .bodyspecific {
     flex-wrap: wrap;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: flex-start;
     width: 100%;
     margin-top: 50px;
@@ -221,4 +221,22 @@
     margin-bottom: 50px;
     margin-bottom: 3.906vw;
     width: 100%;
+}
+@media print {
+  #order-output {
+    display: none;
+  }
+  #noprint {
+    display: none;
+  }
+  #print {
+    position: absolute;
+    margin: 0;
+    margin-top: 15px;
+    width: fit-content;
+    height: 100vh;
+    gap: 0;
+    left: 0;
+    top: 0;
+  }
 }

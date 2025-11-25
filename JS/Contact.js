@@ -7,11 +7,6 @@ import * as AuthUtils from './Authentication_Page.js';
 import * as GenUtils from './Order_Generation.js';
 import * as AccUtils from './User_Account.js';
 import * as Gen2Utils from './Order_Gen_Output.js';
-//This is the HTML Page Clear function. 
-export function clearAppContainer()  // WM code // from online modified it so that it can be exported and used accross the server
-{
-    appContainer.innerHTML = '';
-}
 
 export function Contact() {
     ComUtils.clearAppContainer(); // Clear the screen first
