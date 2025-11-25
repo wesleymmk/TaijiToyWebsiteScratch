@@ -656,7 +656,8 @@ export function renderGenerationOutputView(order_ID_param) {
                                 // Add cache-busting timestamp to force reload of regenerated images
                                 img.src = imagePath + '?t=' + Date.now();
                                 img.alt = 'Generated trait image';
-                                console.log("Creating img element with src:", imagePath);
+                                img.classList.add('generated-image'); // Add class for easy targeting
+                                console.log("Creating img element with src:", img.src);
                                 return img;
                             }
                             return null;
@@ -675,7 +676,11 @@ export function renderGenerationOutputView(order_ID_param) {
                         imagesToDisplay.forEach(item => {
                             const imgElement = createImageElement(item.path);
                             if (imgElement) {
-                                // Don't clear - just append the image alongside the Yin/Yang
+                                // Remove any existing images first to prevent duplicates
+                                const existingImages = item.div.querySelectorAll('.generated-image');
+                                existingImages.forEach(img => img.remove());
+                                
+                                // Append the new image
                                 item.div.appendChild(imgElement);
                             }
                         });
