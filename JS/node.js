@@ -132,52 +132,48 @@ async function generateAllImages(traits, orderID) {
   const fs = require("fs");
   const path = require("path");
   const { orderDir } = createImageDirectories(orderID);
+  const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-image" });
   
-  // Build comprehensive prompt for all 6 images
-  const allTraitsPrompt = `Generate 6 different minimalist animal illustrations in Chinese art style with clean lines and plain backgrounds. Each animal must be a DIFFERENT species. Vary between mammals, birds, reptiles, fish, insects, etc. No text in any image.
-
-The 6 animals should represent these concepts with these colors:
-1. ${traits[0].attribute_1} - Primary color: ${traits[0].color_1}, Accent: ${traits[0].color_2}
-2. ${traits[1].attribute_1} - Primary color: ${traits[1].color_1}, Accent: ${traits[1].color_2}
-3. ${traits[2].attribute_1} - Primary color: ${traits[2].color_1}, Accent: ${traits[2].color_2}
-4. ${traits[3].attribute_1} - Primary color: ${traits[3].color_1}, Accent: ${traits[3].color_2}
-5. ${traits[4].attribute_1} - Primary color: ${traits[4].color_1}, Accent: ${traits[4].color_2}
-6. ${traits[5].attribute_1} - Primary color: ${traits[5].color_1}, Accent: ${traits[5].color_2}
-
-CRITICAL: Each of the 6 images MUST feature a completely different animal species. Generate all 6 images.`;
-
-  try {
-    console.log(`→ Generating all 6 images in a single request...`);
-    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-image" });
-    const result = await model.generateContent([allTraitsPrompt]);
-    const parts = result.response?.candidates?.[0]?.content?.parts;
+  console.log(`→ Generating 6 images individually to guarantee all 6...`);
+  const generatedImages = [];
+  const usedAnimals = [];
+  
+  // Generate each image separately to ensure we get all 6
+  for (let i = 0; i < Math.min(6, traits.length); i++) {
+    const trait = traits[i];
+    const excludeList = usedAnimals.length > 0 
+      ? ` DO NOT use these animals already used: ${usedAnimals.join(', ')}.` 
+      : '';
     
-    if (!parts) {
-      console.error(' No images returned from Gemini');
-      return [];
+    const imagePrompt = `Generate a minimalist animal illustration in Chinese art style with clean lines and plain background. The animal should represent "${trait.attribute_1}". Use ${trait.color_1} as primary color with ${trait.color_2} accents. Choose a unique animal species (mammal, bird, reptile, fish, or insect).${excludeList} No text in the image. Generate exactly 1 image.`;
+    
+    try {
+      console.log(`  → Generating image ${i + 1}/6 for "${trait.attribute_1}"...`);
+      const result = await model.generateContent([imagePrompt]);
+      const parts = result.response?.candidates?.[0]?.content?.parts;
+      const base64Image = parts?.find(p => p.inlineData)?.inlineData?.data;
+      
+      if (base64Image) {
+        const fileName = `Trait_${i + 1}.jpg`;
+        const filePath = path.join(orderDir, fileName);
+        fs.writeFileSync(filePath, Buffer.from(base64Image, "base64"));
+
+        const imagePath = `JS/Generated_Images/Order_${orderID}/${fileName}`;
+        generatedImages.push({ prompt: imagePrompt, base64: base64Image, image_path: imagePath });
+        console.log(`    ✓ Image ${i + 1} saved: ${imagePath}`);
+        
+        // Track animal to avoid duplicates
+        usedAnimals.push(trait.attribute_1);
+      } else {
+        console.error(`     No image returned for trait ${i + 1}`);
+      }
+    } catch (err) {
+      console.error(`     Failed to generate image ${i + 1}:`, err.message);
     }
-    
-    // Extract and save all images
-    const images = parts.filter(p => p.inlineData).map(p => p.inlineData.data);
-    console.log(`✓ Received ${images.length} images from Gemini`);
-    
-    const generatedImages = [];
-    for (let i = 0; i < Math.min(6, images.length, traits.length); i++) {
-      const base64Image = images[i];
-      const fileName = `Trait_${i + 1}.jpg`;
-      const filePath = path.join(orderDir, fileName);
-      fs.writeFileSync(filePath, Buffer.from(base64Image, "base64"));
-
-      const imagePath = `JS/Generated_Images/Order_${orderID}/${fileName}`;
-      generatedImages.push({ prompt: allTraitsPrompt, base64: base64Image, image_path: imagePath });
-      console.log(`  Image ${i + 1} saved: ${imagePath}`);
-    }
-    
-    return generatedImages;
-  } catch (err) {
-    console.error(' Failed to generate images:', err.message);
-    return [];
   }
+  
+  console.log(` Generated ${generatedImages.length}/6 images successfully`);
+  return generatedImages;
 }
 // ---------- END: generateAllImages ----------
 // ==================== END: SHARED UTILITY FUNCTIONS ====================
