@@ -264,12 +264,80 @@ as soon as possible.";
     MessageTextArea.placeholder = 'Please Type Your Message';
     MessageTextArea.classList.add('messagetextarea', 'animation');
     MessageTextArea.required = true;
+
+    SubmitButton.addEventListener('click', () => {
+        // Gather the data from the input fields
+        const firstName = NameTextArea.value.trim();
+        const lastName = NameTextArea2.value.trim();
+        const email = EmailTextArea.value.trim();
+        const inquiryType = InquiryButton.textContent; // Gets the selected option
+        const message = MessageTextArea.value.trim(); // Now MessageTextArea is defined!
+
+        // Simple Validation
+        if (!firstName || !lastName || !email || !message) {
+            alert("Please fill in all required fields.");
+            return;
+        }
+
+        if (inquiryType === 'Select An Option') {
+            alert("Please select an inquiry type.");
+            return;
+        }
+
+        // Package the data into a Javascript Object
+        const contactData = {
+            first_name: firstName,
+            last_name: lastName,
+            email: email,
+            inquiry_type: inquiryType,
+            message: message
+        };
+
+        // Send data to PHP script
+        SubmitButton.disabled = true; // Prevent double submission
+        SubmitButton.textContent = "Sending...";
+
+        ComUtils.apiCall('api/contact_page.php', contactData)
+            .then(response => {
+                // Handle raw response if apiCall doesn't do .json() automatically
+                return response.json ? response.json() : response;
+            })
+            .then(data => {
+                if (data.success) {
+                    alert("Thank you! Your message has been sent.");
+
+                    // Clear the form
+                    NameTextArea.value = '';
+                    NameTextArea2.value = '';
+                    EmailTextArea.value = '';
+                    MessageTextArea.value = '';
+                    // Reset Dropdown
+                    InquiryButton.textContent = 'Select An Option';
+                    InquiryButton.classList.add('droptext');
+                    InquiryButton.classList.remove('pagetextmediumb');
+
+                } else {
+                    alert("Error sending message: " + data.message);
+                }
+            })
+            .catch(error => {
+                console.error("Error submitting contact form:", error);
+                alert("An unexpected error occurred. Please try again later.");
+            })
+            .finally(() => {
+                SubmitButton.disabled = false;
+                SubmitButton.textContent = 'Submit';
+            });
+    });
+
     MessageTextArea.addEventListener('keydown', function (event) {
         if (event.key === 'Enter' && !event.shiftKey) {
             event.preventDefault(); // Prevent the default behavior (new line in textarea)
             SubmitButton.click(); // Submit the form
         }
     });
+
+
     /***************Navigation Bar***************/
     appContainer.appendChild(navwrapper);
     /***************Parent Div containers***************/

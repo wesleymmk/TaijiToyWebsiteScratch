@@ -83,7 +83,7 @@ try {
     $mail->Port       = 465;
 
     // -- Email Content --
-    $mail->setFrom('noreply@taijitoy.com', 'noreply@taijitoy.com');
+    $mail->setFrom('noreply@taijitoy.com', 'noreplyTaijiToy');
     $mail->addAddress($email);
     
     $mail->isHTML(true);
