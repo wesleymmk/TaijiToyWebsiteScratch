@@ -148,6 +148,8 @@
 }
 /*EQ Added*/
 .modal-content{
+  display: flex;
+  flex-direction: column;
   background-color: black;
   border-style: solid;
   border-color: white;

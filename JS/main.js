@@ -9,6 +9,7 @@ import * as OutputOrder from './Order_Gen_Output.js';
 import * as ComUtils from './Common_Function.js';
 import * as Contact from './Contact.js';
 import * as About from './About.js';
+import * as Admin from './Admin_Page.js';
 
 const contentContainer = document.getElementById('content');
 
@@ -17,6 +18,20 @@ function loadPage() {
 
     let content = '';
     switch (hash) {
+        case 'admin':
+            ComUtils.apiCall('api/login_check.php')
+
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success && data.isLoggedIn) {
+                        content = Admin.renderAdminView();
+                    } else {
+                        // Login failed
+                        window.location.href = '#welcome-page';
+                        alert('Please Login');
+                    }
+                })
+            break;
         case 'about':
 
             content = About.About();

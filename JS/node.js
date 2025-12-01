@@ -24,20 +24,16 @@ app.use(cors({ origin: true, credentials: true }));
 //  Initialize the Google AI client with your API key
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
-
-
-
-console.log("Backend is starting...");
-
-
 // Test route
 app.get('/', (req, res) => {
   res.send('Backend is running.'); // quick check route
 });
 
-/**
- * Gemini Trait Generation 
- */
+// ==================== FUNCTION: generateTraits ====================
+// Purpose: Calls Gemini text API to generate 6 trait pairs from core values
+// Input: coreValues (string)
+// Output: Raw Gemini response text containing JSON array
+// =================================================================
 async function generateTraits(coreValues) {
   // Gemini prompt 
   // This is the text instruction given to Gemini to produce personality traits,
@@ -62,8 +58,7 @@ Each object in the array should have the following structure:
   try {
     console.log("=== DEBUG: Calling Gemini API ===");
     console.log("Core Values Input:", coreValues);
-    console.log("Prompt (first 200 chars):", prompt.substring(0, 200));
-    console.log("API Key exists:", !!process.env.GEMINI_API_KEY);
+    
     
     // Call the Gemini API using axios — here we're using the "text generation" model (gemini-2.0-flash)
     // It returns a conversational, structured JSON output describing six pairs of traits.
@@ -89,34 +84,158 @@ Each object in the array should have the following structure:
     throw new Error("Failed to call Gemini API");
   }
 }
+// ==================== END: generateTraits ====================
 
 
-/**
- * Helper: generateImageForPrompt
- * Returns: base64-encoded image data (string) for the given text prompt.
- *
- * Uses the Gemini image model `gemini-2.5-flash-image` via the
- * `@google/generative-ai` client. Ensure `GEMINI_API_KEY` is set in env.
- */
-async function generateImageForPrompt(promptText) {
-  // Direct Gemini image generation using `gemini-2.5-flash-image`.
-  // This helper always uses the Gemini image model and returns a base64 string or null.
+// ==================== SHARED UTILITY FUNCTIONS ====================---------- FUNCTION: parseGeminiJSON ----------
+// Purpose: Extract and parse JSON array from Gemini response text
+// Input: rawResponse (string) - raw text from Gemini API
+// Output: Parsed JavaScript array of trait objects
+// -----------------------------------------------
+function parseGeminiJSON(rawResponse) {
+  const match = rawResponse.match(/\[[\s\S]*\]/);
+  if (!match) {
+    console.error("Failed to extract JSON from response. Response preview:", rawResponse.substring(0, 500));
+    throw new Error("No valid JSON array found in Gemini response");
+  }
+  const jsonString = match[0];
+  console.log("Cleaned JSON string ready to parse:", jsonString.substring(0, 200) + "...");
+  return JSON.parse(jsonString);
+}
+// ---------- END: parseGeminiJSON ----------
+
+// ---------- FUNCTION: createImageDirectories ----------
+// Purpose: Create directory structure for storing order images
+// Input: orderID (number) - unique order identifier
+// Output: { baseDir, orderDir } - paths to created directories
+// ------------------------------------------------------
+function createImageDirectories(orderID) {
+  const fs = require("fs");
+  const path = require("path");
+  const baseDir = path.join(__dirname, "Generated_Images");
+  if (!fs.existsSync(baseDir)) fs.mkdirSync(baseDir, { recursive: true });
+  
+  const orderDir = path.join(baseDir, `Order_${orderID}`);
+  if (!fs.existsSync(orderDir)) fs.mkdirSync(orderDir, { recursive: true });
+  
+  return { baseDir, orderDir };
+}
+// ---------- END: createImageDirectories ----------
+
+// ---------- FUNCTION: generateAllImages ----------
+// Purpose: Generate all 6 animal images for traits using Gemini image API
+// Input: traits (array) - 6 trait objects with attributes and colors
+//        orderID (number) - order identifier for file storage
+// Output: Array of generated image objects with paths and base64 data
+// -------------------------------------------------
+async function generateAllImages(traits, orderID) {
+  const fs = require("fs");
+  const path = require("path");
+  const { orderDir } = createImageDirectories(orderID);
+  const textModel = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+  const imageModel = genAI.getGenerativeModel({ model: "gemini-2.5-flash-image" });
+  
+  console.log(`→ Generating 6 unique animals and their images...`);
+  
+  // Step 1: Ask Gemini text model to choose 6 unique animals
+  const animalSelectionPrompt = `Choose exactly 6 DIFFERENT animal species that represent these 6 concepts:
+1. ${traits[0].attribute_1}
+2. ${traits[1].attribute_1}
+3. ${traits[2].attribute_1}
+4. ${traits[3].attribute_1}
+5. ${traits[4].attribute_1}
+6. ${traits[5].attribute_1}
+
+CRITICAL REQUIREMENTS:
+- Each animal must be a completely DIFFERENT species
+- Vary between mammals, birds, reptiles, fish, insects, and other categories
+- Choose animals that symbolically represent each concept
+- Return ONLY a JSON array with 6 animal names, nothing else
+
+Example format: ["lion", "crane", "dolphin", "butterfly", "snake", "elephant"]
+
+Return only the JSON array:`;
+
+  let selectedAnimals = [];
   try {
-    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-image" });
-    const result = await model.generateContent([promptText]);
-    const parts = result.response?.candidates?.[0]?.content?.parts;
-    const base64 = parts?.find(p => p.inlineData)?.inlineData?.data || null;
-    if (!base64) {
-      console.warn('Gemini image call returned no inlineData. Inspect response:', JSON.stringify(result).substring(0,1000));
+    console.log(`  → Asking Gemini to select 6 unique animals...`);
+    const animalResponse = await textModel.generateContent([animalSelectionPrompt]);
+    const animalText = animalResponse.response.candidates[0].content.parts[0].text;
+    
+    // Parse the animal list
+    const match = animalText.match(/\[[\s\S]*?\]/);
+    if (match) {
+      selectedAnimals = JSON.parse(match[0]);
+      console.log(`  ✓ Selected animals:`, selectedAnimals);
+    } else {
+      throw new Error("Failed to parse animal list");
+    }
+  } catch (err) {
+    console.error(`  ✗ Failed to select animals:`, err.message);
+    // Fallback to default animals if selection fails
+    selectedAnimals = ["lion", "crane", "koi fish", "butterfly", "tiger", "phoenix"];
+    console.log(`  → Using fallback animals:`, selectedAnimals);
+  }
+  
+  // Step 2: Generate images using the selected animals (in parallel for speed)
+  const generatedImages = [];
+  
+  // Create all 6 image generation promises
+  const imagePromises = traits.slice(0, 6).map(async (trait, i) => {
+    const animalName = selectedAnimals[i] || "animal";
+    
+    const imagePrompt = `Generate a minimalist illustration of a ${animalName} in Chinese art style with clean lines and plain background. The ${animalName} represents "${trait.attribute_1}". Use ${trait.color_1} as primary color with ${trait.color_2} accents. No text in the image.`;
+    
+    try {
+      console.log(`  → Generating image ${i + 1}/6: ${animalName} for "${trait.attribute_1}"...`);
+      const result = await imageModel.generateContent([imagePrompt]);
+      const parts = result.response?.candidates?.[0]?.content?.parts;
+      const base64Image = parts?.find(p => p.inlineData)?.inlineData?.data;
+      
+      if (base64Image) {
+        const fileName = `Trait_${i + 1}.jpg`;
+        const filePath = path.join(orderDir, fileName);
+        fs.writeFileSync(filePath, Buffer.from(base64Image, "base64"));
+
+        const imagePath = `JS/Generated_Images/Order_${orderID}/${fileName}`;
+        console.log(`    ✓ Image ${i + 1} saved: ${imagePath}`);
+        
+        return { 
+          prompt: imagePrompt, 
+          base64: base64Image, 
+          image_path: imagePath,
+          animal: animalName,
+          index: i
+        };
+      } else {
+        console.error(`     No image returned for trait ${i + 1}`);
+        return null;
+      }
+    } catch (err) {
+      console.error(`     Failed to generate image ${i + 1}:`, err.message);
       return null;
     }
-    return base64;
-  } catch (err) {
-    throw new Error('Gemini image generation failed: ' + (err && err.message ? err.message : String(err)));
-  }
+  });
+  
+  // Wait for all 6 images to complete (in parallel)
+  const results = await Promise.all(imagePromises);
+  
+  // Filter out null results and sort by index to maintain order
+  results.forEach(result => {
+    if (result) generatedImages.push(result);
+  });
+  
+  console.log(` Generated ${generatedImages.length}/6 images successfully`);
+  return generatedImages;
 }
+// ---------- END: generateAllImages ----------
+// ==================== END: SHARED UTILITY FUNCTIONS ====================
 
 
+// ==================== ENDPOINT: POST /generate ====================
+// Purpose: Main endpoint for generating traits and optionally images
+// Handles: Initial generation, trait regeneration, image regeneration
+// =================================================================
 app.post('/generate', async (req, res) => {
   try {
     // Get user-provided core values from frontend
@@ -132,14 +251,7 @@ app.post('/generate', async (req, res) => {
       console.log("Regeneration mode: Generating NEW traits from Gemini with core values:", coreValues);
       const rawResponse = await generateTraits(coreValues);
       console.log("Raw Gemini response:", rawResponse);
-      const match = rawResponse.match(/\[[\s\S]*\]/);
-      if (!match) {
-        console.error("Failed to extract JSON from response. Response preview:", rawResponse.substring(0, 500));
-        throw new Error("No valid JSON array found in Gemini response");
-      }
-      const jsonString = match[0];
-      console.log("Cleaned JSON string ready to parse:", jsonString.substring(0, 200) + "...");
-      traitsArray = JSON.parse(jsonString);
+      traitsArray = parseGeminiJSON(rawResponse);
       console.log("Parsed NEW traits:", traitsArray);
     } else if (req.body.traits && Array.isArray(req.body.traits) && req.body.traits.length > 0) {
       // Old regeneration mode: reuse existing traits, just regenerate images
@@ -153,138 +265,24 @@ app.post('/generate', async (req, res) => {
       console.log("Received core values:", coreValues);
       const rawResponse = await generateTraits(coreValues);
       console.log("Raw Gemini response:", rawResponse);
-
-      // The response comes as text — extract the JSON portion (between [ and ])
-      const match = rawResponse.match(/\[[\s\S]*\]/);
-      if (!match) {
-        console.error("Failed to extract JSON from response. Response preview:", rawResponse.substring(0, 500));
-        throw new Error("No valid JSON array found in Gemini response. Response: " + rawResponse.substring(0, 200));
-      }
-
-      const jsonString = match[0];
-      console.log("Cleaned JSON string ready to parse:", jsonString.substring(0, 200) + "...");
-
-      // Convert text into an actual JavaScript object (array of trait objects)
-      traitsArray = JSON.parse(jsonString);
+      traitsArray = parseGeminiJSON(rawResponse);
       console.log("Parsed traits:", traitsArray);
     }
 
-   // ===============================================
-   // === AI IMAGE GENERATION LOGIC START (Gemini API) ===
-   // ===============================================
-   // NOTE: Only generate images if orderID is provided (regeneration mode)
-   // For first generation, images will be generated AFTER saving to DB
-
-    const generatedImages = [];
-       /* 
-    // ------------------------
-    //  SINGLE IMAGE VERSION for quick testing (COMMENTED OUT)
-    // ------------------------
-
-    // const firstTrait = traitsArray[0];
-    // const imagePrompt = `Create a minimalist artistic animal representing the concept of ${firstTrait.attribute_1}, colored primarily in ${firstTrait.color_1} with accents of ${firstTrait.color_2}. Digital art style.`;
-
-    // console.log("→ Calling Gemini image generation API...");
-
-    // try {
-    //   const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-image" });
-    //   const result = await model.generateContent([imagePrompt]);
-    //   const parts = result.response.candidates?.[0]?.content?.parts;
-    //   const base64Image = parts?.find(p => p.inlineData)?.inlineData?.data;
-
-    //   if (base64Image) {
-    //     console.log(" Generated image successfully!");
-    //     console.log("Base64 (first 100 chars):", base64Image.substring(0, 100) + "...");
-    //     generatedImages.push({
-    //       prompt: imagePrompt,
-    //       base64: base64Image
-    //     });
-    //   } else {
-    //     console.error(" No image returned from Gemini model.");
-    //   }
-    // } catch (err) {
-    //   console.error(" Gemini image generation failed:", err.message);
-    // }
-
-    // ------------------------
-    // END OLD SINGLE IMAGE VERSION
-    // ------------------------
-    */
-
-    // ------------------------
-    // NEW MULTI-IMAGE VERSION (6 images total)
-    // ------------------------
-   
-    // Only generate and save images if we have an orderID (meaning this is a regeneration, not first generation)
+    // Generate images if orderID is provided (regeneration mode)
+    // For first generation, images will be generated AFTER saving to DB
+    let generatedImages = [];
     if (req.body.orderID) {
       console.log("→ Generating images for all 6 traits with orderID:", req.body.orderID);
-
-      const fs = require("fs");
-      const path = require("path");
-      // functions to create folders for picture storage
-      // Create base image folder
-      const baseDir = path.join(__dirname, "Generated_Images");
-      if (!fs.existsSync(baseDir)) fs.mkdirSync(baseDir, { recursive: true });
-
-      // Create per-order subfolder with the provided orderID
-      const orderID = req.body.orderID;
-      const orderDir = path.join(baseDir, `Order_${orderID}`);
-      if (!fs.existsSync(orderDir)) fs.mkdirSync(orderDir, { recursive: true });
-
-      // Image generation helper
-      // Generate all 6 images in a SINGLE request so Gemini can ensure variety
+      generatedImages = await generateAllImages(traitsArray, req.body.orderID);
       
-      // Build a comprehensive prompt for all 6 images at once
-      const allTraitsPrompt = `Generate 6 different minimalist animal illustrations in Chinese art style with clean lines and plain backgrounds. Each animal must be a DIFFERENT species. Vary between mammals, birds, reptiles, fish, insects, etc. No text in any image.
-
-The 6 animals should represent these concepts with these colors:
-1. ${traitsArray[0].attribute_1} - Primary color: ${traitsArray[0].color_1}, Accent: ${traitsArray[0].color_2}
-2. ${traitsArray[1].attribute_1} - Primary color: ${traitsArray[1].color_1}, Accent: ${traitsArray[1].color_2}
-3. ${traitsArray[2].attribute_1} - Primary color: ${traitsArray[2].color_1}, Accent: ${traitsArray[2].color_2}
-4. ${traitsArray[3].attribute_1} - Primary color: ${traitsArray[3].color_1}, Accent: ${traitsArray[3].color_2}
-5. ${traitsArray[4].attribute_1} - Primary color: ${traitsArray[4].color_1}, Accent: ${traitsArray[4].color_2}
-6. ${traitsArray[5].attribute_1} - Primary color: ${traitsArray[5].color_1}, Accent: ${traitsArray[5].color_2}
-
-CRITICAL: Each of the 6 images MUST feature a completely different animal species. Generate all 6 images.`;
-
-      try {
-        console.log(`→ Generating all 6 images in a single request...`);
-        const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-image" });
-        const result = await model.generateContent([allTraitsPrompt]);
-        const parts = result.response?.candidates?.[0]?.content?.parts;
-        
-        if (parts) {
-          // Extract all images from the response
-          const images = parts.filter(p => p.inlineData).map(p => p.inlineData.data);
-          console.log(`✓ Received ${images.length} images from Gemini`);
-          
-          // Save each image
-          for (let i = 0; i < Math.min(6, images.length, traitsArray.length); i++) {
-            const base64Image = images[i];
-            const fileName = `Trait_${i + 1}.jpg`;
-            const filePath = path.join(orderDir, fileName);
-            fs.writeFileSync(filePath, Buffer.from(base64Image, "base64"));
-
-            const imagePath = `JS/Generated_Images/Order_${orderID}/${fileName}`;
-            generatedImages.push({ prompt: allTraitsPrompt, base64: base64Image, image_path: imagePath });
-            console.log(` Image ${i + 1} saved: ${imagePath}`);
-
-            // Attach image_path to the corresponding trait
-            traitsArray[i].image_path = imagePath;
-          }
-        } else {
-          console.error('✗ No images returned from Gemini');
-        }
-      } catch (err) {
-        console.error('✗ Failed to generate images:', err.message);
-      }
+      // Attach image paths to traits
+      generatedImages.forEach((img, i) => {
+        if (traitsArray[i]) traitsArray[i].image_path = img.image_path;
+      });
     } else {
       console.log("→ First generation mode: Skipping image generation (will be done after DB save)");
     }
-
-    // ===============================================
-    // === AI IMAGE GENERATION LOGIC END ===
-    // ===============================================
 
 
     // Merge the traits with their associated images (if any were generated)
@@ -310,9 +308,12 @@ CRITICAL: Each of the 6 images MUST feature a completely different animal specie
     res.status(500).json({ success: false, message: error.message });
   }
 });
+// ==================== END: POST /generate ====================
 
-// -------------------- REGENERATE IMAGES ENDPOINT --------------------
-// New endpoint to regenerate images with proper orderID after database save
+// ==================== ENDPOINT: POST /regenerate-images ====================
+// Purpose: Regenerate images for existing order with proper orderID
+// Called: After database save when orderID is available
+// =========================================================================
 app.post('/regenerate-images', async (req, res) => {
   try {
     const { traits, orderID } = req.body;
@@ -327,67 +328,15 @@ app.post('/regenerate-images', async (req, res) => {
       return res.status(400).json({ success: false, message: "Missing orderID" });
     }
 
-    const fs = require("fs");
-    const path = require("path");
-    const generatedImages = [];
-
-    // Create base image folder
-    const baseDir = path.join(__dirname, "Generated_Images");
-    if (!fs.existsSync(baseDir)) fs.mkdirSync(baseDir, { recursive: true });
-
-    // Create per-order subfolder with proper orderID
-    const orderDir = path.join(baseDir, `Order_${orderID}`);
-    if (!fs.existsSync(orderDir)) fs.mkdirSync(orderDir, { recursive: true });
-
-    // Generate all 6 images in a SINGLE request so Gemini can ensure variety
-    
-    // Build a comprehensive prompt for all 6 images at once
-    const allTraitsPrompt = `Generate 6 different minimalist animal illustrations in Chinese art style with clean lines and plain backgrounds. Each animal must be a DIFFERENT species. Vary between mammals, birds, reptiles, fish, insects, etc. No text in any image.
-
-The 6 animals should represent these concepts with these colors:
-1. ${traits[0].attribute_1} - Primary color: ${traits[0].color_1}, Accent: ${traits[0].color_2}
-2. ${traits[1].attribute_1} - Primary color: ${traits[1].color_1}, Accent: ${traits[1].color_2}
-3. ${traits[2].attribute_1} - Primary color: ${traits[2].color_1}, Accent: ${traits[2].color_2}
-4. ${traits[3].attribute_1} - Primary color: ${traits[3].color_1}, Accent: ${traits[3].color_2}
-5. ${traits[4].attribute_1} - Primary color: ${traits[4].color_1}, Accent: ${traits[4].color_2}
-6. ${traits[5].attribute_1} - Primary color: ${traits[5].color_1}, Accent: ${traits[5].color_2}
-
-CRITICAL: Each of the 6 images MUST feature a completely different animal species. Generate all 6 images.`;
-
-    try {
-      console.log(`→ Regenerating all 6 images in a single request...`);
-      const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-image" });
-      const result = await model.generateContent([allTraitsPrompt]);
-      const parts = result.response?.candidates?.[0]?.content?.parts;
-      
-      if (parts) {
-        // Extract all images from the response
-        const images = parts.filter(p => p.inlineData).map(p => p.inlineData.data);
-        console.log(`✓ Received ${images.length} images from Gemini`);
-        
-        // Save each image
-        for (let i = 0; i < Math.min(6, images.length, traits.length); i++) {
-          const base64Image = images[i];
-          const fileName = `Trait_${i + 1}.jpg`;
-          const filePath = path.join(orderDir, fileName);
-          fs.writeFileSync(filePath, Buffer.from(base64Image, "base64"));
-
-          const imagePath = `JS/Generated_Images/Order_${orderID}/${fileName}`;
-          generatedImages.push(imagePath);
-          console.log(` Image ${i + 1} saved: ${imagePath}`);
-        }
-      } else {
-        console.error('✗ No images returned from Gemini');
-      }
-    } catch (err) {
-      console.error('✗ Failed to regenerate images:', err.message);
-    }
+    // Generate all images using shared function
+    const generatedImages = await generateAllImages(traits, orderID);
+    const imagePaths = generatedImages.map(img => img.image_path);
 
     res.json({
       success: true,
       message: "Images regenerated successfully.",
       data: {
-        imagePaths: generatedImages
+        imagePaths: imagePaths
       }
     });
 
@@ -396,8 +345,9 @@ CRITICAL: Each of the 6 images MUST feature a completely different animal specie
     res.status(500).json({ success: false, message: error.message });
   }
 });
+// ==================== END: POST /regenerate-images ====================
 
-// -------------------- START SERVER --------------------
+// ==================== SERVER STARTUP ====================
 const PORT = 3000;
 // Listen on all network interfaces (0.0.0.0) for local + LAN access
 app.listen(PORT, '0.0.0.0', () => {
