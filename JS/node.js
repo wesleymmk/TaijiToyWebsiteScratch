@@ -7,6 +7,11 @@
 const path = require('path');
 require('dotenv').config({ path: path.join(__dirname, '.env') }); 
 
+// Validate required environment variables at startup
+if (!process.env.GEMINI_API_KEY) {
+  console.error('FATAL ERROR: GEMINI_API_KEY is not set in environment variables');
+  process.exit(1);
+}
 
 const express = require('express'); 
 const axios = require('axios');     
@@ -17,12 +22,76 @@ const { GoogleGenerativeAI } = require("@google/generative-ai");
 
 // Express Setup
 const app = express();
-app.use(express.json()); // allows the app to read JSON request bodies
-// Enable CORS with credentials so browser cookies (PHP session) can be forwarded to Node
-app.use(cors({ origin: true, credentials: true }));
+
+// Request size limits to prevent memory exhaustion attacks
+app.use(express.json({ limit: '1mb' }));
+
+// CORS configuration - TEMPORARILY OPEN FOR DEVELOPMENT
+// TODO: Restrict this before production launch
+const allowedOrigins = process.env.NODE_ENV === 'production' 
+  ? [
+      'http://34.69.23.109',
+      'http://34.69.23.109:80',
+      // Add your production domain here: 'https://yourdomain.com'
+    ]
+  : null; // null = allow all origins in development
+
+app.use(cors({
+  origin: function(origin, callback) {
+    // In development, allow all origins
+    if (!allowedOrigins) {
+      return callback(null, true);
+    }
+    // In production, check whitelist
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
+}));
 
 //  Initialize the Google AI client with your API key
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+
+// Rate limiting for regeneration - tracks requests per orderID
+const regenerationTracker = new Map(); // orderID -> { count, resetTime }
+const REGEN_LIMIT = 1; // Max regenerations per order per hour
+const REGEN_WINDOW = 60 * 60 * 1000; // 1 hour in milliseconds
+
+function checkRegenerationLimit(orderID) {
+  const now = Date.now();
+  const key = `order_${orderID}`;
+  
+  if (!regenerationTracker.has(key)) {
+    regenerationTracker.set(key, { count: 1, resetTime: now + REGEN_WINDOW });
+    return { allowed: true, remaining: REGEN_LIMIT - 1 };
+  }
+  
+  const tracker = regenerationTracker.get(key);
+  
+  // Reset if window expired
+  if (now > tracker.resetTime) {
+    regenerationTracker.set(key, { count: 1, resetTime: now + REGEN_WINDOW });
+    return { allowed: true, remaining: REGEN_LIMIT - 1 };
+  }
+  
+  // Check if limit exceeded
+  if (tracker.count >= REGEN_LIMIT) {
+    const minutesLeft = Math.ceil((tracker.resetTime - now) / 60000);
+    return { 
+      allowed: false, 
+      remaining: 0,
+      resetIn: minutesLeft
+    };
+  }
+  
+  // Increment count
+  tracker.count++;
+  return { allowed: true, remaining: REGEN_LIMIT - tracker.count };
+}
 
 // Test route
 app.get('/', (req, res) => {
@@ -56,10 +125,6 @@ Each object in the array should have the following structure:
 `;
 
   try {
-    console.log("=== DEBUG: Calling Gemini API ===");
-    console.log("Core Values Input:", coreValues);
-    
-    
     // Call the Gemini API using axios — here we're using the "text generation" model (gemini-2.0-flash)
     // It returns a conversational, structured JSON output describing six pairs of traits.
     const response = await axios.post(
@@ -70,17 +135,12 @@ Each object in the array should have the following structure:
       { headers: { 'Content-Type': 'application/json' } }
     );
 
-    console.log("=== DEBUG: Gemini API Success ===");
     // Extract the raw text content from Gemini's response
     const geminiResponseText = response.data.candidates[0].content.parts[0].text;
     return geminiResponseText;
 
   } catch (error) {
-    // Log and throw if Gemini fails
-    console.error("=== DEBUG: Gemini API Error ===");
-    console.error("Error message:", error.message);
-    console.error("Error status:", error.response?.status);
-    console.error("Error data:", JSON.stringify(error.response?.data, null, 2));
+    // Throw if Gemini fails
     throw new Error("Failed to call Gemini API");
   }
 }
@@ -95,11 +155,9 @@ Each object in the array should have the following structure:
 function parseGeminiJSON(rawResponse) {
   const match = rawResponse.match(/\[[\s\S]*\]/);
   if (!match) {
-    console.error("Failed to extract JSON from response. Response preview:", rawResponse.substring(0, 500));
     throw new Error("No valid JSON array found in Gemini response");
   }
   const jsonString = match[0];
-  console.log("Cleaned JSON string ready to parse:", jsonString.substring(0, 200) + "...");
   return JSON.parse(jsonString);
 }
 // ---------- END: parseGeminiJSON ----------
@@ -135,8 +193,6 @@ async function generateAllImages(traits, orderID) {
   const textModel = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
   const imageModel = genAI.getGenerativeModel({ model: "gemini-2.5-flash-image" });
   
-  console.log(`→ Generating 6 unique animals and their images...`);
-  
   // Step 1: Ask Gemini text model to choose 6 unique animals
   const animalSelectionPrompt = `Choose exactly 6 DIFFERENT animal species that represent these 6 concepts:
 1. ${traits[0].attribute_1}
@@ -158,7 +214,6 @@ Return only the JSON array:`;
 
   let selectedAnimals = [];
   try {
-    console.log(`  → Asking Gemini to select 6 unique animals...`);
     const animalResponse = await textModel.generateContent([animalSelectionPrompt]);
     const animalText = animalResponse.response.candidates[0].content.parts[0].text;
     
@@ -166,15 +221,12 @@ Return only the JSON array:`;
     const match = animalText.match(/\[[\s\S]*?\]/);
     if (match) {
       selectedAnimals = JSON.parse(match[0]);
-      console.log(`  ✓ Selected animals:`, selectedAnimals);
     } else {
       throw new Error("Failed to parse animal list");
     }
   } catch (err) {
-    console.error(`  ✗ Failed to select animals:`, err.message);
     // Fallback to default animals if selection fails
     selectedAnimals = ["lion", "crane", "koi fish", "butterfly", "tiger", "phoenix"];
-    console.log(`  → Using fallback animals:`, selectedAnimals);
   }
   
   // Step 2: Generate images using the selected animals (in parallel for speed)
@@ -187,7 +239,6 @@ Return only the JSON array:`;
     const imagePrompt = `Generate a minimalist illustration of a ${animalName} in Chinese art style with clean lines and plain background. The ${animalName} represents "${trait.attribute_1}". Use ${trait.color_1} as primary color with ${trait.color_2} accents. No text in the image.`;
     
     try {
-      console.log(`  → Generating image ${i + 1}/6: ${animalName} for "${trait.attribute_1}"...`);
       const result = await imageModel.generateContent([imagePrompt]);
       const parts = result.response?.candidates?.[0]?.content?.parts;
       const base64Image = parts?.find(p => p.inlineData)?.inlineData?.data;
@@ -198,7 +249,6 @@ Return only the JSON array:`;
         fs.writeFileSync(filePath, Buffer.from(base64Image, "base64"));
 
         const imagePath = `JS/Generated_Images/Order_${orderID}/${fileName}`;
-        console.log(`    ✓ Image ${i + 1} saved: ${imagePath}`);
         
         return { 
           prompt: imagePrompt, 
@@ -208,11 +258,9 @@ Return only the JSON array:`;
           index: i
         };
       } else {
-        console.error(`     No image returned for trait ${i + 1}`);
         return null;
       }
     } catch (err) {
-      console.error(`     Failed to generate image ${i + 1}:`, err.message);
       return null;
     }
   });
@@ -225,7 +273,6 @@ Return only the JSON array:`;
     if (result) generatedImages.push(result);
   });
   
-  console.log(` Generated ${generatedImages.length}/6 images successfully`);
   return generatedImages;
 }
 // ---------- END: generateAllImages ----------
@@ -241,6 +288,19 @@ app.post('/generate', async (req, res) => {
     // Get user-provided core values from frontend
     const coreValues = req.body.coreValues;
 
+    // Input validation - allow users to tell their full story across all input boxes
+    if (coreValues && (typeof coreValues !== 'string' || coreValues.length > 10000)) {
+      return res.status(400).json({ 
+        success: false, 
+        message: "Your story is too long. Please keep it under 10,000 characters." 
+      });
+    }
+    
+    // Trim whitespace
+    if (coreValues) {
+      req.body.coreValues = coreValues.trim();
+    }
+
     // === 1. Determine traits: either provided by caller (regeneration) or generate via Gemini ===
     let traitsArray;
     if (req.body.traits && Array.isArray(req.body.traits) && req.body.traits.length > 0 && req.body.regenerate) {
@@ -248,40 +308,47 @@ app.post('/generate', async (req, res) => {
       if (!coreValues) {
         return res.status(400).json({ success: false, message: "Missing coreValues for trait regeneration" });
       }
-      console.log("Regeneration mode: Generating NEW traits from Gemini with core values:", coreValues);
       const rawResponse = await generateTraits(coreValues);
-      console.log("Raw Gemini response:", rawResponse);
       traitsArray = parseGeminiJSON(rawResponse);
-      console.log("Parsed NEW traits:", traitsArray);
     } else if (req.body.traits && Array.isArray(req.body.traits) && req.body.traits.length > 0) {
       // Old regeneration mode: reuse existing traits, just regenerate images
       traitsArray = req.body.traits;
-      console.log("Using traits provided in request (image-only regeneration). Count:", traitsArray.length);
     } else {
       // === generate via Gemini as before ===
       if (!coreValues) {
         return res.status(400).json({ success: false, message: "Missing coreValues for trait generation" });
       }
-      console.log("Received core values:", coreValues);
       const rawResponse = await generateTraits(coreValues);
-      console.log("Raw Gemini response:", rawResponse);
       traitsArray = parseGeminiJSON(rawResponse);
-      console.log("Parsed traits:", traitsArray);
     }
 
     // Generate images if orderID is provided (regeneration mode)
     // For first generation, images will be generated AFTER saving to DB
     let generatedImages = [];
     if (req.body.orderID) {
-      console.log("→ Generating images for all 6 traits with orderID:", req.body.orderID);
-      generatedImages = await generateAllImages(traitsArray, req.body.orderID);
+      // Validate orderID to prevent filesystem traversal
+      const orderID = parseInt(req.body.orderID);
+      if (isNaN(orderID) || orderID <= 0) {
+        return res.status(400).json({ success: false, message: "Invalid orderID" });
+      }
+      
+      // Check regeneration rate limit
+      const rateLimit = checkRegenerationLimit(orderID);
+      if (!rateLimit.allowed) {
+        return res.status(429).json({ 
+          success: false, 
+          message: `Regeneration limit reached. Please try again in ${rateLimit.resetIn} minutes.`,
+          remaining: 0,
+          resetIn: rateLimit.resetIn
+        });
+      }
+      
+      generatedImages = await generateAllImages(traitsArray, orderID);
       
       // Attach image paths to traits
       generatedImages.forEach((img, i) => {
         if (traitsArray[i]) traitsArray[i].image_path = img.image_path;
       });
-    } else {
-      console.log("→ First generation mode: Skipping image generation (will be done after DB save)");
     }
 
 
@@ -304,7 +371,6 @@ app.post('/generate', async (req, res) => {
 
   } catch (error) {
     // If anything fails above, catch and return an error message
-    console.error("Error in /generate route:", error.message);
     res.status(500).json({ success: false, message: error.message });
   }
 });
@@ -317,19 +383,30 @@ app.post('/generate', async (req, res) => {
 app.post('/regenerate-images', async (req, res) => {
   try {
     const { traits, orderID } = req.body;
-    console.log('[/regenerate-images] Received request. full body:', JSON.stringify(req.body));
-    console.log('[/regenerate-images] Headers cookie:', req.headers.cookie || '(none)');
 
-    if (!traits || !Array.isArray(traits) || traits.length === 0) {
-      return res.status(400).json({ success: false, message: "Missing traits" });
+    if (!traits || !Array.isArray(traits) || traits.length === 0 || traits.length > 10) {
+      return res.status(400).json({ success: false, message: "Invalid traits array" });
     }
 
-    if (!orderID) {
-      return res.status(400).json({ success: false, message: "Missing orderID" });
+    // Validate and sanitize orderID
+    const validOrderID = parseInt(orderID);
+    if (!validOrderID || isNaN(validOrderID) || validOrderID <= 0) {
+      return res.status(400).json({ success: false, message: "Invalid orderID" });
+    }
+
+    // Check regeneration rate limit
+    const rateLimit = checkRegenerationLimit(validOrderID);
+    if (!rateLimit.allowed) {
+      return res.status(429).json({ 
+        success: false, 
+        message: `Regeneration limit reached. Please try again in ${rateLimit.resetIn} minutes.`,
+        remaining: 0,
+        resetIn: rateLimit.resetIn
+      });
     }
 
     // Generate all images using shared function
-    const generatedImages = await generateAllImages(traits, orderID);
+    const generatedImages = await generateAllImages(traits, validOrderID);
     const imagePaths = generatedImages.map(img => img.image_path);
 
     res.json({
@@ -341,15 +418,23 @@ app.post('/regenerate-images', async (req, res) => {
     });
 
   } catch (error) {
-    console.error("Error in /regenerate-images route:", error.message);
     res.status(500).json({ success: false, message: error.message });
   }
 });
 // ==================== END: POST /regenerate-images ====================
 
+// Health check endpoint
+app.get('/health', (req, res) => {
+  res.json({ status: 'healthy', timestamp: new Date().toISOString() });
+});
+
 // ==================== SERVER STARTUP ====================
-const PORT = 3000;
-// Listen on all network interfaces (0.0.0.0) for local + LAN access
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Server be ready at: http://localhost:${PORT}`);
+const PORT = process.env.PORT || 3000;
+const HOST = process.env.NODE_ENV === 'production' ? '127.0.0.1' : '0.0.0.0';
+
+// Listen on appropriate host based on environment
+app.listen(PORT, HOST, () => {
+  if (process.env.NODE_ENV !== 'production') {
+    console.log(`Server running at http://${HOST}:${PORT}`);
+  }
 });
