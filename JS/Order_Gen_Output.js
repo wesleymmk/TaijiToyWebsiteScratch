@@ -1,5 +1,6 @@
 // JavaScript source code
 //collaboration betwwen PS & EQ
+require('dotenv').config();
 import * as ComUtils from './Common_Function.js';
 import * as Utils from './Authentication_Page.js';
 export const appContainer = document.getElementById('app');
@@ -819,6 +820,57 @@ export function renderGenerationOutputView(order_ID_param) {
     placeorder.textContent = 'Place an order';
     placeorder.classList.add('button1', 'pagetextlargeb', 'buttongapout')
 
+    // Add the event listener to the button
+    placeorder.addEventListener('click', () => {
+        // --- Configuration Values ---
+        // Replace these with your actual test credentials
+        const paypalPartner = process.env.PAYPAL_PARTNER;
+        const paypalVendor = process.env.PAYPAL_VENDOR;
+        const paypalUser = process.env.PAYPAL_USER;
+        const paypalPwd = process.env.PAYPAL_PWD;
+
+        // --- Order Details ---
+        // In a real app, you'd get these dynamically
+        const orderIdToPay = order_ID; // Example Order ID
+        const orderPrice = "59.99"; // Example Price
+
+        // 1. Create a new form element in memory
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = 'https://payflowlink.paypal.com'; // The endpoint for Payflow Link
+        form.style.display = 'none'; // Hide the form so it doesn't mess up your layout
+
+        // 2. Create the data payload
+        const payflowData = {
+            'PARTNER': paypalPartner,
+            'VENDOR': paypalVendor,
+            'USER': paypalUser,
+            'PWD': paypalPwd,
+            'TRXTYPE': 'S', // 'S' for Sale transaction
+            'AMT': orderPrice,
+            'CURRENCY': 'USD',
+            'CREATESECURETOKEN': 'Y', // Request a secure token
+            'SECURETOKENID': Date.now().toString(), // Unique ID for this token request
+            'MODE': mode, // 'TEST' or 'LIVE'
+
+            // Custom field to pass your Order ID through PayPal and back to your webhook
+            'USER1': orderIdToPay
+        };
+
+        // 3. Add inputs to the form
+        for (const key in payflowData) {
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = key;
+            input.value = payflowData[key];
+            form.appendChild(input);
+        }
+
+        // 4. Append to body and submit
+        document.body.appendChild(form);
+        form.submit();
+        // This will redirect the user to the PayPal hosted page
+    });
 
 
     /***************Navigation Bar***************/
