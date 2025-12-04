@@ -332,15 +332,18 @@ app.post('/generate', async (req, res) => {
         return res.status(400).json({ success: false, message: "Invalid orderID" });
       }
       
-      // Check regeneration rate limit
-      const rateLimit = checkRegenerationLimit(orderID);
-      if (!rateLimit.allowed) {
-        return res.status(429).json({ 
-          success: false, 
-          message: `Regeneration limit reached. Please try again in ${rateLimit.resetIn} minutes.`,
-          remaining: 0,
-          resetIn: rateLimit.resetIn
-        });
+      // ONLY check rate limit if this is marked as a regeneration
+      // Don't count the first image generation after order creation
+      if (req.body.isRegeneration === true) {
+        const rateLimit = checkRegenerationLimit(orderID);
+        if (!rateLimit.allowed) {
+          return res.status(429).json({ 
+            success: false, 
+            message: `Regeneration limit reached. Please try again in ${rateLimit.resetIn} minutes.`,
+            remaining: 0,
+            resetIn: rateLimit.resetIn
+          });
+        }
       }
       
       generatedImages = await generateAllImages(traitsArray, orderID);
@@ -426,6 +429,27 @@ app.post('/regenerate-images', async (req, res) => {
 // Health check endpoint
 app.get('/health', (req, res) => {
   res.json({ status: 'healthy', timestamp: new Date().toISOString() });
+});
+
+// Check regeneration limit endpoint - quick check before starting regeneration
+app.post('/check-regen-limit', (req, res) => {
+  const orderID = parseInt(req.body.orderID);
+  
+  if (isNaN(orderID) || orderID <= 0) {
+    return res.status(400).json({ success: false, message: "Invalid orderID" });
+  }
+  
+  const rateLimit = checkRegenerationLimit(orderID);
+  
+  if (!rateLimit.allowed) {
+    return res.json({ 
+      allowed: false,
+      message: `You have already regenerated this order. Please try again in ${rateLimit.resetIn} minutes.`,
+      resetIn: rateLimit.resetIn
+    });
+  }
+  
+  return res.json({ allowed: true });
 });
 
 // ==================== SERVER STARTUP ====================

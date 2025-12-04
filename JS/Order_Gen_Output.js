@@ -744,13 +744,32 @@ export function renderGenerationOutputView(order_ID_param) {
     RegenAll.addEventListener('click', async () => {
         RegenAll.disabled = true;
         const originalText = RegenAll.textContent;
-        RegenAll.textContent = 'Regenerating...';
-        appContainer.appendChild(Loading);
-        Loading.appendChild(LoadingLogo);
-        Loading.appendChild(LoadingText);
-        Loading.appendChild(LoadingText2);
 
         try {
+            // Quick check if regeneration is allowed BEFORE showing loading animation
+            const limitCheck = await fetch('http://34.69.23.109:3000/check-regen-limit', {
+                method: 'POST',
+                credentials: 'include',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ orderID: window.currentOrderID })
+            });
+            
+            const limitResult = await limitCheck.json();
+            
+            if (!limitResult.allowed) {
+                alert(limitResult.message);
+                RegenAll.disabled = false;
+                return;
+            }
+            
+            // Limit check passed, now show loading and proceed
+            RegenAll.textContent = 'Regenerating...';
+            appContainer.appendChild(Loading);
+            Loading.appendChild(LoadingLogo);
+            Loading.appendChild(LoadingText);
+            Loading.appendChild(LoadingText2);
+
+            // Continue with actual regeneration
             const payload = {
                 coreValues: window.currentCoreValues || localStorage.getItem('coreValues') || '',
                 traits: window.currentTraits,
