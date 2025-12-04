@@ -1,6 +1,5 @@
 // JavaScript source code
 //collaboration betwwen PS & EQ
-require('dotenv').config();
 import * as ComUtils from './Common_Function.js';
 import * as Utils from './Authentication_Page.js';
 export const appContainer = document.getElementById('app');
